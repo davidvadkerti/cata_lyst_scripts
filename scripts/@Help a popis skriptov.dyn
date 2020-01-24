@@ -1,0 +1,211 @@
+{
+  "Uuid": "44eb5d95-2e32-46cc-8459-c23f7e13ebb8",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "_Help",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "31ecd967f6224c47abf59b80179a905b",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Klikni na Play pre zobrazenie Helpu.",
+      "Description": "Creates a string."
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "5dafffd7827a4e059e4ac41f068ecc6b",
+      "Name": "Watch",
+      "Type": "unknown",
+      "InitialValue": "",
+      "Description": "Visualize the output of node."
+    }
+  ],
+  "Nodes": [
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "\"http://dynamohelp.atwebpages.com/index.php\"",
+      "Id": "950741f28c834276932e66e30b775700",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "92621dfdafe442108fa272b33fc0c3d3",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\nurl = IN[0]\r\n\r\n# Place your code below this line\r\nimport webbrowser\r\nwebbrowser.open(url)\r\n# Assign your output to the OUT variable.\r\nOUT = \"check your browser\"",
+      "VariableInputPorts": true,
+      "Id": "83405c850a86413c843d19a5248b3268",
+      "Inputs": [
+        {
+          "Id": "b34c802c7d544b168dc6456b13bf1148",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ed1b84fcedef4709a15cba8f29d43257",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "5dafffd7827a4e059e4ac41f068ecc6b",
+      "Inputs": [
+        {
+          "Id": "23e5ea3974b34ae681b4ad37a6bc4c3a",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5d348eb5bb194cc38dd318c9a6450a43",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Klikni na Play pre zobrazenie Helpu.",
+      "Id": "31ecd967f6224c47abf59b80179a905b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1d79a9005a334a77b83d30dc42826604",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "92621dfdafe442108fa272b33fc0c3d3",
+      "End": "b34c802c7d544b168dc6456b13bf1148",
+      "Id": "739c1b5ac76043c8adf0da229a2666cb"
+    },
+    {
+      "Start": "ed1b84fcedef4709a15cba8f29d43257",
+      "End": "23e5ea3974b34ae681b4ad37a6bc4c3a",
+      "Id": "317a88f2eab84a33a5e11f3960290ac9"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.2.1.5175",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "String",
+        "Id": "950741f28c834276932e66e30b775700",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 24.0,
+        "Y": 144.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "83405c850a86413c843d19a5248b3268",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 297.0,
+        "Y": 141.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "5dafffd7827a4e059e4ac41f068ecc6b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": true,
+        "Excluded": false,
+        "X": 505.0,
+        "Y": 156.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "31ecd967f6224c47abf59b80179a905b",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 35.0,
+        "Y": 55.0
+      }
+    ],
+    "Annotations": [],
+    "X": 104.0,
+    "Y": 77.0,
+    "Zoom": 1.0
+  }
+}

@@ -1,0 +1,718 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "obrys dosky",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
+      "SelectedIndex": 206,
+      "NodeType": "ExtensionNode",
+      "Id": "437ff3e7758d484181534f2863178654",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "f86d884df79f4770b5e273f6de7fbfc9",
+          "Name": "Category",
+          "Description": "The selected Category.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "All built-in categories."
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "ddcaf4433f234d2da5341e2a8621815e",
+      "Inputs": [
+        {
+          "Id": "9b35627e36554c998dd84078ac490932",
+          "Name": "Category",
+          "Description": "The Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a08f4f7952764bdf9aba07e00034e6c7",
+          "Name": "Elements",
+          "Description": "An element type.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Get all elements of the specified category from the model."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.Geometry",
+      "Id": "8a52fcb24b60444baa4dc4e60c4197b3",
+      "Inputs": [
+        {
+          "Id": "b24fe852d4194d07abb67181ba386733",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "233092b678144871a757ae05e4cac1ce",
+          "Name": "var[]",
+          "Description": "var[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get all of the Geometry associated with this object\n\nElement.Geometry ( ): var[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Plane.XY",
+      "Id": "0bdedac892f445e78117c4d3df17f720",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "6ddaa0b8c31b4f15955fbbed97364ba3",
+          "Name": "Plane",
+          "Description": "Plane",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Creates a plane in the world XY\n\nPlane.XY ( ): Plane"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Geometry.Intersect@Autodesk.DesignScript.Geometry.Geometry",
+      "Id": "8a48cbba234546f799192a5043401173",
+      "Inputs": [
+        {
+          "Id": "0739643719174aeebef4d28fa09c9d52",
+          "Name": "geometry",
+          "Description": "Autodesk.DesignScript.Geometry.Geometry",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "88dd3211fddf49a7b79f7d6fb3e497b8",
+          "Name": "other",
+          "Description": "Geometry",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9f6dd5302b064feba6366ccd9a25bbfb",
+          "Name": "Geometry[]",
+          "Description": "Geometry[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the intersection Geometry for this object and another\n\nGeometry.Intersect (other: Geometry): Geometry[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Surface.PerimeterCurves",
+      "Id": "f3f138abe8994e1dae105cf28941dbd7",
+      "Inputs": [
+        {
+          "Id": "71ffc288f2404b40897bf05a23b52c49",
+          "Name": "surface",
+          "Description": "Autodesk.DesignScript.Geometry.Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6b3a4f52edc541d9bd58495ef4f06661",
+          "Name": "Curve[]",
+          "Description": "Curve[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Return all the boundary Curves of the Surface.\n\nSurface.PerimeterCurves ( ): Curve[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.Flatten@var[]..[],int",
+      "Id": "2b002c153a634e47a4821a8bd0aa6214",
+      "Inputs": [
+        {
+          "Id": "27692a4a732243d6a58b22732186eb3f",
+          "Name": "list",
+          "Description": "List to flatten.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d232c378d9664b1d92fcff577e04566e",
+          "Name": "amt",
+          "Description": "Layers of nesting to remove.\n\nint\nDefault value : -1",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1eb72483c66747908a43fba02c72f729",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Flattens a nested list of lists by a certain amount.\n\nList.Flatten (list: var[]..[], amt: int = -1): var[]..[]"
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.Levels, DSRevitNodesUI",
+      "SelectedIndex": 0,
+      "NodeType": "ExtensionNode",
+      "Id": "c27ad02f58d6486baa91134f599809a9",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ea80bc2e73ec449c8d7bffa18739553e",
+          "Name": "Levels",
+          "Description": "The selected Levels",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select a level in the active document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Plane.Offset@double",
+      "Id": "081d6e418dad43c08a670a3150a94e7b",
+      "Inputs": [
+        {
+          "Id": "8817eaaf02d24bc7bec72ded1e1844a9",
+          "Name": "plane",
+          "Description": "Autodesk.DesignScript.Geometry.Plane",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "7e6aefcb3eeb4286b97f7bcbb653df86",
+          "Name": "dist",
+          "Description": "double\nDefault value : 1",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b4c7d727c87f4ba9a1bd88b764320edc",
+          "Name": "Plane",
+          "Description": "Plane",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Create a new Plane offset by this Plane in the normal direction by the specified distance.\n\nPlane.Offset (dist: double = 1): Plane"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Level.Elevation",
+      "Id": "45a9df0810d04ff4b2531e04abfb38a7",
+      "Inputs": [
+        {
+          "Id": "d39064b679f04b569863ca9e5203c09c",
+          "Name": "level",
+          "Description": "Revit.Elements.Level",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7f709b0b695c46488753aa09c01e531e",
+          "Name": "double",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "The elevation of the level above ground level\n\nLevel.Elevation: double"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "a-b;",
+      "Id": "cb61996ad0f64356b5a78b1bf333731b",
+      "Inputs": [
+        {
+          "Id": "518b4dbdad364673a98f9a72814d7d68",
+          "Name": "a",
+          "Description": "a",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "fb2120be40344d3791eaec849bd30596",
+          "Name": "b",
+          "Description": "b",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "627b95e17a9047f9a8bb53a477310364",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.Views, DSRevitNodesUI",
+      "SelectedIndex": 0,
+      "NodeType": "ExtensionNode",
+      "Id": "ec46fea990a4431c87a226813d113aa3",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7bbef437ff594551b4cc9acc3db79c6d",
+          "Name": "Views",
+          "Description": "The selected Views",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "All views available in the current document."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "200;",
+      "Id": "574bc42d94e44c0399948875cb8a4705",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "2e75742863bc49b4aee804c2b019c67b",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.DetailCurve.ByCurve@Revit.Elements.Views.View,Autodesk.DesignScript.Geometry.Curve",
+      "Id": "527be90cd412461fb223e6f341e0952d",
+      "Inputs": [
+        {
+          "Id": "571e80ca51ca4e7cad8ff826772c10c7",
+          "Name": "view",
+          "Description": "View to place the detail curve on\n\nView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "5c6df153257f4d9eaced271b4c389b3b",
+          "Name": "curve",
+          "Description": "Curve to create detailcurve from\n\nCurve",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b23a2053c15e429fa1eb800bb7855e71",
+          "Name": "DetailCurve",
+          "Description": "DetailCurve",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Construct a Revit DetailCurve element from a curve\n\nDetailCurve.ByCurve (view: View, curve: Curve): DetailCurve"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "f86d884df79f4770b5e273f6de7fbfc9",
+      "End": "9b35627e36554c998dd84078ac490932",
+      "Id": "545aba6569b04dcf85010546210e62db"
+    },
+    {
+      "Start": "a08f4f7952764bdf9aba07e00034e6c7",
+      "End": "b24fe852d4194d07abb67181ba386733",
+      "Id": "b69db818987640e7b06e465e89761af1"
+    },
+    {
+      "Start": "233092b678144871a757ae05e4cac1ce",
+      "End": "0739643719174aeebef4d28fa09c9d52",
+      "Id": "fd4b201974a14ee9abb76f1c33e598a9"
+    },
+    {
+      "Start": "6ddaa0b8c31b4f15955fbbed97364ba3",
+      "End": "8817eaaf02d24bc7bec72ded1e1844a9",
+      "Id": "9112c9ac39724580876b19564ece3e3f"
+    },
+    {
+      "Start": "9f6dd5302b064feba6366ccd9a25bbfb",
+      "End": "27692a4a732243d6a58b22732186eb3f",
+      "Id": "7b5e970a914a40e5b3e26b269e2165d2"
+    },
+    {
+      "Start": "6b3a4f52edc541d9bd58495ef4f06661",
+      "End": "5c6df153257f4d9eaced271b4c389b3b",
+      "Id": "77785ff8e91b48b2af96de493e3de443"
+    },
+    {
+      "Start": "1eb72483c66747908a43fba02c72f729",
+      "End": "71ffc288f2404b40897bf05a23b52c49",
+      "Id": "773e694d34684b5cb78ac880e42e6bbe"
+    },
+    {
+      "Start": "ea80bc2e73ec449c8d7bffa18739553e",
+      "End": "d39064b679f04b569863ca9e5203c09c",
+      "Id": "90d79fa241cb414eaedf0bc666eb7325"
+    },
+    {
+      "Start": "b4c7d727c87f4ba9a1bd88b764320edc",
+      "End": "88dd3211fddf49a7b79f7d6fb3e497b8",
+      "Id": "3f1bcac8f625467d9ff75d5c756a7535"
+    },
+    {
+      "Start": "7f709b0b695c46488753aa09c01e531e",
+      "End": "518b4dbdad364673a98f9a72814d7d68",
+      "Id": "5d101a065a184a9a84e73e23419a8d9f"
+    },
+    {
+      "Start": "627b95e17a9047f9a8bb53a477310364",
+      "End": "7e6aefcb3eeb4286b97f7bcbb653df86",
+      "Id": "04e8fd2029ab41af8a98c6d0794f99c6"
+    },
+    {
+      "Start": "7bbef437ff594551b4cc9acc3db79c6d",
+      "End": "571e80ca51ca4e7cad8ff826772c10c7",
+      "Id": "6a9817d173f14be1b9beecc2936b44b5"
+    },
+    {
+      "Start": "2e75742863bc49b4aee804c2b019c67b",
+      "End": "fb2120be40344d3791eaec849bd30596",
+      "Id": "0dd58829d1764fbaa56f935dc527e50b"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [
+    {
+      "NodeId": "527be90c-d412-461f-b223-e6f341e0952d",
+      "Binding": {
+        "ByCurve_InClassDecl-1_InFunctionScope-1_Instance0_527be90c-d412-461f-b223-e6f341e0952d": "PFNPQVAtRU5WOkVudmVsb3BlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOlNPQVAtRU5DPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy9zb2FwL2VuY29kaW5nLyIgeG1sbnM6U09BUC1FTlY9Imh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3NvYXAvZW52ZWxvcGUvIiB4bWxuczpjbHI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vc29hcC9lbmNvZGluZy9jbHIvMS4wIiBTT0FQLUVOVjplbmNvZGluZ1N0eWxlPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy9zb2FwL2VuY29kaW5nLyI+DQo8U09BUC1FTlY6Qm9keT4NCjxhMTpDYWxsU2l0ZV94MDAyQl9UcmFjZVNlcmlhbGlzZXJIZWxwZXIgaWQ9InJlZi0xIiB4bWxuczphMT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9jbHIvbnNhc3NlbS9Qcm90b0NvcmUvUHJvdG9Db3JlJTJDJTIwVmVyc2lvbiUzRDIuMC4xLjUwNTUlMkMlMjBDdWx0dXJlJTNEbmV1dHJhbCUyQyUyMFB1YmxpY0tleVRva2VuJTNEbnVsbCI+DQo8TnVtYmVyT2ZFbGVtZW50cz4xPC9OdW1iZXJPZkVsZW1lbnRzPg0KPEJhc2UtMF9IYXNEYXRhPmZhbHNlPC9CYXNlLTBfSGFzRGF0YT4NCjxCYXNlLTBfSGFzTmVzdGVkRGF0YT50cnVlPC9CYXNlLTBfSGFzTmVzdGVkRGF0YT4NCjxCYXNlLTBfTmVzdGVkRGF0YUNvdW50PjE8L0Jhc2UtMF9OZXN0ZWREYXRhQ291bnQ+DQo8QmFzZS0wLTBfSGFzRGF0YT5mYWxzZTwvQmFzZS0wLTBfSGFzRGF0YT4NCjxCYXNlLTAtMF9IYXNOZXN0ZWREYXRhPnRydWU8L0Jhc2UtMC0wX0hhc05lc3RlZERhdGE+DQo8QmFzZS0wLTBfTmVzdGVkRGF0YUNvdW50PjQ8L0Jhc2UtMC0wX05lc3RlZERhdGFDb3VudD4NCjxCYXNlLTAtMC0wX0hhc0RhdGE+dHJ1ZTwvQmFzZS0wLTAtMF9IYXNEYXRhPg0KPEJhc2UtMC0wLTBfRGF0YSBpZD0icmVmLTMiPlBGTlBRVkF0UlU1V09rVnVkbVZzYjNCbElIaHRiRzV6T25oemFUMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TVM5WVRVeFRZMmhsYldFdGFXNXpkR0Z1WTJVaUlIaHRiRzV6T25oelpEMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TVM5WVRVeFRZMmhsYldFaUlIaHRiRzV6T2xOUFFWQXRSVTVEUFNKb2RIUndPaTh2YzJOb1pXMWhjeTU0Yld4emIyRndMbTl5Wnk5emIyRndMMlZ1WTI5a2FXNW5MeUlnZUcxc2JuTTZVMDlCVUMxRlRsWTlJbWgwZEhBNkx5OXpZMmhsYldGekxuaHRiSE52WVhBdWIzSm5MM052WVhBdlpXNTJaV3h2Y0dVdklpQjRiV3h1Y3pwamJISTlJbWgwZEhBNkx5OXpZMmhsYldGekxtMXBZM0p2YzI5bWRDNWpiMjB2YzI5aGNDOWxibU52WkdsdVp5OWpiSEl2TVM0d0lpQlRUMEZRTFVWT1ZqcGxibU52WkdsdVoxTjBlV3hsUFNKb2RIUndPaTh2YzJOb1pXMWhjeTU0Yld4emIyRndMbTl5Wnk5emIyRndMMlZ1WTI5a2FXNW5MeUkrRFFvOFUwOUJVQzFGVGxZNlFtOWtlVDROQ2p4aE1UcFRaWEpwWVd4cGVtRmliR1ZKWkNCcFpEMGljbVZtTFRFaUlIaHRiRzV6T21FeFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1dGFXTnliM052Wm5RdVkyOXRMMk5zY2k5dWMyRnpjMlZ0TDFKbGRtbDBVMlZ5ZG1salpYTXVVR1Z5YzJsemRHVnVZMlV2VW1WMmFYUlRaWEoyYVdObGN5VXlReVV5TUZabGNuTnBiMjRsTTBReUxqQXVNUzQxTURZMUpUSkRKVEl3UTNWc2RIVnlaU1V6Ukc1bGRYUnlZV3dsTWtNbE1qQlFkV0pzYVdOTFpYbFViMnRsYmlVelJHNTFiR3dpUGcwS1BITjBjbWx1WjBsRUlHbGtQU0p5WldZdE15SStOalJtWm1Wa1lXRXRObVUwWmkwMFltSm1MV0V6WlRjdFpEWmlNamt4WXpZeU5XSTNMVEF3TURBd09UazBQQzl6ZEhKcGJtZEpSRDROQ2p4cGJuUkpSRDR5TkRVeVBDOXBiblJKUkQ0TkNqd3ZZVEU2VTJWeWFXRnNhWHBoWW14bFNXUStEUW84TDFOUFFWQXRSVTVXT2tKdlpIaytEUW84TDFOUFFWQXRSVTVXT2tWdWRtVnNiM0JsUGcwSzwvQmFzZS0wLTAtMF9EYXRhPg0KPEJhc2UtMC0wLTBfSGFzTmVzdGVkRGF0YT5mYWxzZTwvQmFzZS0wLTAtMF9IYXNOZXN0ZWREYXRhPg0KPEJhc2UtMC0wLTFfSGFzRGF0YT50cnVlPC9CYXNlLTAtMC0xX0hhc0RhdGE+DQo8QmFzZS0wLTAtMV9EYXRhIGlkPSJyZWYtNCI+UEZOUFFWQXRSVTVXT2tWdWRtVnNiM0JsSUhodGJHNXpPbmh6YVQwaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNUzlZVFV4VFkyaGxiV0V0YVc1emRHRnVZMlVpSUhodGJHNXpPbmh6WkQwaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNUzlZVFV4VFkyaGxiV0VpSUhodGJHNXpPbE5QUVZBdFJVNURQU0pvZEhSd09pOHZjMk5vWlcxaGN5NTRiV3h6YjJGd0xtOXlaeTl6YjJGd0wyVnVZMjlrYVc1bkx5SWdlRzFzYm5NNlUwOUJVQzFGVGxZOUltaDBkSEE2THk5elkyaGxiV0Z6TG5odGJITnZZWEF1YjNKbkwzTnZZWEF2Wlc1MlpXeHZjR1V2SWlCNGJXeHVjenBqYkhJOUltaDBkSEE2THk5elkyaGxiV0Z6TG0xcFkzSnZjMjltZEM1amIyMHZjMjloY0M5bGJtTnZaR2x1Wnk5amJISXZNUzR3SWlCVFQwRlFMVVZPVmpwbGJtTnZaR2x1WjFOMGVXeGxQU0pvZEhSd09pOHZjMk5vWlcxaGN5NTRiV3h6YjJGd0xtOXlaeTl6YjJGd0wyVnVZMjlrYVc1bkx5SStEUW84VTA5QlVDMUZUbFk2UW05a2VUNE5DanhoTVRwVFpYSnBZV3hwZW1GaWJHVkpaQ0JwWkQwaWNtVm1MVEVpSUhodGJHNXpPbUV4UFNKb2RIUndPaTh2YzJOb1pXMWhjeTV0YVdOeWIzTnZablF1WTI5dEwyTnNjaTl1YzJGemMyVnRMMUpsZG1sMFUyVnlkbWxqWlhNdVVHVnljMmx6ZEdWdVkyVXZVbVYyYVhSVFpYSjJhV05sY3lVeVF5VXlNRlpsY25OcGIyNGxNMFF5TGpBdU1TNDFNRFkxSlRKREpUSXdRM1ZzZEhWeVpTVXpSRzVsZFhSeVlXd2xNa01sTWpCUWRXSnNhV05MWlhsVWIydGxiaVV6Ukc1MWJHd2lQZzBLUEhOMGNtbHVaMGxFSUdsa1BTSnlaV1l0TXlJK05qUm1abVZrWVdFdE5tVTBaaTAwWW1KbUxXRXpaVGN0WkRaaU1qa3hZell5TldJM0xUQXdNREF3T1RrMVBDOXpkSEpwYm1kSlJENE5DanhwYm5SSlJENHlORFV6UEM5cGJuUkpSRDROQ2p3dllURTZVMlZ5YVdGc2FYcGhZbXhsU1dRK0RRbzhMMU5QUVZBdFJVNVdPa0p2WkhrK0RRbzhMMU5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxQZzBLPC9CYXNlLTAtMC0xX0RhdGE+DQo8QmFzZS0wLTAtMV9IYXNOZXN0ZWREYXRhPmZhbHNlPC9CYXNlLTAtMC0xX0hhc05lc3RlZERhdGE+DQo8QmFzZS0wLTAtMl9IYXNEYXRhPnRydWU8L0Jhc2UtMC0wLTJfSGFzRGF0YT4NCjxCYXNlLTAtMC0yX0RhdGEgaWQ9InJlZi01Ij5QRk5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxJSGh0Ykc1ek9uaHphVDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRXRhVzV6ZEdGdVkyVWlJSGh0Ykc1ek9uaHpaRDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRWlJSGh0Ykc1ek9sTlBRVkF0UlU1RFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJZ2VHMXNibk02VTA5QlVDMUZUbFk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbmh0YkhOdllYQXViM0puTDNOdllYQXZaVzUyWld4dmNHVXZJaUI0Yld4dWN6cGpiSEk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbTFwWTNKdmMyOW1kQzVqYjIwdmMyOWhjQzlsYm1OdlpHbHVaeTlqYkhJdk1TNHdJaUJUVDBGUUxVVk9WanBsYm1OdlpHbHVaMU4wZVd4bFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJK0RRbzhVMDlCVUMxRlRsWTZRbTlrZVQ0TkNqeGhNVHBUWlhKcFlXeHBlbUZpYkdWSlpDQnBaRDBpY21WbUxURWlJSGh0Ykc1ek9tRXhQU0pvZEhSd09pOHZjMk5vWlcxaGN5NXRhV055YjNOdlpuUXVZMjl0TDJOc2NpOXVjMkZ6YzJWdEwxSmxkbWwwVTJWeWRtbGpaWE11VUdWeWMybHpkR1Z1WTJVdlVtVjJhWFJUWlhKMmFXTmxjeVV5UXlVeU1GWmxjbk5wYjI0bE0wUXlMakF1TVM0MU1EWTFKVEpESlRJd1EzVnNkSFZ5WlNVelJHNWxkWFJ5WVd3bE1rTWxNakJRZFdKc2FXTkxaWGxVYjJ0bGJpVXpSRzUxYkd3aVBnMEtQSE4wY21sdVowbEVJR2xrUFNKeVpXWXRNeUkrTmpSbVptVmtZV0V0Tm1VMFppMDBZbUptTFdFelpUY3RaRFppTWpreFl6WXlOV0kzTFRBd01EQXdPVGsyUEM5emRISnBibWRKUkQ0TkNqeHBiblJKUkQ0eU5EVTBQQzlwYm5SSlJENE5Dand2WVRFNlUyVnlhV0ZzYVhwaFlteGxTV1ErRFFvOEwxTlBRVkF0UlU1V09rSnZaSGsrRFFvOEwxTlBRVkF0UlU1V09rVnVkbVZzYjNCbFBnMEs8L0Jhc2UtMC0wLTJfRGF0YT4NCjxCYXNlLTAtMC0yX0hhc05lc3RlZERhdGE+ZmFsc2U8L0Jhc2UtMC0wLTJfSGFzTmVzdGVkRGF0YT4NCjxCYXNlLTAtMC0zX0hhc0RhdGE+dHJ1ZTwvQmFzZS0wLTAtM19IYXNEYXRhPg0KPEJhc2UtMC0wLTNfRGF0YSBpZD0icmVmLTYiPlBGTlBRVkF0UlU1V09rVnVkbVZzYjNCbElIaHRiRzV6T25oemFUMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TVM5WVRVeFRZMmhsYldFdGFXNXpkR0Z1WTJVaUlIaHRiRzV6T25oelpEMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TVM5WVRVeFRZMmhsYldFaUlIaHRiRzV6T2xOUFFWQXRSVTVEUFNKb2RIUndPaTh2YzJOb1pXMWhjeTU0Yld4emIyRndMbTl5Wnk5emIyRndMMlZ1WTI5a2FXNW5MeUlnZUcxc2JuTTZVMDlCVUMxRlRsWTlJbWgwZEhBNkx5OXpZMmhsYldGekxuaHRiSE52WVhBdWIzSm5MM052WVhBdlpXNTJaV3h2Y0dVdklpQjRiV3h1Y3pwamJISTlJbWgwZEhBNkx5OXpZMmhsYldGekxtMXBZM0p2YzI5bWRDNWpiMjB2YzI5aGNDOWxibU52WkdsdVp5OWpiSEl2TVM0d0lpQlRUMEZRTFVWT1ZqcGxibU52WkdsdVoxTjBlV3hsUFNKb2RIUndPaTh2YzJOb1pXMWhjeTU0Yld4emIyRndMbTl5Wnk5emIyRndMMlZ1WTI5a2FXNW5MeUkrRFFvOFUwOUJVQzFGVGxZNlFtOWtlVDROQ2p4aE1UcFRaWEpwWVd4cGVtRmliR1ZKWkNCcFpEMGljbVZtTFRFaUlIaHRiRzV6T21FeFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1dGFXTnliM052Wm5RdVkyOXRMMk5zY2k5dWMyRnpjMlZ0TDFKbGRtbDBVMlZ5ZG1salpYTXVVR1Z5YzJsemRHVnVZMlV2VW1WMmFYUlRaWEoyYVdObGN5VXlReVV5TUZabGNuTnBiMjRsTTBReUxqQXVNUzQxTURZMUpUSkRKVEl3UTNWc2RIVnlaU1V6Ukc1bGRYUnlZV3dsTWtNbE1qQlFkV0pzYVdOTFpYbFViMnRsYmlVelJHNTFiR3dpUGcwS1BITjBjbWx1WjBsRUlHbGtQU0p5WldZdE15SStOalJtWm1Wa1lXRXRObVUwWmkwMFltSm1MV0V6WlRjdFpEWmlNamt4WXpZeU5XSTNMVEF3TURBd09UazNQQzl6ZEhKcGJtZEpSRDROQ2p4cGJuUkpSRDR5TkRVMVBDOXBiblJKUkQ0TkNqd3ZZVEU2VTJWeWFXRnNhWHBoWW14bFNXUStEUW84TDFOUFFWQXRSVTVXT2tKdlpIaytEUW84TDFOUFFWQXRSVTVXT2tWdWRtVnNiM0JsUGcwSzwvQmFzZS0wLTAtM19EYXRhPg0KPEJhc2UtMC0wLTNfSGFzTmVzdGVkRGF0YT5mYWxzZTwvQmFzZS0wLTAtM19IYXNOZXN0ZWREYXRhPg0KPC9hMTpDYWxsU2l0ZV94MDAyQl9UcmFjZVNlcmlhbGlzZXJIZWxwZXI+DQo8L1NPQVAtRU5WOkJvZHk+DQo8L1NPQVAtRU5WOkVudmVsb3BlPg0K"
+      }
+    }
+  ],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.1.5055",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Categories",
+        "Id": "437ff3e7758d484181534f2863178654",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 33.618792077475007,
+        "Y": 145.80662960958142
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "All Elements of Category",
+        "Id": "ddcaf4433f234d2da5341e2a8621815e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 278.42973106939394,
+        "Y": 158.15897106670457
+      },
+      {
+        "ShowGeometry": false,
+        "Name": "Element.Geometry",
+        "Id": "8a52fcb24b60444baa4dc4e60c4197b3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 553.07544421918715,
+        "Y": 184.14496596307498
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Plane.XY",
+        "Id": "0bdedac892f445e78117c4d3df17f720",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 451.8921657689861,
+        "Y": 280.94761265093325
+      },
+      {
+        "ShowGeometry": false,
+        "Name": "Geometry.Intersect",
+        "Id": "8a48cbba234546f799192a5043401173",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 883.62402286179781,
+        "Y": 192.54493692613212
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Surface.PerimeterCurves",
+        "Id": "f3f138abe8994e1dae105cf28941dbd7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1432.5264604840236,
+        "Y": 197.68476332140665
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.Flatten",
+        "Id": "2b002c153a634e47a4821a8bd0aa6214",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1190.0645999423696,
+        "Y": 187.09702772085612
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Levels",
+        "Id": "c27ad02f58d6486baa91134f599809a9",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -240.685304557741,
+        "Y": 248.269270984196
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Plane.Offset",
+        "Id": "081d6e418dad43c08a670a3150a94e7b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 619.17450455476478,
+        "Y": 279.72525791028551
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Level.Elevation",
+        "Id": "45a9df0810d04ff4b2531e04abfb38a7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 62.228579687851123,
+        "Y": 327.72838194034887
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "cb61996ad0f64356b5a78b1bf333731b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 340.60289484577817,
+        "Y": 404.88015089070626
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Views",
+        "Id": "ec46fea990a4431c87a226813d113aa3",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -245.882199094635,
+        "Y": 454.80275550745705
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "offset roviny rezu pod doskou",
+        "Id": "574bc42d94e44c0399948875cb8a4705",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -246.511347164729,
+        "Y": 361.14542661528
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "DetailCurve.ByCurve",
+        "Id": "527be90cd412461fb223e6f341e0952d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1717.8927995229074,
+        "Y": 305.43481605229664
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "1d016d2260a04095a09876c567622d32",
+        "Title": "INPUT",
+        "Nodes": [
+          "c27ad02f58d6486baa91134f599809a9",
+          "ec46fea990a4431c87a226813d113aa3",
+          "574bc42d94e44c0399948875cb8a4705"
+        ],
+        "Left": -256.511347164729,
+        "Top": 195.269270984196,
+        "Width": 217.0,
+        "Height": 352.53348452326105,
+        "FontSize": 36.0,
+        "InitialTop": 248.269270984196,
+        "InitialHeight": 329.533484523261,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "a30f17f9f92a42919374cfadbc10a7bd",
+        "Title": "New Note",
+        "Nodes": [],
+        "Left": 1034.705639079591,
+        "Top": 294.93316437835063,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "27b0bfefcc8e4659a310a59aa8b267f9",
+        "Title": "vytvori obrys vodorovnej dosky Detail Lines do zvoleneho podorysu. Obrys vytvori na zaklade prieniku so zvolenou rovinou.",
+        "Nodes": [],
+        "Left": -272.68686656796189,
+        "Top": 8.1328312192787,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 185.93619478941409,
+    "Y": 69.645226331015635,
+    "Zoom": 0.73223611399135868
+  }
+}

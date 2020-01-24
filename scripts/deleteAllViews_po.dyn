@@ -1,0 +1,719 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "deleteAllViews_po",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "ee2bdf1584994a2685ca512486656cbd",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Vymaže všetky Views (Floorplans, Sections, Details), Schedules, Legends, Sheets, linknuté dwg subory.\r\nNevymaže 1 vybraný  a práve otvorený view. \r\n\r\nSkript môže pri väčších projektoch s množstvom views pracovať dlhšie.\r\nJe potrebné mať nainštalovaný package Springs a Clockwork",
+      "Description": "Creates a string."
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "c45e12d92aea4dc0b9918eb1b5c6ca80",
+      "Name": "počet ponechaných views",
+      "Type": "unknown",
+      "IntitialValue": "",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "Id": "3a5cc2bd282a4ba4a300e12013a7f8e5",
+      "Name": "počet vymazaných views",
+      "Type": "unknown",
+      "IntitialValue": "",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "Id": "72a337259c52461e881d7b6ac9f23639",
+      "Name": "počet vymazaných elementov",
+      "Type": "unknown",
+      "IntitialValue": "",
+      "Description": "Visualize the output of node."
+    }
+  ],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "de43b934-e84a-4c0a-b298-06207ba545cd",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "f03d0a09cd2d43249a720175be4b69dd",
+      "Inputs": [
+        {
+          "Id": "ab4be3e8bcb240e7b0fb747aa5d401e5",
+          "Name": "toggle",
+          "Description": "bool\nDefault value : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "34a2432a820e4e2db8826008b58468e7",
+          "Name": "docOrRevitLinkInstance",
+          "Description": " Use only if you want to query a linked model\n\nvar\nDefault value : null (disabled)",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f28a58a76df147ae8af82b255fe8546a",
+          "Name": "Views",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets all views in the document - except for 3D view templates (as long as this bug is not fixed: https://github.com/DynamoDS/Dynamo/issues/2970)"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.SetDifference@var[],var[]",
+      "Id": "9d9774ff97584d68af41f870ff178a33",
+      "Inputs": [
+        {
+          "Id": "b445c85492044a67a38a96baa720613b",
+          "Name": "list1",
+          "Description": "List of objects to be included in the new list.\n\nvar[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4fdda1a028d2494f83a1b79de30942ed",
+          "Name": "list2",
+          "Description": "List of objects to be excluded in the new list.\n\nvar[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8d1e51578f514ab8a626965ec5cc5156",
+          "Name": "newList",
+          "Description": "The new list that contains objects in List1 but not in List2.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns a new list that includes objects in List1 but excludes objects in List2.\n\nList.SetDifference (list1: var[], list2: var[]): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "a8709c69-aa1d-4e0d-b2f1-182332d5b6b9",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "4871d77c8b584752b78df011d81d5e6a",
+      "Inputs": [
+        {
+          "Id": "a39df0fdd5274b1e9a4a61fb2950f591",
+          "Name": "element",
+          "Description": "var[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "7977c621d30345959f06cc2fea013b59",
+          "Name": "confirm",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6fed7965f7d54579aa9ebaff808b1fb7",
+          "Name": "count",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ee71bff905db42468c5c11c9a2904717",
+          "Name": "deletedIds(str)",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ec77af6cbf55415b9353200d3b321be0",
+          "Name": "failedIds(str)",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Attempts to delete the input list of elements from the active Revit document.The node returns the number of successfully deleted elements and their Ids as a string. Carefully observe the deleted elements count. It may be greater than the input list because hosted elements or tags will be deleted as well. If an element in the list can not be deleted (for example last revision or last view), the whole list will fail to be deleted."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "574c6cb347254486a75168fa3683cff7",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ea513d0236604fe19faaba3f60bd91e9",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "c45e12d92aea4dc0b9918eb1b5c6ca80",
+      "Inputs": [
+        {
+          "Id": "6bcfa3edfa654c90b6bd9c885c2ff885",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fbe3cb42f51240a8a7fac29c157ba188",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Vymaže všetky Views (Floorplans, Sections, Details), Schedules, Legends, Sheets, linknuté dwg subory.\r\nNevymaže 1 vybraný  a práve otvorený view. \r\n\r\nSkript môže pri väčších projektoch s množstvom views pracovať dlhšie.\r\nJe potrebné mať nainštalovaný package Springs a Clockwork",
+      "Id": "ee2bdf1584994a2685ca512486656cbd",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "a5eff67afb3e448dae45c3463f2a9e1a",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.Views, DSRevitNodesUI",
+      "SelectedIndex": 0,
+      "NodeType": "ExtensionNode",
+      "Id": "8d4b75d403404c7283e6d4cde04ba9d9",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d97ddc1f4ecc47fd95fc871ae8d0f416",
+          "Name": "Views",
+          "Description": "The selected Views",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "All views available in the current document."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.Count@var[]..[]",
+      "Id": "e80604a6878941d5bdbf25b9307d8a9e",
+      "Inputs": [
+        {
+          "Id": "570d908b984e444dadc1029367c99894",
+          "Name": "list",
+          "Description": "List to get the item count of.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "51a6eba04b8e417b812978015c958e00",
+          "Name": "count",
+          "Description": "List length.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the number of items stored in the given list.\n\nList.Count (list: var[]..[]): int"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "null;",
+      "Id": "5443b0267e524d2bbe34756640d51081",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "50fd45ea7bbc4214893c15143131184d",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.Count@var[]..[]",
+      "Id": "2d94139949cf4e929b263ba2a4d6e8f5",
+      "Inputs": [
+        {
+          "Id": "f41b66932d3e411382e9dc2fe3724134",
+          "Name": "list",
+          "Description": "List to get the item count of.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "05b9b1a5124943b190ea0b2d75f5a78e",
+          "Name": "count",
+          "Description": "List length.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the number of items stored in the given list.\n\nList.Count (list: var[]..[]): int"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "3a5cc2bd282a4ba4a300e12013a7f8e5",
+      "Inputs": [
+        {
+          "Id": "8b273b9ee7834a4592b806483d75ef36",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5e3831fdf490430791167851f49f67d7",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "a+b;",
+      "Id": "5066d7e766db4a77833e2c31a148978b",
+      "Inputs": [
+        {
+          "Id": "728e72ac467b4c37b9a7e7c2d3ceb27f",
+          "Name": "a",
+          "Description": "a",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3bc6516900ba4b97acdc1887cb27a019",
+          "Name": "b",
+          "Description": "b",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c827eef352bf4c50a7a8a3e8c1d52c61",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DoubleInput, CoreNodeModels",
+      "NodeType": "NumberInputNode",
+      "NumberType": "Double",
+      "InputValue": -1.0,
+      "Id": "674d090ea42a4189b5fb449ad0a42bd2",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "49efc413626244738e199e49a51b3b7c",
+          "Name": "",
+          "Description": "Double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a number."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "72a337259c52461e881d7b6ac9f23639",
+      "Inputs": [
+        {
+          "Id": "29faac828f0541699dfe26b8ed379160",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3955d82aef7b4b30a7605bde94e496a2",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "f28a58a76df147ae8af82b255fe8546a",
+      "End": "b445c85492044a67a38a96baa720613b",
+      "Id": "80aecfe1c945453bb4ddfb46df3a0481"
+    },
+    {
+      "Start": "f28a58a76df147ae8af82b255fe8546a",
+      "End": "f41b66932d3e411382e9dc2fe3724134",
+      "Id": "c9d50dba45ad40e8beee947e3749a4fc"
+    },
+    {
+      "Start": "8d1e51578f514ab8a626965ec5cc5156",
+      "End": "a39df0fdd5274b1e9a4a61fb2950f591",
+      "Id": "29902c34c47c4e8999eb232a06f93574"
+    },
+    {
+      "Start": "6fed7965f7d54579aa9ebaff808b1fb7",
+      "End": "29faac828f0541699dfe26b8ed379160",
+      "Id": "a8e8553848de4ec186862eb581def5c6"
+    },
+    {
+      "Start": "ec77af6cbf55415b9353200d3b321be0",
+      "End": "570d908b984e444dadc1029367c99894",
+      "Id": "9dbd7c89184d4e09a0900c9a9b756f0e"
+    },
+    {
+      "Start": "ea513d0236604fe19faaba3f60bd91e9",
+      "End": "7977c621d30345959f06cc2fea013b59",
+      "Id": "ab1991050bf44ef199b2009f8bffc137"
+    },
+    {
+      "Start": "d97ddc1f4ecc47fd95fc871ae8d0f416",
+      "End": "4fdda1a028d2494f83a1b79de30942ed",
+      "Id": "cd865acb197f460a8a6fb00a83c1fda8"
+    },
+    {
+      "Start": "51a6eba04b8e417b812978015c958e00",
+      "End": "6bcfa3edfa654c90b6bd9c885c2ff885",
+      "Id": "4253c741ebe7485e845046763fbdc55e"
+    },
+    {
+      "Start": "50fd45ea7bbc4214893c15143131184d",
+      "End": "34a2432a820e4e2db8826008b58468e7",
+      "Id": "f41ef9ae5e5b4d8994061e22237f672d"
+    },
+    {
+      "Start": "05b9b1a5124943b190ea0b2d75f5a78e",
+      "End": "728e72ac467b4c37b9a7e7c2d3ceb27f",
+      "Id": "2989e7ad18614638b74f44e35e7b819b"
+    },
+    {
+      "Start": "c827eef352bf4c50a7a8a3e8c1d52c61",
+      "End": "8b273b9ee7834a4592b806483d75ef36",
+      "Id": "0fe8abb74e284630850a76a4dd750e8b"
+    },
+    {
+      "Start": "49efc413626244738e199e49a51b3b7c",
+      "End": "3bc6516900ba4b97acdc1887cb27a019",
+      "Id": "6f7699d953b24640a122f203a85d41d9"
+    }
+  ],
+  "Dependencies": [
+    "de43b934-e84a-4c0a-b298-06207ba545cd",
+    "a8709c69-aa1d-4e0d-b2f1-182332d5b6b9"
+  ],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.1.5055",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Document.Views",
+        "Id": "f03d0a09cd2d43249a720175be4b69dd",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 114.588472208605,
+        "Y": 99.0289363700392
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.SetDifference",
+        "Id": "9d9774ff97584d68af41f870ff178a33",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 507.0,
+        "Y": 253.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Springs.Doc.DeleteElements",
+        "Id": "4871d77c8b584752b78df011d81d5e6a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 750.0,
+        "Y": 258.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "574c6cb347254486a75168fa3683cff7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 520.23087275971,
+        "Y": 391.960454725713
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "počet ponechaných views",
+        "Id": "c45e12d92aea4dc0b9918eb1b5c6ca80",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": true,
+        "Excluded": false,
+        "X": 1293.8000597701746,
+        "Y": 330.761740756984
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "ee2bdf1584994a2685ca512486656cbd",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -450.72126190425109,
+        "Y": 165.47024458328502
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Ponechat views s názvom",
+        "Id": "8d4b75d403404c7283e6d4cde04ba9d9",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -102.46609020969868,
+        "Y": 353.98927752666708
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.Count",
+        "Id": "e80604a6878941d5bdbf25b9307d8a9e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1095.71973593777,
+        "Y": 329.449539240476
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "5443b0267e524d2bbe34756640d51081",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -43.1423522704835,
+        "Y": 142.44200909682
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.Count",
+        "Id": "2d94139949cf4e929b263ba2a4d6e8f5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1027.970542318569,
+        "Y": 16.139783342425993
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "počet vymazaných views",
+        "Id": "3a5cc2bd282a4ba4a300e12013a7f8e5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": true,
+        "Excluded": false,
+        "X": 1425.9167760838845,
+        "Y": 21.093686655976988
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "5066d7e766db4a77833e2c31a148978b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1251.4550840424024,
+        "Y": 42.523156243232393
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Number",
+        "Id": "674d090ea42a4189b5fb449ad0a42bd2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1146.60712666155,
+        "Y": 116.29204556957603
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "počet vymazaných elementov",
+        "Id": "72a337259c52461e881d7b6ac9f23639",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": true,
+        "Excluded": false,
+        "X": 1103.2513691309473,
+        "Y": 209.11312426571206
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "5bc26c0404fc4426abe1e14a57529f35",
+        "Title": "INPUT",
+        "Nodes": [
+          "8d4b75d403404c7283e6d4cde04ba9d9"
+        ],
+        "Left": -112.46609020969868,
+        "Top": 300.98927752666708,
+        "Width": 190.0,
+        "Height": 146.0,
+        "FontSize": 36.0,
+        "InitialTop": 353.98927752666708,
+        "InitialHeight": 123.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 494.67683011692071,
+    "Y": 209.5705883458715,
+    "Zoom": 0.59120702476703513
+  }
+}

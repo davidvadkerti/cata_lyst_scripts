@@ -1,0 +1,298 @@
+{
+  "Uuid": "65ec2610-c5ae-4508-b67d-2795e976519a",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "checkUnhostedElements_p",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "cfdeb65978ba4dafb473e27122d57ee4",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Vypíše elementy, ku ktorým sú hostované označené elementy.\r\n\r\nVhodné napr. na kontrolu či sú všetky stromy hostované k Topography atd.",
+      "Description": "Creates a string."
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "055740c5e8eb4f16b754a8374ce0be37",
+      "Name": "Názvy elementov, ktoré sú ako host",
+      "Type": "unknown",
+      "IntitialValue": "",
+      "Description": "Visualize the output of node."
+    }
+  ],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.GetParameterValueByName@string",
+      "Id": "cea6124dc455442a8d91f873d7a606f8",
+      "Inputs": [
+        {
+          "Id": "20352fb34a3a4f978c8bf30d5bea548a",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e623064ead7a4a7aa372147703726a3d",
+          "Name": "parameterName",
+          "Description": "The name of the parameter whose value you want to obtain.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "70b14bd7a62e4a238d3e64a69792fef4",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the value of one of the element's parameters.\n\nElement.GetParameterValueByName (parameterName: string): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.UniqueItems@var[]..[]",
+      "Id": "fcd4934ede074c2ba097c495f4df8026",
+      "Inputs": [
+        {
+          "Id": "f40160732f374d38b2b14dc8b50e5fe5",
+          "Name": "list",
+          "Description": "List to filter duplicates out of.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f76b64fdd8be4b7a9e72f2b3b37e915a",
+          "Name": "list",
+          "Description": "Filtered list.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Creates a new list containing all unique items in the given list.\n\nList.UniqueItems (list: var[]..[]): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "055740c5e8eb4f16b754a8374ce0be37",
+      "Inputs": [
+        {
+          "Id": "e598525205744a7b9417909687870754",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5d267d7bf07c47f28b86066f459fde83",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Host",
+      "Id": "980ea98c1cff4b5b823428760093a7ed",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "e6dc3ada8f034c41999d7f84825ba5b5",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Vypíše elementy, ku ktorým sú hostované označené elementy.\r\n\r\nVhodné napr. na kontrolu či sú všetky stromy hostované k Topography atd.",
+      "Id": "cfdeb65978ba4dafb473e27122d57ee4",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "86aff4b44ab94d5f85fa06f0e8ae7c3c",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementsSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [],
+      "Id": "47fecabe479b4083985f3dffadae190b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ab0e11c4f79c4503bed0f9a31a05a79b",
+          "Name": "Elements",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "70b14bd7a62e4a238d3e64a69792fef4",
+      "End": "f40160732f374d38b2b14dc8b50e5fe5",
+      "Id": "1bff017a69e04de8ba7ad1224e977e6d"
+    },
+    {
+      "Start": "f76b64fdd8be4b7a9e72f2b3b37e915a",
+      "End": "e598525205744a7b9417909687870754",
+      "Id": "73d335ad283f469da05faf521d647432"
+    },
+    {
+      "Start": "e6dc3ada8f034c41999d7f84825ba5b5",
+      "End": "e623064ead7a4a7aa372147703726a3d",
+      "Id": "27d0487ed34a422e824c87d2c2f7d499"
+    },
+    {
+      "Start": "ab0e11c4f79c4503bed0f9a31a05a79b",
+      "End": "20352fb34a3a4f978c8bf30d5bea548a",
+      "Id": "8a5e2f71076b4bccae60fa435b15769a"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.1.5055",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Element.GetParameterValueByName",
+        "Id": "cea6124dc455442a8d91f873d7a606f8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 527.5,
+        "Y": 297.5
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.UniqueItems",
+        "Id": "fcd4934ede074c2ba097c495f4df8026",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 837.56011435551034,
+        "Y": 312.11078551847646
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Názvy elementov, ktoré sú ako host",
+        "Id": "055740c5e8eb4f16b754a8374ce0be37",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": true,
+        "Excluded": false,
+        "X": 1035.6177152708117,
+        "Y": 314.12712193628221
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "String",
+        "Id": "980ea98c1cff4b5b823428760093a7ed",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 285.47480753350357,
+        "Y": 466.55884259268942
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "cfdeb65978ba4dafb473e27122d57ee4",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 175.45361482409868,
+        "Y": 61.261158996528337
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Select Model Elements",
+        "Id": "47fecabe479b4083985f3dffadae190b",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 175.43974959869422,
+        "Y": 231.68637133963617
+      }
+    ],
+    "Annotations": [],
+    "X": -34.454634820390311,
+    "Y": 59.076847760920657,
+    "Zoom": 0.88878922829715579
+  }
+}

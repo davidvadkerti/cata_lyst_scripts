@@ -1,0 +1,479 @@
+{
+  "Uuid": "001fc30a-0c60-4b86-b3e2-1d14db49abbb",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "UniqueIDsGet",
+  "ElementResolver": {
+    "ResolutionMap": {
+      "Select": {
+        "Key": "archilab.Revit.Selection.Select",
+        "Value": "archilab.dll"
+      }
+    }
+  },
+  "Inputs": [
+    {
+      "Id": "3417c9bb7a664f4eabb08d31684a62cd",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Vygeneruje Unique IDs (UIDs) vybraných elementov a vloží ho do Clipboardu. Zoznam sa pošle druhej strane.\r\n\r\nDruhá strana si Zoznam vloží v do Select By Unique ID v skripte UniqueIDsSelect.dyn. Skript označí Elementy s príslušným UIDs. Skript spúšťajte s aktívnym 3D view.",
+      "Description": "Creates a string."
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "42e56c3fdcb649c69a6f5a4efd3477cb",
+      "Name": "Unique IDs",
+      "Type": "unknown",
+      "IntitialValue": "",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "Id": "2f2407ea86c24c82a5d01d970b33c080",
+      "Name": "Clipboard status",
+      "Type": "unknown",
+      "IntitialValue": "",
+      "Description": "Visualize the output of node."
+    }
+  ],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.UniqueId",
+      "Id": "5ce10be85da246f891e6097bf1359831",
+      "Inputs": [
+        {
+          "Id": "0e1c049ce58243939683612c23a15267",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "aec55fd08cc04773adbc83cd8d99840a",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the Element Unique Id for this element\n\nElement.UniqueId: string"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "42e56c3fdcb649c69a6f5a4efd3477cb",
+      "Inputs": [
+        {
+          "Id": "f34f0c0bb2c949239960d9b90141db3e",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "db2f7003e6fc4530b2a2a5e76b94fe3d",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Enable Python support and load DesignScript library\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\n#sourcelist=[]\r\nsourcelist = IN[0]\r\ncount = IN[1]\r\nx=\"\"\r\n\r\ndef quote(a):\r\n    b='\"'+a+'\"'\r\n    return a\r\n\r\nif count<2: c=sourcelist\r\nelse:\r\n\tfor i in range(0,count-1):\r\n\t\tx=x+sourcelist[i]+\", \"\r\n\tx=x+sourcelist[count-1]\r\n\tc=\"ID označených elementov: \"+x\r\n\r\n#print sourcelist[newlist]\r\n#for i in range\r\n\r\n# Place your code below this line\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = c",
+      "VariableInputPorts": true,
+      "Id": "be59b7889735409eb3fd6fd7b2111eb5",
+      "Inputs": [
+        {
+          "Id": "bea86c74cfb14560a6ad9227f5d3a3d5",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e93ce724e2374954a36646bd752c3d26",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fde2383067af4ec0958554682a35f455",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "2b41ce74561140d7bfa61f72acec1a18",
+      "Inputs": [
+        {
+          "Id": "be61239faadf439d9abb488637356c0e",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8079e97bd2114d8497d006d650ccca82",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n\nclr.AddReference('System.Windows.Forms')\nfrom System.Windows.Forms import Clipboard\n\nimport sys\npyt_path = r'C:\\Program Files (x86)\\IronPython 2.7\\Lib'\nsys.path.append(pyt_path)\n\n#The inputs to this node will be stored as a list in the IN variables.\n#leaved commented text from original WRITE TO TEXT FILE node\nA = IN[0]\n#path = IN[1]\n\n#anewline = \"\\n\".join(A.split(\", \"))\n\ntry:\n\tClipboard.SetText(A)\n\tOUT = \"Výstup bol nakopírovaný do schránky\"\n#\tOUT = IN[0]\nexcept:\n\tOUT = 'Data could not be copied to clipboard'",
+      "VariableInputPorts": true,
+      "Id": "b836a25f0aaa4b9ca1f9f601a26a27dc",
+      "Inputs": [
+        {
+          "Id": "8a6cdab38e02488d9bdc2b3253112804",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6cde50c2b3f7401ea099af99856c4c4e",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "2f2407ea86c24c82a5d01d970b33c080",
+      "Inputs": [
+        {
+          "Id": "582f039cd22c4eb69e07071105741800",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "cf7c9f6459204cd19a2ce472de047a5e",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Vygeneruje Unique IDs (UIDs) vybraných elementov a vloží ho do Clipboardu. Zoznam sa pošle druhej strane.\r\n\r\nDruhá strana si Zoznam vloží v do Select By Unique ID v skripte UniqueIDsSelect.dyn. Skript označí Elementy s príslušným UIDs. Skript spúšťajte s aktívnym 3D view.",
+      "Id": "3417c9bb7a664f4eabb08d31684a62cd",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ebc3aab69a9a4f1d81d3d270fb309e32",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.Count@var[]..[]",
+      "Id": "564bf5fe08494c54bad5be473a1ca123",
+      "Inputs": [
+        {
+          "Id": "69a64bcc23fe47d4b4c27041f5878f0a",
+          "Name": "list",
+          "Description": "List to get the item count of.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5b244b82475a407189b14e9372ff1605",
+          "Name": "count",
+          "Description": "List length.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the number of items stored in the given list.\n\nList.Count (list: var[]..[]): int"
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementsSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "a575e949-5246-4966-92a8-9b28a80e36b7-00051ad5"
+      ],
+      "Id": "ee12b7c120784802a11953dff77bc4d7",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "e6ed387c3aba40a189c00c307c7bdfcf",
+          "Name": "Elements",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "aec55fd08cc04773adbc83cd8d99840a",
+      "End": "f34f0c0bb2c949239960d9b90141db3e",
+      "Id": "1d17cbc39ed44cd298305831680da4bf"
+    },
+    {
+      "Start": "aec55fd08cc04773adbc83cd8d99840a",
+      "End": "bea86c74cfb14560a6ad9227f5d3a3d5",
+      "Id": "ef10186211ef444eb41c9d90677b2a8a"
+    },
+    {
+      "Start": "aec55fd08cc04773adbc83cd8d99840a",
+      "End": "69a64bcc23fe47d4b4c27041f5878f0a",
+      "Id": "26c31f19ed43405e8fbffa7324509058"
+    },
+    {
+      "Start": "fde2383067af4ec0958554682a35f455",
+      "End": "be61239faadf439d9abb488637356c0e",
+      "Id": "9b30e5b3ef0840418848be6a5684bdd0"
+    },
+    {
+      "Start": "fde2383067af4ec0958554682a35f455",
+      "End": "8a6cdab38e02488d9bdc2b3253112804",
+      "Id": "86a5c59bb2534ee18cb4b8bb87e039e0"
+    },
+    {
+      "Start": "6cde50c2b3f7401ea099af99856c4c4e",
+      "End": "582f039cd22c4eb69e07071105741800",
+      "Id": "3eeeaa23640b4a89ab2b3c776c01fc20"
+    },
+    {
+      "Start": "5b244b82475a407189b14e9372ff1605",
+      "End": "e93ce724e2374954a36646bd752c3d26",
+      "Id": "d7745ebd004c41089b8b1b7bb7d4fafe"
+    },
+    {
+      "Start": "e6ed387c3aba40a189c00c307c7bdfcf",
+      "End": "0e1c049ce58243939683612c23a15267",
+      "Id": "bddb21141d374380a247f88e40dcb3b2"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.1.5055",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "Id": "5ce10be85da246f891e6097bf1359831",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Element.UniqueId",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 148.11719912162778,
+        "Y": 154.3181691614891
+      },
+      {
+        "Id": "42e56c3fdcb649c69a6f5a4efd3477cb",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": true,
+        "Name": "Unique IDs",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 1137.4816491128581,
+        "Y": -41.740062737018889
+      },
+      {
+        "Id": "be59b7889735409eb3fd6fd7b2111eb5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "PY list generator",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 764.662582181084,
+        "Y": 133.44352648107366
+      },
+      {
+        "Id": "2b41ce74561140d7bfa61f72acec1a18",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Unique IDs list for Dynamo",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 1143.1141613342083,
+        "Y": 258.25988104815895
+      },
+      {
+        "Id": "b836a25f0aaa4b9ca1f9f601a26a27dc",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "PY clipboard",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 969.74733589312382,
+        "Y": 114.86738252599883
+      },
+      {
+        "Id": "2f2407ea86c24c82a5d01d970b33c080",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": true,
+        "Name": "Clipboard status",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 1147.4722631370371,
+        "Y": 104.19550593300875
+      },
+      {
+        "Id": "3417c9bb7a664f4eabb08d31684a62cd",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Name": "Návod",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -426.15497882403889,
+        "Y": 44.110068470890354
+      },
+      {
+        "Id": "564bf5fe08494c54bad5be473a1ca123",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "List.Count",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 465.12117018601066,
+        "Y": 280.358362115858
+      },
+      {
+        "Id": "ee12b7c120784802a11953dff77bc4d7",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Name": "Select Model Elements",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -179.26907590559586,
+        "Y": 155.33294339013051
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "6ae9586f84294cfbadad6c75033cd900",
+        "Title": "Get UID INPUT",
+        "Nodes": [
+          "ee12b7c120784802a11953dff77bc4d7"
+        ],
+        "Left": -189.26907590559586,
+        "Top": 59.332943390130509,
+        "Width": 195.0,
+        "Height": 215.0,
+        "FontSize": 36.0,
+        "InitialTop": 155.33294339013051,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 86.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 614.44356960932021,
+    "Y": 269.39870535835468,
+    "Zoom": 1.1119030376319663
+  }
+}

@@ -1,0 +1,515 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "SUM of selected element Areas_p",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "8f96d15bb0d14a6b82a0c1beb11d2d15",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Spocita plochu vsetkych vybranych elementov.\r\nElementy je nutne vybrat naraz cez Cross Window. Podporovane su vsetky elementy ktore maju parameter s nazvom Area (Rooms, Floors, Walls...)",
+      "Description": "Creates a string."
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "2f5ba59580c240ff90c549651a7e9e34",
+      "Name": "Počet elementov",
+      "Type": "unknown",
+      "IntitialValue": "",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "Id": "491a99de2a834e58afdd2577d42a349a",
+      "Name": "Plocha v m2",
+      "Type": "unknown",
+      "IntitialValue": "",
+      "Description": "Visualize the output of node."
+    }
+  ],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.GetParameterValueByName@string",
+      "Id": "e42f7161776443bdaf3957a3580d92af",
+      "Inputs": [
+        {
+          "Id": "21ad6999de3943cdbf1996ba86aec130",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4887e62480d64774926646f55cc98593",
+          "Name": "parameterName",
+          "Description": "The name of the parameter whose value you want to obtain.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "43a73ab2a0bb43f480019d9aaa6691c4",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the value of one of the element's parameters.\n\nElement.GetParameterValueByName (parameterName: string): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.Count@var[]..[]",
+      "Id": "547fcc55dc7c4789917c1aac4e9ca07b",
+      "Inputs": [
+        {
+          "Id": "3f52090438d041aa88f7833a55878254",
+          "Name": "list",
+          "Description": "List to get the item count of.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "97f428262cc64df09116cf62a8f6cefb",
+          "Name": "count",
+          "Description": "List length.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the number of items stored in the given list.\n\nList.Count (list: var[]..[]): int"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "2f5ba59580c240ff90c549651a7e9e34",
+      "Inputs": [
+        {
+          "Id": "525d002abe454424add6983a9a0999cc",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d90be7f64f34457cb3c646c4f0ae0f13",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.Math.Sum@double[]",
+      "Id": "5be61f786ae74e008ef43bc430750304",
+      "Inputs": [
+        {
+          "Id": "b47547c679a144ffae60b86f8bf25935",
+          "Name": "values",
+          "Description": "The numbers to sum\n\ndouble[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c728f57d52da4b72aa5aa101e4618feb",
+          "Name": "sum",
+          "Description": "The sum of the values",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Find the sum of a series of numbers\n\nMath.Sum (values: double[]): double"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "491a99de2a834e58afdd2577d42a349a",
+      "Inputs": [
+        {
+          "Id": "7ab61575ec88495189498a44d09b68d0",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "99214654221c4bdab7dd334f3c3bada3",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.Math.Round@double,int",
+      "Id": "62a76db1a12f4082a7eafcb88a24d593",
+      "Inputs": [
+        {
+          "Id": "1b06129adcd144e4be93306582407074",
+          "Name": "number",
+          "Description": "Number to be rounded.\n\ndouble",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "80614a65de034983a3ec186ba58d65a6",
+          "Name": "digits",
+          "Description": "Number of fractional digits in the return value.\n\nint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8ddc6cdf0c644f908b7bb8bf56058feb",
+          "Name": "number",
+          "Description": "The number nearest to value that contains a number of fractional digits equal to digits.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Rounds a number to a specified number of fractional digits.\n\nMath.Round (number: double, digits: int): double"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "3;",
+      "Id": "4a7871af3ee4400d9c541bfd6e2f6869",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "25b1306d7db64ddf919bd84ad8a99620",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Spocita plochu vsetkych vybranych elementov.\r\nElementy je nutne vybrat naraz cez Cross Window. Podporovane su vsetky elementy ktore maju parameter s nazvom Area (Rooms, Floors, Walls...)",
+      "Id": "8f96d15bb0d14a6b82a0c1beb11d2d15",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "b4a819d561c84601a7df49541bb4d08a",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementsSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [],
+      "Id": "082b90b8cb9b4daba716f3365dd5f797",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "41feb8d36b774eb7a71fc0f9628700a2",
+          "Name": "Elements",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Area\";",
+      "Id": "10cf4bf6bcc949f9a40f9355bf385d04",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1f540113cf1e4bbb9da8912854ee248d",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "43a73ab2a0bb43f480019d9aaa6691c4",
+      "End": "b47547c679a144ffae60b86f8bf25935",
+      "Id": "36187857a107498484232623226affab"
+    },
+    {
+      "Start": "97f428262cc64df09116cf62a8f6cefb",
+      "End": "525d002abe454424add6983a9a0999cc",
+      "Id": "fb909ee0a67a49c89239908e921aab17"
+    },
+    {
+      "Start": "c728f57d52da4b72aa5aa101e4618feb",
+      "End": "1b06129adcd144e4be93306582407074",
+      "Id": "b9dea85021984b76bf68902a7f8d92ad"
+    },
+    {
+      "Start": "8ddc6cdf0c644f908b7bb8bf56058feb",
+      "End": "7ab61575ec88495189498a44d09b68d0",
+      "Id": "500b729bfe5f4fffb1595ce4f3079131"
+    },
+    {
+      "Start": "25b1306d7db64ddf919bd84ad8a99620",
+      "End": "80614a65de034983a3ec186ba58d65a6",
+      "Id": "d8eb1d25013147259a4afbf2e331ae2a"
+    },
+    {
+      "Start": "41feb8d36b774eb7a71fc0f9628700a2",
+      "End": "3f52090438d041aa88f7833a55878254",
+      "Id": "2450c9d13a0942a88e33c10196d529c3"
+    },
+    {
+      "Start": "41feb8d36b774eb7a71fc0f9628700a2",
+      "End": "21ad6999de3943cdbf1996ba86aec130",
+      "Id": "d24aa571278a4253b56e7cbe1750a201"
+    },
+    {
+      "Start": "1f540113cf1e4bbb9da8912854ee248d",
+      "End": "4887e62480d64774926646f55cc98593",
+      "Id": "118c7be3c098477191e51b7f34249d3d"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.1.5055",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Element.GetParameterValueByName",
+        "Id": "e42f7161776443bdaf3957a3580d92af",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 347.064451794785,
+        "Y": 224.564451794785
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.Count",
+        "Id": "547fcc55dc7c4789917c1aac4e9ca07b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 395.553412462908,
+        "Y": 93.486646884273
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Počet elementov",
+        "Id": "2f5ba59580c240ff90c549651a7e9e34",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": true,
+        "Excluded": false,
+        "X": 609.543026706231,
+        "Y": 96.0563798219584
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Math.Sum",
+        "Id": "5be61f786ae74e008ef43bc430750304",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 679.572700296736,
+        "Y": 230.181008902077
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Plocha v m2",
+        "Id": "491a99de2a834e58afdd2577d42a349a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": true,
+        "Excluded": false,
+        "X": 1132.43496514646,
+        "Y": 235.937685459941
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Math.Round",
+        "Id": "62a76db1a12f4082a7eafcb88a24d593",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 889.46998273653,
+        "Y": 236.841084498825
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "4a7871af3ee4400d9c541bfd6e2f6869",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 728.244519503102,
+        "Y": 357.151889198371
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "8f96d15bb0d14a6b82a0c1beb11d2d15",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 19.763872607508,
+        "Y": 431.841165302477
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Vyberte elementy oknom",
+        "Id": "082b90b8cb9b4daba716f3365dd5f797",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 11.927276941062,
+        "Y": 168.877407478407
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "10cf4bf6bcc949f9a40f9355bf385d04",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 69.7922155287825,
+        "Y": 312.855366279942
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "3d880652d33b44968cbf76558ca24122",
+        "Title": "INPUT",
+        "Nodes": [
+          "b34b1d793d5a47cf8e3d27c026327669",
+          "082b90b8cb9b4daba716f3365dd5f797"
+        ],
+        "Left": -8.393879893187659,
+        "Top": -4.2759836143634971,
+        "Width": 305.0,
+        "Height": 292.15339109277051,
+        "FontSize": 30.0,
+        "InitialTop": 41.7240163856365,
+        "InitialHeight": 252.976093821889,
+        "TextblockHeight": 36.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "b34b1d793d5a47cf8e3d27c026327669",
+        "Title": "Spocita plochu vsetkych vybranych elementov.\r\n\r\nElementy je nutne vybrat naraz cez Cross Window. Podporovane su vsetky elementy ktore maju parameter s nazvom Area (Rooms, Floors, Walls...)",
+        "Nodes": [],
+        "Left": 1.60612010681234,
+        "Top": 41.7240163856365,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 141.744136739737,
+    "Y": 198.33705149338,
+    "Zoom": 0.639201542248482
+  }
+}

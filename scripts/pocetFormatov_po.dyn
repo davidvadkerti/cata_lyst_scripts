@@ -1,0 +1,440 @@
+{
+  "Uuid": "ff65b080-4731-498f-bf9c-8378ae2dd478",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "pocetFormatov_po",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "a8d26caeb5cd4f4dbaa4fa5e417e34c1",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Každému Sheetu v projekte zapíše hodnotu \"Pocet formatov\" z Titleblocku, ktorý je vložený na Sheete do číselného Shared parametru \"Pocet formatov num\".\r\n\r\nV revite je potom v Sheet liste možné spočítať všetky formáty časti alebo celej dokumentácie.",
+      "Description": "Creates a string."
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
+      "SelectedIndex": 572,
+      "NodeType": "ExtensionNode",
+      "Id": "1191b615b7f44c7fa9bc314d4ed9153d",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "a18a848fcfb94b17bb7fefac3df95b1c",
+          "Name": "Category",
+          "Description": "The selected Category.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "All built-in categories."
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "68223fcfe0c14327a0f350257187f532",
+      "Inputs": [
+        {
+          "Id": "975d90e6c3254f0882d3b8a6ca9ca6f3",
+          "Name": "Category",
+          "Description": "The Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "85709720281f4775ac243a407e7b4b24",
+          "Name": "Elements",
+          "Description": "An element type.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Get all elements of the specified category from the model."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.SetParameterByName@string,var",
+      "Id": "f0cabfbe9674425588542e1d8e1676f3",
+      "Inputs": [
+        {
+          "Id": "3c836a839646474992dc0fa29a829223",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "5e1eda0aa16a48d7be7ae5bea6e20c38",
+          "Name": "parameterName",
+          "Description": "The name of the parameter to set.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "fa4e84db92a24baabbd944f0f65a492e",
+          "Name": "value",
+          "Description": "The value.\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0e0a4d5af4c74b219b5290b06c8fecc9",
+          "Name": "Element",
+          "Description": "Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Set one of the element's parameters.\n\nElement.SetParameterByName (parameterName: string, value: var): Element"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Pocet formatov\";",
+      "Id": "8ce94708483f440f89fc5bc367e24ec4",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "0b670ea5170a409d8310f3bf76da425f",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.GetParameterValueByName@string",
+      "Id": "dd0d5280e8b94186922f6412825c758e",
+      "Inputs": [
+        {
+          "Id": "01e02ad3127e458d81a1315d870c883f",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4a5647a8d3bf4877b9b3d07108364975",
+          "Name": "parameterName",
+          "Description": "The name of the parameter whose value you want to obtain.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "38af63176fcc4976ba430c53d42919de",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the value of one of the element's parameters.\n\nElement.GetParameterValueByName (parameterName: string): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Pocet formatov num\";",
+      "Id": "69b3366dd6204d3cae7e6865557bda6e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "3dc12869a4c645058a8b66bcb1cf9618",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.ElementType",
+      "Id": "d818f6b885b343dc9fa3bf9ed963798b",
+      "Inputs": [
+        {
+          "Id": "05f8050217f842af84482ae28c9d9c48",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "878021216ccd492195f80e71f78cb898",
+          "Name": "ElementType",
+          "Description": "Element Type or Null.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the FamilyType for this Element. Returns null if the Element cannot have a FamilyType assigned.\n\nElement.ElementType: Element"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\n\r\nclr.AddReference(\"RevitNodes\")\r\nimport Revit\r\nclr.ImportExtensions(Revit.Elements)\r\n\r\ndef GetOwnerView(item):\r\n\tif hasattr(item, \"OwnerViewId\"): return item.Document.GetElement(item.OwnerViewId)\r\n\telse: return None\r\n\r\nitems = UnwrapElement(IN[0])\r\n\r\nif isinstance(IN[0], list): OUT = [GetOwnerView(x) for x in items]\r\nelse: OUT = GetOwnerView(items)",
+      "VariableInputPorts": true,
+      "Id": "a0adb2bc92a04790b918a8aa4554b2fb",
+      "Inputs": [
+        {
+          "Id": "3b4677a5881d4c518d634ba11c2b0951",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5a160b4ff3474ca2ab0d8636a1be0176",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Každému Sheetu v projekte zapíše hodnotu \"Pocet formatov\" z Titleblocku, ktorý je vložený na Sheete do číselného Shared parametru \"Pocet formatov num\".\r\n\r\nV revite je potom v Sheet liste možné spočítať všetky formáty časti alebo celej dokumentácie.",
+      "Id": "a8d26caeb5cd4f4dbaa4fa5e417e34c1",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "40b54a1a1fd14ad8bbd771294c9b115c",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "a18a848fcfb94b17bb7fefac3df95b1c",
+      "End": "975d90e6c3254f0882d3b8a6ca9ca6f3",
+      "Id": "9624e2314d3e4fc2a35a464ba9807345"
+    },
+    {
+      "Start": "85709720281f4775ac243a407e7b4b24",
+      "End": "05f8050217f842af84482ae28c9d9c48",
+      "Id": "31f65852161f4c7aa9fe121e3cb81a32"
+    },
+    {
+      "Start": "85709720281f4775ac243a407e7b4b24",
+      "End": "3b4677a5881d4c518d634ba11c2b0951",
+      "Id": "38da8442736c46d2832960433b5ce818"
+    },
+    {
+      "Start": "0b670ea5170a409d8310f3bf76da425f",
+      "End": "4a5647a8d3bf4877b9b3d07108364975",
+      "Id": "ff17d2e6366b42718c7a64cf7bfb844f"
+    },
+    {
+      "Start": "38af63176fcc4976ba430c53d42919de",
+      "End": "fa4e84db92a24baabbd944f0f65a492e",
+      "Id": "b9404af0c09d4b2f9ec86f4531869ab1"
+    },
+    {
+      "Start": "3dc12869a4c645058a8b66bcb1cf9618",
+      "End": "5e1eda0aa16a48d7be7ae5bea6e20c38",
+      "Id": "f530b8afc6d044379804e6b127e86421"
+    },
+    {
+      "Start": "878021216ccd492195f80e71f78cb898",
+      "End": "01e02ad3127e458d81a1315d870c883f",
+      "Id": "b4f54d94ce864bdfa0f9fb9977c04263"
+    },
+    {
+      "Start": "5a160b4ff3474ca2ab0d8636a1be0176",
+      "End": "3c836a839646474992dc0fa29a829223",
+      "Id": "30875153693f492a981374ae4fed44dc"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.1.5055",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Categories",
+        "Id": "1191b615b7f44c7fa9bc314d4ed9153d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 397.73245228625683,
+        "Y": 440.30727131573997
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "All Elements of Category",
+        "Id": "68223fcfe0c14327a0f350257187f532",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 636.76283764045968,
+        "Y": 417.02280899280873
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.SetParameterByName",
+        "Id": "f0cabfbe9674425588542e1d8e1676f3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2114.0715083076338,
+        "Y": 293.09529963815459
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "8ce94708483f440f89fc5bc367e24ec4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1282.62815038514,
+        "Y": 517.942225864848
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.GetParameterValueByName",
+        "Id": "dd0d5280e8b94186922f6412825c758e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1512.43420070245,
+        "Y": 480.27273013681
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "69b3366dd6204d3cae7e6865557bda6e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1555.35264179108,
+        "Y": 375.671796444575
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.ElementType",
+        "Id": "d818f6b885b343dc9fa3bf9ed963798b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1180.62024451172,
+        "Y": 386.45372386651
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY Clockwork Element.OwnerView",
+        "Id": "a0adb2bc92a04790b918a8aa4554b2fb",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 894.01010104429133,
+        "Y": 254.12932421547285
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "a8d26caeb5cd4f4dbaa4fa5e417e34c1",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 385.55772963571292,
+        "Y": 222.82228570705846
+      }
+    ],
+    "Annotations": [],
+    "X": -262.41214928886654,
+    "Y": 58.299914566578309,
+    "Zoom": 0.98582718668465552
+  }
+}

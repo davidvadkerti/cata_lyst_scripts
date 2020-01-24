@@ -1,0 +1,98 @@
+<Workspace Version="1.3.2.2480" X="210.61" Y="105.6775" zoom="0.8425" ScaleFactor="1" Name="Home" Description="" RunType="Manual" RunPeriod="1000" HasRunWithoutCrash="True">
+  <NamespaceResolutionMap />
+  <Elements>
+    <PythonNodeModels.PythonNode guid="c4fca8f5-b4af-4ba2-a651-22bd0931c593" type="PythonNodeModels.PythonNode" nickname="Python Script" x="507" y="176" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="2">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <Script>import clr
+clr.AddReference('RevitAPI')
+from Autodesk.Revit.DB import *
+import Autodesk
+
+
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+
+a = UnwrapElement(IN[0])
+v = UnwrapElement(IN[1])
+try:
+	TransactionManager.Instance.EnsureInTransaction(doc)
+	for i in a:
+#   	i.SetDatumExtentType(DatumEnds.End0,v, DatumExtentType.Model)
+    	i.SetDatumExtentType(DatumEnds.End0,v, DatumExtentType.ViewSpecific)
+#   	i.SetDatumExtentType(DatumEnds.End1,v, DatumExtentType.Model)
+    	i.SetDatumExtentType(DatumEnds.End1,v, DatumExtentType.ViewSpecific)
+	TransactionManager.Instance.TransactionTaskDone()
+except:
+	OUT[1] = "message"
+
+OUT = v</Script>
+    </PythonNodeModels.PythonNode>
+    <DSRevitNodesUI.ElementsOfCategory guid="2048dee8-cfe5-462e-aab7-3c29b3f4f39e" type="DSRevitNodesUI.ElementsOfCategory" nickname="All Elements of Category" x="248" y="132" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </DSRevitNodesUI.ElementsOfCategory>
+    <Dynamo.Graph.Nodes.CustomNodes.Function guid="9f2a8a5d-10cc-4390-a851-7e0161606064" type="Dynamo.Graph.Nodes.CustomNodes.Function" nickname="Springs.Doc.ActiveView" x="118.175074183976" y="260.569732937685" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="True" />
+      <ID value="58849545-7510-4baf-99da-98c0b1e184fd" />
+      <Name value="Springs.Doc.ActiveView" />
+      <Description value="Selects the current document's active view. Supports more view types than the built-in option.&#xD;&#xA;Will be depreciated once the bult in node works with all plan types." />
+      <Inputs>
+        <Input value="refresh" />
+      </Inputs>
+      <Outputs>
+        <Output value="view" />
+      </Outputs>
+    </Dynamo.Graph.Nodes.CustomNodes.Function>
+    <CoreNodeModels.Input.StringInput guid="c7298507-4f70-4244-ab49-a5cbf152954f" type="CoreNodeModels.Input.StringInput" nickname="Návod" x="-228.617210682493" y="111.955489614243" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.String>zmení extents všetkých Grids v aktívnom View z defaultného 3D na 2D.Skript je potrebné spúšťať keď sú views neorezané (uncropped).
+
+Je potrebné doinštalovať package Springs</System.String>
+      <System.String value="zmení extents všetkých Grids v aktívnom View z defaultného 3D na 2D.Skript je potrebné spúšťať keď sú views neorezané (uncropped).&#xD;&#xA;&#xD;&#xA;Je potrebné doinštalovať package Springs" />
+    </CoreNodeModels.Input.StringInput>
+    <DSRevitNodesUI.Categories guid="18acb2c7-3120-4610-92a3-450a200cc349" type="DSRevitNodesUI.Categories" nickname="Categories" x="32.1454005934719" y="119.456973293769" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" index="231:Grids" />
+    <PythonNodeModels.PythonNode guid="884536f6-7246-4ba3-bb5c-fc9e9c8f3d55" type="PythonNodeModels.PythonNode" nickname="Python Script" x="145.930579826061" y="385.396874475794" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>#Copyright(c) 2016, Dimitar Venkov
+# @5devene, dimitar.ven@gmail.com
+
+import clr
+
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+doc = DocumentManager.Instance.CurrentDBDocument
+clr.AddReference("RevitNodes")
+import Revit
+clr.ImportExtensions(Revit.Elements)
+
+OUT = doc.ActiveView.ToDSType(True)</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="b3a7453f-f6be-4107-a74e-64a5e0194038" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="-79.8338278931749" y="389.522255192878" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="refresh:bool = true;" ShouldFocus="false" />
+    <CoreNodeModels.Watch guid="b8f0d66e-3d3d-46a3-9665-b1d69c2b9aad" type="CoreNodeModels.Watch" nickname="Watch" x="742.747774480712" y="76.1988130563799" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.Watch>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="c4fca8f5-b4af-4ba2-a651-22bd0931c593" start_index="0" end="b8f0d66e-3d3d-46a3-9665-b1d69c2b9aad" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="2048dee8-cfe5-462e-aab7-3c29b3f4f39e" start_index="0" end="c4fca8f5-b4af-4ba2-a651-22bd0931c593" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="18acb2c7-3120-4610-92a3-450a200cc349" start_index="0" end="2048dee8-cfe5-462e-aab7-3c29b3f4f39e" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="884536f6-7246-4ba3-bb5c-fc9e9c8f3d55" start_index="0" end="c4fca8f5-b4af-4ba2-a651-22bd0931c593" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="b3a7453f-f6be-4107-a74e-64a5e0194038" start_index="0" end="884536f6-7246-4ba3-bb5c-fc9e9c8f3d55" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="b8e1dba6-e057-48bf-b255-43003ffbe0a7" annotationText="INPUT" left="22.1454005934719" top="73.456973293769" width="186" height="139" fontSize="30" InitialTop="119.456973293769" InitialHeight="123" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="18acb2c7-3120-4610-92a3-450a200cc349" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+  </Annotations>
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>

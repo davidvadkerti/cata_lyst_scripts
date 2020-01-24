@@ -1,0 +1,291 @@
+{
+  "Uuid": "93f660f0-269e-4488-beff-3dfca42370c1",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "wallDisallowJoin_p",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "411418a2686646529530c048f1ce6ac4",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Všetkým označeným Walls (len system families) nastaví na oboch koncoch Disallow wall join",
+      "Description": "Creates a string."
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nclr.AddReference('RevitServices')\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import WallUtils\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nWalls = UnwrapElement(IN[0])\r\nsuccess, failure = [],[]\r\nfor wall in Walls:\r\n\ttry:\r\n\t\tTransactionManager.Instance.EnsureInTransaction(doc)\r\n\t\tWallUtils.DisallowWallJoinAtEnd(wall,0)\r\n\t\tWallUtils.DisallowWallJoinAtEnd(wall,1)\r\n\t\tTransactionManager.Instance.TransactionTaskDone()\r\n\t\tsuccess.append(wall)\r\n\texcept:\r\n\t\tfailure.append(\"Failure: Element category\" +str(wall.Category.Name))\r\nOUT = (success,failure)",
+      "VariableInputPorts": true,
+      "Id": "416bf5f252174d92a06fbe689b1423dd",
+      "Inputs": [
+        {
+          "Id": "075b96f1ab9244d39925e12d9758daa1",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e0540d5bd6c043459d0a6ea4f812e39e",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.CreateList, CoreNodeModels",
+      "VariableInputPorts": true,
+      "NodeType": "ExtensionNode",
+      "Id": "bfade451f69a49ee986f3f20b1a82b45",
+      "Inputs": [
+        {
+          "Id": "eb423d5b75e14b49bfae5fcf5c18f9d6",
+          "Name": "item0",
+          "Description": "Item Index #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d90b644ab44c46098ab90c668a260e3b",
+          "Name": "list",
+          "Description": "A list",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Makes a new list out of the given inputs"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.Flatten@var[]..[],int",
+      "Id": "20ad458895104a25b384476dc103c8e7",
+      "Inputs": [
+        {
+          "Id": "6a5e3b6c79dc479583c0b906ae247272",
+          "Name": "list",
+          "Description": "List to flatten.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "875d307b8324417e89d88522cee073b9",
+          "Name": "amt",
+          "Description": "Layers of nesting to remove.\n\nint\nDefault value : -1",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6560d605ea59424d9c117183edd38264",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Flattens a nested list of lists by a certain amount.\n\nList.Flatten (list: var[]..[], amt: int = -1): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Všetkým označeným Walls (len system families) nastaví na oboch koncoch Disallow wall join",
+      "Id": "411418a2686646529530c048f1ce6ac4",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "95ea0b86703b4cddbdb96f3d0be4c03d",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementsSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [],
+      "Id": "7b4169f5b4fa41e784a3e208b257e767",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "aaead05412574e448dcf0583834719a7",
+          "Name": "Elements",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "d90b644ab44c46098ab90c668a260e3b",
+      "End": "6a5e3b6c79dc479583c0b906ae247272",
+      "Id": "ed99eec6a6ee41f58f45c7a84d62d063"
+    },
+    {
+      "Start": "6560d605ea59424d9c117183edd38264",
+      "End": "075b96f1ab9244d39925e12d9758daa1",
+      "Id": "00c9e6b61f904753a5ab889e3f5df25a"
+    },
+    {
+      "Start": "aaead05412574e448dcf0583834719a7",
+      "End": "eb423d5b75e14b49bfae5fcf5c18f9d6",
+      "Id": "f91401da6e7040ecb51b2f0029d08f84"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.1.5055",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "PY disallow wall join",
+        "Id": "416bf5f252174d92a06fbe689b1423dd",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 776.64839958998186,
+        "Y": 155.25277873655489
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List Create",
+        "Id": "bfade451f69a49ee986f3f20b1a82b45",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 355.5,
+        "Y": 147.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.Flatten",
+        "Id": "20ad458895104a25b384476dc103c8e7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 511.5,
+        "Y": 141.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "411418a2686646529530c048f1ce6ac4",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 54.749639590459651,
+        "Y": -80.5214851595162
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Select Model Elements",
+        "Id": "7b4169f5b4fa41e784a3e208b257e767",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 76.812752213712542,
+        "Y": 123.23784906699598
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "d1c1b8117fa947a9a37cdc32c17bbea2",
+        "Title": "treat list of elements and one element as well",
+        "Nodes": [
+          "bfade451f69a49ee986f3f20b1a82b45",
+          "20ad458895104a25b384476dc103c8e7"
+        ],
+        "Left": 345.5,
+        "Top": 1.0,
+        "Width": 362.0,
+        "Height": 259.0,
+        "FontSize": 36.0,
+        "InitialTop": 141.0,
+        "InitialHeight": 151.0,
+        "TextblockHeight": 130.0,
+        "Background": "#FFA4E1FF"
+      },
+      {
+        "Id": "a293c6b845114804866b8da078f9e9c9",
+        "Title": "INPUT",
+        "Nodes": [
+          "7b4169f5b4fa41e784a3e208b257e767"
+        ],
+        "Left": 66.812752213712542,
+        "Top": 70.237849066995977,
+        "Width": 195.0,
+        "Height": 172.0,
+        "FontSize": 36.0,
+        "InitialTop": 123.23784906699598,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 13.788637852437773,
+    "Y": 296.517318547562,
+    "Zoom": 0.77051684820224542
+  }
+}

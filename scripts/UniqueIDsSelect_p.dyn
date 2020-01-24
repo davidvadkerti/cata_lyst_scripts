@@ -1,0 +1,297 @@
+{
+  "Uuid": "001fc30a-0c60-4b86-b3e2-1d14db49abbb",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "UniqueIDsSelect",
+  "ElementResolver": {
+    "ResolutionMap": {
+      "Select": {
+        "Key": "archilab.Revit.Selection.Select",
+        "Value": "archilab.dll"
+      }
+    }
+  },
+  "Inputs": [
+    {
+      "Id": "3417c9bb7a664f4eabb08d31684a62cd",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Druhá strana vygeneruje Unique IDs (UIDs) vybraných elementov pomocou skriptu UniqueIDsGet.dyn a pošle ho nám.\r\n\r\nZoznam je potrebné vložiť do Select By Unique ID. Skript označí Elementy s príslušným UIDs. Skript spúšťajte s aktívnym 3D view.",
+      "Description": "Creates a string."
+    },
+    {
+      "Id": "83a23f87e47e4373812a580a63c90ca7",
+      "Name": "Select By Unique ID",
+      "Type": "string",
+      "Value": "",
+      "Description": "Creates a string."
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.Id",
+      "Id": "d5d8a85f3eb747c8991bd675e771074a",
+      "Inputs": [
+        {
+          "Id": "a531e3941b624cedb342d7daf41f9bb2",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "73dc892e8c64448c89bfe545f0a740cb",
+          "Name": "int",
+          "Description": "int",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the Element Id for this element\n\nElement.Id: int"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nclr.AddReference(\"RevitAPI\")\r\nimport Autodesk\r\nfrom Autodesk.Revit.DB import ElementId\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nclr.AddReference(\"System\")\r\nfrom System.Collections.Generic import List\r\n\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\n\r\nids = IN[0]\r\n\r\n# if it's not a list, make it a list\r\nif not isinstance(ids, list):\r\n\tids = [ids]\r\n\r\n# convert to element ids\r\nelemIds = []\r\nfor id in ids:\r\n    elemIds.append(ElementId(id))\r\n    \r\n\r\n# cast to icollection and select\r\nuiapp.ActiveUIDocument.Selection.SetElementIds(List[ElementId](elemIds));\r\n\r\n#Assign your output to the OUT variable.\r\nOUT = 0",
+      "VariableInputPorts": true,
+      "Id": "4509c502eb194f86bb63e22e0acf1c88",
+      "Inputs": [
+        {
+          "Id": "2102d6b5b6934aa8ad4b7cacbb00c4ee",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8d88eebb9fe5454b891d0cdc2bfec4a5",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nclr.AddReference(\"RevitAPI\")\r\nimport Autodesk\r\nfrom Autodesk.Revit.DB import ElementId\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nclr.AddReference(\"System\")\r\nfrom System.Collections.Generic import List\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\n\r\nguids = IN[0]\r\n\r\nif not isinstance(guids, list):\r\n\tguids = [guids]\r\n\t\r\nelems = []\r\n\r\nfor g in guids:\r\n\thexid = g[37:]\r\n\tid = int(hexid, 16)\r\n\telem = doc.GetElement(ElementId(id));\r\n\telems.append(elem)\r\n\r\n\r\nOUT = elems",
+      "VariableInputPorts": true,
+      "Id": "b1908b9822784b9ea0e63b5dbdcbe039",
+      "Inputs": [
+        {
+          "Id": "0f932b6b6e7d45aa89a711c4aa494485",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9d978959bd03415197735140eb123680",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Druhá strana vygeneruje Unique IDs (UIDs) vybraných elementov pomocou skriptu UniqueIDsGet.dyn a pošle ho nám.\r\n\r\nZoznam je potrebné vložiť do Select By Unique ID. Skript označí Elementy s príslušným UIDs. Skript spúšťajte s aktívnym 3D view.",
+      "Id": "3417c9bb7a664f4eabb08d31684a62cd",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ebc3aab69a9a4f1d81d3d270fb309e32",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "",
+      "Id": "83a23f87e47e4373812a580a63c90ca7",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "e74e06dbd4eb40d68de01117ad8acb53",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "73dc892e8c64448c89bfe545f0a740cb",
+      "End": "2102d6b5b6934aa8ad4b7cacbb00c4ee",
+      "Id": "3cda968b0bf7418084398d205b0cc9f6"
+    },
+    {
+      "Start": "9d978959bd03415197735140eb123680",
+      "End": "a531e3941b624cedb342d7daf41f9bb2",
+      "Id": "939c035f6db144e48711221cf3de252f"
+    },
+    {
+      "Start": "e74e06dbd4eb40d68de01117ad8acb53",
+      "End": "0f932b6b6e7d45aa89a711c4aa494485",
+      "Id": "1568539db7984504ab59bbb1cf501269"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.1.5055",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "Id": "d5d8a85f3eb747c8991bd675e771074a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Element.Id",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 242.70724967911144,
+        "Y": 531.173664908305
+      },
+      {
+        "Id": "4509c502eb194f86bb63e22e0acf1c88",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Python Script",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 467.07685217556559,
+        "Y": 532.74558753274925
+      },
+      {
+        "Id": "b1908b9822784b9ea0e63b5dbdcbe039",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Python Script",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 58.9247141973641,
+        "Y": 518.617249294861
+      },
+      {
+        "Id": "3417c9bb7a664f4eabb08d31684a62cd",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Name": "Návod",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -533.983694698263,
+        "Y": 392.29419860109806
+      },
+      {
+        "Id": "83a23f87e47e4373812a580a63c90ca7",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Name": "Select By Unique ID",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -250.04160987656269,
+        "Y": 539.91259847579613
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "3169ed25b1294de18fd6a3a14f3abecc",
+        "Title": "One UID",
+        "Nodes": [
+          "d5d8a85f3eb747c8991bd675e771074a",
+          "4509c502eb194f86bb63e22e0acf1c88",
+          "b1908b9822784b9ea0e63b5dbdcbe039"
+        ],
+        "Left": 48.9247141973641,
+        "Top": 465.61724929486104,
+        "Width": 552.15213797820149,
+        "Height": 160.12833823788822,
+        "FontSize": 36.0,
+        "InitialTop": 518.617249294861,
+        "InitialHeight": 159.12833823788822,
+        "TextblockHeight": 43.0,
+        "Background": "#FFFFAA45"
+      },
+      {
+        "Id": "3025d28f937d441d95b7f10d2fc98cb5",
+        "Title": "Input pre Dynamo player",
+        "Nodes": [
+          "83a23f87e47e4373812a580a63c90ca7"
+        ],
+        "Left": -260.04160987656269,
+        "Top": 399.91259847579613,
+        "Width": 152.0,
+        "Height": 208.0,
+        "FontSize": 36.0,
+        "InitialTop": 539.91259847579613,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 130.0,
+        "Background": "#FFD8D8D8"
+      }
+    ],
+    "X": 740.28015184326114,
+    "Y": -237.39821600154949,
+    "Zoom": 1.0370462641945553
+  }
+}
