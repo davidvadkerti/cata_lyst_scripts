@@ -5,3 +5,5 @@
 * [download](https://bitbucket.org/davidvadkerti/dynamoscripts/downloads/?tab=tags) - stiahnuť aktuálnu verziu Dynamo skriptov
 
 Kompatibilita: Dynamo 2.1.0 - Revit 2020 obsahuje Dynamo a dostáva aktualizácie spolu s Revitom
+
+![alt text](https://static.miraheze.org/gfiwiki/a/a8/DynamoToposurface1.PNG "ukážka skriptu TopographyMeter-LoadLegend.dyn")
