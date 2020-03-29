@@ -1,0 +1,405 @@
+{
+  "Uuid": "dd459724-7431-4cc1-ae58-ec68ebc998f4",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "prefaGapSetter",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "a9075a06742043038e0c9221d4dda3b2",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Prefabrikátom vymodelovaným tesne vedľa seba skráti ich dĺžku tak, aby medzi nimi vznikli medzery želanej šírky",
+      "Description": "Creates a string."
+    },
+    {
+      "Id": "3b96fef9d7dc4c1b89e3242f31444a6c",
+      "Name": "rozdiel",
+      "Type": "number",
+      "Value": "10",
+      "MaximumValue": 100.0,
+      "MinimumValue": 0.0,
+      "StepValue": 10.0,
+      "NumberType": "Double",
+      "Description": "A slider that produces numeric values."
+    },
+    {
+      "Id": "27582402a368443db1b15d227c56dec8",
+      "Name": "Parameter Name",
+      "Type": "string",
+      "Value": "dlzka prvku",
+      "Description": "Creates a string."
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.GetParameterValueByName@string",
+      "Id": "cd82d462ba3641d1b9e64c95c112e783",
+      "Inputs": [
+        {
+          "Id": "84c00c4bb833420a9f40a03b47d5eb7e",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c0c32c3f19394d63be872ca6e5a883f8",
+          "Name": "parameterName",
+          "Description": "The name of the parameter whose value you want to obtain.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5ec3e30b414a48b9861c25dad1225820",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the value of one of the element's parameters.\n\nElement.GetParameterValueByName (parameterName: string): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.SetParameterByName@string,var",
+      "Id": "a2129e6f512b447ca05489091fb29c53",
+      "Inputs": [
+        {
+          "Id": "dfa46520b41342639df9e5389cd8a375",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "fbfabdb07b6041eab12bef2753ef0b19",
+          "Name": "parameterName",
+          "Description": "The name of the parameter to set.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8e47c3a2af84472bb540743bf2ec5a40",
+          "Name": "value",
+          "Description": "The value.\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b4f5b723125440f3968ae7f48fd496b6",
+          "Name": "Element",
+          "Description": "Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Set one of the element's parameters.\n\nElement.SetParameterByName (parameterName: string, value: var): Element"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "length - diff;",
+      "Id": "178e8f489439455da8a1317d166f4d14",
+      "Inputs": [
+        {
+          "Id": "5f6f178400474e38af21b8b11d2005f6",
+          "Name": "length",
+          "Description": "length",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "5ff283153d8e460e985d8c83718cfc47",
+          "Name": "diff",
+          "Description": "diff",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b11ecd631b0d4a26ad8bc9a88ac6d278",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Prefabrikátom vymodelovaným tesne vedľa seba skráti ich dĺžku tak, aby medzi nimi vznikli medzery želanej šírky",
+      "Id": "a9075a06742043038e0c9221d4dda3b2",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "790123d8835a4330a77287dba26484a3",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementsSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [],
+      "Id": "b820fea76c3242f89afd8febb1330085",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "69abb131098348dbb8338f3e76675d1d",
+          "Name": "Elements",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DoubleSlider, CoreNodeModels",
+      "NodeType": "NumberInputNode",
+      "NumberType": "Double",
+      "MaximumValue": 100.0,
+      "MinimumValue": 0.0,
+      "StepValue": 10.0,
+      "InputValue": 10.0,
+      "Id": "3b96fef9d7dc4c1b89e3242f31444a6c",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "2b829f796aa748868d394d197d1d7d56",
+          "Name": "",
+          "Description": "Double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A slider that produces numeric values."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "dlzka prvku",
+      "Id": "27582402a368443db1b15d227c56dec8",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "304298f422be449c978084bc3835db06",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "5ec3e30b414a48b9861c25dad1225820",
+      "End": "5f6f178400474e38af21b8b11d2005f6",
+      "Id": "3024701b64a9447ba4cb0033c8b9bf72"
+    },
+    {
+      "Start": "b11ecd631b0d4a26ad8bc9a88ac6d278",
+      "End": "8e47c3a2af84472bb540743bf2ec5a40",
+      "Id": "ac6ad464fad6419dad452701b13456c9"
+    },
+    {
+      "Start": "69abb131098348dbb8338f3e76675d1d",
+      "End": "84c00c4bb833420a9f40a03b47d5eb7e",
+      "Id": "8434770965e84555b418a58babfb519c"
+    },
+    {
+      "Start": "69abb131098348dbb8338f3e76675d1d",
+      "End": "dfa46520b41342639df9e5389cd8a375",
+      "Id": "f366981bbaa44071b28df2e71a4e7638"
+    },
+    {
+      "Start": "2b829f796aa748868d394d197d1d7d56",
+      "End": "5ff283153d8e460e985d8c83718cfc47",
+      "Id": "cba07ce5c5f748bcb37791fe13529eee"
+    },
+    {
+      "Start": "304298f422be449c978084bc3835db06",
+      "End": "c0c32c3f19394d63be872ca6e5a883f8",
+      "Id": "eeba45f22afb4bfbb19c13911e6bdb50"
+    },
+    {
+      "Start": "304298f422be449c978084bc3835db06",
+      "End": "fbfabdb07b6041eab12bef2753ef0b19",
+      "Id": "a73b0c6fc4d84652840ddcbd2369064c"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Element.GetParameterValueByName",
+        "Id": "cd82d462ba3641d1b9e64c95c112e783",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 376.45157267353375,
+        "Y": 241.16539296289949
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.SetParameterByName",
+        "Id": "a2129e6f512b447ca05489091fb29c53",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 904.0,
+        "Y": 221.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "178e8f489439455da8a1317d166f4d14",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 679.961909733715,
+        "Y": 436.10011262737225
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "a9075a06742043038e0c9221d4dda3b2",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -180.7026730401833,
+        "Y": -125.6203799721082
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Select Model Elements",
+        "Id": "b820fea76c3242f89afd8febb1330085",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -137.79901425394326,
+        "Y": 48.9512845411445
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "rozdiel",
+        "Id": "3b96fef9d7dc4c1b89e3242f31444a6c",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -182.30634142429898,
+        "Y": 229.39901637485821
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Parameter Name",
+        "Id": "27582402a368443db1b15d227c56dec8",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -126.00887084278963,
+        "Y": 378.27768836475445
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "4cec73defbbc42888f9a1a83db553ea5",
+        "Title": "INPUT",
+        "Nodes": [
+          "27582402a368443db1b15d227c56dec8",
+          "3b96fef9d7dc4c1b89e3242f31444a6c",
+          "b820fea76c3242f89afd8febb1330085"
+        ],
+        "Left": -192.30634142429898,
+        "Top": -4.0487154588554972,
+        "Width": 319.0,
+        "Height": 450.32640382360995,
+        "FontSize": 36.0,
+        "InitialTop": 48.9512845411445,
+        "InitialHeight": 474.32640382360995,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 152.28478696886543,
+    "Y": 131.1825892062501,
+    "Zoom": 0.67900743610005776
+  }
+}
