@@ -41,26 +41,6 @@
   "Outputs": [],
   "Nodes": [
     {
-      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
-      "SelectedIndex": 416,
-      "NodeType": "ExtensionNode",
-      "Id": "c9a26871041b450ab1e2283a8f8b6cfd",
-      "Inputs": [],
-      "Outputs": [
-        {
-          "Id": "290fdca6efc44fe7ace9308be31bc23d",
-          "Name": "Category",
-          "Description": "The selected Category.",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "All built-in categories."
-    },
-    {
       "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
       "NodeType": "ExtensionNode",
       "Id": "f3738f6eb3f24328a865682f59244396",
@@ -1420,14 +1400,59 @@
       ],
       "Replication": "Auto",
       "Description": "Flattens a nested list of lists by a certain amount.\n\nList.Flatten (list: var[]..[], amt: int = -1): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Category.ByName@string",
+      "Id": "65928cbf57644e8ab25da5a23dcd1d80",
+      "Inputs": [
+        {
+          "Id": "afdd4d59403e4639a7b907ef963e1cc5",
+          "Name": "name",
+          "Description": "The built in category name.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0d8c5960a1034c919d28854887cc2690",
+          "Name": "Category",
+          "Description": "Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets a Revit category by the built-in category name.\n\nCategory.ByName (name: string): Category"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Rooms\";",
+      "Id": "92def82543d7463ba9dd20a9360b3c27",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "0e59f0930a4b470eb8bb8ee635fe916d",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
     }
   ],
   "Connectors": [
-    {
-      "Start": "290fdca6efc44fe7ace9308be31bc23d",
-      "End": "fac9a4895cf145a4b6da1889d661baeb",
-      "Id": "0000d62da269440dadf57a2ac6670636"
-    },
     {
       "Start": "d51849e63b4e4d27b5d43cf86ad8197d",
       "End": "a55788c53dbf45179e1fa4060d2da994",
@@ -1657,16 +1682,27 @@
       "Start": "49f1981c1e79421481d368a740382fa9",
       "End": "79787c4fb5ed4c10a014a7de0980ee1a",
       "Id": "a8ebf97831db43e2b3704242628e7010"
+    },
+    {
+      "Start": "0d8c5960a1034c919d28854887cc2690",
+      "End": "fac9a4895cf145a4b6da1889d661baeb",
+      "Id": "dbae1fec07d14b2dbb2e233499b9b9db"
+    },
+    {
+      "Start": "0e59f0930a4b470eb8bb8ee635fe916d",
+      "End": "afdd4d59403e4639a7b907ef963e1cc5",
+      "Id": "a9e0208dbc3b4071aade04d90f5e199c"
     }
   ],
   "Dependencies": [],
+  "NodeLibraryDependencies": [],
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.0.1.5055",
+      "Version": "2.3.0.5885",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -1683,16 +1719,6 @@
       "UpZ": 0.0
     },
     "NodeViews": [
-      {
-        "ShowGeometry": true,
-        "Name": "Categories",
-        "Id": "c9a26871041b450ab1e2283a8f8b6cfd",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": -146.08847352375656,
-        "Y": 268.87057124819205
-      },
       {
         "ShowGeometry": true,
         "Name": "All Elements of Category",
@@ -2122,6 +2148,26 @@
         "Excluded": false,
         "X": 850.518993051032,
         "Y": 99.12095566009782
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Category.ByName",
+        "Id": "65928cbf57644e8ab25da5a23dcd1d80",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -177.72306651378778,
+        "Y": 274.80271133673187
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "92def82543d7463ba9dd20a9360b3c27",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -325.09531227303671,
+        "Y": 274.80688716399584
       }
     ],
     "Annotations": [
@@ -2177,7 +2223,7 @@
         ],
         "Left": -128.92208645683098,
         "Top": -218.447281288117,
-        "Width": 175.0,
+        "Width": 189.0,
         "Height": 449.149190194983,
         "FontSize": 14.0,
         "InitialTop": -188.447281288117,
@@ -2214,8 +2260,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": 341.89297908638497,
-    "Y": 266.52092062141821,
-    "Zoom": 0.14527327545454294
+    "X": 281.65221888312078,
+    "Y": 248.92277886945811,
+    "Zoom": 0.518789741571032
   }
 }

@@ -69,26 +69,6 @@
       "Description": "Get all elements of the specified category from the model."
     },
     {
-      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
-      "SelectedIndex": 351,
-      "NodeType": "ExtensionNode",
-      "Id": "d06a6c9a41334404a14246ca183dc2c3",
-      "Inputs": [],
-      "Outputs": [
-        {
-          "Id": "02287635bd844fcca21dc810221e4f3b",
-          "Name": "Category",
-          "Description": "The selected Category.",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "All built-in categories."
-    },
-    {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
       "FunctionSignature": "Revit.Elements.Element.GetParameterValueByName@string",
@@ -698,6 +678,7 @@
     {
       "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
       "SelectedIndex": 206,
+      "SelectedString": "OST_FlexPipeCurvesCenterLine",
       "NodeType": "ExtensionNode",
       "Id": "4b665eb5c6804e3b88632e5b43333304",
       "Inputs": [],
@@ -1202,7 +1183,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Replaces all occurrances of text in a string with other text.\n\nString.Replace (str: string, searchFor: string, replaceWith: string): string"
+      "Description": "Replaces all occurrences of text in a string with other text.\n\nString.Replace (str: string, searchFor: string, replaceWith: string): string"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -1411,6 +1392,56 @@
       ],
       "Replication": "Disabled",
       "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Category.ByName@string",
+      "Id": "14798f8458824d0f8c25a2e364a2e447",
+      "Inputs": [
+        {
+          "Id": "b0de7e9a9a6a447c93ea1c66fbab2dec",
+          "Name": "name",
+          "Description": "The built in category name.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "efac9ea0671e46d98a9f6b873587934e",
+          "Name": "Category",
+          "Description": "Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets a Revit category by the built-in category name.\n\nCategory.ByName (name: string): Category"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Planting\";",
+      "Id": "91f20bbbc55d4bcd981c9c4dfbfe3c4b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ecc9cca18f954483a22bd6d90a5dc014",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
     }
   ],
   "Connectors": [
@@ -1443,11 +1474,6 @@
       "Start": "86571b94c7ca4638ac90ec26e160f2e4",
       "End": "f269189adf4f43ae8f54779b02085b54",
       "Id": "3330f8a5df974d5b812e229137342735"
-    },
-    {
-      "Start": "02287635bd844fcca21dc810221e4f3b",
-      "End": "291b1d79a93840c2887cc6cfddf4a8b7",
-      "Id": "1736f2d0be0945c9bdb812f5aa06365d"
     },
     {
       "Start": "6f9a6f3c16714187b01f986dd5de2a79",
@@ -1678,16 +1704,27 @@
       "Start": "d638faf9fc084572998adc7f8048c639",
       "End": "83637712676041a4b940077e15c6bcad",
       "Id": "2414695288a74151a8b7aaf374c2da21"
+    },
+    {
+      "Start": "efac9ea0671e46d98a9f6b873587934e",
+      "End": "291b1d79a93840c2887cc6cfddf4a8b7",
+      "Id": "09569b67ff494e9da546d0d64825e3e4"
+    },
+    {
+      "Start": "ecc9cca18f954483a22bd6d90a5dc014",
+      "End": "b0de7e9a9a6a447c93ea1c66fbab2dec",
+      "Id": "2935153919db4e77a77adc421a14c237"
     }
   ],
   "Dependencies": [],
+  "NodeLibraryDependencies": [],
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.0.1.5055",
+      "Version": "2.3.0.5885",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -1723,16 +1760,6 @@
         "Excluded": false,
         "X": 511.20961763776245,
         "Y": -483.07560151126768
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "Categories",
-        "Id": "d06a6c9a41334404a14246ca183dc2c3",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 285.32770349526936,
-        "Y": -497.752785973517
       },
       {
         "ShowGeometry": true,
@@ -2133,6 +2160,26 @@
         "Excluded": false,
         "X": 399.54131152771805,
         "Y": -81.886623910887238
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Category.ByName",
+        "Id": "14798f8458824d0f8c25a2e364a2e447",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 273.40921522591117,
+        "Y": -483.38115882325047
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "91f20bbbc55d4bcd981c9c4dfbfe3c4b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 126.0369694666623,
+        "Y": -483.37698299598645
       }
     ],
     "Annotations": [
@@ -2297,7 +2344,7 @@
       }
     ],
     "X": -36.970328675928258,
-    "Y": 584.24474801851375,
+    "Y": 524.24474801851375,
     "Zoom": 0.80111676044889191
   }
 }

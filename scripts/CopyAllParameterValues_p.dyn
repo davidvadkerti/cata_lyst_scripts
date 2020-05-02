@@ -1,63 +1,534 @@
-<Workspace Version="1.3.1.1736" X="109.77017939986" Y="41.5092901606574" zoom="1.50237217924567" ScaleFactor="1" Name="Home" Description="" RunType="Manual" RunPeriod="1000" HasRunWithoutCrash="False">
-  <NamespaceResolutionMap />
-  <Elements>
-    <DSRevitNodesUI.ElementsOfCategory guid="2d9c82c9-9b68-4504-b96a-a269b4aaa053" type="DSRevitNodesUI.ElementsOfCategory" nickname="All Elements of Category" x="294" y="353.5" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
-      <PortInfo index="0" default="False" />
-    </DSRevitNodesUI.ElementsOfCategory>
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="7d6d3f60-a992-495e-9906-d018a29d7624" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Element.GetParameterValueByName" x="536" y="372.5" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="RevitNodes.dll" function="Revit.Elements.Element.GetParameterValueByName@string">
-      <PortInfo index="0" default="False" />
-      <PortInfo index="1" default="False" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="d12043ed-06e0-45f6-ac83-942a004edd74" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Element.SetParameterByName" x="946.607498115922" y="91.337902615303" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="RevitNodes.dll" function="Revit.Elements.Element.SetParameterByName@string,var">
-      <PortInfo index="0" default="False" />
-      <PortInfo index="1" default="False" />
-      <PortInfo index="2" default="False" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <CoreNodeModels.Watch guid="7ffc0d74-7d96-4843-b5ec-0debbca9d10b" type="CoreNodeModels.Watch" nickname="Watch" x="959.3525978351" y="412.575930379927" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
-      <PortInfo index="0" default="False" />
-    </CoreNodeModels.Watch>
-    <CoreNodeModels.Input.StringInput guid="08d81884-ad65-439b-980e-623c933590e0" type="CoreNodeModels.Input.StringInput" nickname="Návod" x="48.4065954332325" y="50.5926398272055" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <System.String>Skopiruje hodnoty jedneho parametra vsetkych elementov danej kategorie do zvoleneho noveho parametru.
-
-Vhodné napr. pri zmene Project parametru na Shared parameter, pricom do novovytvoreneho paremetra potrebujeme nakopirovat spravne hodnoty povodneho parametra.
-
-Novy parameter uz musi byt vytvoreny.
-</System.String>
-      <System.String value="Skopiruje hodnoty jedneho parametra vsetkych elementov danej kategorie do zvoleneho noveho parametru.&#xD;&#xA;&#xD;&#xA;Vhodné napr. pri zmene Project parametru na Shared parameter, pricom do novovytvoreneho paremetra potrebujeme nakopirovat spravne hodnoty povodneho parametra.&#xD;&#xA;&#xD;&#xA;Novy parameter uz musi byt vytvoreny.&#xD;&#xA;" />
-    </CoreNodeModels.Input.StringInput>
-    <CoreNodeModels.Input.StringInput guid="807ab1bb-a932-40d5-87a5-4be40c227841" type="CoreNodeModels.Input.StringInput" nickname="Original Parameter Name" x="68.8735485980015" y="459.741473281008" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <System.String>
-      </System.String>
-      <System.String value="" />
-    </CoreNodeModels.Input.StringInput>
-    <CoreNodeModels.Input.StringInput guid="e2cd14bd-8210-4c2b-9146-28134968c185" type="CoreNodeModels.Input.StringInput" nickname="New Parameter Name" x="69.8318145348154" y="534.356803004766" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <System.String>
-      </System.String>
-      <System.String value="" />
-    </CoreNodeModels.Input.StringInput>
-    <DSRevitNodesUI.Categories guid="38d16dcc-2e1d-4b45-8ae6-d59b125e4820" type="DSRevitNodesUI.Categories" nickname="Categories" x="68.8316841800213" y="351.327102393552" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false" index="-1" />
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="3e3d7158-23a6-443d-b15e-34c3c479c0f9" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Count" x="1242.12212012942" y="106.384116341832" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="BuiltIn" function="Count@var[]..[]">
-      <PortInfo index="0" default="False" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <CoreNodeModels.Watch guid="01a99342-78c9-4103-a31d-7fb57b167e02" type="CoreNodeModels.Watch" nickname="Počet prekopírovaných hodnôt" x="1444.09043882966" y="102.077403377742" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
-      <PortInfo index="0" default="False" />
-    </CoreNodeModels.Watch>
-  </Elements>
-  <Connectors>
-    <Dynamo.Graph.Connectors.ConnectorModel start="2d9c82c9-9b68-4504-b96a-a269b4aaa053" start_index="0" end="7d6d3f60-a992-495e-9906-d018a29d7624" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="2d9c82c9-9b68-4504-b96a-a269b4aaa053" start_index="0" end="d12043ed-06e0-45f6-ac83-942a004edd74" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="7d6d3f60-a992-495e-9906-d018a29d7624" start_index="0" end="7ffc0d74-7d96-4843-b5ec-0debbca9d10b" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="7d6d3f60-a992-495e-9906-d018a29d7624" start_index="0" end="d12043ed-06e0-45f6-ac83-942a004edd74" end_index="2" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="d12043ed-06e0-45f6-ac83-942a004edd74" start_index="0" end="3e3d7158-23a6-443d-b15e-34c3c479c0f9" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="807ab1bb-a932-40d5-87a5-4be40c227841" start_index="0" end="7d6d3f60-a992-495e-9906-d018a29d7624" end_index="1" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="e2cd14bd-8210-4c2b-9146-28134968c185" start_index="0" end="d12043ed-06e0-45f6-ac83-942a004edd74" end_index="1" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="38d16dcc-2e1d-4b45-8ae6-d59b125e4820" start_index="0" end="2d9c82c9-9b68-4504-b96a-a269b4aaa053" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="3e3d7158-23a6-443d-b15e-34c3c479c0f9" start_index="0" end="01a99342-78c9-4103-a31d-7fb57b167e02" end_index="0" portType="0" />
-  </Connectors>
-  <Notes />
-  <Annotations />
-  <Presets />
-  <Cameras>
-    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
-  </Cameras>
-</Workspace>
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "CopyAllParameterValues_p",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "08d81884ad65439b980e623c933590e0",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Skopiruje hodnoty jedneho parametra vsetkych elementov danej kategorie do zvoleneho noveho parametru.\r\n\r\nVhodné napr. pri zmene Project parametru na Shared parameter, pricom do novovytvoreneho paremetra potrebujeme nakopirovat spravne hodnoty povodneho parametra.\r\n\r\nNovy parameter uz musi byt vytvoreny.\r\n",
+      "Description": "Creates a string."
+    },
+    {
+      "Id": "807ab1bba93240d587a54be40c227841",
+      "Name": "Original Parameter Name",
+      "Type": "string",
+      "Value": "",
+      "Description": "Creates a string."
+    },
+    {
+      "Id": "e2cd14bd82104c2b914628134968c185",
+      "Name": "New Parameter Name",
+      "Type": "string",
+      "Value": "",
+      "Description": "Creates a string."
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "2d9c82c99b684504b96aa269b4aaa053",
+      "Inputs": [
+        {
+          "Id": "2309f7c5c9734d2699c89a95d3fef7b9",
+          "Name": "Category",
+          "Description": "The Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "26c5e519403f4f4686233e2389b92e22",
+          "Name": "Elements",
+          "Description": "An element type.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Get all elements of the specified category from the model."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.GetParameterValueByName@string",
+      "Id": "7d6d3f60a992495e9906d018a29d7624",
+      "Inputs": [
+        {
+          "Id": "c972f641f0be4cbdabdb58a1e4672adf",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "64e256b0a9564153a3142a0201bfded7",
+          "Name": "parameterName",
+          "Description": "The name of the parameter whose value you want to obtain.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7c916cbaa465469bbd065239f7d7a82e",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the value of one of the element's parameters.\n\nElement.GetParameterValueByName (parameterName: string): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.SetParameterByName@string,var",
+      "Id": "d12043ed06e045f6ac83942a004edd74",
+      "Inputs": [
+        {
+          "Id": "8387c82f6a3e452a9febe00860e6b23e",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "5090db4d28f94bdab8e8d39ab795a9b1",
+          "Name": "parameterName",
+          "Description": "The name of the parameter to set.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "56f2d8506c31488caabcb5541775e137",
+          "Name": "value",
+          "Description": "The value.\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "90687d65ca864b968806020a5d169f42",
+          "Name": "Element",
+          "Description": "Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Set one of the element's parameters.\n\nElement.SetParameterByName (parameterName: string, value: var): Element"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "7ffc0d747d964843b5ec0debbca9d10b",
+      "Inputs": [
+        {
+          "Id": "a6d7a9ca830c4e0fbc4c82a05278baa8",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "891e9f4ed0aa4c21a711b7b9bd6ec1d7",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Skopiruje hodnoty jedneho parametra vsetkych elementov danej kategorie do zvoleneho noveho parametru.\r\n\r\nVhodné napr. pri zmene Project parametru na Shared parameter, pricom do novovytvoreneho paremetra potrebujeme nakopirovat spravne hodnoty povodneho parametra.\r\n\r\nNovy parameter uz musi byt vytvoreny.\r\n",
+      "Id": "08d81884ad65439b980e623c933590e0",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1b07ea7c273e4bf8a609b0adc1a0d88a",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "",
+      "Id": "807ab1bba93240d587a54be40c227841",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "005168003f894f3f8208e0a5aeb5f925",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "",
+      "Id": "e2cd14bd82104c2b914628134968c185",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4ec91b85099c443aac9c609d79d90efe",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
+      "SelectedIndex": -1,
+      "SelectedString": "",
+      "NodeType": "ExtensionNode",
+      "Id": "38d16dcc2e1d4b458ae6d59b125e4820",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "be319a87d8e24badb80730eb9e354704",
+          "Name": "Category",
+          "Description": "The selected Category.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "All built-in categories."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.Count@var[]..[]",
+      "Id": "3e3d715823a6443db15e34c3c479c0f9",
+      "Inputs": [
+        {
+          "Id": "c72c5a1e4c754989bbe6fb3bf5a4a164",
+          "Name": "list",
+          "Description": "List to get the item count of.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "641d9c4e98b0427a878167c7125a7fbd",
+          "Name": "count",
+          "Description": "List length.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the number of items stored in the given list.\n\nList.Count (list: var[]..[]): int"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "01a9934278c94103a31d7fb57b167e02",
+      "Inputs": [
+        {
+          "Id": "ed0fd8a0ab6e497e98bc12180854a0b3",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "30c3ff061f4343c3b65cd79985c2b83b",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "26c5e519403f4f4686233e2389b92e22",
+      "End": "c972f641f0be4cbdabdb58a1e4672adf",
+      "Id": "e50806a79fc84302b1eed0c1bf931b70"
+    },
+    {
+      "Start": "26c5e519403f4f4686233e2389b92e22",
+      "End": "8387c82f6a3e452a9febe00860e6b23e",
+      "Id": "066b0f027e52454587dd34c25a58072a"
+    },
+    {
+      "Start": "7c916cbaa465469bbd065239f7d7a82e",
+      "End": "a6d7a9ca830c4e0fbc4c82a05278baa8",
+      "Id": "a973eea0fe7e4b0e8144dca36c05bdc0"
+    },
+    {
+      "Start": "7c916cbaa465469bbd065239f7d7a82e",
+      "End": "56f2d8506c31488caabcb5541775e137",
+      "Id": "a47d3d8f600e42e3ad2ef007b2fd8132"
+    },
+    {
+      "Start": "90687d65ca864b968806020a5d169f42",
+      "End": "c72c5a1e4c754989bbe6fb3bf5a4a164",
+      "Id": "33eaa57492d94c4fb4723d79721fe74c"
+    },
+    {
+      "Start": "005168003f894f3f8208e0a5aeb5f925",
+      "End": "64e256b0a9564153a3142a0201bfded7",
+      "Id": "f068050295b64196bec204c02a270f88"
+    },
+    {
+      "Start": "4ec91b85099c443aac9c609d79d90efe",
+      "End": "5090db4d28f94bdab8e8d39ab795a9b1",
+      "Id": "fa53152358784c5e94ecf5f662d924d3"
+    },
+    {
+      "Start": "be319a87d8e24badb80730eb9e354704",
+      "End": "2309f7c5c9734d2699c89a95d3fef7b9",
+      "Id": "c5b6950e25b64a3cacf6af5467c6c97b"
+    },
+    {
+      "Start": "641d9c4e98b0427a878167c7125a7fbd",
+      "End": "ed0fd8a0ab6e497e98bc12180854a0b3",
+      "Id": "e33b04c9aedc47e0ac82bea9c1d98f34"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "All Elements of Category",
+        "Id": "2d9c82c99b684504b96aa269b4aaa053",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 294.0,
+        "Y": 353.5
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.GetParameterValueByName",
+        "Id": "7d6d3f60a992495e9906d018a29d7624",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 536.0,
+        "Y": 372.5
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.SetParameterByName",
+        "Id": "d12043ed06e045f6ac83942a004edd74",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 946.607498115922,
+        "Y": 91.337902615303
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "7ffc0d747d964843b5ec0debbca9d10b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 959.3525978351,
+        "Y": 412.575930379927
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "08d81884ad65439b980e623c933590e0",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 48.406595433232496,
+        "Y": 52.46208064266
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Original Parameter Name",
+        "Id": "807ab1bba93240d587a54be40c227841",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 68.8735485980015,
+        "Y": 461.61091409646247
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "New Parameter Name",
+        "Id": "e2cd14bd82104c2b914628134968c185",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 69.8318145348154,
+        "Y": 534.356803004766
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Categories",
+        "Id": "38d16dcc2e1d4b458ae6d59b125e4820",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 68.8316841800213,
+        "Y": 353.19654320900651
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.Count",
+        "Id": "3e3d715823a6443db15e34c3c479c0f9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1242.12212012942,
+        "Y": 106.384116341832
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Počet prekopírovaných hodnôt",
+        "Id": "01a9934278c94103a31d7fb57b167e02",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1444.09043882966,
+        "Y": 102.077403377742
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "c86ba2a10251491a914084f1399ece2c",
+        "Title": "INPUT",
+        "Nodes": [
+          "08d81884ad65439b980e623c933590e0",
+          "38d16dcc2e1d4b458ae6d59b125e4820",
+          "807ab1bba93240d587a54be40c227841",
+          "e2cd14bd82104c2b914628134968c185"
+        ],
+        "Left": 38.406595433232496,
+        "Top": -0.53791935734000162,
+        "Width": 236.0,
+        "Height": 602.894722362106,
+        "FontSize": 36.0,
+        "InitialTop": 52.46208064266,
+        "InitialHeight": 140.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "6ffa0f5d8b744ac9aa810c7905cae528",
+        "Title": "OUTPUT",
+        "Nodes": [
+          "01a9934278c94103a31d7fb57b167e02"
+        ],
+        "Left": 1434.09043882966,
+        "Top": 49.077403377742,
+        "Width": 224.0,
+        "Height": 147.0,
+        "FontSize": 36.0,
+        "InitialTop": 102.077403377742,
+        "InitialHeight": 172.31612729013909,
+        "TextblockHeight": 43.0,
+        "Background": "#FFFFAA45"
+      }
+    ],
+    "X": 267.49897704392237,
+    "Y": 326.99983967614008,
+    "Zoom": 0.3056218893527648
+  }
+}

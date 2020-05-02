@@ -20,14 +20,14 @@
       "Id": "b4293b8c64464d319d9fe8ef86edbf00",
       "Name": "Status",
       "Type": "unknown",
-      "IntitialValue": "",
+      "InitialValue": "",
       "Description": "Visualize the output of node."
     },
     {
       "Id": "199c5f5637564e9bb9d07031af653f47",
       "Name": "Status",
       "Type": "unknown",
-      "IntitialValue": "",
+      "InitialValue": "",
       "Description": "Visualize the output of node."
     }
   ],
@@ -387,26 +387,6 @@
       "Description": "Creates a string."
     },
     {
-      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
-      "SelectedIndex": 293,
-      "NodeType": "ExtensionNode",
-      "Id": "3a474f4389024a438376afb202f7aca1",
-      "Inputs": [],
-      "Outputs": [
-        {
-          "Id": "0808a898010f408dac70669473f7e5bf",
-          "Name": "Category",
-          "Description": "The selected Category.",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "All built-in categories."
-    },
-    {
       "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
       "NodeType": "ExtensionNode",
       "Id": "f774482594854a5aa027296c73ca996d",
@@ -662,7 +642,8 @@
     },
     {
       "ConcreteType": "DSRevitNodesUI.ElementTypes, DSRevitNodesUI",
-      "SelectedIndex": 174,
+      "SelectedIndex": 177,
+      "SelectedString": "LinePatternElement",
       "NodeType": "ExtensionNode",
       "Id": "adebe66d58be4240a7e51e0ad6bda13d",
       "Inputs": [],
@@ -817,6 +798,56 @@
       ],
       "Replication": "Disabled",
       "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Category.ByName@string",
+      "Id": "21a5eed0213f491e9ba3ef52e4e215c4",
+      "Inputs": [
+        {
+          "Id": "70b0a28e64484025aaffc8be0dce6d22",
+          "Name": "name",
+          "Description": "The built in category name.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "68c2bb5bb878414595b6b037579179ce",
+          "Name": "Category",
+          "Description": "Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets a Revit category by the built-in category name.\n\nCategory.ByName (name: string): Category"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Materials\";",
+      "Id": "ec5b16b2a595449b9f7348c84d030e6b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "b920c2d6784644998f847d1745aa298f",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
     }
   ],
   "Connectors": [
@@ -869,11 +900,6 @@
       "Start": "8b8797c1f119407a9fc78e8913270a43",
       "End": "b6f1f269b2bc4dfc98bd26cd0dd3d1d3",
       "Id": "464f98e2de3941d4995aeacfce15a7bf"
-    },
-    {
-      "Start": "0808a898010f408dac70669473f7e5bf",
-      "End": "83fceee26ee746d3a8dc64e240536d26",
-      "Id": "6bd2b3604ca94e25aca345bafa5bb650"
     },
     {
       "Start": "9ce575f10247455cb2ae32a937f1adb4",
@@ -949,16 +975,27 @@
       "Start": "41366b8dd360460e92b51351edd7aa74",
       "End": "eb4a6835be5a4e5c953e558f92b4eab7",
       "Id": "d1e0439b714742689c0f0943fbab5086"
+    },
+    {
+      "Start": "68c2bb5bb878414595b6b037579179ce",
+      "End": "83fceee26ee746d3a8dc64e240536d26",
+      "Id": "c907809779f74e6caed6fc1c551ca95d"
+    },
+    {
+      "Start": "b920c2d6784644998f847d1745aa298f",
+      "End": "70b0a28e64484025aaffc8be0dce6d22",
+      "Id": "6dcda1cf9312435ebc5826dbab7e556d"
     }
   ],
   "Dependencies": [],
+  "NodeLibraryDependencies": [],
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.0.1.5055",
+      "Version": "2.3.0.5885",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -1082,18 +1119,8 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -173.22401251484587,
-        "Y": 210.88793164605536
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "Categories",
-        "Id": "3a474f4389024a438376afb202f7aca1",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 59.537825924015408,
-        "Y": 240.65146639194876
+        "X": -163.30285132863355,
+        "Y": 87.582071188845219
       },
       {
         "ShowGeometry": true,
@@ -1162,8 +1189,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 269.55563084669279,
-        "Y": 694.9562824649247
+        "X": 247.24342723385155,
+        "Y": 693.46880222406855
       },
       {
         "ShowGeometry": true,
@@ -1182,7 +1209,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 38.003696488197761,
+        "X": 18.66645335706869,
         "Y": 692.45349117990372
       },
       {
@@ -1224,11 +1251,31 @@
         "Excluded": false,
         "X": 1606.8780489413339,
         "Y": 605.01703522859634
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Category.ByName",
+        "Id": "21a5eed0213f491e9ba3ef52e4e215c4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 30.386823490987297,
+        "Y": 194.18541661092425
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "ec5b16b2a595449b9f7348c84d030e6b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -123.96412624791816,
+        "Y": 199.73543698032157
       }
     ],
     "Annotations": [],
-    "X": 125.26933595195803,
-    "Y": 146.25276852353434,
-    "Zoom": 0.632527700865849
+    "X": 258.12951262178592,
+    "Y": 160.16830405493585,
+    "Zoom": 0.25818599788691554
   }
 }

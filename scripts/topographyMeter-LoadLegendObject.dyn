@@ -2,7 +2,7 @@
   "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
   "IsCustomNode": false,
   "Description": "",
-  "Name": "topographyMeter-LoadLegendObjectChodnik",
+  "Name": "topographyMeter-LoadLegendObject",
   "ElementResolver": {
     "ResolutionMap": {}
   },
@@ -67,26 +67,6 @@
       ],
       "Replication": "Disabled",
       "Description": "Get all elements of the specified category from the model."
-    },
-    {
-      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
-      "SelectedIndex": 438,
-      "NodeType": "ExtensionNode",
-      "Id": "d06a6c9a41334404a14246ca183dc2c3",
-      "Inputs": [],
-      "Outputs": [
-        {
-          "Id": "02287635bd844fcca21dc810221e4f3b",
-          "Name": "Category",
-          "Description": "The selected Category.",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "All built-in categories."
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -708,6 +688,7 @@
     {
       "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
       "SelectedIndex": 206,
+      "SelectedString": "OST_FlexPipeCurvesCenterLine",
       "NodeType": "ExtensionNode",
       "Id": "4b665eb5c6804e3b88632e5b43333304",
       "Inputs": [],
@@ -1212,7 +1193,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Replaces all occurrances of text in a string with other text.\n\nString.Replace (str: string, searchFor: string, replaceWith: string): string"
+      "Description": "Replaces all occurrences of text in a string with other text.\n\nString.Replace (str: string, searchFor: string, replaceWith: string): string"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -1431,7 +1412,7 @@
       "Inputs": [
         {
           "Id": "10a261788c214313969ec321a4b4a9b9",
-          "Name": "Input",
+          "Name": "_input",
           "Description": "var[]",
           "UsingDefaultValue": false,
           "Level": 2,
@@ -1442,7 +1423,7 @@
       "Outputs": [
         {
           "Id": "66a9e4228d7d4c0c9693fa1c3ca949e5",
-          "Name": "OUT",
+          "Name": "_out",
           "Description": "return value",
           "UsingDefaultValue": false,
           "Level": 2,
@@ -2303,6 +2284,56 @@
       ],
       "Replication": "Disabled",
       "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Category.ByName@string",
+      "Id": "38aa76ce745044de848bfbbeced3d306",
+      "Inputs": [
+        {
+          "Id": "7ea9eb2af11243b68dc96d5be193de1a",
+          "Name": "name",
+          "Description": "The built in category name.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b38af32d3b664378a2650c3a5322cfdd",
+          "Name": "Category",
+          "Description": "Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets a Revit category by the built-in category name.\n\nCategory.ByName (name: string): Category"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Site\";",
+      "Id": "20dd50aae90a47e8a7689be3fef54584",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "e1c162fa8e50452da026d4fd928f98bf",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
     }
   ],
   "Connectors": [
@@ -2335,11 +2366,6 @@
       "Start": "86571b94c7ca4638ac90ec26e160f2e4",
       "End": "377565cfed9e401c839f4b58af910a3d",
       "Id": "971f701caa79483b8534e772be51176c"
-    },
-    {
-      "Start": "02287635bd844fcca21dc810221e4f3b",
-      "End": "291b1d79a93840c2887cc6cfddf4a8b7",
-      "Id": "1736f2d0be0945c9bdb812f5aa06365d"
     },
     {
       "Start": "6f9a6f3c16714187b01f986dd5de2a79",
@@ -2740,10 +2766,30 @@
       "Start": "ddb764f307d946348dee17b94ad375a9",
       "End": "70c1e3b434f54c48af2e87af5c5662f9",
       "Id": "f2d4702a23ed47f391f7764158b5e3fc"
+    },
+    {
+      "Start": "b38af32d3b664378a2650c3a5322cfdd",
+      "End": "291b1d79a93840c2887cc6cfddf4a8b7",
+      "Id": "6a7c4b5bf3ca4617bd1c79c3e9688259"
+    },
+    {
+      "Start": "e1c162fa8e50452da026d4fd928f98bf",
+      "End": "7ea9eb2af11243b68dc96d5be193de1a",
+      "Id": "3f306880b8f64005bb8c2e9fd7421c84"
     }
   ],
   "Dependencies": [
     "8d999e76-78ae-4cc6-a4a3-b50679a618e8"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "archi-lab.net",
+      "Version": "2020.23.2",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "0f4a34a847c04775a9e050f70e28849d"
+      ]
+    }
   ],
   "Bindings": [],
   "View": {
@@ -2751,7 +2797,7 @@
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.0.1.5055",
+      "Version": "2.3.0.5885",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -2787,16 +2833,6 @@
         "Excluded": false,
         "X": -440.72937317205162,
         "Y": -1065.9778215074061
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "Categories",
-        "Id": "d06a6c9a41334404a14246ca183dc2c3",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": -646.3656817182756,
-        "Y": -1066.7533753785929
       },
       {
         "ShowGeometry": true,
@@ -3467,6 +3503,26 @@
         "Excluded": false,
         "X": -664.0970537771575,
         "Y": -1456.8585403171312
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Category.ByName",
+        "Id": "38aa76ce745044de848bfbbeced3d306",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -674.89560049664738,
+        "Y": -1072.2852554322862
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "20dd50aae90a47e8a7689be3fef54584",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -791.03364397970438,
+        "Y": -1064.7848710587361
       }
     ],
     "Annotations": [
@@ -3732,8 +3788,8 @@
         "Background": "#FFA4E1FF"
       }
     ],
-    "X": 677.14698818374052,
-    "Y": 1269.2620791388283,
-    "Zoom": 0.80040462627906261
+    "X": 433.17822217828711,
+    "Y": 867.02599173528779,
+    "Zoom": 0.51327905533629392
   }
 }

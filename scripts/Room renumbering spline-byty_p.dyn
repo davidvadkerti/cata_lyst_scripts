@@ -49,26 +49,6 @@
   "Outputs": [],
   "Nodes": [
     {
-      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
-      "SelectedIndex": 416,
-      "NodeType": "ExtensionNode",
-      "Id": "c9a26871041b450ab1e2283a8f8b6cfd",
-      "Inputs": [],
-      "Outputs": [
-        {
-          "Id": "efffdd239dc3408db86f126c28f19f7c",
-          "Name": "Category",
-          "Description": "The selected Category.",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "All built-in categories."
-    },
-    {
       "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
       "NodeType": "ExtensionNode",
       "Id": "f3738f6eb3f24328a865682f59244396",
@@ -1489,14 +1469,59 @@
       ],
       "Replication": "Auto",
       "Description": "Flattens a nested list of lists by a certain amount.\n\nList.Flatten (list: var[]..[], amt: int = -1): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Category.ByName@string",
+      "Id": "b8d2b57f4b25485185e2009327a9ae09",
+      "Inputs": [
+        {
+          "Id": "aca78a3fce7d45c0a5e9e671611ebfb7",
+          "Name": "name",
+          "Description": "The built in category name.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8bd94f556f5846ec894be92653bfaf90",
+          "Name": "Category",
+          "Description": "Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets a Revit category by the built-in category name.\n\nCategory.ByName (name: string): Category"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Rooms\";",
+      "Id": "77d13c59cce24c2588eeba03f7376f28",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1602daa284324eda896cc06f41238e82",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
     }
   ],
   "Connectors": [
-    {
-      "Start": "efffdd239dc3408db86f126c28f19f7c",
-      "End": "110a928520e143249455083b1192fcae",
-      "Id": "62e7e42d92e846e3b8dc74a3b0144f80"
-    },
     {
       "Start": "0b01a706a9ab48f1b2643b6ec928286b",
       "End": "a923b4d9f01a49da85ca439846ee8608",
@@ -1736,16 +1761,27 @@
       "Start": "6280823c09cc42f1b9b4e869f62b4810",
       "End": "72ec2b53f7de47dab5af276ab1fb0ce8",
       "Id": "a1d3d4dccda9421f90b9e8897312c65f"
+    },
+    {
+      "Start": "8bd94f556f5846ec894be92653bfaf90",
+      "End": "110a928520e143249455083b1192fcae",
+      "Id": "2d80177e222940bb89ece7da10c0933a"
+    },
+    {
+      "Start": "1602daa284324eda896cc06f41238e82",
+      "End": "aca78a3fce7d45c0a5e9e671611ebfb7",
+      "Id": "14735b9db57c4f04b0dfc26f29246a5c"
     }
   ],
   "Dependencies": [],
+  "NodeLibraryDependencies": [],
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.0.1.5055",
+      "Version": "2.3.0.5885",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -1762,16 +1798,6 @@
       "UpZ": 0.0
     },
     "NodeViews": [
-      {
-        "ShowGeometry": true,
-        "Name": "Categories",
-        "Id": "c9a26871041b450ab1e2283a8f8b6cfd",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": -172.34759361091821,
-        "Y": 258.05429758202473
-      },
       {
         "ShowGeometry": true,
         "Name": "All Elements of Category",
@@ -2221,6 +2247,26 @@
         "Excluded": false,
         "X": 826.309323868001,
         "Y": 141.234886233439
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Category.ByName",
+        "Id": "b8d2b57f4b25485185e2009327a9ae09",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -196.33246742394954,
+        "Y": 305.40586795734271
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "77d13c59cce24c2588eeba03f7376f28",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -343.70471318319846,
+        "Y": 305.41004378460667
       }
     ],
     "Annotations": [
@@ -2240,7 +2286,7 @@
         "Height": 354.803791300058,
         "FontSize": 14.0,
         "InitialTop": 279.605885702395,
-        "InitialHeight": 354.803791300058,
+        "InitialHeight": 376.803791300058,
         "TextblockHeight": 20.0,
         "Background": "#FFC1D676"
       },
@@ -2261,7 +2307,7 @@
         "Height": 509.07086550809197,
         "FontSize": 14.0,
         "InitialTop": -258.066675674175,
-        "InitialHeight": 436.450570310349,
+        "InitialHeight": 531.070865508092,
         "TextblockHeight": 20.0,
         "Background": "#FFC1D676"
       },
@@ -2281,7 +2327,7 @@
         "Height": 354.803791300058,
         "FontSize": 14.0,
         "InitialTop": 437.139553965722,
-        "InitialHeight": 354.803791300058,
+        "InitialHeight": 376.803791300058,
         "TextblockHeight": 20.0,
         "Background": "#FFC1D676"
       },
@@ -2328,8 +2374,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": 456.38614749279088,
-    "Y": 421.20575757787918,
+    "X": 595.38614749279088,
+    "Y": 215.20575757787918,
     "Zoom": 0.955431028138847
   }
 }
