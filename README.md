@@ -10,3 +10,5 @@ Kompatibilita: Dynamo 2.1.0 - Revit 2020 obsahuje Dynamo a dostáva aktualizáci
 
 ## Youtube
 [![Click to watch video on Youtube](https://img.youtube.com/vi/2LBi9p3gPiY/0.jpg)](https://www.youtube.com/watch?v=2LBi9p3gPiY)
+
+[![Click to watch video on Youtube](https://img.youtube.com/vi/iTW9NoQGErE/0.jpg)](https://www.youtube.com/watch?v=iTW9NoQGErE)
