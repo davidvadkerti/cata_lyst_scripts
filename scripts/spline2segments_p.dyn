@@ -394,6 +394,37 @@
       ],
       "Replication": "Disabled",
       "Description": "A slider that produces numeric values."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"spline2segments\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "VariableInputPorts": true,
+      "Id": "6f83a9baf26346c89f083bdf77a04743",
+      "Inputs": [
+        {
+          "Id": "9bea3a2e64694f88b840f2931f37a760",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "aa673feede154f4f84745bf12acbac2b",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
     }
   ],
   "Connectors": [
@@ -484,124 +515,134 @@
     },
     "NodeViews": [
       {
+        "ShowGeometry": true,
+        "Name": "CurveElement.Curve",
         "Id": "2a08aa9697b2470398d1d7f8d0b399b7",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "CurveElement.Curve",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 142.666095036314,
         "Y": -5.64400336147423
       },
       {
+        "ShowGeometry": true,
+        "Name": "Curve.PointsAtChordLengthFromPoint",
         "Id": "18f9b12c33284b1abc93281d860770b5",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Curve.PointsAtChordLengthFromPoint",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 401.780632565097,
         "Y": -240.380691206148
       },
       {
+        "ShowGeometry": true,
+        "Name": "Curve.SplitByPoints",
         "Id": "709b6ccf2e3d4e52b9b4f131631ffe9f",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Curve.SplitByPoints",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 729.339574966201,
         "Y": -142.922454419913
       },
       {
+        "ShowGeometry": true,
+        "Name": "Curve.EndPoint",
         "Id": "b2ac5345d5654f3895919e509ba72737",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Curve.EndPoint",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 962.914544928641,
         "Y": -34.7781173133981
       },
       {
+        "ShowGeometry": true,
+        "Name": "Curve.StartPoint",
         "Id": "2c022dd2f0a947a8a87175388ff4c66d",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Curve.StartPoint",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 962.914544928641,
         "Y": -170.435670356733
       },
       {
+        "ShowGeometry": true,
+        "Name": "Line.ByStartPointEndPoint",
         "Id": "2fc262c58c664aeab4049805f3a55bbd",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Line.ByStartPointEndPoint",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1246.45263462724,
         "Y": -28.4109727275285
       },
       {
+        "ShowGeometry": true,
+        "Name": "Návod",
         "Id": "fbd0e50f8f184f3cbbc7705bc08ed4d6",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "Návod",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -513.674458502494,
         "Y": -212.463515385883
       },
       {
+        "ShowGeometry": true,
+        "Name": "ModelCurve.ByCurve",
         "Id": "01051f3509ad4636a94ea2569eccb70f",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "ModelCurve.ByCurve",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1528.33894692704,
         "Y": -6.14183491024573
       },
       {
+        "ShowGeometry": true,
+        "Name": "Watch",
         "Id": "721bccf9f1ab477daf7900e268f1f64d",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Watch",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 915.609282784415,
         "Y": 271.102497036518
       },
       {
+        "ShowGeometry": true,
+        "Name": "Vytvorené segmenty",
         "Id": "f7e24c53ea4e4132a0954392d9f97263",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Vytvorené segmenty",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1861.02512885242,
         "Y": -10.2901357822856
       },
       {
+        "ShowGeometry": true,
+        "Name": "Select Model Line",
         "Id": "c1b9d2efed634de29ad2f3ea11195c25",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "Select Model Line",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -204.175380840041,
         "Y": -70.9367589186924
       },
       {
+        "ShowGeometry": true,
+        "Name": "segment length",
         "Id": "4ec9239b2d034fbf9b8dcedbdd1f5cfe",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "segment length",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -248.152799557802,
         "Y": -151.233507827524
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY log",
+        "Id": "6f83a9baf26346c89f083bdf77a04743",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -211.6979655659884,
+        "Y": 100.660531134606
       }
     ],
     "Annotations": [

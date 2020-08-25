@@ -1,211 +1,1295 @@
-<Workspace Version="1.3.1.1736" X="616.632142181363" Y="542.904633306362" zoom="0.924134632287627" ScaleFactor="1" Name="Home" Description="" RunType="Automatic" RunPeriod="1000" HasRunWithoutCrash="True">
-  <NamespaceResolutionMap />
-  <Elements>
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="709b6ccf-2e3d-4e52-b9b4-f131631ffe9f" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Curve.SplitByPoints" x="729.339574966201" y="-142.922454419913" isVisible="true" isUpstreamVisible="false" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Curve.SplitByPoints@Autodesk.DesignScript.Geometry.Point[]">
-      <PortInfo index="0" default="False" />
-      <PortInfo index="1" default="False" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="b2ac5345-d565-4f38-9591-9e509ba72737" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Curve.EndPoint" x="1085.39352239989" y="83.407335798611" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Curve.EndPoint">
-      <PortInfo index="0" default="False" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="2c022dd2-f0a9-47a8-a871-75388ff4c66d" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Curve.StartPoint" x="1059.3452284588" y="-266.55214438662" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Curve.StartPoint">
-      <PortInfo index="0" default="False" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <CoreNodeModels.Input.StringInput guid="fbd0e50f-8f18-4f3c-bbc7-705bc08ed4d6" type="CoreNodeModels.Input.StringInput" nickname="Návod" x="-481.373914604106" y="-335.060339026878" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <System.String>Lines nakreslené cez krivky - Splines prekreslí vyskladaním z oblúkov Arcs</System.String>
-      <System.String value="Lines nakreslené cez krivky - Splines prekreslí vyskladaním z oblúkov Arcs" />
-    </CoreNodeModels.Input.StringInput>
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="19cafb72-7c36-4668-bfdb-c7a01f12b85b" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Arc.ByThreePoints" x="2775.81490770704" y="-321.998335400509" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Arc.ByThreePoints@Autodesk.DesignScript.Geometry.Point,Autodesk.DesignScript.Geometry.Point,Autodesk.DesignScript.Geometry.Point">
-      <PortInfo index="0" default="False" />
-      <PortInfo index="1" default="False" />
-      <PortInfo index="2" default="False" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="b2b8cba0-8b9e-43ff-bf14-a9e78da7db0f" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Count" x="1410.52776862683" y="-389.961176314978" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="BuiltIn" function="Count@var[]..[]">
-      <PortInfo index="0" default="False" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <PythonNodeModels.PythonNode guid="e12c037e-c6b1-466c-87a6-de8870f1bf46" type="PythonNodeModels.PythonNode" nickname="Triplets PY" x="1839.48106100299" y="-345.328717544885" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="4">
-      <PortInfo index="0" default="False" />
-      <PortInfo index="1" default="False" />
-      <PortInfo index="2" default="False" />
-      <PortInfo index="3" default="False" />
-      <Script>import clr
-clr.AddReference('ProtoGeometry')
-from Autodesk.DesignScript.Geometry import *
-#The inputs to this node will be stored as a list in the IN variables.
-start = IN[0]
-end = IN[1]
-step = IN[2]
-points = list()
-points = IN[3]
-
-##variables
-count = len(points)
-
-triplets = list(range(start,end,2))
-result = list()
-for i in triplets:
-    result.append(points[i:i+3])
-print result
-
-#Assign your output to the OUT variable.
-try:
-	OUT = result
-except:
-	OUT = "something went wrong"</Script>
-    </PythonNodeModels.PythonNode>
-    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="aaee13a3-928c-41f0-89b7-7d29ea624b27" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="1657.27890264407" y="-401.65775963025" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="0;&#xA;a;&#xA;1;" ShouldFocus="false">
-      <PortInfo index="0" default="False" />
-    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
-    <CoreNodeModels.Watch guid="6b34001b-9298-4788-a56f-f3bda252b566" type="CoreNodeModels.Watch" nickname="Watch" x="1974.63404396984" y="-770.129875530028" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
-      <PortInfo index="0" default="False" />
-    </CoreNodeModels.Watch>
-    <PythonNodeModels.PythonNode guid="e0c54a9c-e9b2-4c1c-a037-fe2064a3fec1" type="PythonNodeModels.PythonNode" nickname="first items PY" x="2323.6002971268" y="-454.762337280599" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
-      <PortInfo index="0" default="False" />
-      <Script>import clr
-clr.AddReference('ProtoGeometry')
-from Autodesk.DesignScript.Geometry import *
-#The inputs to this node will be stored as a list in the IN variables.
-points = IN[0]
-
-result = [item[0] for item in points]
-
-#Assign your output to the OUT variable.
-OUT = result</Script>
-    </PythonNodeModels.PythonNode>
-    <PythonNodeModels.PythonNode guid="290f272a-b935-4fa9-85dc-8a199a4db6db" type="PythonNodeModels.PythonNode" nickname="second items PY" x="2322.14771209501" y="-358.190126560424" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
-      <PortInfo index="0" default="False" />
-      <Script>import clr
-clr.AddReference('ProtoGeometry')
-from Autodesk.DesignScript.Geometry import *
-#The inputs to this node will be stored as a list in the IN variables.
-points = IN[0]
-
-result = [item[1] for item in points]
-
-#Assign your output to the OUT variable.
-OUT = result</Script>
-    </PythonNodeModels.PythonNode>
-    <PythonNodeModels.PythonNode guid="eaa967db-c597-4e4d-9d30-8d997582afe8" type="PythonNodeModels.PythonNode" nickname="third items PY" x="2325.5230985834" y="-255.01184910353" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
-      <PortInfo index="0" default="False" />
-      <Script>import clr
-clr.AddReference('ProtoGeometry')
-from Autodesk.DesignScript.Geometry import *
-#The inputs to this node will be stored as a list in the IN variables.
-points = IN[0]
-
-result = [item[2] for item in points]
-
-#Assign your output to the OUT variable.
-OUT = result</Script>
-    </PythonNodeModels.PythonNode>
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="1edad328-be7d-401c-bd84-b4afc8cb26c4" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="ModelCurve.ByCurve" x="3081.21285049204" y="-349.32603528334" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="RevitNodes.dll" function="Revit.Elements.ModelCurve.ByCurve@Autodesk.DesignScript.Geometry.Curve">
-      <PortInfo index="0" default="False" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="4925bd7b-b248-42c1-98cb-c7882053f8ca" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Element.Id" x="3365.80442680097" y="-341.135519609467" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="RevitNodes.dll" function="Revit.Elements.Element.Id">
-      <PortInfo index="0" default="False" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="a002394f-a976-460c-b0d7-158e75ce0941" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Curve.PointsAtEqualChordLength" x="425.841737533064" y="-375.392006244224" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Curve.PointsAtEqualChordLength@int">
-      <PortInfo index="0" default="False" />
-      <PortInfo index="1" default="True" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <Dynamo.Nodes.DSModelElementSelection guid="a1c4e919-1d76-4d35-9337-9f11bf41aaf7" type="Dynamo.Nodes.DSModelElementSelection" nickname="Select Model Line" x="-214.50993946532" y="-448.741813913969" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <instance id="cf626c56-1074-4ca6-84ea-39f8fa687649-00001cba" />
-    </Dynamo.Nodes.DSModelElementSelection>
-    <CoreNodeModels.Input.DoubleSlider guid="f3406597-dbd3-4366-a82a-a9956a2d6b58" type="CoreNodeModels.Input.DoubleSlider" nickname="Počet oblúkov" x="-194.111877850971" y="-305.577364606404" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <System.Double>6</System.Double>
-      <Range min="1" max="25" step="1" />
-    </CoreNodeModels.Input.DoubleSlider>
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="f137c863-53b3-4a40-a4bb-6fedbe3beffc" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="CurveElement.Curve" x="159.120458038069" y="-475.188699351802" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="RevitNodes.dll" function="Revit.Elements.CurveElement.Curve">
-      <PortInfo index="0" default="False" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <PythonNodeModels.PythonNode guid="2f8121fd-7262-4512-a065-69928eb344af" type="PythonNodeModels.PythonNode" nickname="just last item PY" x="1628.07154180555" y="42.7254181535248" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
-      <PortInfo index="0" default="False" />
-      <Script>import clr
-clr.AddReference('ProtoGeometry')
-from Autodesk.DesignScript.Geometry import *
-#The inputs to this node will be stored as a list in the IN variables.
-items = IN[0]
-
-result = items[-1]
-
-#Assign your output to the OUT variable.
-OUT = result</Script>
-    </PythonNodeModels.PythonNode>
-    <PythonNodeModels.PythonNode guid="5bf43840-05de-4154-a5df-c330255a47fa" type="PythonNodeModels.PythonNode" nickname="just last item PY" x="2101.34948098295" y="-270.238985290584" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="2">
-      <PortInfo index="0" default="False" />
-      <PortInfo index="1" default="False" />
-      <Script>import clr
-clr.AddReference('ProtoGeometry')
-from Autodesk.DesignScript.Geometry import *
-#The inputs to this node will be stored as a list in the IN variables.
-items = IN[0]
-LastPoint = IN[1]
-
-
-#result = items.append(LastPoint)
-items[-1].append(LastPoint)
-
-#Assign your output to the OUT variable.
-OUT = items</Script>
-    </PythonNodeModels.PythonNode>
-    <CoreNodeModels.Watch guid="a8019c19-2cc7-4130-9834-5551c02b5b07" type="CoreNodeModels.Watch" nickname="Watch" x="2336.05283674131" y="-42.4009026954768" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
-      <PortInfo index="0" default="False" />
-    </CoreNodeModels.Watch>
-    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="4732e298-1854-40ce-a7c2-e3a093cc4961" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="268.819795165898" y="-303.911260310072" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="a-1;" ShouldFocus="false">
-      <PortInfo index="0" default="False" />
-    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
-    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="e892dcc1-5d2f-4d6a-babb-971da0bd766b" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Počet segmentov" x="128.986522386679" y="-275.823278442995" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="2*a;" ShouldFocus="false">
-      <PortInfo index="0" default="False" />
-    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
-    <CoreNodeModels.Watch guid="35dc621e-6952-4d82-96e8-b9df84802ffc" type="CoreNodeModels.Watch" nickname="ID of created arcs" x="3623.61216275616" y="-337.749702683155" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
-      <PortInfo index="0" default="False" />
-    </CoreNodeModels.Watch>
-  </Elements>
-  <Connectors>
-    <Dynamo.Graph.Connectors.ConnectorModel start="709b6ccf-2e3d-4e52-b9b4-f131631ffe9f" start_index="0" end="2c022dd2-f0a9-47a8-a871-75388ff4c66d" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="709b6ccf-2e3d-4e52-b9b4-f131631ffe9f" start_index="0" end="b2ac5345-d565-4f38-9591-9e509ba72737" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="b2ac5345-d565-4f38-9591-9e509ba72737" start_index="0" end="2f8121fd-7262-4512-a065-69928eb344af" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="2c022dd2-f0a9-47a8-a871-75388ff4c66d" start_index="0" end="b2b8cba0-8b9e-43ff-bf14-a9e78da7db0f" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="2c022dd2-f0a9-47a8-a871-75388ff4c66d" start_index="0" end="e12c037e-c6b1-466c-87a6-de8870f1bf46" end_index="3" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="19cafb72-7c36-4668-bfdb-c7a01f12b85b" start_index="0" end="1edad328-be7d-401c-bd84-b4afc8cb26c4" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="b2b8cba0-8b9e-43ff-bf14-a9e78da7db0f" start_index="0" end="aaee13a3-928c-41f0-89b7-7d29ea624b27" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="e12c037e-c6b1-466c-87a6-de8870f1bf46" start_index="0" end="6b34001b-9298-4788-a56f-f3bda252b566" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="e12c037e-c6b1-466c-87a6-de8870f1bf46" start_index="0" end="5bf43840-05de-4154-a5df-c330255a47fa" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="aaee13a3-928c-41f0-89b7-7d29ea624b27" start_index="0" end="e12c037e-c6b1-466c-87a6-de8870f1bf46" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="aaee13a3-928c-41f0-89b7-7d29ea624b27" start_index="1" end="e12c037e-c6b1-466c-87a6-de8870f1bf46" end_index="1" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="aaee13a3-928c-41f0-89b7-7d29ea624b27" start_index="2" end="e12c037e-c6b1-466c-87a6-de8870f1bf46" end_index="2" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="e0c54a9c-e9b2-4c1c-a037-fe2064a3fec1" start_index="0" end="19cafb72-7c36-4668-bfdb-c7a01f12b85b" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="290f272a-b935-4fa9-85dc-8a199a4db6db" start_index="0" end="19cafb72-7c36-4668-bfdb-c7a01f12b85b" end_index="1" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="eaa967db-c597-4e4d-9d30-8d997582afe8" start_index="0" end="19cafb72-7c36-4668-bfdb-c7a01f12b85b" end_index="2" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="1edad328-be7d-401c-bd84-b4afc8cb26c4" start_index="0" end="4925bd7b-b248-42c1-98cb-c7882053f8ca" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="4925bd7b-b248-42c1-98cb-c7882053f8ca" start_index="0" end="35dc621e-6952-4d82-96e8-b9df84802ffc" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="a002394f-a976-460c-b0d7-158e75ce0941" start_index="0" end="709b6ccf-2e3d-4e52-b9b4-f131631ffe9f" end_index="1" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="a1c4e919-1d76-4d35-9337-9f11bf41aaf7" start_index="0" end="f137c863-53b3-4a40-a4bb-6fedbe3beffc" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="f3406597-dbd3-4366-a82a-a9956a2d6b58" start_index="0" end="e892dcc1-5d2f-4d6a-babb-971da0bd766b" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="f137c863-53b3-4a40-a4bb-6fedbe3beffc" start_index="0" end="a002394f-a976-460c-b0d7-158e75ce0941" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="f137c863-53b3-4a40-a4bb-6fedbe3beffc" start_index="0" end="709b6ccf-2e3d-4e52-b9b4-f131631ffe9f" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="2f8121fd-7262-4512-a065-69928eb344af" start_index="0" end="5bf43840-05de-4154-a5df-c330255a47fa" end_index="1" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="5bf43840-05de-4154-a5df-c330255a47fa" start_index="0" end="a8019c19-2cc7-4130-9834-5551c02b5b07" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="5bf43840-05de-4154-a5df-c330255a47fa" start_index="0" end="e0c54a9c-e9b2-4c1c-a037-fe2064a3fec1" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="5bf43840-05de-4154-a5df-c330255a47fa" start_index="0" end="290f272a-b935-4fa9-85dc-8a199a4db6db" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="5bf43840-05de-4154-a5df-c330255a47fa" start_index="0" end="eaa967db-c597-4e4d-9d30-8d997582afe8" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="4732e298-1854-40ce-a7c2-e3a093cc4961" start_index="0" end="a002394f-a976-460c-b0d7-158e75ce0941" end_index="1" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="e892dcc1-5d2f-4d6a-babb-971da0bd766b" start_index="0" end="4732e298-1854-40ce-a7c2-e3a093cc4961" end_index="0" portType="0" />
-  </Connectors>
-  <Notes />
-  <Annotations>
-    <Dynamo.Graph.Annotations.AnnotationModel guid="54f1b99d-3891-4013-bb4f-9312dc24814e" annotationText="INPUT" left="-224.50993946532" top="-494.741813913969" width="339.398061614349" height="351.164449307565" fontSize="30" InitialTop="-448.741813913969" InitialHeight="241.164449307565" TextblockHeight="36" backgrouund="#FFC1D676">
-      <Models ModelGuid="a1c4e919-1d76-4d35-9337-9f11bf41aaf7" />
-      <Models ModelGuid="f3406597-dbd3-4366-a82a-a9956a2d6b58" />
-    </Dynamo.Graph.Annotations.AnnotationModel>
-  </Annotations>
-  <Presets />
-  <Cameras>
-    <Camera Name="Background Preview" eyeX="473924.1875" eyeY="23446.794921875" eyeZ="-4701.3447265625" lookX="-345.853759765625" lookY="-21576.8828125" lookZ="827.221130371094" upX="0.379874676465988" upY="0.173648178577423" upZ="-0.90859317779541" />
-  </Cameras>
-  <SessionTraceData>
-    <NodeTraceData NodeId="1edad328-be7d-401c-bd84-b4afc8cb26c4">
-      <CallsiteTraceData CallSiteID="ByCurve_InClassDecl-1_InFunctionScope-1_Instance0_1edad328-be7d-401c-bd84-b4afc8cb26c4">PFNPQVAtRU5WOkVudmVsb3BlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOlNPQVAtRU5DPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy9zb2FwL2VuY29kaW5nLyIgeG1sbnM6U09BUC1FTlY9Imh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3NvYXAvZW52ZWxvcGUvIiB4bWxuczpjbHI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vc29hcC9lbmNvZGluZy9jbHIvMS4wIiBTT0FQLUVOVjplbmNvZGluZ1N0eWxlPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy9zb2FwL2VuY29kaW5nLyI+DQo8U09BUC1FTlY6Qm9keT4NCjxhMTpDYWxsU2l0ZV94MDAyQl9UcmFjZVNlcmlhbGlzZXJIZWxwZXIgaWQ9InJlZi0xIiB4bWxuczphMT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9jbHIvbnNhc3NlbS9Qcm90b0NvcmUvUHJvdG9Db3JlJTJDJTIwVmVyc2lvbiUzRDEuMy4xLjE3MzYlMkMlMjBDdWx0dXJlJTNEbmV1dHJhbCUyQyUyMFB1YmxpY0tleVRva2VuJTNEbnVsbCI+DQo8TnVtYmVyT2ZFbGVtZW50cz4xPC9OdW1iZXJPZkVsZW1lbnRzPg0KPEJhc2UtMF9IYXNEYXRhPmZhbHNlPC9CYXNlLTBfSGFzRGF0YT4NCjxCYXNlLTBfSGFzTmVzdGVkRGF0YT50cnVlPC9CYXNlLTBfSGFzTmVzdGVkRGF0YT4NCjxCYXNlLTBfTmVzdGVkRGF0YUNvdW50PjY8L0Jhc2UtMF9OZXN0ZWREYXRhQ291bnQ+DQo8QmFzZS0wLTBfSGFzRGF0YT50cnVlPC9CYXNlLTAtMF9IYXNEYXRhPg0KPEJhc2UtMC0wX0RhdGEgaWQ9InJlZi0zIj5QRk5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxJSGh0Ykc1ek9uaHphVDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRXRhVzV6ZEdGdVkyVWlJSGh0Ykc1ek9uaHpaRDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRWlJSGh0Ykc1ek9sTlBRVkF0UlU1RFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJZ2VHMXNibk02VTA5QlVDMUZUbFk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbmh0YkhOdllYQXViM0puTDNOdllYQXZaVzUyWld4dmNHVXZJaUI0Yld4dWN6cGpiSEk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbTFwWTNKdmMyOW1kQzVqYjIwdmMyOWhjQzlsYm1OdlpHbHVaeTlqYkhJdk1TNHdJaUJUVDBGUUxVVk9WanBsYm1OdlpHbHVaMU4wZVd4bFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJK0RRbzhVMDlCVUMxRlRsWTZRbTlrZVQ0TkNqeGhNVHBUWlhKcFlXeHBlbUZpYkdWSlpDQnBaRDBpY21WbUxURWlJSGh0Ykc1ek9tRXhQU0pvZEhSd09pOHZjMk5vWlcxaGN5NXRhV055YjNOdlpuUXVZMjl0TDJOc2NpOXVjMkZ6YzJWdEwxSmxkbWwwVTJWeWRtbGpaWE11VUdWeWMybHpkR1Z1WTJVdlVtVjJhWFJUWlhKMmFXTmxjeVV5UXlVeU1GWmxjbk5wYjI0bE0wUXhMak11TVM0eE56TTJKVEpESlRJd1EzVnNkSFZ5WlNVelJHNWxkWFJ5WVd3bE1rTWxNakJRZFdKc2FXTkxaWGxVYjJ0bGJpVXpSRzUxYkd3aVBnMEtQSE4wY21sdVowbEVJR2xrUFNKeVpXWXRNeUkrWTJZMk1qWmpOVFl0TVRBM05DMDBZMkUyTFRnMFpXRXRNemxtT0daaE5qZzNOalE1TFRBd01EQXhZek0yUEM5emRISnBibWRKUkQ0TkNqeHBiblJKUkQ0M01qSXlQQzlwYm5SSlJENE5Dand2WVRFNlUyVnlhV0ZzYVhwaFlteGxTV1ErRFFvOEwxTlBRVkF0UlU1V09rSnZaSGsrRFFvOEwxTlBRVkF0UlU1V09rVnVkbVZzYjNCbFBnMEs8L0Jhc2UtMC0wX0RhdGE+DQo8QmFzZS0wLTBfSGFzTmVzdGVkRGF0YT5mYWxzZTwvQmFzZS0wLTBfSGFzTmVzdGVkRGF0YT4NCjxCYXNlLTAtMV9IYXNEYXRhPnRydWU8L0Jhc2UtMC0xX0hhc0RhdGE+DQo8QmFzZS0wLTFfRGF0YSBpZD0icmVmLTQiPlBGTlBRVkF0UlU1V09rVnVkbVZzYjNCbElIaHRiRzV6T25oemFUMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TVM5WVRVeFRZMmhsYldFdGFXNXpkR0Z1WTJVaUlIaHRiRzV6T25oelpEMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TVM5WVRVeFRZMmhsYldFaUlIaHRiRzV6T2xOUFFWQXRSVTVEUFNKb2RIUndPaTh2YzJOb1pXMWhjeTU0Yld4emIyRndMbTl5Wnk5emIyRndMMlZ1WTI5a2FXNW5MeUlnZUcxc2JuTTZVMDlCVUMxRlRsWTlJbWgwZEhBNkx5OXpZMmhsYldGekxuaHRiSE52WVhBdWIzSm5MM052WVhBdlpXNTJaV3h2Y0dVdklpQjRiV3h1Y3pwamJISTlJbWgwZEhBNkx5OXpZMmhsYldGekxtMXBZM0p2YzI5bWRDNWpiMjB2YzI5aGNDOWxibU52WkdsdVp5OWpiSEl2TVM0d0lpQlRUMEZRTFVWT1ZqcGxibU52WkdsdVoxTjBlV3hsUFNKb2RIUndPaTh2YzJOb1pXMWhjeTU0Yld4emIyRndMbTl5Wnk5emIyRndMMlZ1WTI5a2FXNW5MeUkrRFFvOFUwOUJVQzFGVGxZNlFtOWtlVDROQ2p4aE1UcFRaWEpwWVd4cGVtRmliR1ZKWkNCcFpEMGljbVZtTFRFaUlIaHRiRzV6T21FeFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1dGFXTnliM052Wm5RdVkyOXRMMk5zY2k5dWMyRnpjMlZ0TDFKbGRtbDBVMlZ5ZG1salpYTXVVR1Z5YzJsemRHVnVZMlV2VW1WMmFYUlRaWEoyYVdObGN5VXlReVV5TUZabGNuTnBiMjRsTTBReExqTXVNUzR4TnpNMkpUSkRKVEl3UTNWc2RIVnlaU1V6Ukc1bGRYUnlZV3dsTWtNbE1qQlFkV0pzYVdOTFpYbFViMnRsYmlVelJHNTFiR3dpUGcwS1BITjBjbWx1WjBsRUlHbGtQU0p5WldZdE15SStZMlkyTWpaak5UWXRNVEEzTkMwMFkyRTJMVGcwWldFdE16bG1PR1poTmpnM05qUTVMVEF3TURBeFl6YzBQQzl6ZEhKcGJtZEpSRDROQ2p4cGJuUkpSRDQzTWpnMFBDOXBiblJKUkQ0TkNqd3ZZVEU2VTJWeWFXRnNhWHBoWW14bFNXUStEUW84TDFOUFFWQXRSVTVXT2tKdlpIaytEUW84TDFOUFFWQXRSVTVXT2tWdWRtVnNiM0JsUGcwSzwvQmFzZS0wLTFfRGF0YT4NCjxCYXNlLTAtMV9IYXNOZXN0ZWREYXRhPmZhbHNlPC9CYXNlLTAtMV9IYXNOZXN0ZWREYXRhPg0KPEJhc2UtMC0yX0hhc0RhdGE+dHJ1ZTwvQmFzZS0wLTJfSGFzRGF0YT4NCjxCYXNlLTAtMl9EYXRhIGlkPSJyZWYtNSI+UEZOUFFWQXRSVTVXT2tWdWRtVnNiM0JsSUhodGJHNXpPbmh6YVQwaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNUzlZVFV4VFkyaGxiV0V0YVc1emRHRnVZMlVpSUhodGJHNXpPbmh6WkQwaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNUzlZVFV4VFkyaGxiV0VpSUhodGJHNXpPbE5QUVZBdFJVNURQU0pvZEhSd09pOHZjMk5vWlcxaGN5NTRiV3h6YjJGd0xtOXlaeTl6YjJGd0wyVnVZMjlrYVc1bkx5SWdlRzFzYm5NNlUwOUJVQzFGVGxZOUltaDBkSEE2THk5elkyaGxiV0Z6TG5odGJITnZZWEF1YjNKbkwzTnZZWEF2Wlc1MlpXeHZjR1V2SWlCNGJXeHVjenBqYkhJOUltaDBkSEE2THk5elkyaGxiV0Z6TG0xcFkzSnZjMjltZEM1amIyMHZjMjloY0M5bGJtTnZaR2x1Wnk5amJISXZNUzR3SWlCVFQwRlFMVVZPVmpwbGJtTnZaR2x1WjFOMGVXeGxQU0pvZEhSd09pOHZjMk5vWlcxaGN5NTRiV3h6YjJGd0xtOXlaeTl6YjJGd0wyVnVZMjlrYVc1bkx5SStEUW84VTA5QlVDMUZUbFk2UW05a2VUNE5DanhoTVRwVFpYSnBZV3hwZW1GaWJHVkpaQ0JwWkQwaWNtVm1MVEVpSUhodGJHNXpPbUV4UFNKb2RIUndPaTh2YzJOb1pXMWhjeTV0YVdOeWIzTnZablF1WTI5dEwyTnNjaTl1YzJGemMyVnRMMUpsZG1sMFUyVnlkbWxqWlhNdVVHVnljMmx6ZEdWdVkyVXZVbVYyYVhSVFpYSjJhV05sY3lVeVF5VXlNRlpsY25OcGIyNGxNMFF4TGpNdU1TNHhOek0ySlRKREpUSXdRM1ZzZEhWeVpTVXpSRzVsZFhSeVlXd2xNa01sTWpCUWRXSnNhV05MWlhsVWIydGxiaVV6Ukc1MWJHd2lQZzBLUEhOMGNtbHVaMGxFSUdsa1BTSnlaV1l0TXlJK1kyWTJNalpqTlRZdE1UQTNOQzAwWTJFMkxUZzBaV0V0TXpsbU9HWmhOamczTmpRNUxUQXdNREF4WXpkaVBDOXpkSEpwYm1kSlJENE5DanhwYm5SSlJENDNNamt4UEM5cGJuUkpSRDROQ2p3dllURTZVMlZ5YVdGc2FYcGhZbXhsU1dRK0RRbzhMMU5QUVZBdFJVNVdPa0p2WkhrK0RRbzhMMU5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxQZzBLPC9CYXNlLTAtMl9EYXRhPg0KPEJhc2UtMC0yX0hhc05lc3RlZERhdGE+ZmFsc2U8L0Jhc2UtMC0yX0hhc05lc3RlZERhdGE+DQo8QmFzZS0wLTNfSGFzRGF0YT50cnVlPC9CYXNlLTAtM19IYXNEYXRhPg0KPEJhc2UtMC0zX0RhdGEgaWQ9InJlZi02Ij5QRk5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxJSGh0Ykc1ek9uaHphVDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRXRhVzV6ZEdGdVkyVWlJSGh0Ykc1ek9uaHpaRDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRWlJSGh0Ykc1ek9sTlBRVkF0UlU1RFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJZ2VHMXNibk02VTA5QlVDMUZUbFk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbmh0YkhOdllYQXViM0puTDNOdllYQXZaVzUyWld4dmNHVXZJaUI0Yld4dWN6cGpiSEk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbTFwWTNKdmMyOW1kQzVqYjIwdmMyOWhjQzlsYm1OdlpHbHVaeTlqYkhJdk1TNHdJaUJUVDBGUUxVVk9WanBsYm1OdlpHbHVaMU4wZVd4bFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJK0RRbzhVMDlCVUMxRlRsWTZRbTlrZVQ0TkNqeGhNVHBUWlhKcFlXeHBlbUZpYkdWSlpDQnBaRDBpY21WbUxURWlJSGh0Ykc1ek9tRXhQU0pvZEhSd09pOHZjMk5vWlcxaGN5NXRhV055YjNOdlpuUXVZMjl0TDJOc2NpOXVjMkZ6YzJWdEwxSmxkbWwwVTJWeWRtbGpaWE11VUdWeWMybHpkR1Z1WTJVdlVtVjJhWFJUWlhKMmFXTmxjeVV5UXlVeU1GWmxjbk5wYjI0bE0wUXhMak11TVM0eE56TTJKVEpESlRJd1EzVnNkSFZ5WlNVelJHNWxkWFJ5WVd3bE1rTWxNakJRZFdKc2FXTkxaWGxVYjJ0bGJpVXpSRzUxYkd3aVBnMEtQSE4wY21sdVowbEVJR2xrUFNKeVpXWXRNeUkrWTJZMk1qWmpOVFl0TVRBM05DMDBZMkUyTFRnMFpXRXRNemxtT0daaE5qZzNOalE1TFRBd01EQXhZemd6UEM5emRISnBibWRKUkQ0TkNqeHBiblJKUkQ0M01qazVQQzlwYm5SSlJENE5Dand2WVRFNlUyVnlhV0ZzYVhwaFlteGxTV1ErRFFvOEwxTlBRVkF0UlU1V09rSnZaSGsrRFFvOEwxTlBRVkF0UlU1V09rVnVkbVZzYjNCbFBnMEs8L0Jhc2UtMC0zX0RhdGE+DQo8QmFzZS0wLTNfSGFzTmVzdGVkRGF0YT5mYWxzZTwvQmFzZS0wLTNfSGFzTmVzdGVkRGF0YT4NCjxCYXNlLTAtNF9IYXNEYXRhPnRydWU8L0Jhc2UtMC00X0hhc0RhdGE+DQo8QmFzZS0wLTRfRGF0YSBpZD0icmVmLTciPlBGTlBRVkF0UlU1V09rVnVkbVZzYjNCbElIaHRiRzV6T25oemFUMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TVM5WVRVeFRZMmhsYldFdGFXNXpkR0Z1WTJVaUlIaHRiRzV6T25oelpEMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TVM5WVRVeFRZMmhsYldFaUlIaHRiRzV6T2xOUFFWQXRSVTVEUFNKb2RIUndPaTh2YzJOb1pXMWhjeTU0Yld4emIyRndMbTl5Wnk5emIyRndMMlZ1WTI5a2FXNW5MeUlnZUcxc2JuTTZVMDlCVUMxRlRsWTlJbWgwZEhBNkx5OXpZMmhsYldGekxuaHRiSE52WVhBdWIzSm5MM052WVhBdlpXNTJaV3h2Y0dVdklpQjRiV3h1Y3pwamJISTlJbWgwZEhBNkx5OXpZMmhsYldGekxtMXBZM0p2YzI5bWRDNWpiMjB2YzI5aGNDOWxibU52WkdsdVp5OWpiSEl2TVM0d0lpQlRUMEZRTFVWT1ZqcGxibU52WkdsdVoxTjBlV3hsUFNKb2RIUndPaTh2YzJOb1pXMWhjeTU0Yld4emIyRndMbTl5Wnk5emIyRndMMlZ1WTI5a2FXNW5MeUkrRFFvOFUwOUJVQzFGVGxZNlFtOWtlVDROQ2p4aE1UcFRaWEpwWVd4cGVtRmliR1ZKWkNCcFpEMGljbVZtTFRFaUlIaHRiRzV6T21FeFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1dGFXTnliM052Wm5RdVkyOXRMMk5zY2k5dWMyRnpjMlZ0TDFKbGRtbDBVMlZ5ZG1salpYTXVVR1Z5YzJsemRHVnVZMlV2VW1WMmFYUlRaWEoyYVdObGN5VXlReVV5TUZabGNuTnBiMjRsTTBReExqTXVNUzR4TnpNMkpUSkRKVEl3UTNWc2RIVnlaU1V6Ukc1bGRYUnlZV3dsTWtNbE1qQlFkV0pzYVdOTFpYbFViMnRsYmlVelJHNTFiR3dpUGcwS1BITjBjbWx1WjBsRUlHbGtQU0p5WldZdE15SStZMlkyTWpaak5UWXRNVEEzTkMwMFkyRTJMVGcwWldFdE16bG1PR1poTmpnM05qUTVMVEF3TURBeFl6aGxQQzl6ZEhKcGJtZEpSRDROQ2p4cGJuUkpSRDQzTXpFd1BDOXBiblJKUkQ0TkNqd3ZZVEU2VTJWeWFXRnNhWHBoWW14bFNXUStEUW84TDFOUFFWQXRSVTVXT2tKdlpIaytEUW84TDFOUFFWQXRSVTVXT2tWdWRtVnNiM0JsUGcwSzwvQmFzZS0wLTRfRGF0YT4NCjxCYXNlLTAtNF9IYXNOZXN0ZWREYXRhPmZhbHNlPC9CYXNlLTAtNF9IYXNOZXN0ZWREYXRhPg0KPEJhc2UtMC01X0hhc0RhdGE+dHJ1ZTwvQmFzZS0wLTVfSGFzRGF0YT4NCjxCYXNlLTAtNV9EYXRhIGlkPSJyZWYtOCI+UEZOUFFWQXRSVTVXT2tWdWRtVnNiM0JsSUhodGJHNXpPbmh6YVQwaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNUzlZVFV4VFkyaGxiV0V0YVc1emRHRnVZMlVpSUhodGJHNXpPbmh6WkQwaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNUzlZVFV4VFkyaGxiV0VpSUhodGJHNXpPbE5QUVZBdFJVNURQU0pvZEhSd09pOHZjMk5vWlcxaGN5NTRiV3h6YjJGd0xtOXlaeTl6YjJGd0wyVnVZMjlrYVc1bkx5SWdlRzFzYm5NNlUwOUJVQzFGVGxZOUltaDBkSEE2THk5elkyaGxiV0Z6TG5odGJITnZZWEF1YjNKbkwzTnZZWEF2Wlc1MlpXeHZjR1V2SWlCNGJXeHVjenBqYkhJOUltaDBkSEE2THk5elkyaGxiV0Z6TG0xcFkzSnZjMjltZEM1amIyMHZjMjloY0M5bGJtTnZaR2x1Wnk5amJISXZNUzR3SWlCVFQwRlFMVVZPVmpwbGJtTnZaR2x1WjFOMGVXeGxQU0pvZEhSd09pOHZjMk5vWlcxaGN5NTRiV3h6YjJGd0xtOXlaeTl6YjJGd0wyVnVZMjlrYVc1bkx5SStEUW84VTA5QlVDMUZUbFk2UW05a2VUNE5DanhoTVRwVFpYSnBZV3hwZW1GaWJHVkpaQ0JwWkQwaWNtVm1MVEVpSUhodGJHNXpPbUV4UFNKb2RIUndPaTh2YzJOb1pXMWhjeTV0YVdOeWIzTnZablF1WTI5dEwyTnNjaTl1YzJGemMyVnRMMUpsZG1sMFUyVnlkbWxqWlhNdVVHVnljMmx6ZEdWdVkyVXZVbVYyYVhSVFpYSjJhV05sY3lVeVF5VXlNRlpsY25OcGIyNGxNMFF4TGpNdU1TNHhOek0ySlRKREpUSXdRM1ZzZEhWeVpTVXpSRzVsZFhSeVlXd2xNa01sTWpCUWRXSnNhV05MWlhsVWIydGxiaVV6Ukc1MWJHd2lQZzBLUEhOMGNtbHVaMGxFSUdsa1BTSnlaV1l0TXlJK1kyWTJNalpqTlRZdE1UQTNOQzAwWTJFMkxUZzBaV0V0TXpsbU9HWmhOamczTmpRNUxUQXdNREF4WXpsa1BDOXpkSEpwYm1kSlJENE5DanhwYm5SSlJENDNNekkxUEM5cGJuUkpSRDROQ2p3dllURTZVMlZ5YVdGc2FYcGhZbXhsU1dRK0RRbzhMMU5QUVZBdFJVNVdPa0p2WkhrK0RRbzhMMU5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxQZzBLPC9CYXNlLTAtNV9EYXRhPg0KPEJhc2UtMC01X0hhc05lc3RlZERhdGE+ZmFsc2U8L0Jhc2UtMC01X0hhc05lc3RlZERhdGE+DQo8L2ExOkNhbGxTaXRlX3gwMDJCX1RyYWNlU2VyaWFsaXNlckhlbHBlcj4NCjwvU09BUC1FTlY6Qm9keT4NCjwvU09BUC1FTlY6RW52ZWxvcGU+DQo=</CallsiteTraceData>
-    </NodeTraceData>
-  </SessionTraceData>
-</Workspace>
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "spline2arcs_p",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "fbd0e50f8f184f3cbbc7705bc08ed4d6",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Lines nakreslené cez krivky - Splines prekreslí vyskladaním z oblúkov Arcs",
+      "Description": "Creates a string."
+    },
+    {
+      "Id": "f3406597dbd34366a82aa9956a2d6b58",
+      "Name": "Počet oblúkov",
+      "Type": "number",
+      "Value": "6",
+      "MaximumValue": 25.0,
+      "MinimumValue": 1.0,
+      "StepValue": 1.0,
+      "NumberType": "Double",
+      "Description": "A slider that produces numeric values."
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Curve.SplitByPoints@Autodesk.DesignScript.Geometry.Point[]",
+      "Id": "709b6ccf2e3d4e52b9b4f131631ffe9f",
+      "Inputs": [
+        {
+          "Id": "7edd954d00044b20b870e2221ba6b287",
+          "Name": "curve",
+          "Description": "Autodesk.DesignScript.Geometry.Curve",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b1b386f3548f47dbabab5f7eb28c45cd",
+          "Name": "points",
+          "Description": "The points on the curve at which to split the curve\n\nPoint[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9128a9afc66b45ffa2b75924ace2b983",
+          "Name": "Curve[]",
+          "Description": "Curves created from splitting",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Split a Curve into multiple pieces at the given points\n\nCurve.SplitByPoints (points: Point[]): Curve[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Curve.EndPoint",
+      "Id": "b2ac5345d5654f3895919e509ba72737",
+      "Inputs": [
+        {
+          "Id": "c31ca6c36db34ecca4d76d4882c0a09b",
+          "Name": "curve",
+          "Description": "Autodesk.DesignScript.Geometry.Curve",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4537210b7d5941e594482e01b0313a89",
+          "Name": "Point",
+          "Description": "Point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the end Point along the Curve\n\nCurve.EndPoint: Point"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Curve.StartPoint",
+      "Id": "2c022dd2f0a947a8a87175388ff4c66d",
+      "Inputs": [
+        {
+          "Id": "66c4105c88a0418e9e01aa13d98121f6",
+          "Name": "curve",
+          "Description": "Autodesk.DesignScript.Geometry.Curve",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "26f966df4d6244419e6236fb42867df8",
+          "Name": "Point",
+          "Description": "Point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the start Point along the Curve\n\nCurve.StartPoint: Point"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Lines nakreslené cez krivky - Splines prekreslí vyskladaním z oblúkov Arcs",
+      "Id": "fbd0e50f8f184f3cbbc7705bc08ed4d6",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7f403fe33a2e4c028505b6ec81eb9433",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Arc.ByThreePoints@Autodesk.DesignScript.Geometry.Point,Autodesk.DesignScript.Geometry.Point,Autodesk.DesignScript.Geometry.Point",
+      "Id": "19cafb727c364668bfdbc7a01f12b85b",
+      "Inputs": [
+        {
+          "Id": "b7da1d69e2c84c4a858cf7418c08cc93",
+          "Name": "firstPoint",
+          "Description": "First point along the curve\n\nPoint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bea6b44dce384e4abc8d89c9df00c0fe",
+          "Name": "secondPoint",
+          "Description": "Second point along the curve\n\nPoint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6ad911cca65f4d61ba019d309703a609",
+          "Name": "thirdPoint",
+          "Description": "Third point along the curve\n\nPoint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6de3c96d9cc0416d82fb7bfe37a8dada",
+          "Name": "Arc",
+          "Description": "An Arc",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Create an arc by providing three sequential points along its circumference.\n\nArc.ByThreePoints (firstPoint: Point, secondPoint: Point, thirdPoint: Point): Arc"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.Count@var[]..[]",
+      "Id": "b2b8cba08b9e43ffbf14a9e78da7db0f",
+      "Inputs": [
+        {
+          "Id": "c680b5c1314a419f8d833a276adfef09",
+          "Name": "list",
+          "Description": "List to get the item count of.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9b24169fad984ecbbefee32cba4e43f6",
+          "Name": "count",
+          "Description": "List length.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the number of items stored in the given list.\n\nList.Count (list: var[]..[]): int"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n#The inputs to this node will be stored as a list in the IN variables.\nstart = IN[0]\nend = IN[1]\nstep = IN[2]\npoints = list()\npoints = IN[3]\n\n##variables\ncount = len(points)\n\ntriplets = list(range(start,end,2))\nresult = list()\nfor i in triplets:\n    result.append(points[i:i+3])\nprint result\n\n#Assign your output to the OUT variable.\ntry:\n\tOUT = result\nexcept:\n\tOUT = \"something went wrong\"",
+      "VariableInputPorts": true,
+      "Id": "e12c037ec6b1466c87a6de8870f1bf46",
+      "Inputs": [
+        {
+          "Id": "defc5b2588cf47eaad2d84a29fefddb4",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "fdeb800d70454e35a61b23a234a7f4de",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "36a1f6e37404426e8ce6d5985c44459f",
+          "Name": "IN[2]",
+          "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ac25275d50f640aea8f794574439a594",
+          "Name": "IN[3]",
+          "Description": "Input #3",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "686aab4664b94f7facee9293359c50dc",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "0;\na;\n1;",
+      "Id": "aaee13a3928c41f089b77d29ea624b27",
+      "Inputs": [
+        {
+          "Id": "304838604dd84c1792bd5356aadc6aa8",
+          "Name": "a",
+          "Description": "a",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a23d6bc52cae45aeb2450f88d2b0a04e",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "77c17167a3eb43519156ad0c81e9b865",
+          "Name": "",
+          "Description": "Value of expression at line 2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3505ef1a9f6449ccb7cef5ed4096c1fb",
+          "Name": "",
+          "Description": "Value of expression at line 3",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "6b34001b92984788a56ff3bda252b566",
+      "Inputs": [
+        {
+          "Id": "50c44bc22efd47a690e71953a1c1e8a1",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "533c0ed3d49f4affa70d550f2a42c129",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n#The inputs to this node will be stored as a list in the IN variables.\npoints = IN[0]\n\nresult = [item[0] for item in points]\n\n#Assign your output to the OUT variable.\nOUT = result",
+      "VariableInputPorts": true,
+      "Id": "e0c54a9ce9b24c1ca037fe2064a3fec1",
+      "Inputs": [
+        {
+          "Id": "7a9681506a3e4b01a36abbbb513362c0",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c105f736b71d4a71b96643c2e24e3609",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n#The inputs to this node will be stored as a list in the IN variables.\npoints = IN[0]\n\nresult = [item[1] for item in points]\n\n#Assign your output to the OUT variable.\nOUT = result",
+      "VariableInputPorts": true,
+      "Id": "290f272ab9354fa985dc8a199a4db6db",
+      "Inputs": [
+        {
+          "Id": "295d107570f64eb08bbacbb090c72255",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "28308228d5cb4e87b6bb0be0db793f0b",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n#The inputs to this node will be stored as a list in the IN variables.\npoints = IN[0]\n\nresult = [item[2] for item in points]\n\n#Assign your output to the OUT variable.\nOUT = result",
+      "VariableInputPorts": true,
+      "Id": "eaa967dbc5974e4d9d308d997582afe8",
+      "Inputs": [
+        {
+          "Id": "d612dc668d204f49bea80d789708b466",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "cd4248b42648465089570bec28c83175",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.ModelCurve.ByCurve@Autodesk.DesignScript.Geometry.Curve",
+      "Id": "1edad328be7d401cbd84b4afc8cb26c4",
+      "Inputs": [
+        {
+          "Id": "0385045ccbe2402a83abf7a5aa1696fb",
+          "Name": "curve",
+          "Description": "Curve",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "00ec6456912547fd8be4d8c629f7e770",
+          "Name": "ModelCurve",
+          "Description": "ModelCurve",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Construct a Revit ModelCurve element from a Curve\n\nModelCurve.ByCurve (curve: Curve): ModelCurve"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.Id",
+      "Id": "4925bd7bb24842c198cbc7882053f8ca",
+      "Inputs": [
+        {
+          "Id": "8680420e1d8b4253bdc975a010d9a154",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8e002ec5193045a3bd7a1897a28de98d",
+          "Name": "int",
+          "Description": "int",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the Element Id for this element\n\nElement.Id: int"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Curve.PointsAtEqualChordLength@int",
+      "Id": "a002394fa976460cb0d7158e75ce0941",
+      "Inputs": [
+        {
+          "Id": "bcb02e70daff4ad7959558c3232fae0d",
+          "Name": "curve",
+          "Description": "Autodesk.DesignScript.Geometry.Curve",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "771e8cddff4042b88017d2d79e88cf83",
+          "Name": "divisions",
+          "Description": "int\nDefault value : 10",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d1a4aef76c0e463b87fa496a5c0f09b4",
+          "Name": "Point[]",
+          "Description": "List of points on curve",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns points spaced along curve at equal chord length based on the input number of divisions\n\nCurve.PointsAtEqualChordLength (divisions: int = 10): Point[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [],
+      "Id": "a1c4e9191d764d3593379f11bf41aaf7",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "590234eb3a2c47f18fe911135eb95da4",
+          "Name": "Element",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DoubleSlider, CoreNodeModels",
+      "NodeType": "NumberInputNode",
+      "NumberType": "Double",
+      "MaximumValue": 25.0,
+      "MinimumValue": 1.0,
+      "StepValue": 1.0,
+      "InputValue": 6.0,
+      "Id": "f3406597dbd34366a82aa9956a2d6b58",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "6fcda9805dc44511a6072830a7aba4df",
+          "Name": "",
+          "Description": "Double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A slider that produces numeric values."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.CurveElement.Curve",
+      "Id": "f137c86353b34a40a4bb6fedbe3beffc",
+      "Inputs": [
+        {
+          "Id": "2865e5b6f02f46c486cc37b3cbe04b56",
+          "Name": "curveElement",
+          "Description": "Revit.Elements.CurveElement",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "231b4e3d05cb43c8ad7db9ecb52749e4",
+          "Name": "Curve",
+          "Description": "Curve",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Obtain the geometry curve for this geometry curve\n\nCurveElement.Curve: Curve"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n#The inputs to this node will be stored as a list in the IN variables.\nitems = IN[0]\n\nresult = items[-1]\n\n#Assign your output to the OUT variable.\nOUT = result",
+      "VariableInputPorts": true,
+      "Id": "2f8121fd72624512a06569928eb344af",
+      "Inputs": [
+        {
+          "Id": "9575a60920bd447db62ba0706a23b2b0",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ef5d6a9b03e54538b96508d590992145",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n#The inputs to this node will be stored as a list in the IN variables.\nitems = IN[0]\nLastPoint = IN[1]\n\n\n#result = items.append(LastPoint)\nitems[-1].append(LastPoint)\n\n#Assign your output to the OUT variable.\nOUT = items",
+      "VariableInputPorts": true,
+      "Id": "5bf4384005de4154a5dfc330255a47fa",
+      "Inputs": [
+        {
+          "Id": "1cdd155eb71d48e391f440504bb7c1a1",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8d2135590ebb4b4db0d1956a03712cff",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "773de7a88d9b4a7e872a59b933d7f99c",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "a8019c192cc7413098345551c02b5b07",
+      "Inputs": [
+        {
+          "Id": "bdb381230e074a60bb260d972f38cb53",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "77cacb24011d4e6d8f232f98506a2e1b",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "a-1;",
+      "Id": "4732e298185440cea7c2e3a093cc4961",
+      "Inputs": [
+        {
+          "Id": "a1ef960f3fee4cec881aaabcf9ea9b10",
+          "Name": "a",
+          "Description": "a",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8842fa4408f5439fbe9438da1d36baa6",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "2*a;",
+      "Id": "e892dcc15d2f4d6ababb971da0bd766b",
+      "Inputs": [
+        {
+          "Id": "c796e5ce99d846749be600d2dab474d7",
+          "Name": "a",
+          "Description": "a",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5da6ed81f6134635af5259ec751affad",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "35dc621e69524d8296e8b9df84802ffc",
+      "Inputs": [
+        {
+          "Id": "46daf2b62e2143fc9a4e34b2a0a83d9a",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "cc8962dfa17a4aaa88948adac730612d",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"spline2arcs\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "VariableInputPorts": true,
+      "Id": "d3c95660896b42a687b55b4e4b924782",
+      "Inputs": [
+        {
+          "Id": "9494b914efa349688c98d24786d40a41",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e916c36903904ebba9d72851da472b49",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "9128a9afc66b45ffa2b75924ace2b983",
+      "End": "66c4105c88a0418e9e01aa13d98121f6",
+      "Id": "e5f2bcda187a470ba3e7351844ea7514"
+    },
+    {
+      "Start": "9128a9afc66b45ffa2b75924ace2b983",
+      "End": "c31ca6c36db34ecca4d76d4882c0a09b",
+      "Id": "4d4bf8973c924c06b30e2e328320a621"
+    },
+    {
+      "Start": "4537210b7d5941e594482e01b0313a89",
+      "End": "9575a60920bd447db62ba0706a23b2b0",
+      "Id": "17e4197464de4199af82f965a6df4708"
+    },
+    {
+      "Start": "26f966df4d6244419e6236fb42867df8",
+      "End": "c680b5c1314a419f8d833a276adfef09",
+      "Id": "110a132f7fc541469a9268855336da87"
+    },
+    {
+      "Start": "26f966df4d6244419e6236fb42867df8",
+      "End": "ac25275d50f640aea8f794574439a594",
+      "Id": "22712ed09b0a4e0698a6b2abdaec38f8"
+    },
+    {
+      "Start": "6de3c96d9cc0416d82fb7bfe37a8dada",
+      "End": "0385045ccbe2402a83abf7a5aa1696fb",
+      "Id": "db21b65f39704315bad608a8018a5d11"
+    },
+    {
+      "Start": "9b24169fad984ecbbefee32cba4e43f6",
+      "End": "304838604dd84c1792bd5356aadc6aa8",
+      "Id": "2f0dec7eeaa34873a407c2c24ca201c0"
+    },
+    {
+      "Start": "686aab4664b94f7facee9293359c50dc",
+      "End": "50c44bc22efd47a690e71953a1c1e8a1",
+      "Id": "83483c6e6baa4d929c019441976db4e3"
+    },
+    {
+      "Start": "686aab4664b94f7facee9293359c50dc",
+      "End": "1cdd155eb71d48e391f440504bb7c1a1",
+      "Id": "3224ef7e2a5b4da6b593de48264689da"
+    },
+    {
+      "Start": "a23d6bc52cae45aeb2450f88d2b0a04e",
+      "End": "defc5b2588cf47eaad2d84a29fefddb4",
+      "Id": "ab106be76cfa4c7d9c8faff95e18f590"
+    },
+    {
+      "Start": "77c17167a3eb43519156ad0c81e9b865",
+      "End": "fdeb800d70454e35a61b23a234a7f4de",
+      "Id": "4679dbc4823b48328d0b7c8c9c3f1f6e"
+    },
+    {
+      "Start": "3505ef1a9f6449ccb7cef5ed4096c1fb",
+      "End": "36a1f6e37404426e8ce6d5985c44459f",
+      "Id": "c01bfe56832d4a18b6770a36ce89a53c"
+    },
+    {
+      "Start": "c105f736b71d4a71b96643c2e24e3609",
+      "End": "b7da1d69e2c84c4a858cf7418c08cc93",
+      "Id": "0b13b50637234e35831ed8594272f847"
+    },
+    {
+      "Start": "28308228d5cb4e87b6bb0be0db793f0b",
+      "End": "bea6b44dce384e4abc8d89c9df00c0fe",
+      "Id": "bd594a9726cb455fa43709bf912796b2"
+    },
+    {
+      "Start": "cd4248b42648465089570bec28c83175",
+      "End": "6ad911cca65f4d61ba019d309703a609",
+      "Id": "c719f7a8023f43fe8c03dc9eb81643aa"
+    },
+    {
+      "Start": "00ec6456912547fd8be4d8c629f7e770",
+      "End": "8680420e1d8b4253bdc975a010d9a154",
+      "Id": "d7be439fc45c419f935fc1af5d2a31a8"
+    },
+    {
+      "Start": "8e002ec5193045a3bd7a1897a28de98d",
+      "End": "46daf2b62e2143fc9a4e34b2a0a83d9a",
+      "Id": "93ab0eb4f62d475f8c523fc2d11c83fb"
+    },
+    {
+      "Start": "d1a4aef76c0e463b87fa496a5c0f09b4",
+      "End": "b1b386f3548f47dbabab5f7eb28c45cd",
+      "Id": "c750c8b4fa6f4d01ac93242cb97c2def"
+    },
+    {
+      "Start": "590234eb3a2c47f18fe911135eb95da4",
+      "End": "2865e5b6f02f46c486cc37b3cbe04b56",
+      "Id": "20de6a28f7f646dc8c4c92ca0f64095f"
+    },
+    {
+      "Start": "6fcda9805dc44511a6072830a7aba4df",
+      "End": "c796e5ce99d846749be600d2dab474d7",
+      "Id": "804cae843ab54e5b9bcfd5c6737087f2"
+    },
+    {
+      "Start": "231b4e3d05cb43c8ad7db9ecb52749e4",
+      "End": "bcb02e70daff4ad7959558c3232fae0d",
+      "Id": "eceedb21619a4b3ebdc2252e422f5822"
+    },
+    {
+      "Start": "231b4e3d05cb43c8ad7db9ecb52749e4",
+      "End": "7edd954d00044b20b870e2221ba6b287",
+      "Id": "08e5cd8d3748410787949bdb05af5da2"
+    },
+    {
+      "Start": "ef5d6a9b03e54538b96508d590992145",
+      "End": "8d2135590ebb4b4db0d1956a03712cff",
+      "Id": "4b8a0aa7528f49f5a7e1873a1a577e31"
+    },
+    {
+      "Start": "773de7a88d9b4a7e872a59b933d7f99c",
+      "End": "bdb381230e074a60bb260d972f38cb53",
+      "Id": "a22d72550da247019199631357ed1bd1"
+    },
+    {
+      "Start": "773de7a88d9b4a7e872a59b933d7f99c",
+      "End": "7a9681506a3e4b01a36abbbb513362c0",
+      "Id": "505213ceab4447e4bd093bd8a5236bec"
+    },
+    {
+      "Start": "773de7a88d9b4a7e872a59b933d7f99c",
+      "End": "295d107570f64eb08bbacbb090c72255",
+      "Id": "5c32227657b0416aa0e1f258274aaed1"
+    },
+    {
+      "Start": "773de7a88d9b4a7e872a59b933d7f99c",
+      "End": "d612dc668d204f49bea80d789708b466",
+      "Id": "9435cf227b2e4794a9bfcbb351b9ef5e"
+    },
+    {
+      "Start": "8842fa4408f5439fbe9438da1d36baa6",
+      "End": "771e8cddff4042b88017d2d79e88cf83",
+      "Id": "d7b22c674f974475823c358e9baa5ca4"
+    },
+    {
+      "Start": "5da6ed81f6134635af5259ec751affad",
+      "End": "a1ef960f3fee4cec881aaabcf9ea9b10",
+      "Id": "06566d96145846cf8de56e037d89d2ae"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": 473924.1875,
+      "EyeY": 23446.794921875,
+      "EyeZ": -4701.3447265625,
+      "LookX": -345.853759765625,
+      "LookY": -21576.8828125,
+      "LookZ": 827.22113037109375,
+      "UpX": 0.37987467646598816,
+      "UpY": 0.1736481785774231,
+      "UpZ": -0.90859317779541016
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Curve.SplitByPoints",
+        "Id": "709b6ccf2e3d4e52b9b4f131631ffe9f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 729.339574966201,
+        "Y": -142.922454419913
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Curve.EndPoint",
+        "Id": "b2ac5345d5654f3895919e509ba72737",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1085.39352239989,
+        "Y": 83.407335798611
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Curve.StartPoint",
+        "Id": "2c022dd2f0a947a8a87175388ff4c66d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1059.3452284588,
+        "Y": -266.55214438662
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "fbd0e50f8f184f3cbbc7705bc08ed4d6",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -481.373914604106,
+        "Y": -335.060339026878
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Arc.ByThreePoints",
+        "Id": "19cafb727c364668bfdbc7a01f12b85b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2775.81490770704,
+        "Y": -321.998335400509
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.Count",
+        "Id": "b2b8cba08b9e43ffbf14a9e78da7db0f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1410.52776862683,
+        "Y": -389.961176314978
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Triplets PY",
+        "Id": "e12c037ec6b1466c87a6de8870f1bf46",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1839.48106100299,
+        "Y": -345.328717544885
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "aaee13a3928c41f089b77d29ea624b27",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1657.27890264407,
+        "Y": -401.65775963025
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "6b34001b92984788a56ff3bda252b566",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1974.63404396984,
+        "Y": -770.129875530028
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "first items PY",
+        "Id": "e0c54a9ce9b24c1ca037fe2064a3fec1",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2323.6002971268,
+        "Y": -454.762337280599
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "second items PY",
+        "Id": "290f272ab9354fa985dc8a199a4db6db",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2322.14771209501,
+        "Y": -358.190126560424
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "third items PY",
+        "Id": "eaa967dbc5974e4d9d308d997582afe8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2325.5230985834,
+        "Y": -255.01184910353
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "ModelCurve.ByCurve",
+        "Id": "1edad328be7d401cbd84b4afc8cb26c4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3081.21285049204,
+        "Y": -349.32603528334
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.Id",
+        "Id": "4925bd7bb24842c198cbc7882053f8ca",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3365.80442680097,
+        "Y": -341.135519609467
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Curve.PointsAtEqualChordLength",
+        "Id": "a002394fa976460cb0d7158e75ce0941",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 425.841737533064,
+        "Y": -375.392006244224
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Select Model Line",
+        "Id": "a1c4e9191d764d3593379f11bf41aaf7",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -214.50993946532,
+        "Y": -448.741813913969
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Počet oblúkov",
+        "Id": "f3406597dbd34366a82aa9956a2d6b58",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -194.111877850971,
+        "Y": -305.577364606404
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "CurveElement.Curve",
+        "Id": "f137c86353b34a40a4bb6fedbe3beffc",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 159.120458038069,
+        "Y": -475.188699351802
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "just last item PY",
+        "Id": "2f8121fd72624512a06569928eb344af",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1628.07154180555,
+        "Y": 42.7254181535248
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "just last item PY",
+        "Id": "5bf4384005de4154a5dfc330255a47fa",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2101.34948098295,
+        "Y": -270.238985290584
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "a8019c192cc7413098345551c02b5b07",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2336.05283674131,
+        "Y": -42.4009026954768
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "4732e298185440cea7c2e3a093cc4961",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 268.819795165898,
+        "Y": -303.911260310072
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Počet segmentov",
+        "Id": "e892dcc15d2f4d6ababb971da0bd766b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 128.986522386679,
+        "Y": -275.823278442995
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "ID of created arcs",
+        "Id": "35dc621e69524d8296e8b9df84802ffc",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3623.61216275616,
+        "Y": -337.749702683155
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY log",
+        "Id": "d3c95660896b42a687b55b4e4b924782",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -470.31257892095562,
+        "Y": -207.65873997311002
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "54f1b99d38914013bb4f9312dc24814e",
+        "Title": "INPUT",
+        "Nodes": [
+          "a1c4e9191d764d3593379f11bf41aaf7",
+          "f3406597dbd34366a82aa9956a2d6b58"
+        ],
+        "Left": -224.50993946532,
+        "Top": -494.741813913969,
+        "Width": 339.398061614349,
+        "Height": 257.164449307565,
+        "FontSize": 30.0,
+        "InitialTop": -448.741813913969,
+        "InitialHeight": 241.164449307565,
+        "TextblockHeight": 36.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 616.632142181363,
+    "Y": 542.904633306362,
+    "Zoom": 0.924134632287627
+  }
+}

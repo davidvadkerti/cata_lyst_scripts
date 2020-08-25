@@ -490,6 +490,37 @@
       ],
       "Replication": "Disabled",
       "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"heightToParameter\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "VariableInputPorts": true,
+      "Id": "6341d01c77334ca2a187875cfc48b0e2",
+      "Inputs": [
+        {
+          "Id": "c9008d6a141e48c591e976e3b1e14509",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9ce203907f57417faf5db4d8efa5968a",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
     }
   ],
   "Connectors": [
@@ -595,164 +626,174 @@
     },
     "NodeViews": [
       {
+        "ShowGeometry": true,
+        "Name": "Element.GetLocation",
         "Id": "52ab7071380741b4bd506e514011f2aa",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Element.GetLocation",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 363.86060342377687,
         "Y": 367.54736002097718
       },
       {
+        "ShowGeometry": true,
+        "Name": "Point.Z",
         "Id": "010e7e64cc864cd381750c6cdcb67f73",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Point.Z",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 657.01022628391638,
         "Y": 364.56781258880949
       },
       {
+        "ShowGeometry": true,
+        "Name": "Code Block",
         "Id": "1e47d5dc6799430eaaadc247a5031347",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Code Block",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 922.11296431710616,
         "Y": 319.47656002042049
       },
       {
+        "ShowGeometry": true,
+        "Name": "vyska",
         "Id": "1a6a2540c0024d8a857b881d415bedd7",
         "IsSetAsInput": false,
         "IsSetAsOutput": true,
-        "Name": "vyska",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1539.975006842853,
         "Y": 344.6966726655113
       },
       {
+        "ShowGeometry": true,
+        "Name": "Point.Z",
         "Id": "d6f380ad63814799bdf3dc23d1441458",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Point.Z",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 158.27223268517741,
         "Y": -200.15590903191207
       },
       {
+        "ShowGeometry": true,
+        "Name": "Coordinates.SurveyPoint",
         "Id": "a63f68a28d2041d1900acc8f1db66187",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Coordinates.SurveyPoint",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -60.035731411983761,
         "Y": -208.78787979330747
       },
       {
+        "ShowGeometry": true,
+        "Name": "Coordinates.BasePoint",
         "Id": "29a4fc21c8314bba94f8719b8ef02e7f",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Coordinates.BasePoint",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -65.840071440677775,
         "Y": -84.544879723391489
       },
       {
+        "ShowGeometry": true,
+        "Name": "Point.Z",
         "Id": "074b7bc000594165a32d09268bf83441",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Point.Z",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 175.19210813634322,
         "Y": -89.82130735281612
       },
       {
+        "ShowGeometry": true,
+        "Name": "Code Block",
         "Id": "f380bcb50edc48d895309d882d556c0d",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Code Block",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 436.60878495350426,
         "Y": -131.53674291060594
       },
       {
+        "ShowGeometry": true,
+        "Name": "Categories",
         "Id": "1d0cbca8084248a68f94bb30895b9c0d",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Categories",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -106.40038128223114,
         "Y": 332.62425652807804
       },
       {
+        "ShowGeometry": true,
+        "Name": "All Elements of Category",
         "Id": "f334ef11548048e1861540cd0749c90a",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "All Elements of Category",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 77.703064578374892,
         "Y": 337.26940142541719
       },
       {
+        "ShowGeometry": true,
+        "Name": "Math.Round",
         "Id": "c1dc26120819466fabb0c62c24de21b7",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Math.Round",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1228.5081104814444,
         "Y": 336.79789871507637
       },
       {
+        "ShowGeometry": true,
+        "Name": "Element.SetParameterByName",
         "Id": "83b384d6aa334fbea8050ad292ea4549",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Element.SetParameterByName",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1622.3726909100919,
         "Y": 121.94849320583398
       },
       {
+        "ShowGeometry": true,
+        "Name": "Code Block",
         "Id": "b56c2f19ca9e4755ac873d83d41ac60c",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Code Block",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1341.0154277166253,
         "Y": 181.33758689866289
       },
       {
+        "ShowGeometry": true,
+        "Name": "PY round & abs",
         "Id": "aff61b01783946faba7be6a53659e1a4",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "PY round & abs",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 650.8632741178493,
         "Y": -14.170529924450818
       },
       {
+        "ShowGeometry": true,
+        "Name": "Návod",
         "Id": "8b1a8c25318a497abed0df502be5a303",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "Návod",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -175.1652392504709,
         "Y": 170.71852882818553
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY log",
+        "Id": "6341d01c77334ca2a187875cfc48b0e2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -97.790278636502762,
+        "Y": 457.98439141952156
       }
     ],
     "Annotations": [
@@ -778,8 +819,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": 305.52623862952379,
-    "Y": 406.52848456293987,
-    "Zoom": 0.31277860736980828
+    "X": 435.9826550987691,
+    "Y": -9.7938052646816232,
+    "Zoom": 1.2450523126925643
   }
 }

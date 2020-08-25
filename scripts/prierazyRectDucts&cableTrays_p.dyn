@@ -273,6 +273,24 @@
           "Level": 2,
           "UseLevels": false,
           "KeepListStructure": false
+        },
+        {
+          "Id": "37983ed8e8214905a46aefeb7890ec14",
+          "Name": "hasMulipleCurves",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "54a499a77899454f8ec3cba19878a196",
+          "Name": "mulipleCurves",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
         }
       ],
       "Replication": "Auto",
@@ -515,7 +533,8 @@
     },
     {
       "ConcreteType": "DSRevitNodesUI.FamilyTypes, DSRevitNodesUI",
-      "SelectedIndex": 33,
+      "SelectedIndex": -1,
+      "SelectedString": "",
       "NodeType": "ExtensionNode",
       "Id": "e335f928fac443208f7aacf975aa3008",
       "Inputs": [],
@@ -1173,6 +1192,37 @@
       ],
       "Replication": "Disabled",
       "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"prierazyRectDucts&cableTrays\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "VariableInputPorts": true,
+      "Id": "4b1651b0513b44deaa3e946b72498fd8",
+      "Inputs": [
+        {
+          "Id": "aaaf6db2b13745209b63854248bf5d1d",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1782c68acc04438f9bc7ad949107c86f",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
     }
   ],
   "Connectors": [
@@ -1382,13 +1432,33 @@
     "0b59c4d8-afe4-4063-bf7e-2195fa33e8a9",
     "2b432cef-fa0a-44ef-92c2-89b586bfc8ba"
   ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Clockwork for Dynamo 2.x",
+      "Version": "2.1.2",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "637dd596bf5c42508e316928b821520c",
+        "3320466a0c2c486f922e3cbe5947e281",
+        "ce1b2a3686e142998c9d964712124a49"
+      ]
+    },
+    {
+      "Name": "spring nodes",
+      "Version": "203.1.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "caa0e7a759db4874a8b418c937912c66"
+      ]
+    }
+  ],
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.0.1.5055",
+      "Version": "2.3.0.5885",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -1406,334 +1476,344 @@
     },
     "NodeViews": [
       {
+        "ShowGeometry": true,
+        "Name": "Element.GetParameterValueByName",
         "Id": "f4a055d9772e43ab84b9de17eb260911",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Element.GetParameterValueByName",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1051.0345620872711,
         "Y": 93.2821266942928
       },
       {
+        "ShowGeometry": true,
+        "Name": "Code Block",
         "Id": "eabd2cf5022c4392a8cd9da15e6d9f18",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Code Block",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 792.93172932494372,
         "Y": 193.48238322962578
       },
       {
+        "ShowGeometry": true,
+        "Name": "Code Block",
         "Id": "7058914ccaf54c3292d562c8ccef56ec",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Code Block",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1381.251517645147,
         "Y": 146.99975298915996
       },
       {
+        "ShowGeometry": true,
+        "Name": "Rounding.Ceiling+",
         "Id": "637dd596bf5c42508e316928b821520c",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Rounding.Ceiling+",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1673.5246495511517,
         "Y": 187.72574503928962
       },
       {
+        "ShowGeometry": false,
+        "Name": "Element.Location+",
         "Id": "3320466a0c2c486f922e3cbe5947e281",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Element.Location+",
-        "ShowGeometry": false,
         "Excluded": false,
         "X": 341.8674155228332,
         "Y": -283.26889810575631
       },
       {
+        "ShowGeometry": false,
+        "Name": "Element.Geometry",
         "Id": "555d1d1c24e84cb992eba2261324176a",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Element.Geometry",
-        "ShowGeometry": false,
         "Excluded": false,
         "X": 357.47423552675195,
         "Y": -389.64908466584893
       },
       {
+        "ShowGeometry": true,
+        "Name": "Geometry.Intersect",
         "Id": "f1b34141156849c28cf0d925b3f814a6",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Geometry.Intersect",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 774.17587260107564,
         "Y": -360.53716527720707
       },
       {
+        "ShowGeometry": false,
+        "Name": "List.Flatten",
         "Id": "d5697777fdbe403e9e374cac671d7b42",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "List.Flatten",
-        "ShowGeometry": false,
         "Excluded": false,
         "X": 1145.1649675682718,
         "Y": -351.47931510368369
       },
       {
+        "ShowGeometry": true,
+        "Name": "Element.SetParameterByName",
         "Id": "f97c5118d47949608abba44a93c4c6cc",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Element.SetParameterByName",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 3051.2724274964166,
         "Y": 32.994709753761867
       },
       {
+        "ShowGeometry": true,
+        "Name": "Curve.EndPoint",
         "Id": "be546a73b63d4aa2a32ac99f56a14b78",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Curve.EndPoint",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1421.9492110013937,
         "Y": -381.90276387661874
       },
       {
+        "ShowGeometry": true,
+        "Name": "Springs.HostedInstance.ByPoints",
         "Id": "caa0e7a759db4874a8b418c937912c66",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Springs.HostedInstance.ByPoints",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 2562.4948693446863,
         "Y": -568.04486841611993
       },
       {
+        "ShowGeometry": true,
+        "Name": "Family prierazu",
         "Id": "e335f928fac443208f7aacf975aa3008",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Family prierazu",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 560.31777680773348,
         "Y": -809.69915319842119
       },
       {
+        "ShowGeometry": true,
+        "Name": "Element.GetParameterValueByName",
         "Id": "49d713eeccfd43ff98ea3a452b4d3048",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Element.GetParameterValueByName",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1049.0646443278138,
         "Y": 414.79013381408572
       },
       {
+        "ShowGeometry": true,
+        "Name": "Code Block",
         "Id": "277640d9ed1342c88f022c7771347397",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Code Block",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 789.05473179169394,
         "Y": 499.73375215908277
       },
       {
+        "ShowGeometry": true,
+        "Name": "Code Block",
         "Id": "574649e244034db186a82ebcd1a817aa",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Code Block",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1379.281599885689,
         "Y": 468.50776010895277
       },
       {
+        "ShowGeometry": true,
+        "Name": "Rounding.Ceiling+",
         "Id": "ce1b2a3686e142998c9d964712124a49",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Rounding.Ceiling+",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1671.5547317916989,
         "Y": 509.23375215908277
       },
       {
+        "ShowGeometry": true,
+        "Name": "Element.SetParameterByName",
         "Id": "c7f5656207ae4077b20b21a7180fa79d",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Element.SetParameterByName",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 3031.2277744434418,
         "Y": 490.9486021249827
       },
       {
+        "ShowGeometry": true,
+        "Name": "Point.Z",
         "Id": "7da53107a78749c38de40b2d16073664",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Point.Z",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1785.5112780528484,
         "Y": -137.39080563121945
       },
       {
+        "ShowGeometry": true,
+        "Name": "Point.Y",
         "Id": "adc0f48eb5f6490fa1ec1f295b67e94b",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Point.Y",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1774.780805203404,
         "Y": -235.21486306890188
       },
       {
+        "ShowGeometry": true,
+        "Name": "Point.X",
         "Id": "fc7d0cf39ac84acbaa9e917bfc30f4cf",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Point.X",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1781.8438763228221,
         "Y": -346.81138675572089
       },
       {
+        "ShowGeometry": true,
+        "Name": "Code Block",
         "Id": "b3e6d8c4fea54c11b32726e3a19a1049",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Code Block",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 2051.4100673757307,
         "Y": -136.65687677370926
       },
       {
+        "ShowGeometry": true,
+        "Name": "Point.ByCoordinates",
         "Id": "1543fc5f73104efa902ccf7b36a703c7",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Point.ByCoordinates",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 2327.8032040098842,
         "Y": -292.02198040093879
       },
       {
+        "ShowGeometry": true,
+        "Name": "FamilyType.ByName",
         "Id": "7bb72ef33c40408994d97fb75caecc74",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "FamilyType.ByName",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 888.81939595686026,
         "Y": -652.73539288051
       },
       {
+        "ShowGeometry": true,
+        "Name": "Code Block",
         "Id": "fcd54b89a7ed445b805f27bda74ae048",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Code Block",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 583.79000275016779,
         "Y": -669.69020551592166
       },
       {
+        "ShowGeometry": true,
+        "Name": "Code Block",
         "Id": "5d806f1c945b478fb4caa8fc180893f7",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Code Block",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 188.1983880987284,
         "Y": -37.833184423335695
       },
       {
+        "ShowGeometry": true,
+        "Name": "Element.SetParameterByName",
         "Id": "1ab09a7326174686a905053e158bab2e",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Element.SetParameterByName",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 3037.4396102781766,
         "Y": 775.02053856089356
       },
       {
+        "ShowGeometry": true,
+        "Name": "Parameter Name",
         "Id": "e72a480134e64e0bbd96c5d52d439400",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Parameter Name",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 2752.7023112936104,
         "Y": 789.68021029045985
       },
       {
+        "ShowGeometry": true,
+        "Name": "Návod",
         "Id": "4f6b9c7df7a9408fb55fc30928de2ac2",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "Návod",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -129.76217668811995,
         "Y": -852.74612350813629
       },
       {
+        "ShowGeometry": true,
+        "Name": "Select Wall",
         "Id": "db5fe4b7db424d5fb80d562f348759b6",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "Select Wall",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -77.6617543280314,
         "Y": -462.52322509419776
       },
       {
+        "ShowGeometry": true,
+        "Name": "Select Ducts and Cable Trays",
         "Id": "895eb3c524e94777ad9dac1b77cf763b",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "Select Ducts and Cable Trays",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -119.40979964792689,
         "Y": -240.69485247861229
       },
       {
+        "ShowGeometry": true,
+        "Name": "o koľko má byť väčší otvor na každú stranu",
         "Id": "73b2bb0a5795453d931ec6c84af7ec24",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "o koľko má byť väčší otvor na každú stranu",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -172.29026439324247,
         "Y": -95.586318020044132
       },
       {
+        "ShowGeometry": true,
+        "Name": "rozmer otvorov zaokrúliť na",
         "Id": "2aea4d21a018450291fea9e72a73324d",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "rozmer otvorov zaokrúliť na",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -168.9559475208473,
         "Y": -25.270181382549652
       },
       {
+        "ShowGeometry": true,
+        "Name": "Kód profesie",
         "Id": "2347386f97f24457ac7b087f66ae5307",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "Kód profesie",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -107.71432318172674,
         "Y": 51.003512813713314
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY log",
+        "Id": "4b1651b0513b44deaa3e946b72498fd8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -158.55190530385403,
+        "Y": 161.04445554685333
       }
     ],
     "Annotations": [
@@ -1882,8 +1962,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": 470.91040733371142,
-    "Y": 1481.6778274658582,
-    "Zoom": 1.549161554862579
+    "X": 647.15989235226766,
+    "Y": 588.77358786250011,
+    "Zoom": 0.552879614316944
   }
 }

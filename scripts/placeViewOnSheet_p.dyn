@@ -2,7 +2,7 @@
   "Uuid": "cb1d0694-0ca8-4158-820d-b5fc141865ff",
   "IsCustomNode": false,
   "Description": null,
-  "Name": "placeViewOnSheetV3",
+  "Name": "placeViewOnSheet_p",
   "ElementResolver": {
     "ResolutionMap": {}
   },
@@ -42,14 +42,14 @@
       "Id": "2e673c3ec1934cb484aa3e16b0d582c6",
       "Name": "Počet umiestnených Views",
       "Type": "unknown",
-      "IntitialValue": "",
+      "InitialValue": "",
       "Description": "Visualize the output of node."
     },
     {
       "Id": "4523062b5361478f8afe5c5fb8f982d9",
       "Name": "Počet neumiestnených Views",
       "Type": "unknown",
-      "IntitialValue": "",
+      "InitialValue": "",
       "Description": "Visualize the output of node."
     }
   ],
@@ -498,6 +498,37 @@
       ],
       "Replication": "Disabled",
       "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"placeViewOnSheet\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "VariableInputPorts": true,
+      "Id": "d239e373a9604a2d83bf7de92d940d36",
+      "Inputs": [
+        {
+          "Id": "9848cffd4c1f434b826d03adbad922a7",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "2ad73ee22db74fe6adfe6b9fc3817708",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
     }
   ],
   "Connectors": [
@@ -570,13 +601,23 @@
   "Dependencies": [
     "a0fc8138-f7bc-4425-abe6-2ef1b411d447"
   ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Clockwork for Dynamo 2.x",
+      "Version": "2.1.2",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "c81ebbd7e544452aa80a562142918567"
+      ]
+    }
+  ],
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.0.1.5055",
+      "Version": "2.3.0.5885",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -594,159 +635,169 @@
     },
     "NodeViews": [
       {
+        "ShowGeometry": true,
+        "Name": "Document.ActiveView",
         "Id": "82c67e8ae3ae405eacb80595566501c2",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Document.ActiveView",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 282.80908320620586,
         "Y": 331.99401108812629
       },
       {
+        "ShowGeometry": true,
+        "Name": "Document.Current",
         "Id": "1db098a1ffff4c7286c7843213681b69",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Document.Current",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 122.34551204573847,
         "Y": 331.23338170999807
       },
       {
+        "ShowGeometry": true,
+        "Name": "Element.OwnerView",
         "Id": "c81ebbd7e544452aa80a562142918567",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Element.OwnerView",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 319.55013212533947,
         "Y": 476.53298871858613
       },
       {
+        "ShowGeometry": true,
+        "Name": "Návod",
         "Id": "97ce7c6ddac348359ae51d82f4c5cb46",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "Návod",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -167.18510825165367,
         "Y": 462.01573395632647
       },
       {
+        "ShowGeometry": true,
+        "Name": "Select Title Block  of Sheet",
         "Id": "00ab8f8b9d574600a0027cf3d55718a3",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "Select Title Block  of Sheet",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 95.520372651272226,
         "Y": 457.00363742849407
       },
       {
+        "ShowGeometry": true,
+        "Name": "List.CountFalse",
         "Id": "8085787c7a1242ee994621a082f7b8df",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "List.CountFalse",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1566.8277095207661,
         "Y": 784.77467361427966
       },
       {
+        "ShowGeometry": true,
+        "Name": "List.CountFalse",
         "Id": "d9b66272241940bc89dcdf8159addee5",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "List.CountFalse",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1574.0211683765133,
         "Y": 886.26235229116014
       },
       {
+        "ShowGeometry": true,
+        "Name": "Počet umiestnených Views",
         "Id": "2e673c3ec1934cb484aa3e16b0d582c6",
         "IsSetAsInput": false,
         "IsSetAsOutput": true,
-        "Name": "Počet umiestnených Views",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1787.6345729388943,
         "Y": 765.76160243232255
       },
       {
+        "ShowGeometry": true,
+        "Name": "Počet neumiestnených Views",
         "Id": "4523062b5361478f8afe5c5fb8f982d9",
         "IsSetAsInput": false,
         "IsSetAsOutput": true,
-        "Name": "Počet neumiestnených Views",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1779.8376625808148,
         "Y": 901.49063837287258
       },
       {
+        "ShowGeometry": true,
+        "Name": "Point.ByCoordinates",
         "Id": "f249ede8f32a46edadcc084187cb3f0b",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Point.ByCoordinates",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 793.48870382016526,
         "Y": 925.34075560925612
       },
       {
+        "ShowGeometry": true,
+        "Name": "Place Legend On Sheets (py)",
         "Id": "04c7610e1dd5489e84e5110a1514151c",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Place Legend On Sheets (py)",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1115.1082302286582,
         "Y": 882.41326993780012
       },
       {
+        "ShowGeometry": true,
+        "Name": "Failed",
         "Id": "4e462d31f45841f1b8f52458e010cb92",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Failed",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1396.7935494376056,
         "Y": 898.80421477165964
       },
       {
+        "ShowGeometry": true,
+        "Name": "Placement X axis",
         "Id": "aab73f82d59a4b3fb9ee8efa6f80258e",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "Placement X axis",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 307.14716100074031,
         "Y": 904.58986077481245
       },
       {
+        "ShowGeometry": true,
+        "Name": "Placement Y axis",
         "Id": "00e66bd7e61b4ce08facefd4338502af",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "Placement Y axis",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 300.20529815979035,
         "Y": 1012.6617073443924
       },
       {
+        "ShowGeometry": true,
+        "Name": "Succeded",
         "Id": "23d577dc2cb54da482623b0c34a449aa",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Succeded",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1368.7339230856383,
         "Y": 797.79013307449031
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY log",
+        "Id": "d239e373a9604a2d83bf7de92d940d36",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 115.8945530424736,
+        "Y": 591.42452500281706
       }
     ],
     "Annotations": [],
-    "X": -837.064545750006,
-    "Y": -261.8051490939738,
-    "Zoom": 0.81543459021238085
+    "X": 516.21142929941936,
+    "Y": -223.87142688161214,
+    "Zoom": 0.99724878290004548
   }
 }

@@ -20,14 +20,14 @@
       "Id": "2f5ba59580c240ff90c549651a7e9e34",
       "Name": "Počet elementov",
       "Type": "unknown",
-      "IntitialValue": "",
+      "InitialValue": "",
       "Description": "Visualize the output of node."
     },
     {
       "Id": "491a99de2a834e58afdd2577d42a349a",
       "Name": "Plocha v m2",
       "Type": "unknown",
-      "IntitialValue": "",
+      "InitialValue": "",
       "Description": "Visualize the output of node."
     }
   ],
@@ -306,6 +306,37 @@
       ],
       "Replication": "Disabled",
       "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"SUM of selected element Areas\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "VariableInputPorts": true,
+      "Id": "47a25c91c4e94836863afcb9007d988e",
+      "Inputs": [
+        {
+          "Id": "1a8cd40a357248e38b8f46577c4d522f",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "660c66ae89de4950822e350d7febe98e",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
     }
   ],
   "Connectors": [
@@ -351,13 +382,14 @@
     }
   ],
   "Dependencies": [],
+  "NodeLibraryDependencies": [],
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": false,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.0.1.5055",
+      "Version": "2.3.0.5885",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -473,6 +505,16 @@
         "Excluded": false,
         "X": 69.7922155287825,
         "Y": 312.855366279942
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY log",
+        "Id": "47a25c91c4e94836863afcb9007d988e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 37.283444505350872,
+        "Y": 659.400480672454
       }
     ],
     "Annotations": [
@@ -480,8 +522,8 @@
         "Id": "3d880652d33b44968cbf76558ca24122",
         "Title": "INPUT",
         "Nodes": [
-          "b34b1d793d5a47cf8e3d27c026327669",
-          "082b90b8cb9b4daba716f3365dd5f797"
+          "082b90b8cb9b4daba716f3365dd5f797",
+          "b34b1d793d5a47cf8e3d27c026327669"
         ],
         "Left": -8.393879893187659,
         "Top": -4.2759836143634971,
@@ -489,7 +531,7 @@
         "Height": 292.15339109277051,
         "FontSize": 30.0,
         "InitialTop": 41.7240163856365,
-        "InitialHeight": 252.976093821889,
+        "InitialHeight": 272.15339109277051,
         "TextblockHeight": 36.0,
         "Background": "#FFC1D676"
       },

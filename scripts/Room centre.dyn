@@ -1,32 +1,219 @@
-<Workspace Version="1.3.2.2480" X="-334.767494678803" Y="-161.034250268725" zoom="0.679653671190364" ScaleFactor="1" Name="Home" Description="" RunType="Manual" RunPeriod="1000" HasRunWithoutCrash="False">
-  <NamespaceResolutionMap />
-  <Elements>
-    <Dynamo.Graph.Nodes.CustomNodes.Function guid="e5b32306-5d7a-40c0-b839-b9fce4f08a39" type="Dynamo.Graph.Nodes.CustomNodes.Function" nickname="Room Location Centering" x="1376.45207897956" y="551.707697603532" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false">
-      <PortInfo index="0" default="False" useLevels="True" level="1" shouldKeepListStructure="False" />
-      <ID value="c34c0a2f-e5f9-46f3-ab98-bdce159ab4e1" />
-      <Name value="Room Location Centering" />
-      <Description value="Move room location point to its centroid. If centroid is located outside the room, location point stays at its origin coords.&#xD;&#xA;&#xD;&#xA;It's a good tool for auto-tagging." />
-      <Inputs>
-        <Input value="Rooms" />
-      </Inputs>
-      <Outputs>
-        <Output value="Rooms Moved" />
-        <Output value="Rooms not Moved" />
-      </Outputs>
-    </Dynamo.Graph.Nodes.CustomNodes.Function>
-    <DSRevitNodesUI.Levels guid="e4b1f831-ae46-4dd8-81ee-015b480e712c" type="DSRevitNodesUI.Levels" nickname="Levels" x="790.343443272532" y="580.634509096305" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false" index="-1" />
-    <DSRevitNodesUI.ElementsAtLevel guid="2b9dc1da-f5b8-471d-9f67-de0a92528623" type="DSRevitNodesUI.ElementsAtLevel" nickname="All Elements at Level" x="1042.65746631651" y="506.11089143378" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
-      <PortInfo index="0" default="False" />
-    </DSRevitNodesUI.ElementsAtLevel>
-  </Elements>
-  <Connectors>
-    <Dynamo.Graph.Connectors.ConnectorModel start="e4b1f831-ae46-4dd8-81ee-015b480e712c" start_index="0" end="2b9dc1da-f5b8-471d-9f67-de0a92528623" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="2b9dc1da-f5b8-471d-9f67-de0a92528623" start_index="0" end="e5b32306-5d7a-40c0-b839-b9fce4f08a39" end_index="0" portType="0" />
-  </Connectors>
-  <Notes />
-  <Annotations />
-  <Presets />
-  <Cameras>
-    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
-  </Cameras>
-</Workspace>
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "Room centre",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "c34c0a2f-e5f9-46f3-ab98-bdce159ab4e1",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "e5b323065d7a40c0b839b9fce4f08a39",
+      "Inputs": [
+        {
+          "Id": "1d602ad5ede746ab9325e85e2a720712",
+          "Name": "Rooms",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 1,
+          "UseLevels": true,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "516fb8980ef6459dab9789b3b3e1920b",
+          "Name": "Rooms Moved",
+          "Description": "Output #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "beca5db21a8449059d480f5e2aebeb0e",
+          "Name": "Rooms not Moved",
+          "Description": "Output #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Move room location point to its centroid. If centroid is located outside the room, location point stays at its origin coords.\r\n\r\nIt's a good tool for auto-tagging."
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.Levels, DSRevitNodesUI",
+      "SelectedIndex": -1,
+      "SelectedString": "",
+      "NodeType": "ExtensionNode",
+      "Id": "e4b1f831ae464dd881ee015b480e712c",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "f1bb4240b832420dbb34ee4bc068cfce",
+          "Name": "Levels",
+          "Description": "The selected Levels",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select a level in the active document"
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementsAtLevel, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "2b9dc1daf5b8471d9f67de0a92528623",
+      "Inputs": [
+        {
+          "Id": "2323ccf0e13b44f8ba3d7cdd2c6ae7eb",
+          "Name": "Level",
+          "Description": "A Level",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3a8c233186ab46869b47893aa22af813",
+          "Name": "Elements",
+          "Description": "Elements at the given level.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Get all the elements at the specified Level from the model."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"room centre\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "VariableInputPorts": true,
+      "Id": "c816fab5978b41c0914a1975fb806737",
+      "Inputs": [
+        {
+          "Id": "6625d7bd82714ef39839acf31f6c7019",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b83ef5e06b7343ac802e814b33116f2d",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "f1bb4240b832420dbb34ee4bc068cfce",
+      "End": "2323ccf0e13b44f8ba3d7cdd2c6ae7eb",
+      "Id": "a6152dcc9f2e4e8b9d5bbf6417cb7f06"
+    },
+    {
+      "Start": "3a8c233186ab46869b47893aa22af813",
+      "End": "1d602ad5ede746ab9325e85e2a720712",
+      "Id": "a2125b8651a345968d852c88dd484a9f"
+    }
+  ],
+  "Dependencies": [
+    "c34c0a2f-e5f9-46f3-ab98-bdce159ab4e1"
+  ],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Room Location Centering",
+        "Id": "e5b323065d7a40c0b839b9fce4f08a39",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1376.45207897956,
+        "Y": 551.707697603532
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Levels",
+        "Id": "e4b1f831ae464dd881ee015b480e712c",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 790.343443272532,
+        "Y": 580.634509096305
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "All Elements at Level",
+        "Id": "2b9dc1daf5b8471d9f67de0a92528623",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1042.65746631651,
+        "Y": 506.11089143378
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY log",
+        "Id": "c816fab5978b41c0914a1975fb806737",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 810.36492264387209,
+        "Y": 706.29244071907954
+      }
+    ],
+    "Annotations": [],
+    "X": -334.767494678803,
+    "Y": -161.034250268725,
+    "Zoom": 0.679653671190364
+  }
+}

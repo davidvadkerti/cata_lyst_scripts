@@ -745,6 +745,37 @@
       ],
       "Replication": "Disabled",
       "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"door_flip_setter\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "VariableInputPorts": true,
+      "Id": "22fc6084b67b4dbb86f6ac53dcb38f15",
+      "Inputs": [
+        {
+          "Id": "8de79ec685bb4b9caccfc5302c3f784e",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "95eeb0be433c485d93ad5df523b51ef4",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
     }
   ],
   "Connectors": [
@@ -1134,6 +1165,16 @@
         "Excluded": false,
         "X": -139.44250742629015,
         "Y": 95.212020025127742
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY log",
+        "Id": "22fc6084b67b4dbb86f6ac53dcb38f15",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -20.863386189523226,
+        "Y": 262.90595514354561
       }
     ],
     "Annotations": [
@@ -1150,13 +1191,13 @@
         "Height": 237.82938614079623,
         "FontSize": 30.0,
         "InitialTop": -111.272444839631,
-        "InitialHeight": 223.068975339769,
+        "InitialHeight": 243.82938614079623,
         "TextblockHeight": 36.0,
         "Background": "#FFC1D676"
       }
     ],
-    "X": -2467.4130078974335,
-    "Y": 956.35880042893962,
-    "Zoom": 0.98765144907594649
+    "X": 185.43834904463466,
+    "Y": 300.67385849481451,
+    "Zoom": 1.0723638893318197
   }
 }

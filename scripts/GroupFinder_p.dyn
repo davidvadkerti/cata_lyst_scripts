@@ -11,7 +11,7 @@
       "Id": "6581445c8b1343bcb2eb5b8d1f6e1923",
       "Name": "Návod",
       "Type": "string",
-      "Value": "Vytvorí a otvorí exceovskú tabuľku všwtkých Detail Groups a ich Views na, na ktorých sú umiestnené. Pomocou CTRL+F v Project Browseri je potom jednoduché vyhľadať daný View a lokalizovať Detail Groups",
+      "Value": "Vytvorí a otvorí exceovskú tabuľku všetkých Detail Groups a ich Views na, na ktorých sú umiestnené. Pomocou CTRL+F v Project Browseri je potom jednoduché vyhľadať daný View a lokalizovať Detail Groups",
       "Description": "Creates a string."
     },
     {
@@ -402,7 +402,7 @@
     {
       "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
       "NodeType": "StringInputNode",
-      "InputValue": "Vytvorí a otvorí exceovskú tabuľku všwtkých Detail Groups a ich Views na, na ktorých sú umiestnené. Pomocou CTRL+F v Project Browseri je potom jednoduché vyhľadať daný View a lokalizovať Detail Groups",
+      "InputValue": "Vytvorí a otvorí exceovskú tabuľku všetkých Detail Groups a ich Views na, na ktorých sú umiestnené. Pomocou CTRL+F v Project Browseri je potom jednoduché vyhľadať daný View a lokalizovať Detail Groups",
       "Id": "6581445c8b1343bcb2eb5b8d1f6e1923",
       "Inputs": [],
       "Outputs": [
@@ -459,6 +459,37 @@
       ],
       "Replication": "Disabled",
       "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"GroupFinder\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "VariableInputPorts": true,
+      "Id": "7d484500fea443cda703a46e2dd8a77f",
+      "Inputs": [
+        {
+          "Id": "1929b436814b4af19db57df11a22bde7",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0d9384716c174b688cbf67d02508d1f6",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
     }
   ],
   "Connectors": [
@@ -534,13 +565,14 @@
     }
   ],
   "Dependencies": [],
+  "NodeLibraryDependencies": [],
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.2.1.5175",
+      "Version": "2.3.0.5885",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -686,6 +718,16 @@
         "Excluded": false,
         "X": 547.82064824119936,
         "Y": -68.8887518079438
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY log",
+        "Id": "7d484500fea443cda703a46e2dd8a77f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -17.472368312125354,
+        "Y": 352.76792889458727
       }
     ],
     "Annotations": [
@@ -735,13 +777,13 @@
         "Height": 214.44502248398649,
         "FontSize": 36.0,
         "InitialTop": -162.3337742919303,
-        "InitialHeight": 191.44502248398649,
+        "InitialHeight": 238.44502248398649,
         "TextblockHeight": 43.0,
         "Background": "#FFC1D676"
       }
     ],
-    "X": -55.486118776172418,
-    "Y": 415.51331832946869,
+    "X": 151.51388122382758,
+    "Y": 387.51331832946869,
     "Zoom": 0.71293240932190716
   }
 }

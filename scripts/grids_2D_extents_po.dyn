@@ -237,6 +237,37 @@
       ],
       "Replication": "Disabled",
       "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"grids 2D extents\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "VariableInputPorts": true,
+      "Id": "ac6d7e58b38c4baea1c9170f11254999",
+      "Inputs": [
+        {
+          "Id": "db10ad372b8149b690b5468bcab38c50",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "93558a805d134a4eb1fdcccb6ae84679",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
     }
   ],
   "Connectors": [
@@ -303,84 +334,94 @@
     },
     "NodeViews": [
       {
+        "ShowGeometry": true,
+        "Name": "Python Script",
         "Id": "c4fca8f5b4af4ba2a65122bd0931c593",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Python Script",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 507.0,
         "Y": 176.0
       },
       {
+        "ShowGeometry": true,
+        "Name": "All Elements of Category",
         "Id": "2048dee8cfe5462eaab73c29b3f4f39e",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "All Elements of Category",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 248.0,
         "Y": 132.0
       },
       {
+        "ShowGeometry": true,
+        "Name": "Springs.Doc.ActiveView",
         "Id": "9f2a8a5d10cc4390a8517e0161606064",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Springs.Doc.ActiveView",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 118.175074183976,
         "Y": 260.569732937685
       },
       {
+        "ShowGeometry": true,
+        "Name": "Návod",
         "Id": "c72985074f704244ab49a5cbf152954f",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "Návod",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -228.617210682493,
         "Y": 111.955489614243
       },
       {
+        "ShowGeometry": true,
+        "Name": "Categories",
         "Id": "18acb2c73120461092a3450a200cc349",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Categories",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 32.1454005934719,
         "Y": 119.456973293769
       },
       {
+        "ShowGeometry": true,
+        "Name": "Python Script",
         "Id": "884536f672464ba3bb5cfc9e9c8f3d55",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Python Script",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 145.930579826061,
         "Y": 385.396874475794
       },
       {
+        "ShowGeometry": true,
+        "Name": "Code Block",
         "Id": "b3a7453ff6be4107a74e64a5e0194038",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Code Block",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": -79.8338278931749,
         "Y": 389.522255192878
       },
       {
+        "ShowGeometry": true,
+        "Name": "Watch",
         "Id": "b8f0d66e3d3d46a39665b1d69c2b9aad",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Watch",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 742.747774480712,
         "Y": 76.1988130563799
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY log",
+        "Id": "ac6d7e58b38c4baea1c9170f11254999",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -78.187000715030536,
+        "Y": 493.96474843622707
       }
     ],
     "Annotations": [
@@ -396,13 +437,13 @@
         "Height": 139.0,
         "FontSize": 30.0,
         "InitialTop": 119.456973293769,
-        "InitialHeight": 123.0,
+        "InitialHeight": 145.0,
         "TextblockHeight": 36.0,
         "Background": "#FFC1D676"
       }
     ],
-    "X": 174.98560363501491,
-    "Y": 65.161441153560816,
+    "X": 686.985603635015,
+    "Y": 159.16144115356082,
     "Zoom": 0.70823125000000009
   }
 }

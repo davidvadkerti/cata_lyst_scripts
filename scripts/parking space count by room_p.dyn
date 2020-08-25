@@ -1,86 +1,748 @@
-<Workspace Version="1.3.1.1736" X="437.781063277735" Y="377.926586409939" zoom="0.801466032152009" ScaleFactor="1" Name="Home" Description="" RunType="Manual" RunPeriod="1000" HasRunWithoutCrash="False">
-  <NamespaceResolutionMap />
-  <Elements>
-    <DSRevitNodesUI.Categories guid="c9a26871-041b-450a-b1e2-283a8f8b6cfd" type="DSRevitNodesUI.Categories" nickname="Categories" x="-148.976671735388" y="66.4036889870719" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" index="326:Parking" />
-    <DSRevitNodesUI.ElementsOfCategory guid="f3738f6e-b3f2-4328-a865-682f59244396" type="DSRevitNodesUI.ElementsOfCategory" nickname="All Elements of Category" x="163.851530716439" y="59.7390288618187" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
-      <PortInfo index="0" default="False" />
-    </DSRevitNodesUI.ElementsOfCategory>
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="7fbab3c8-4df4-41ac-8de0-aab687657450" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Geometry.BoundingBox" x="322.240063734812" y="-48.2841030617559" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Geometry.BoundingBox">
-      <PortInfo index="0" default="False" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="7ad5e769-f070-48ff-9008-9df1c0145679" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="BoundingBox.Contains" x="661.53403192635" y="-36.1071910562446" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.BoundingBox.Contains@Autodesk.DesignScript.Geometry.Point">
-      <PortInfo index="0" default="False" />
-      <PortInfo index="1" default="False" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <Dynamo.Graph.Nodes.CustomNodes.Function guid="6aefed9e-f46e-4ec9-8f08-d54b9c3ef967" type="Dynamo.Graph.Nodes.CustomNodes.Function" nickname="Element.Location" x="391.106107951034" y="59.5264317607006" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false">
-      <PortInfo index="0" default="False" />
-      <ID value="0b59c4d8-afe4-4063-bf7e-2195fa33e8a9" />
-      <Name value="Element.Location" />
-      <Description value="Returns the location of an element as an XYZ (or if it's line-based the start and end point of the line), along with some booleans to help filtering the results. Use this for some element types (e.g. walls or lines) that do not work with the built-in Get Family Instance Location node. " />
-      <Inputs>
-        <Input value="element" />
-      </Inputs>
-      <Outputs>
-        <Output value="points" />
-        <Output value="curveEndpoints" />
-        <Output value="curves" />
-        <Output value="isPoint" />
-        <Output value="isCurve" />
-        <Output value="hasLocation" />
-        <Output value="angle" />
-        <Output value="hasRotation" />
-      </Outputs>
-    </Dynamo.Graph.Nodes.CustomNodes.Function>
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="aea5c449-5cb8-461b-bc19-33d28c26b664" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="CountTrue" x="899.088570233791" y="-37.9791927494229" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="BuiltIn" function="CountTrue@var[]..[]">
-      <PortInfo index="0" default="False" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="9d39467f-e2da-48dd-b23d-e70238153d7e" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Element.SetParameterByName" x="1232.5899739723" y="-175.003565412878" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="RevitNodes.dll" function="Revit.Elements.Element.SetParameterByName@string,var">
-      <PortInfo index="0" default="False" />
-      <PortInfo index="1" default="False" />
-      <PortInfo index="2" default="False" />
-    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
-    <CoreNodeModels.FromObject guid="8821a270-8694-4c0c-8e44-0031c71596ba" type="CoreNodeModels.FromObject" nickname="String from Object" x="1057.38264020627" y="-79.1577313663506" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
-      <PortInfo index="0" default="False" />
-    </CoreNodeModels.FromObject>
-    <CoreNodeModels.Watch guid="40428540-4d34-48ca-863e-1b8f99ebba68" type="CoreNodeModels.Watch" nickname="Watch" x="1133.64891976059" y="54.3074017131982" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
-      <PortInfo index="0" default="False" />
-    </CoreNodeModels.Watch>
-    <CoreNodeModels.Input.StringInput guid="54cddc55-f008-403b-982d-65417e6b954f" type="CoreNodeModels.Input.StringInput" nickname="Návod" x="-392.139474734935" y="-219.569062700319" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <System.String>Spocita parkovacie miesta vo vybranej miestnosti a zapise ho do vybraneho parametru miestnosti.</System.String>
-      <System.String value="Spocita parkovacie miesta vo vybranej miestnosti a zapise ho do vybraneho parametru miestnosti." />
-    </CoreNodeModels.Input.StringInput>
-    <Dynamo.Nodes.DSModelElementSelection guid="11ece482-25d2-4047-9703-510faa9111b5" type="Dynamo.Nodes.DSModelElementSelection" nickname="Select Model Element - room" x="-153.924374160669" y="-57.7684189544986" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false" />
-    <CoreNodeModels.Input.StringInput guid="a6984430-6406-4942-aba8-ac426fb0308b" type="CoreNodeModels.Input.StringInput" nickname="Room parameter tag" x="-150.777560640211" y="-136.105265319211" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <System.String>Comments</System.String>
-      <System.String value="Comments" />
-    </CoreNodeModels.Input.StringInput>
-  </Elements>
-  <Connectors>
-    <Dynamo.Graph.Connectors.ConnectorModel start="c9a26871-041b-450a-b1e2-283a8f8b6cfd" start_index="0" end="f3738f6e-b3f2-4328-a865-682f59244396" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="f3738f6e-b3f2-4328-a865-682f59244396" start_index="0" end="6aefed9e-f46e-4ec9-8f08-d54b9c3ef967" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="7fbab3c8-4df4-41ac-8de0-aab687657450" start_index="0" end="7ad5e769-f070-48ff-9008-9df1c0145679" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="7ad5e769-f070-48ff-9008-9df1c0145679" start_index="0" end="aea5c449-5cb8-461b-bc19-33d28c26b664" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="6aefed9e-f46e-4ec9-8f08-d54b9c3ef967" start_index="0" end="7ad5e769-f070-48ff-9008-9df1c0145679" end_index="1" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="aea5c449-5cb8-461b-bc19-33d28c26b664" start_index="0" end="8821a270-8694-4c0c-8e44-0031c71596ba" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="aea5c449-5cb8-461b-bc19-33d28c26b664" start_index="0" end="40428540-4d34-48ca-863e-1b8f99ebba68" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="8821a270-8694-4c0c-8e44-0031c71596ba" start_index="0" end="9d39467f-e2da-48dd-b23d-e70238153d7e" end_index="2" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="11ece482-25d2-4047-9703-510faa9111b5" start_index="0" end="7fbab3c8-4df4-41ac-8de0-aab687657450" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="11ece482-25d2-4047-9703-510faa9111b5" start_index="0" end="9d39467f-e2da-48dd-b23d-e70238153d7e" end_index="0" portType="0" />
-    <Dynamo.Graph.Connectors.ConnectorModel start="a6984430-6406-4942-aba8-ac426fb0308b" start_index="0" end="9d39467f-e2da-48dd-b23d-e70238153d7e" end_index="1" portType="0" />
-  </Connectors>
-  <Notes>
-    <Dynamo.Graph.Notes.NoteModel guid="ab078fe8-4554-4d46-b989-1fae41b12e5f" text="Spocita parkovacie miesta vo vybranej miestnosti a zapise ho do shared parametru." x="-151.219397244156" y="-200.370285573282" />
-  </Notes>
-  <Annotations>
-    <Dynamo.Graph.Annotations.AnnotationModel guid="5be2492c-ef3b-4363-9a92-88e83954651d" annotationText="INPUT" left="-163.924374160669" top="-230.370285573282" width="311.704976916513" height="389.773974560354" fontSize="14" InitialTop="-200.370285573282" InitialHeight="377.678967953306" TextblockHeight="20" backgrouund="#FFC1D676">
-      <Models ModelGuid="c9a26871-041b-450a-b1e2-283a8f8b6cfd" />
-      <Models ModelGuid="ab078fe8-4554-4d46-b989-1fae41b12e5f" />
-      <Models ModelGuid="11ece482-25d2-4047-9703-510faa9111b5" />
-      <Models ModelGuid="a6984430-6406-4942-aba8-ac426fb0308b" />
-    </Dynamo.Graph.Annotations.AnnotationModel>
-  </Annotations>
-  <Presets />
-  <Cameras>
-    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
-  </Cameras>
-</Workspace>
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "parking space count by room_p",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "54cddc55f008403b982d65417e6b954f",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Spocita parkovacie miesta vo vybranej miestnosti a zapise ho do vybraneho parametru miestnosti.",
+      "Description": "Creates a string."
+    },
+    {
+      "Id": "a698443064064942aba8ac426fb0308b",
+      "Name": "Room parameter tag",
+      "Type": "string",
+      "Value": "Comments",
+      "Description": "Creates a string."
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
+      "SelectedIndex": 334,
+      "SelectedString": "OST_Parking",
+      "NodeType": "ExtensionNode",
+      "Id": "c9a26871041b450ab1e2283a8f8b6cfd",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "f7c41b0f94584e40a25a022c98d72792",
+          "Name": "Category",
+          "Description": "The selected Category.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "All built-in categories."
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "f3738f6eb3f24328a865682f59244396",
+      "Inputs": [
+        {
+          "Id": "93c91f808f4a4eea92887294121f9b39",
+          "Name": "Category",
+          "Description": "The Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ea64b9c596984639958c543a7493f8f5",
+          "Name": "Elements",
+          "Description": "An element type.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Get all elements of the specified category from the model."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Geometry.BoundingBox",
+      "Id": "7fbab3c84df441ac8de0aab687657450",
+      "Inputs": [
+        {
+          "Id": "2e1f7f154cad422aae90cdd590af0e8b",
+          "Name": "geometry",
+          "Description": "Autodesk.DesignScript.Geometry.Geometry",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a29d26c2ae134b06955353dec78f9ced",
+          "Name": "BoundingBox",
+          "Description": "BoundingBox",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the BoundingBox containing the given piece of Geometry\n\nGeometry.BoundingBox: BoundingBox"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.BoundingBox.Contains@Autodesk.DesignScript.Geometry.Point",
+      "Id": "7ad5e769f07048ff90089df1c0145679",
+      "Inputs": [
+        {
+          "Id": "0946ad57c3d54421b0d75001a4fd8ed0",
+          "Name": "boundingBox",
+          "Description": "Autodesk.DesignScript.Geometry.BoundingBox",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "27299c0b773b40d1bf72c62f5f671d54",
+          "Name": "point",
+          "Description": "The test point\n\nPoint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d5be1e5033fa48a497397f23a2742e00",
+          "Name": "bool",
+          "Description": "True if the point is inside, otherwise False",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Determine if a point is inside of the BoundingBox\n\nBoundingBox.Contains (point: Point): bool"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "0b59c4d8-afe4-4063-bf7e-2195fa33e8a9",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "6aefed9ef46e4ec98f08d54b9c3ef967",
+      "Inputs": [
+        {
+          "Id": "546d02f032f1452e9f21e8c467d5476e",
+          "Name": "element",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7f642f90af324f74bb16077ddb888227",
+          "Name": "points",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4181d77970a84785ab2c3af871f77b19",
+          "Name": "curveEndpoints",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "904bbfaf0e7c40edab4b4bf1ffa53d2a",
+          "Name": "curves",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "00eee29ddacc44af8ec69726c6b83656",
+          "Name": "isPoint",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "807e3ed99ca54945b7719b104e016595",
+          "Name": "isCurve",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8fb78c4f0d7d4d6da9220dd74710c212",
+          "Name": "hasLocation",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b441749068654677863de43b43023577",
+          "Name": "angle",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c6e1e36af75d414a95af042aae40da3c",
+          "Name": "hasRotation",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ab2c513cd8d54f05bbf13331e0e61a95",
+          "Name": "hasMulipleCurves",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "5632e510c7ea4674be60cdc9aa668444",
+          "Name": "mulipleCurves",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the location of an element as an XYZ (or if it's line-based the start and end point of the line), along with some booleans to help filtering the results. Use this for some element types (e.g. walls or lines) that do not work with the built-in Get Family Instance Location node. "
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.CountTrue@var[]..[]",
+      "Id": "aea5c4495cb8461bbc1933d28c26b664",
+      "Inputs": [
+        {
+          "Id": "ee4010fc75cb40f1b6b2addffd6c12b3",
+          "Name": "list",
+          "Description": "The list find the true boolean values.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a2be38b44a0849b6a6a55d4d36fa994e",
+          "Name": "int",
+          "Description": "The number of true boolean values in the list.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the number of true boolean values in the given list.\n\nList.CountTrue (list: var[]..[]): int"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.SetParameterByName@string,var",
+      "Id": "9d39467fe2da48ddb23de70238153d7e",
+      "Inputs": [
+        {
+          "Id": "48eca931e3f54bd99d9af713381ecda3",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "79dbe820a0bc4696acd8d2559dacc927",
+          "Name": "parameterName",
+          "Description": "The name of the parameter to set.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "eeca6be400fc433894d90feb1b36d946",
+          "Name": "value",
+          "Description": "The value.\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "44e4d51cb8d84716a86afa475e19a00f",
+          "Name": "Element",
+          "Description": "Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Set one of the element's parameters.\n\nElement.SetParameterByName (parameterName: string, value: var): Element"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.FromObject, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "8821a27086944c0c8e440031c71596ba",
+      "Inputs": [
+        {
+          "Id": "2f4402fb39674a108e712045d46edb49",
+          "Name": "obj",
+          "Description": "Object to be serialized",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "48f23cf06dce47288ea1f7b5df9f473a",
+          "Name": "str",
+          "Description": "Result of math computation",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Convert an object to a string representation."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "404285404d3448ca863e1b8f99ebba68",
+      "Inputs": [
+        {
+          "Id": "853d84e866e749978b3747b50915da36",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "60b2ff5a032746afa83e8acdc8b9bb5b",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Spocita parkovacie miesta vo vybranej miestnosti a zapise ho do vybraneho parametru miestnosti.",
+      "Id": "54cddc55f008403b982d65417e6b954f",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4bb3c936702d4797babaa8c178204334",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [],
+      "Id": "11ece48225d240479703510faa9111b5",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "327dd386ea2f475c85720b4ca2bc1226",
+          "Name": "Element",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Comments",
+      "Id": "a698443064064942aba8ac426fb0308b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "a8c8ca9f82a14f488185613b3903f0cf",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"parking space count by room\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "VariableInputPorts": true,
+      "Id": "8f65a2c4a8a3448695c3df661570b7bf",
+      "Inputs": [
+        {
+          "Id": "ad2cd1b597c448809937d15763630428",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "51e8ea00cc8549faa2365226dbbe0f02",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "f7c41b0f94584e40a25a022c98d72792",
+      "End": "93c91f808f4a4eea92887294121f9b39",
+      "Id": "576612ed9afb46928b94d70c75f0d9a7"
+    },
+    {
+      "Start": "ea64b9c596984639958c543a7493f8f5",
+      "End": "546d02f032f1452e9f21e8c467d5476e",
+      "Id": "c7542c2e324f4cbe82d2763daf62e52c"
+    },
+    {
+      "Start": "a29d26c2ae134b06955353dec78f9ced",
+      "End": "0946ad57c3d54421b0d75001a4fd8ed0",
+      "Id": "c0fc32c92e5b410287ac8dfb8fe36c6c"
+    },
+    {
+      "Start": "d5be1e5033fa48a497397f23a2742e00",
+      "End": "ee4010fc75cb40f1b6b2addffd6c12b3",
+      "Id": "52c9215b62d445a7b921f095a131ddb0"
+    },
+    {
+      "Start": "7f642f90af324f74bb16077ddb888227",
+      "End": "27299c0b773b40d1bf72c62f5f671d54",
+      "Id": "ad01ce6616004e79ad2d3da855e66890"
+    },
+    {
+      "Start": "a2be38b44a0849b6a6a55d4d36fa994e",
+      "End": "2f4402fb39674a108e712045d46edb49",
+      "Id": "e8c431e21a964fa9a57d4309f14aabe5"
+    },
+    {
+      "Start": "a2be38b44a0849b6a6a55d4d36fa994e",
+      "End": "853d84e866e749978b3747b50915da36",
+      "Id": "7af99b7d44dc417ea2ca27e7fa0e46bd"
+    },
+    {
+      "Start": "48f23cf06dce47288ea1f7b5df9f473a",
+      "End": "eeca6be400fc433894d90feb1b36d946",
+      "Id": "69ee0b0111a349ffb589da293b9cc580"
+    },
+    {
+      "Start": "327dd386ea2f475c85720b4ca2bc1226",
+      "End": "2e1f7f154cad422aae90cdd590af0e8b",
+      "Id": "f765d711205d46f8a5670c795ad189a6"
+    },
+    {
+      "Start": "327dd386ea2f475c85720b4ca2bc1226",
+      "End": "48eca931e3f54bd99d9af713381ecda3",
+      "Id": "aba3d05378aa4a4a9ad969fa6efba470"
+    },
+    {
+      "Start": "a8c8ca9f82a14f488185613b3903f0cf",
+      "End": "79dbe820a0bc4696acd8d2559dacc927",
+      "Id": "ddc81f7242bc4104b81f6617fa122381"
+    }
+  ],
+  "Dependencies": [
+    "0b59c4d8-afe4-4063-bf7e-2195fa33e8a9"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Clockwork for Dynamo 2.x",
+      "Version": "2.1.2",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "6aefed9ef46e4ec98f08d54b9c3ef967"
+      ]
+    }
+  ],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Categories",
+        "Id": "c9a26871041b450ab1e2283a8f8b6cfd",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -148.976671735388,
+        "Y": 66.4036889870719
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "All Elements of Category",
+        "Id": "f3738f6eb3f24328a865682f59244396",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 163.851530716439,
+        "Y": 59.7390288618187
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Geometry.BoundingBox",
+        "Id": "7fbab3c84df441ac8de0aab687657450",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 322.240063734812,
+        "Y": -48.2841030617559
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "BoundingBox.Contains",
+        "Id": "7ad5e769f07048ff90089df1c0145679",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 661.53403192635,
+        "Y": -36.1071910562446
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.Location",
+        "Id": "6aefed9ef46e4ec98f08d54b9c3ef967",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 391.106107951034,
+        "Y": 59.5264317607006
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.CountTrue",
+        "Id": "aea5c4495cb8461bbc1933d28c26b664",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 899.088570233791,
+        "Y": -37.9791927494229
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.SetParameterByName",
+        "Id": "9d39467fe2da48ddb23de70238153d7e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1232.5899739723,
+        "Y": -175.003565412878
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "String from Object",
+        "Id": "8821a27086944c0c8e440031c71596ba",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1057.38264020627,
+        "Y": -79.1577313663506
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "404285404d3448ca863e1b8f99ebba68",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1133.64891976059,
+        "Y": 54.3074017131982
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "54cddc55f008403b982d65417e6b954f",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -392.139474734935,
+        "Y": -219.569062700319
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Select Model Element - room",
+        "Id": "11ece48225d240479703510faa9111b5",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -153.924374160669,
+        "Y": -57.7684189544986
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Room parameter tag",
+        "Id": "a698443064064942aba8ac426fb0308b",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -150.777560640211,
+        "Y": -136.105265319211
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY log",
+        "Id": "8f65a2c4a8a3448695c3df661570b7bf",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -149.73000088499987,
+        "Y": 181.8311773617213
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "5be2492cef3b43639a9288e83954651d",
+        "Title": "INPUT",
+        "Nodes": [
+          "c9a26871041b450ab1e2283a8f8b6cfd",
+          "ab078fe845544d46b9891fae41b12e5f",
+          "11ece48225d240479703510faa9111b5",
+          "a698443064064942aba8ac426fb0308b"
+        ],
+        "Left": -163.924374160669,
+        "Top": -230.370285573282,
+        "Width": 311.70497691651303,
+        "Height": 389.77397456035391,
+        "FontSize": 14.0,
+        "InitialTop": -200.370285573282,
+        "InitialHeight": 377.678967953306,
+        "TextblockHeight": 20.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "ab078fe845544d46b9891fae41b12e5f",
+        "Title": "Spocita parkovacie miesta vo vybranej miestnosti a zapise ho do shared parametru.",
+        "Nodes": [],
+        "Left": -151.219397244156,
+        "Top": -200.370285573282,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 437.781063277735,
+    "Y": 377.926586409939,
+    "Zoom": 0.801466032152009
+  }
+}
