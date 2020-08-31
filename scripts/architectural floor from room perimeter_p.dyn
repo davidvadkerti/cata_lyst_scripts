@@ -2,7 +2,7 @@
   "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
   "IsCustomNode": false,
   "Description": "",
-  "Name": "architectural floor from room perimeterV2_p",
+  "Name": "architectural floor from room perimeter_p",
   "ElementResolver": {
     "ResolutionMap": {}
   },
@@ -11,11 +11,11 @@
       "Id": "9db5333f848740028c9ad60e69d35789",
       "Name": "Návod",
       "Type": "string",
-      "Value": "Vytvori architectural floor podla Floor Finish prislusnej miestnosti. Je potrebne vytvorit Floor types s nazvom zhodnym s Floor Finish. Floor sa vytvorí v rovine Levelu, na ktorom je miestnost umiestnena.\r\n\r\nAk nemáte vytvorené Floor types je možné nastaviť aj vytváranie placeholder dosiek.",
+      "Value": "Vytvori architectural floor podľa Base Finish danej miestnosti. Je potrebné vytvoriť Floor types s príslušnými Base Finishes. Floor sa vytvorí v rovine Levelu, na ktorom je miestnosť umiestnená.\r\n\r\nAk nemáte vytvorené Floor types je možné nastaviť aj vytváranie placeholder dosiek.",
       "Description": "Creates a string."
     },
     {
-      "Id": "5aac5b4080384aa088ff3e1f252a7dac",
+      "Id": "e52befa904ef4963bf858069a571763e",
       "Name": "FloorType by Rooms FloorFinish",
       "Type": "boolean",
       "Value": "true",
@@ -26,8 +26,8 @@
     {
       "Id": "d1d0e92aa4cb483da2643370aaa882c3",
       "Name": "Počet vytvorených Floors",
-      "Type": "integer",
-      "InitialValue": "5",
+      "Type": "unknown",
+      "InitialValue": "",
       "Description": "Visualize the output of node."
     }
   ],
@@ -240,12 +240,12 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
       "NodeType": "CodeBlockNode",
-      "Code": "\"Floor Finish\";",
+      "Code": "\"Base Finish\";",
       "Id": "3f442bbc484c4e1794e4612310e3ed3a",
       "Inputs": [],
       "Outputs": [
         {
-          "Id": "98d5d9e0a40542acb5af04abc385a743",
+          "Id": "89f55c4bc2784b6290a702bd566e9a4d",
           "Name": "",
           "Description": "Value of expression at line 1",
           "UsingDefaultValue": false,
@@ -533,36 +533,6 @@
       "Description": "Allows for DesignScript code to be authored directly"
     },
     {
-      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Revit.Elements.FloorType.ByName@string",
-      "Id": "ece133976b51401c8df1d26cb8a551e2",
-      "Inputs": [
-        {
-          "Id": "69f2e4898e654555b5a447a758c47b4f",
-          "Name": "name",
-          "Description": "string",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "ca21b5221ebf402b81a845a906264a1a",
-          "Name": "FloorType",
-          "Description": "FloorType",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Auto",
-      "Description": "Select a FloorType from the document given\n\nFloorType.ByName (name: string): FloorType"
-    },
-    {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
       "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\nboolean = IN[0]\r\ntrue = IN[1]\r\nfalse = IN[2]\r\n\r\n# Place your code below this line\r\nif boolean == 1:\r\n\tresult = true\r\nelif boolean == 0:\r\n\tresult = false\r\nelse:\r\n\tresult = null\r\n# Assign your output to the OUT variable.\r\nOUT = result",
@@ -839,7 +809,7 @@
     {
       "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
       "NodeType": "StringInputNode",
-      "InputValue": "Vytvori architectural floor podla Floor Finish prislusnej miestnosti. Je potrebne vytvorit Floor types s nazvom zhodnym s Floor Finish. Floor sa vytvorí v rovine Levelu, na ktorom je miestnost umiestnena.\r\n\r\nAk nemáte vytvorené Floor types je možné nastaviť aj vytváranie placeholder dosiek.",
+      "InputValue": "Vytvori architectural floor podľa Base Finish danej miestnosti. Je potrebné vytvoriť Floor types s príslušnými Base Finishes. Floor sa vytvorí v rovine Levelu, na ktorom je miestnosť umiestnená.\r\n\r\nAk nemáte vytvorené Floor types je možné nastaviť aj vytváranie placeholder dosiek.",
       "Id": "9db5333f848740028c9ad60e69d35789",
       "Inputs": [],
       "Outputs": [
@@ -1034,39 +1004,6 @@
       "Description": "Allows for DesignScript code to be authored directly"
     },
     {
-      "ConcreteType": "Dynamo.Nodes.DSModelElementsSelection, DSRevitNodesUI",
-      "NodeType": "ExtensionNode",
-      "InstanceId": [
-        "a4f7cc45-ff98-4a99-b1d8-b506f7835745-0009b47e",
-        "1d6b51e3-a5fd-4b87-9fc7-51206af5f24c-0009eca9",
-        "48d8129e-1e5a-40ec-8b68-8689a1560db2-000c5314",
-        "e58fb16d-bc93-49ad-8f3d-25b2efa081af-000ec57f",
-        "e58fb16d-bc93-49ad-8f3d-25b2efa081af-000ec5a6",
-        "e58fb16d-bc93-49ad-8f3d-25b2efa081af-000ec5a9",
-        "e58fb16d-bc93-49ad-8f3d-25b2efa081af-000ec5af",
-        "e58fb16d-bc93-49ad-8f3d-25b2efa081af-000ec5b2",
-        "e24f18b3-6e15-40d6-b222-8e82e473974b-00130867",
-        "e24f18b3-6e15-40d6-b222-8e82e473974b-00130955",
-        "03953785-a552-4e4a-a74b-ec2aec63bbfb-0029a074",
-        "03953785-a552-4e4a-a74b-ec2aec63bbfb-0029a075",
-        "03953785-a552-4e4a-a74b-ec2aec63bbfb-0029a083"
-      ],
-      "Id": "404e59a6202f420e8b700063fcd51fdc",
-      "Inputs": [],
-      "Outputs": [
-        {
-          "Id": "875803c154544772bec506e01f2433fa",
-          "Name": "Elements",
-          "Description": "The selected elements.",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled"
-    },
-    {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
       "NodeType": "CodeBlockNode",
       "Code": "\"Level\";",
@@ -1156,14 +1093,310 @@
       "Description": "Retrieve Level by its name.\n\nSelect.GetLevelByName (name: string): Level"
     },
     {
-      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
-      "NodeType": "BooleanInputNode",
-      "InputValue": true,
-      "Id": "5aac5b4080384aa088ff3e1f252a7dac",
+      "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "e5e0c989ee38411eac9be4a7849477bc",
+      "Inputs": [
+        {
+          "Id": "285c35abba51450c98cec64794b98232",
+          "Name": "Category",
+          "Description": "The Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5c6e9077a01a45c9846c6402db3f53ea",
+          "Name": "Elements",
+          "Description": "An element type.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Get all elements of the specified category from the model."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "archilab.Revit.Elements.Elements.Type@Revit.Elements.Element",
+      "Id": "aafa8485afdb4500ba194e8afaad89e5",
+      "Inputs": [
+        {
+          "Id": "e6f02f6e357e4f42838072dcbb76af0e",
+          "Name": "element",
+          "Description": "Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "02f95c942dec46999b3c80575d7a84af",
+          "Name": "Element",
+          "Description": "Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get Element Type.\n\nElements.Type (element: Element): Element"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.UniqueItems@var[]..[]",
+      "Id": "92a78339ee9240e1b081a76046feb059",
+      "Inputs": [
+        {
+          "Id": "9877227f25c44e6ab3082b23405f1031",
+          "Name": "list",
+          "Description": "List to filter duplicates out of.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "bd9e060aecfd44ccbec26db724e86488",
+          "Name": "list",
+          "Description": "Filtered list.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Creates a new list containing all unique items in the given list.\n\nList.UniqueItems (list: var[]..[]): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Type Mark\";",
+      "Id": "3a43599cffab45bf98bf45663bc53670",
       "Inputs": [],
       "Outputs": [
         {
-          "Id": "87ace818abc8463796c6ee29e3d949e6",
+          "Id": "e0e218fa12d64b07a67ec7eaf6c8a3b9",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.GetParameterValueByName@string",
+      "Id": "d2037d938ffe474093f51e5bdc668e4f",
+      "Inputs": [
+        {
+          "Id": "741ce643c223485da24492a3f2a2d0d0",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d91e6bd164ff4487bbba54718137219f",
+          "Name": "parameterName",
+          "Description": "The name of the parameter whose value you want to obtain.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "86a70460bada4d6b882f6ca26f8d4e11",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the value of one of the element's parameters.\n\nElement.GetParameterValueByName (parameterName: string): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.GetItemAtIndex@var[]..[],int",
+      "Id": "3d9495e03abc4adfaefae55fa9b254c3",
+      "Inputs": [
+        {
+          "Id": "dfe671a987dc4647827575fc94c84f2e",
+          "Name": "list",
+          "Description": "List to fetch an item from.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "fec44572dfd74bb3aa8065b0e139aadf",
+          "Name": "index",
+          "Description": "Index of the item to be fetched.\n\nint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "230a659f3c3745888f81324206953581",
+          "Name": "item",
+          "Description": "Item in the list at the given index.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns an item from the given list that's located at the specified index.\n\nList.GetItemAtIndex (list: var[]..[], index: int): var[]..[]"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\nfinishes = IN[0]\r\ntypemarks = IN[1]\r\n\r\n# Place your code below this line\r\noutput = []\r\nfor i in finishes:\r\n\ta=typemarks.index(i)\r\n\toutput.append(a)\r\n# Assign your output to the OUT variable.\r\nOUT = output",
+      "VariableInputPorts": true,
+      "Id": "50e585f39843440db3b24587caf9f671",
+      "Inputs": [
+        {
+          "Id": "cebf5622ba6f426cac5dd82e44cef671",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "98630e502f6a4c7d90c65ee0ec4d3a11",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "34040432f398459aaa24c1253b8619ce",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Category.ByName@string",
+      "Id": "8c798f0dd41f47d48adb40426745dbba",
+      "Inputs": [
+        {
+          "Id": "6b06d6afed8d4660acb16da1612bf064",
+          "Name": "name",
+          "Description": "The built in category name.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "04ed9de738ac4f598b128e4555f9b3e0",
+          "Name": "Category",
+          "Description": "Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets a Revit category by the built-in category name.\n\nCategory.ByName (name: string): Category"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Floors\";",
+      "Id": "03eb8b3515764873808f9c6e45d6230b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ad72298fd97e49d6b33dd285723965cb",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementsSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [],
+      "Id": "7ebb772049024891b466db384c433cc5",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "8775a26f074c479ea324a404afacb33f",
+          "Name": "Elements",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "e52befa904ef4963bf858069a571763e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "559a327794044944935be339e931a93b",
           "Name": "",
           "Description": "Boolean",
           "UsingDefaultValue": false,
@@ -1180,11 +1413,11 @@
       "SelectedIndex": 0,
       "SelectedString": "Keramická dlažba",
       "NodeType": "ExtensionNode",
-      "Id": "b4a905690d1045dc897d08827cd02d7d",
+      "Id": "ded6eec614ff48318cfce5538a86f100",
       "Inputs": [],
       "Outputs": [
         {
-          "Id": "e628453fdbb645cabd2cb12f86f984bd",
+          "Id": "bbc4b25987c04bc3b167d27689a1d232",
           "Name": "Floor Type",
           "Description": "The selected Floor Type",
           "UsingDefaultValue": false,
@@ -1225,13 +1458,13 @@
     },
     {
       "Start": "9cd7d86729d746a383817bd67915a0a5",
-      "End": "69f2e4898e654555b5a447a758c47b4f",
-      "Id": "eb250907545045d3962f4651361a775e"
+      "End": "cebf5622ba6f426cac5dd82e44cef671",
+      "Id": "d79dfa48900f4d788781fbf3f5f2e4af"
     },
     {
-      "Start": "98d5d9e0a40542acb5af04abc385a743",
+      "Start": "89f55c4bc2784b6290a702bd566e9a4d",
       "End": "26dd7475160843d28b0e1b0ae87d86d9",
-      "Id": "885a9c5e7e5846e2879113d861019212"
+      "Id": "31e627db6ddd4075832c6d98fa35bfb1"
     },
     {
       "Start": "11b631fc32b244c5a5ac68b13b57ab79",
@@ -1269,14 +1502,9 @@
       "Id": "b22819d6b66c4fadbe190e0201e85b09"
     },
     {
-      "Start": "ca21b5221ebf402b81a845a906264a1a",
-      "End": "677fbad8dda141f69672bee2c9648e39",
-      "Id": "3fe7ef6d6ed44f07810a4eb3eda50e79"
-    },
-    {
       "Start": "c340b5b90aaa466ea02fada949df4565",
       "End": "5c6927bb106a46788aadb5b12b1f2755",
-      "Id": "f6a98fe2b3f64d628e54228d3295806f"
+      "Id": "5473b2bf7824447481f52001597ddb2e"
     },
     {
       "Start": "fca1cc026adb46e3a0a89c5920bc99ca",
@@ -1359,16 +1587,6 @@
       "Id": "b910401cc3f04c55afed8e9cde87b74a"
     },
     {
-      "Start": "875803c154544772bec506e01f2433fa",
-      "End": "9f12a5c834a249fb9ec0e266e5d22723",
-      "Id": "a1dced68ef0c48fa85df5fab302b140e"
-    },
-    {
-      "Start": "875803c154544772bec506e01f2433fa",
-      "End": "a41f7cbb360c4c229fc26030b34c137b",
-      "Id": "2dc9ce82ffde467993347a0502a9d219"
-    },
-    {
       "Start": "e3055d5aa61f4a32a21142c857eb880d",
       "End": "a17009bd4fab4643aa64639463244e02",
       "Id": "b905201428e94ec0b4e07a00ca7aa560"
@@ -1389,14 +1607,74 @@
       "Id": "96c54a660e0443c09396a8e1449612a8"
     },
     {
-      "Start": "87ace818abc8463796c6ee29e3d949e6",
-      "End": "81c28d48d3fa4420b2101ee714dec287",
-      "Id": "21b9c28b7acb4a8381bbd232f1339138"
+      "Start": "5c6e9077a01a45c9846c6402db3f53ea",
+      "End": "e6f02f6e357e4f42838072dcbb76af0e",
+      "Id": "b46714af408d426da30496bb605052ad"
     },
     {
-      "Start": "e628453fdbb645cabd2cb12f86f984bd",
+      "Start": "02f95c942dec46999b3c80575d7a84af",
+      "End": "9877227f25c44e6ab3082b23405f1031",
+      "Id": "78b1612d139a4999989038b7e3ed61cf"
+    },
+    {
+      "Start": "bd9e060aecfd44ccbec26db724e86488",
+      "End": "741ce643c223485da24492a3f2a2d0d0",
+      "Id": "51665ceba3994ebda0d3b54e912f4fd5"
+    },
+    {
+      "Start": "bd9e060aecfd44ccbec26db724e86488",
+      "End": "dfe671a987dc4647827575fc94c84f2e",
+      "Id": "c72c146145a44af39981c979082d8913"
+    },
+    {
+      "Start": "e0e218fa12d64b07a67ec7eaf6c8a3b9",
+      "End": "d91e6bd164ff4487bbba54718137219f",
+      "Id": "3e79923f71d9450eaedd471c265226db"
+    },
+    {
+      "Start": "86a70460bada4d6b882f6ca26f8d4e11",
+      "End": "98630e502f6a4c7d90c65ee0ec4d3a11",
+      "Id": "1f2ea3056ad44321ab60e8f4f6e75acf"
+    },
+    {
+      "Start": "230a659f3c3745888f81324206953581",
+      "End": "677fbad8dda141f69672bee2c9648e39",
+      "Id": "623c9afcb02e43daa476d598928fda71"
+    },
+    {
+      "Start": "34040432f398459aaa24c1253b8619ce",
+      "End": "fec44572dfd74bb3aa8065b0e139aadf",
+      "Id": "9c6129bb9a2d4f72b8e3b54bd0749bfc"
+    },
+    {
+      "Start": "04ed9de738ac4f598b128e4555f9b3e0",
+      "End": "285c35abba51450c98cec64794b98232",
+      "Id": "aad0465a7f434b34afb2e07949d2dfe7"
+    },
+    {
+      "Start": "ad72298fd97e49d6b33dd285723965cb",
+      "End": "6b06d6afed8d4660acb16da1612bf064",
+      "Id": "a985a3e9475d40ecae9e1ae2e417ce41"
+    },
+    {
+      "Start": "8775a26f074c479ea324a404afacb33f",
+      "End": "a41f7cbb360c4c229fc26030b34c137b",
+      "Id": "a13a29f8d56e47e09dcab381dd14b308"
+    },
+    {
+      "Start": "8775a26f074c479ea324a404afacb33f",
+      "End": "9f12a5c834a249fb9ec0e266e5d22723",
+      "Id": "d8061c80f2f6426785a19036b9eceedb"
+    },
+    {
+      "Start": "559a327794044944935be339e931a93b",
+      "End": "81c28d48d3fa4420b2101ee714dec287",
+      "Id": "801aa0e26cc14fd9bfeee650f28258c2"
+    },
+    {
+      "Start": "bbc4b25987c04bc3b167d27689a1d232",
       "End": "4496588998634313ba77001651197abc",
-      "Id": "c7f0096e14e1456eae620088984205c2"
+      "Id": "cf3edcc75a424afb9f7d217f09b7921c"
     }
   ],
   "Dependencies": [],
@@ -1406,18 +1684,12 @@
       "Version": "2020.23.2",
       "ReferenceType": "Package",
       "Nodes": [
-        "d5d972bb6c024f4696e2516882c09404"
+        "d5d972bb6c024f4696e2516882c09404",
+        "aafa8485afdb4500ba194e8afaad89e5"
       ]
     }
   ],
-  "Bindings": [
-    {
-      "NodeId": "f0e955d9-dbb1-4b3e-8015-bd1e0b435b0e",
-      "Binding": {
-        "ByOutlineTypeAndLevel_InClassDecl-1_InFunctionScope-1_Instance0_f0e955d9-dbb1-4b3e-8015-bd1e0b435b0e": "PFNPQVAtRU5WOkVudmVsb3BlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOlNPQVAtRU5DPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy9zb2FwL2VuY29kaW5nLyIgeG1sbnM6U09BUC1FTlY9Imh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3NvYXAvZW52ZWxvcGUvIiB4bWxuczpjbHI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vc29hcC9lbmNvZGluZy9jbHIvMS4wIiBTT0FQLUVOVjplbmNvZGluZ1N0eWxlPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy9zb2FwL2VuY29kaW5nLyI+DQo8U09BUC1FTlY6Qm9keT4NCjxhMTpDYWxsU2l0ZV94MDAyQl9UcmFjZVNlcmlhbGlzZXJIZWxwZXIgaWQ9InJlZi0xIiB4bWxuczphMT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9jbHIvbnNhc3NlbS9Qcm90b0NvcmUvUHJvdG9Db3JlJTJDJTIwVmVyc2lvbiUzRDIuMy4wLjU4ODUlMkMlMjBDdWx0dXJlJTNEbmV1dHJhbCUyQyUyMFB1YmxpY0tleVRva2VuJTNEbnVsbCI+DQo8TnVtYmVyT2ZFbGVtZW50cz4xPC9OdW1iZXJPZkVsZW1lbnRzPg0KPEJhc2UtMF9IYXNEYXRhPmZhbHNlPC9CYXNlLTBfSGFzRGF0YT4NCjxCYXNlLTBfSGFzTmVzdGVkRGF0YT50cnVlPC9CYXNlLTBfSGFzTmVzdGVkRGF0YT4NCjxCYXNlLTBfTmVzdGVkRGF0YUNvdW50PjU8L0Jhc2UtMF9OZXN0ZWREYXRhQ291bnQ+DQo8QmFzZS0wLTBfSGFzRGF0YT50cnVlPC9CYXNlLTAtMF9IYXNEYXRhPg0KPEJhc2UtMC0wX0RhdGEgaWQ9InJlZi0zIj5QRk5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxJSGh0Ykc1ek9uaHphVDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRXRhVzV6ZEdGdVkyVWlJSGh0Ykc1ek9uaHpaRDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRWlJSGh0Ykc1ek9sTlBRVkF0UlU1RFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJZ2VHMXNibk02VTA5QlVDMUZUbFk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbmh0YkhOdllYQXViM0puTDNOdllYQXZaVzUyWld4dmNHVXZJaUI0Yld4dWN6cGpiSEk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbTFwWTNKdmMyOW1kQzVqYjIwdmMyOWhjQzlsYm1OdlpHbHVaeTlqYkhJdk1TNHdJaUJUVDBGUUxVVk9WanBsYm1OdlpHbHVaMU4wZVd4bFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJK0RRbzhVMDlCVUMxRlRsWTZRbTlrZVQ0TkNqeGhNVHBUWlhKcFlXeHBlbUZpYkdWSlpDQnBaRDBpY21WbUxURWlJSGh0Ykc1ek9tRXhQU0pvZEhSd09pOHZjMk5vWlcxaGN5NXRhV055YjNOdlpuUXVZMjl0TDJOc2NpOXVjMkZ6YzJWdEwxSmxkbWwwVTJWeWRtbGpaWE11VUdWeWMybHpkR1Z1WTJVdlVtVjJhWFJUWlhKMmFXTmxjeVV5UXlVeU1GWmxjbk5wYjI0bE0wUXlMak11TUM0M05qWXhKVEpESlRJd1EzVnNkSFZ5WlNVelJHNWxkWFJ5WVd3bE1rTWxNakJRZFdKc2FXTkxaWGxVYjJ0bGJpVXpSRzUxYkd3aVBnMEtQSE4wY21sdVowbEVJR2xrUFNKeVpXWXRNeUkrT0dZd1ltWTVNbU10TVRrM05TMDBaRGt5TFdKak5EY3ROR0l5TkdJeFptWmlNbVUwTFRBd05UUXhOamc1UEM5emRISnBibWRKUkQ0TkNqeHBiblJKUkQ0MU5URXdOemt6UEM5cGJuUkpSRDROQ2p3dllURTZVMlZ5YVdGc2FYcGhZbXhsU1dRK0RRbzhMMU5QUVZBdFJVNVdPa0p2WkhrK0RRbzhMMU5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxQZzBLPC9CYXNlLTAtMF9EYXRhPg0KPEJhc2UtMC0wX0hhc05lc3RlZERhdGE+ZmFsc2U8L0Jhc2UtMC0wX0hhc05lc3RlZERhdGE+DQo8QmFzZS0wLTFfSGFzRGF0YT50cnVlPC9CYXNlLTAtMV9IYXNEYXRhPg0KPEJhc2UtMC0xX0RhdGEgaWQ9InJlZi00Ij5QRk5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxJSGh0Ykc1ek9uaHphVDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRXRhVzV6ZEdGdVkyVWlJSGh0Ykc1ek9uaHpaRDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRWlJSGh0Ykc1ek9sTlBRVkF0UlU1RFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJZ2VHMXNibk02VTA5QlVDMUZUbFk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbmh0YkhOdllYQXViM0puTDNOdllYQXZaVzUyWld4dmNHVXZJaUI0Yld4dWN6cGpiSEk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbTFwWTNKdmMyOW1kQzVqYjIwdmMyOWhjQzlsYm1OdlpHbHVaeTlqYkhJdk1TNHdJaUJUVDBGUUxVVk9WanBsYm1OdlpHbHVaMU4wZVd4bFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJK0RRbzhVMDlCVUMxRlRsWTZRbTlrZVQ0TkNqeGhNVHBUWlhKcFlXeHBlbUZpYkdWSlpDQnBaRDBpY21WbUxURWlJSGh0Ykc1ek9tRXhQU0pvZEhSd09pOHZjMk5vWlcxaGN5NXRhV055YjNOdlpuUXVZMjl0TDJOc2NpOXVjMkZ6YzJWdEwxSmxkbWwwVTJWeWRtbGpaWE11VUdWeWMybHpkR1Z1WTJVdlVtVjJhWFJUWlhKMmFXTmxjeVV5UXlVeU1GWmxjbk5wYjI0bE0wUXlMak11TUM0M05qWXhKVEpESlRJd1EzVnNkSFZ5WlNVelJHNWxkWFJ5WVd3bE1rTWxNakJRZFdKc2FXTkxaWGxVYjJ0bGJpVXpSRzUxYkd3aVBnMEtQSE4wY21sdVowbEVJR2xrUFNKeVpXWXRNeUkrT0dZd1ltWTVNbU10TVRrM05TMDBaRGt5TFdKak5EY3ROR0l5TkdJeFptWmlNbVUwTFRBd05UUXhOamt4UEM5emRISnBibWRKUkQ0TkNqeHBiblJKUkQ0MU5URXdPREF4UEM5cGJuUkpSRDROQ2p3dllURTZVMlZ5YVdGc2FYcGhZbXhsU1dRK0RRbzhMMU5QUVZBdFJVNVdPa0p2WkhrK0RRbzhMMU5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxQZzBLPC9CYXNlLTAtMV9EYXRhPg0KPEJhc2UtMC0xX0hhc05lc3RlZERhdGE+ZmFsc2U8L0Jhc2UtMC0xX0hhc05lc3RlZERhdGE+DQo8QmFzZS0wLTJfSGFzRGF0YT50cnVlPC9CYXNlLTAtMl9IYXNEYXRhPg0KPEJhc2UtMC0yX0RhdGEgaWQ9InJlZi01Ij5QRk5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxJSGh0Ykc1ek9uaHphVDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRXRhVzV6ZEdGdVkyVWlJSGh0Ykc1ek9uaHpaRDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRWlJSGh0Ykc1ek9sTlBRVkF0UlU1RFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJZ2VHMXNibk02VTA5QlVDMUZUbFk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbmh0YkhOdllYQXViM0puTDNOdllYQXZaVzUyWld4dmNHVXZJaUI0Yld4dWN6cGpiSEk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbTFwWTNKdmMyOW1kQzVqYjIwdmMyOWhjQzlsYm1OdlpHbHVaeTlqYkhJdk1TNHdJaUJUVDBGUUxVVk9WanBsYm1OdlpHbHVaMU4wZVd4bFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJK0RRbzhVMDlCVUMxRlRsWTZRbTlrZVQ0TkNqeGhNVHBUWlhKcFlXeHBlbUZpYkdWSlpDQnBaRDBpY21WbUxURWlJSGh0Ykc1ek9tRXhQU0pvZEhSd09pOHZjMk5vWlcxaGN5NXRhV055YjNOdlpuUXVZMjl0TDJOc2NpOXVjMkZ6YzJWdEwxSmxkbWwwVTJWeWRtbGpaWE11VUdWeWMybHpkR1Z1WTJVdlVtVjJhWFJUWlhKMmFXTmxjeVV5UXlVeU1GWmxjbk5wYjI0bE0wUXlMak11TUM0M05qWXhKVEpESlRJd1EzVnNkSFZ5WlNVelJHNWxkWFJ5WVd3bE1rTWxNakJRZFdKc2FXTkxaWGxVYjJ0bGJpVXpSRzUxYkd3aVBnMEtQSE4wY21sdVowbEVJR2xrUFNKeVpXWXRNeUkrT0dZd1ltWTVNbU10TVRrM05TMDBaRGt5TFdKak5EY3ROR0l5TkdJeFptWmlNbVUwTFRBd05UUXhOams1UEM5emRISnBibWRKUkQ0TkNqeHBiblJKUkQ0MU5URXdPREE1UEM5cGJuUkpSRDROQ2p3dllURTZVMlZ5YVdGc2FYcGhZbXhsU1dRK0RRbzhMMU5QUVZBdFJVNVdPa0p2WkhrK0RRbzhMMU5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxQZzBLPC9CYXNlLTAtMl9EYXRhPg0KPEJhc2UtMC0yX0hhc05lc3RlZERhdGE+ZmFsc2U8L0Jhc2UtMC0yX0hhc05lc3RlZERhdGE+DQo8QmFzZS0wLTNfSGFzRGF0YT50cnVlPC9CYXNlLTAtM19IYXNEYXRhPg0KPEJhc2UtMC0zX0RhdGEgaWQ9InJlZi02Ij5QRk5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxJSGh0Ykc1ek9uaHphVDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRXRhVzV6ZEdGdVkyVWlJSGh0Ykc1ek9uaHpaRDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRWlJSGh0Ykc1ek9sTlBRVkF0UlU1RFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJZ2VHMXNibk02VTA5QlVDMUZUbFk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbmh0YkhOdllYQXViM0puTDNOdllYQXZaVzUyWld4dmNHVXZJaUI0Yld4dWN6cGpiSEk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbTFwWTNKdmMyOW1kQzVqYjIwdmMyOWhjQzlsYm1OdlpHbHVaeTlqYkhJdk1TNHdJaUJUVDBGUUxVVk9WanBsYm1OdlpHbHVaMU4wZVd4bFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJK0RRbzhVMDlCVUMxRlRsWTZRbTlrZVQ0TkNqeGhNVHBUWlhKcFlXeHBlbUZpYkdWSlpDQnBaRDBpY21WbUxURWlJSGh0Ykc1ek9tRXhQU0pvZEhSd09pOHZjMk5vWlcxaGN5NXRhV055YjNOdlpuUXVZMjl0TDJOc2NpOXVjMkZ6YzJWdEwxSmxkbWwwVTJWeWRtbGpaWE11VUdWeWMybHpkR1Z1WTJVdlVtVjJhWFJUWlhKMmFXTmxjeVV5UXlVeU1GWmxjbk5wYjI0bE0wUXlMak11TUM0M05qWXhKVEpESlRJd1EzVnNkSFZ5WlNVelJHNWxkWFJ5WVd3bE1rTWxNakJRZFdKc2FXTkxaWGxVYjJ0bGJpVXpSRzUxYkd3aVBnMEtQSE4wY21sdVowbEVJR2xrUFNKeVpXWXRNeUkrT0dZd1ltWTVNbU10TVRrM05TMDBaRGt5TFdKak5EY3ROR0l5TkdJeFptWmlNbVUwTFRBd05UUXhObUV4UEM5emRISnBibWRKUkQ0TkNqeHBiblJKUkQ0MU5URXdPREUzUEM5cGJuUkpSRDROQ2p3dllURTZVMlZ5YVdGc2FYcGhZbXhsU1dRK0RRbzhMMU5QUVZBdFJVNVdPa0p2WkhrK0RRbzhMMU5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxQZzBLPC9CYXNlLTAtM19EYXRhPg0KPEJhc2UtMC0zX0hhc05lc3RlZERhdGE+ZmFsc2U8L0Jhc2UtMC0zX0hhc05lc3RlZERhdGE+DQo8QmFzZS0wLTRfSGFzRGF0YT50cnVlPC9CYXNlLTAtNF9IYXNEYXRhPg0KPEJhc2UtMC00X0RhdGEgaWQ9InJlZi03Ij5QRk5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxJSGh0Ykc1ek9uaHphVDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRXRhVzV6ZEdGdVkyVWlJSGh0Ykc1ek9uaHpaRDBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01TOVlUVXhUWTJobGJXRWlJSGh0Ykc1ek9sTlBRVkF0UlU1RFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJZ2VHMXNibk02VTA5QlVDMUZUbFk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbmh0YkhOdllYQXViM0puTDNOdllYQXZaVzUyWld4dmNHVXZJaUI0Yld4dWN6cGpiSEk5SW1oMGRIQTZMeTl6WTJobGJXRnpMbTFwWTNKdmMyOW1kQzVqYjIwdmMyOWhjQzlsYm1OdlpHbHVaeTlqYkhJdk1TNHdJaUJUVDBGUUxVVk9WanBsYm1OdlpHbHVaMU4wZVd4bFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1NGJXeHpiMkZ3TG05eVp5OXpiMkZ3TDJWdVkyOWthVzVuTHlJK0RRbzhVMDlCVUMxRlRsWTZRbTlrZVQ0TkNqeGhNVHBUWlhKcFlXeHBlbUZpYkdWSlpDQnBaRDBpY21WbUxURWlJSGh0Ykc1ek9tRXhQU0pvZEhSd09pOHZjMk5vWlcxaGN5NXRhV055YjNOdlpuUXVZMjl0TDJOc2NpOXVjMkZ6YzJWdEwxSmxkbWwwVTJWeWRtbGpaWE11VUdWeWMybHpkR1Z1WTJVdlVtVjJhWFJUWlhKMmFXTmxjeVV5UXlVeU1GWmxjbk5wYjI0bE0wUXlMak11TUM0M05qWXhKVEpESlRJd1EzVnNkSFZ5WlNVelJHNWxkWFJ5WVd3bE1rTWxNakJRZFdKc2FXTkxaWGxVYjJ0bGJpVXpSRzUxYkd3aVBnMEtQSE4wY21sdVowbEVJR2xrUFNKeVpXWXRNeUkrT0dZd1ltWTVNbU10TVRrM05TMDBaRGt5TFdKak5EY3ROR0l5TkdJeFptWmlNbVUwTFRBd05UUXhObUZpUEM5emRISnBibWRKUkQ0TkNqeHBiblJKUkQ0MU5URXdPREkzUEM5cGJuUkpSRDROQ2p3dllURTZVMlZ5YVdGc2FYcGhZbXhsU1dRK0RRbzhMMU5QUVZBdFJVNVdPa0p2WkhrK0RRbzhMMU5QUVZBdFJVNVdPa1Z1ZG1Wc2IzQmxQZzBLPC9CYXNlLTAtNF9EYXRhPg0KPEJhc2UtMC00X0hhc05lc3RlZERhdGE+ZmFsc2U8L0Jhc2UtMC00X0hhc05lc3RlZERhdGE+DQo8L2ExOkNhbGxTaXRlX3gwMDJCX1RyYWNlU2VyaWFsaXNlckhlbHBlcj4NCjwvU09BUC1FTlY6Qm9keT4NCjwvU09BUC1FTlY6RW52ZWxvcGU+DQo="
-      }
-    }
-  ],
+  "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
@@ -1497,8 +1769,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 884.76354030230527,
-        "Y": 458.97100979633171
+        "X": 419.59924229182673,
+        "Y": 296.53746370604262
       },
       {
         "ShowGeometry": true,
@@ -1507,8 +1779,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 676.49482692945617,
-        "Y": 479.02609241325985
+        "X": 253.10597221741773,
+        "Y": 350.25612859341339
       },
       {
         "ShowGeometry": true,
@@ -1592,23 +1864,13 @@
       },
       {
         "ShowGeometry": true,
-        "Name": "FloorType.ByName",
-        "Id": "ece133976b51401c8df1d26cb8a551e2",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 1197.039076927869,
-        "Y": 456.52450412710726
-      },
-      {
-        "ShowGeometry": true,
         "Name": "pyIF",
         "Id": "e25fbdfa195643ba82b192d0319c6a6f",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1493.1800159914908,
-        "Y": 327.78654048034468
+        "X": 1504.7200532678619,
+        "Y": 66.762690677127011
       },
       {
         "ShowGeometry": true,
@@ -1678,7 +1940,7 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "X": -814.0048081907147,
-        "Y": -110.04023194865169
+        "Y": -63.438300312713181
       },
       {
         "ShowGeometry": true,
@@ -1687,8 +1949,8 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -2165.5426927503813,
-        "Y": -85.7913074974856
+        "X": -2165.7677810480723,
+        "Y": -119.4481879604088
       },
       {
         "ShowGeometry": true,
@@ -1707,8 +1969,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2239.0341126761696,
-        "Y": 330.09970639476535
+        "X": 2375.5338321587806,
+        "Y": 214.01115991890003
       },
       {
         "ShowGeometry": true,
@@ -1717,8 +1979,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1949.6498334631751,
-        "Y": 317.06437850228826
+        "X": 2086.1495529457861,
+        "Y": 200.97583202642295
       },
       {
         "ShowGeometry": true,
@@ -1727,8 +1989,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1779.9671719189823,
-        "Y": 337.09020784867641
+        "X": 1916.4668914015933,
+        "Y": 221.0016613728111
       },
       {
         "ShowGeometry": true,
@@ -1739,16 +2001,6 @@
         "Excluded": false,
         "X": 34.188210979385531,
         "Y": 196.84143131405597
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "Select Model Elements",
-        "Id": "404e59a6202f420e8b700063fcd51fdc",
-        "IsSetAsInput": true,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": -2160.0881043648878,
-        "Y": 145.76916648617703
       },
       {
         "ShowGeometry": true,
@@ -1767,8 +2019,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -545.31543325318114,
-        "Y": 107.08600926554874
+        "X": -542.85692427874926,
+        "Y": 121.83706311214024
       },
       {
         "ShowGeometry": true,
@@ -1782,23 +2034,123 @@
       },
       {
         "ShowGeometry": true,
-        "Name": "FloorType by Rooms FloorFinish",
-        "Id": "5aac5b4080384aa088ff3e1f252a7dac",
+        "Name": "All Elements of Category",
+        "Id": "e5e0c989ee38411eac9be4a7849477bc",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 29.748199401048623,
+        "Y": 518.36494607749444
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Elements.Type",
+        "Id": "aafa8485afdb4500ba194e8afaad89e5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 232.41497540286048,
+        "Y": 519.06453889908482
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.UniqueItems",
+        "Id": "92a78339ee9240e1b081a76046feb059",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 496.29152141807617,
+        "Y": 518.70327785314407
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "3a43599cffab45bf98bf45663bc53670",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 525.1716627076828,
+        "Y": 639.674491296715
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.GetParameterValueByName",
+        "Id": "d2037d938ffe474093f51e5bdc668e4f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 747.23110765957858,
+        "Y": 568.243936721844
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.GetItemAtIndex",
+        "Id": "3d9495e03abc4adfaefae55fa9b254c3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1227.9194010861611,
+        "Y": 261.69677763396555
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY index()",
+        "Id": "50e585f39843440db3b24587caf9f671",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1060.0590333286518,
+        "Y": 358.70184801482009
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Category.ByName",
+        "Id": "8c798f0dd41f47d48adb40426745dbba",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -201.20104696841781,
+        "Y": 518.49928615342208
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "03eb8b3515764873808f9c6e45d6230b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -329.27268812573584,
+        "Y": 520.40509520546436
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Select Model Elements",
+        "Id": "7ebb772049024891b466db384c433cc5",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -2159.311061283277,
-        "Y": 312.82844618970614
+        "X": -2138.42579962089,
+        "Y": 121.43178573634066
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "FloorType by Rooms FloorFinish",
+        "Id": "e52befa904ef4963bf858069a571763e",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -2134.4606589747027,
+        "Y": 255.59737239668669
       },
       {
         "ShowGeometry": true,
         "Name": "Placeholder Floor Type (Only if not by Room's Floor Finish)",
-        "Id": "b4a905690d1045dc897d08827cd02d7d",
+        "Id": "ded6eec614ff48318cfce5538a86f100",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -2172.5673785432546,
-        "Y": 392.75987339985011
+        "X": -2148.3565310627191,
+        "Y": 342.50369325622762
       }
     ],
     "Annotations": [
@@ -1892,16 +2244,15 @@
         "Title": "Floor by Room's Floor Finish",
         "Nodes": [
           "5f961cfe6e5d4ac7a3bc54014bfa44ae",
-          "3f442bbc484c4e1794e4612310e3ed3a",
-          "ece133976b51401c8df1d26cb8a551e2"
+          "3f442bbc484c4e1794e4612310e3ed3a"
         ],
-        "Left": 666.49482692945617,
-        "Top": 403.52450412710726,
-        "Width": 754.54424999841285,
-        "Height": 168.50158828615258,
+        "Left": 243.10597221741773,
+        "Top": 243.53746370604262,
+        "Width": 449.493270074409,
+        "Height": 199.71866488737078,
         "FontSize": 36.0,
-        "InitialTop": 456.52450412710726,
-        "InitialHeight": 167.50158828615258,
+        "InitialTop": 296.53746370604262,
+        "InitialHeight": 198.71866488737078,
         "TextblockHeight": 43.0,
         "Background": "#FFC1D676"
       },
@@ -1914,7 +2265,7 @@
         "Left": 2207.856479480839,
         "Top": -200.75110384932316,
         "Width": 187.0,
-        "Height": 162.0,
+        "Height": 147.0,
         "FontSize": 36.0,
         "InitialTop": -147.75110384932316,
         "InitialHeight": 145.0,
@@ -1926,17 +2277,17 @@
         "Title": "INPUT",
         "Nodes": [
           "9db5333f848740028c9ad60e69d35789",
-          "404e59a6202f420e8b700063fcd51fdc",
-          "5aac5b4080384aa088ff3e1f252a7dac",
-          "b4a905690d1045dc897d08827cd02d7d"
+          "7ebb772049024891b466db384c433cc5",
+          "e52befa904ef4963bf858069a571763e",
+          "ded6eec614ff48318cfce5538a86f100"
         ],
-        "Left": -2182.5673785432546,
-        "Top": -138.7913074974856,
-        "Width": 394.0,
-        "Height": 624.55118089733571,
+        "Left": -2175.7677810480723,
+        "Top": -172.4481879604088,
+        "Width": 411.41124998535315,
+        "Height": 607.95188121663637,
         "FontSize": 36.0,
-        "InitialTop": -85.7913074974856,
-        "InitialHeight": 623.55118089733571,
+        "InitialTop": -119.4481879604088,
+        "InitialHeight": 606.95188121663637,
         "TextblockHeight": 43.0,
         "Background": "#FFC1D676"
       },
@@ -1948,13 +2299,33 @@
           "e9ddccf7d1d643ecaf38078176d189e6",
           "eb677915a2cc45fa9492c7928369da7d"
         ],
-        "Left": 1769.9671719189823,
-        "Top": 264.06437850228826,
+        "Left": 1906.4668914015933,
+        "Top": 147.97583202642295,
         "Width": 674.06694075718724,
         "Height": 198.0,
         "FontSize": 36.0,
-        "InitialTop": 317.06437850228826,
+        "InitialTop": 200.97583202642295,
         "InitialHeight": 165.02582934638815,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "692530a141fd4895a101b66143d8b2f8",
+        "Title": "Get Floor Types",
+        "Nodes": [
+          "e5e0c989ee38411eac9be4a7849477bc",
+          "aafa8485afdb4500ba194e8afaad89e5",
+          "92a78339ee9240e1b081a76046feb059",
+          "8c798f0dd41f47d48adb40426745dbba",
+          "03eb8b3515764873808f9c6e45d6230b"
+        ],
+        "Left": -339.27268812573584,
+        "Top": 465.36494607749444,
+        "Width": 998.564209543812,
+        "Height": 148.04014912796993,
+        "FontSize": 36.0,
+        "InitialTop": 518.36494607749444,
+        "InitialHeight": 147.04014912796993,
         "TextblockHeight": 43.0,
         "Background": "#FFC1D676"
       },
@@ -2015,8 +2386,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": 806.402399465559,
-    "Y": 488.47694341833437,
-    "Zoom": 0.26209748323234838
+    "X": 3743.8599954046031,
+    "Y": 352.81720910462536,
+    "Zoom": 1.6854353088665941
   }
 }

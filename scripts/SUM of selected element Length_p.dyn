@@ -15,7 +15,15 @@
       "Description": "Creates a string."
     }
   ],
-  "Outputs": [],
+  "Outputs": [
+    {
+      "Id": "bfa9fdcbd6d0432bba70ca6ba24b182d",
+      "Name": "Dlzka v m",
+      "Type": "unknown",
+      "InitialValue": "",
+      "Description": "Visualize the output of node."
+    }
+  ],
   "Nodes": [
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -333,25 +341,6 @@
       "Description": "Allows for DesignScript code to be authored directly"
     },
     {
-      "ConcreteType": "Dynamo.Nodes.DSModelElementsSelection, DSRevitNodesUI",
-      "NodeType": "ExtensionNode",
-      "InstanceId": [],
-      "Id": "eb75ffa1d82d481ab1e6cc4fbbeebcf8",
-      "Inputs": [],
-      "Outputs": [
-        {
-          "Id": "7ea1d82731e042fe8f1f6add00679579",
-          "Name": "Elements",
-          "Description": "The selected elements.",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled"
-    },
-    {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
       "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"SUM of selected element Length\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
@@ -381,6 +370,25 @@
       ],
       "Replication": "Disabled",
       "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementsSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [],
+      "Id": "b2b23f7ccc1e48038d9103290a07ddb8",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4ead799dd1354e3b837623cc22ec15ea",
+          "Name": "Elements",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
     }
   ],
   "Connectors": [
@@ -425,14 +433,14 @@
       "Id": "b5dc135b93cf4460a04274715cb7ee28"
     },
     {
-      "Start": "7ea1d82731e042fe8f1f6add00679579",
+      "Start": "4ead799dd1354e3b837623cc22ec15ea",
       "End": "ca1b1822571f4f6dbeccdb2abaab496e",
-      "Id": "7ec51a293d294ae3b3c0c1447c36c3b3"
+      "Id": "91561076fa324f53b5642abc94530110"
     },
     {
-      "Start": "7ea1d82731e042fe8f1f6add00679579",
+      "Start": "4ead799dd1354e3b837623cc22ec15ea",
       "End": "2120eb8ebb4147269eda47b2c40fb9e0",
-      "Id": "78e5383ddc64485fb8b22b6fd52fb95d"
+      "Id": "791e49a7726b4254b56811d61be50f4f"
     }
   ],
   "Dependencies": [],
@@ -441,7 +449,7 @@
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
-      "HasRunWithoutCrash": false,
+      "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
       "Version": "2.3.0.5885",
       "RunType": "Manual",
@@ -525,7 +533,7 @@
         "Name": "Dlzka v m",
         "Id": "bfa9fdcbd6d0432bba70ca6ba24b182d",
         "IsSetAsInput": false,
-        "IsSetAsOutput": false,
+        "IsSetAsOutput": true,
         "Excluded": false,
         "X": 92.9931167729202,
         "Y": 483.559821242944
@@ -572,16 +580,6 @@
       },
       {
         "ShowGeometry": true,
-        "Name": "Vyberte elementy oknom",
-        "Id": "eb75ffa1d82d481ab1e6cc4fbbeebcf8",
-        "IsSetAsInput": true,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 22.9096000469997,
-        "Y": 140.81381055933
-      },
-      {
-        "ShowGeometry": true,
         "Name": "PY log",
         "Id": "8af1e24df8ac4225813cf0b35024343a",
         "IsSetAsInput": false,
@@ -589,6 +587,16 @@
         "Excluded": false,
         "X": 38.926129129359879,
         "Y": 619.25082930560438
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Vyberte elementy oknom",
+        "Id": "b2b23f7ccc1e48038d9103290a07ddb8",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 34.430218709983706,
+        "Y": 156.70308731829044
       }
     ],
     "Annotations": [
@@ -596,16 +604,16 @@
         "Id": "6e4e09aa7a2c4bfaaa2caa868f2d40ec",
         "Title": "INPUT",
         "Nodes": [
-          "eb75ffa1d82d481ab1e6cc4fbbeebcf8",
-          "b34b1d793d5a47cf8e3d27c026327669"
+          "b34b1d793d5a47cf8e3d27c026327669",
+          "b2b23f7ccc1e48038d9103290a07ddb8"
         ],
         "Left": -1.1913047520973805,
         "Top": -48.84460325165135,
         "Width": 308.0,
-        "Height": 308.65841381098136,
+        "Height": 324.54769056994178,
         "FontSize": 30.0,
-        "InitialTop": -2.84460325165135,
-        "InitialHeight": 292.658413810981,
+        "InitialTop": -2.8446032516513498,
+        "InitialHeight": 261.86912752627592,
         "TextblockHeight": 36.0,
         "Background": "#FFC1D676"
       },
@@ -614,7 +622,7 @@
         "Title": "Spocita dlzku jednotlivych elementov.\r\n\r\nElementy je potrebne vybrat cez Crossing Window. Podporovane su vsetky elementy, ktore maju parameter Length (Railings, Walls, Lines...)",
         "Nodes": [],
         "Left": 8.80869524790262,
-        "Top": -2.84460325165135,
+        "Top": -2.8446032516513498,
         "Width": 0.0,
         "Height": 0.0,
         "FontSize": 36.0,
@@ -624,8 +632,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": 298.517865488523,
-    "Y": 156.455233629671,
-    "Zoom": 0.709238753062544
+    "X": 129.41865896363902,
+    "Y": 366.43867817527581,
+    "Zoom": 0.55259260745116745
   }
 }
