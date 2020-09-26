@@ -11,12 +11,12 @@ Kompatibilita: Dynamo 2.3 - je súčasťou Revitu 2020.2
 ![alt text](https://static.miraheze.org/gfiwiki/a/a8/DynamoToposurface1.PNG "ukážka skriptu TopographyMeter-LoadLegend.dyn")
 
 ## Youtube
-[![Click to watch video on Youtube](https://img.youtube.com/vi/2LBi9p3gPiY/0.jpg)](https://youtu.be/G1FyT3xQ7SU)
+[![Click to watch video on Youtube](https://img.youtube.com/vi/G1FyT3xQ7SU/0.jpg)](https://youtu.be/G1FyT3xQ7SU)
 
-[![Click to watch video on Youtube](https://img.youtube.com/vi/iTW9NoQGErE/0.jpg)](https://youtu.be/jWGyl-8PpIY)
+[![Click to watch video on Youtube](https://img.youtube.com/vi/jWGyl-8PpIY/0.jpg)](https://youtu.be/jWGyl-8PpIY)
 
-[![Click to watch video on Youtube](https://img.youtube.com/vi/2LBi9p3gPiY/0.jpg)](https://youtu.be/g0C7OiLBA04)
+[![Click to watch video on Youtube](https://img.youtube.com/vi/g0C7OiLBA04/0.jpg)](https://youtu.be/g0C7OiLBA04)
 
 [![Click to watch video on Youtube](https://img.youtube.com/vi/2LBi9p3gPiY/0.jpg)](https://youtu.be/2LBi9p3gPiY)
 
-[![Click to watch video on Youtube](https://img.youtube.com/vi/2LBi9p3gPiY/0.jpg)](https://youtu.be/iTW9NoQGErE)
+[![Click to watch video on Youtube](https://img.youtube.com/vi/iTW9NoQGErE/0.jpg)](https://youtu.be/iTW9NoQGErE)
