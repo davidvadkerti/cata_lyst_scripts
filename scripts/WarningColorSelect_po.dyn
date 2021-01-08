@@ -2,7 +2,7 @@
   "Uuid": "40551574-5b73-45a2-90f8-cac87fc2d383",
   "IsCustomNode": false,
   "Description": null,
-  "Name": "WarningColorSelect",
+  "Name": "WarningColorSelect_po",
   "ElementResolver": {
     "ResolutionMap": {}
   },
@@ -322,6 +322,37 @@
       ],
       "Replication": "Auto",
       "Description": "Select Element by Id\n\nSelect.ByElementId (id: var): var[]..[]"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"WarningColorSelect\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\ntry:\r\n\tlastBackslash = filePath.rindex(\"\\\\\")+1\r\nexcept:\r\n\tlastBackslash = filePath.rindex(\"/\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "VariableInputPorts": true,
+      "Id": "cc0f3c15fea743898025d732a1f3bf7b",
+      "Inputs": [
+        {
+          "Id": "b97e98ae7cf94e438acf8c8d67c3a7e6",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "618413c0fb7c4aa3965dedd67ecea9a8",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
     }
   ],
   "Connectors": [
@@ -374,13 +405,27 @@
   "Dependencies": [
     "8d999e76-78ae-4cc6-a4a3-b50679a618e8"
   ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "archi-lab.net",
+      "Version": "2020.23.2",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "3f4ca428411c4c4cafab08fb07ccaefc",
+        "a5a15b271846471b86544169693eff79",
+        "75a30514f55a43a5869bd8b49aa28762",
+        "e8b1966edb31481a8f4477885dd94c4b",
+        "ef4949e27edd47578daabf9ff0a89045"
+      ]
+    }
+  ],
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.2.1.5175",
+      "Version": "2.3.0.5885",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -398,104 +443,114 @@
     },
     "NodeViews": [
       {
+        "ShowGeometry": true,
+        "Name": "Warning.GetWarnings",
         "Id": "3f4ca428411c4c4cafab08fb07ccaefc",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Warning.GetWarnings",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 100.49383756083773,
         "Y": 261.05364522786152
       },
       {
+        "ShowGeometry": true,
+        "Name": "Warning.Elements",
         "Id": "a5a15b271846471b86544169693eff79",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Warning.Elements",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 279.15581702484815,
         "Y": 253.21843200241744
       },
       {
+        "ShowGeometry": true,
+        "Name": "WarningElement.Id",
         "Id": "75a30514f55a43a5869bd8b49aa28762",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "WarningElement.Id",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1025.0813016977675,
         "Y": 245.263402337142
       },
       {
+        "ShowGeometry": true,
+        "Name": "List.Flatten",
         "Id": "bf55f62ed472465a8dfc6f498b6b7274",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "List.Flatten",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1298.1633847724715,
         "Y": 235.21909045758593
       },
       {
+        "ShowGeometry": true,
+        "Name": "PY select elements",
         "Id": "75e67c2b60c045b793a9ed75367a0782",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "PY select elements",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1641.8396867928523,
         "Y": 109.57961847403452
       },
       {
+        "ShowGeometry": true,
+        "Name": "Element.OverrideColorInView",
         "Id": "6d720bd99d774644a232e2fc5395f515",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Element.OverrideColorInView",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1790.8179298898035,
         "Y": 320.65181043809349
       },
       {
+        "ShowGeometry": true,
+        "Name": "Color Palette",
         "Id": "3a40fec98d484a0fbda99da0c877c976",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Color Palette",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 139.78030996561472,
         "Y": 523.92558678471119
       },
       {
+        "ShowGeometry": true,
+        "Name": "Clear List",
         "Id": "e8b1966edb31481a8f4477885dd94c4b",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Clear List",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 806.003525639285,
         "Y": 268.06822864017249
       },
       {
+        "ShowGeometry": true,
+        "Name": "List.Flatten",
         "Id": "31211b946be84ca3b667ed4c644ed4f1",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "List.Flatten",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 588.53493374783181,
         "Y": 242.98696680574659
       },
       {
+        "ShowGeometry": true,
+        "Name": "Select.ByElementId",
         "Id": "ef4949e27edd47578daabf9ff0a89045",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Select.ByElementId",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1558.9062284314184,
         "Y": 287.406332916501
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY log",
+        "Id": "cc0f3c15fea743898025d732a1f3bf7b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 213.28258368250476,
+        "Y": 722.8702143767282
       }
     ],
     "Annotations": [
@@ -550,8 +605,8 @@
         "Background": "#FFFF7BAC"
       }
     ],
-    "X": 64.576856752990125,
-    "Y": 193.21459998388727,
-    "Zoom": 0.34279130111798434
+    "X": 299.75236708658821,
+    "Y": 109.27280348713725,
+    "Zoom": 0.47284758819273787
   }
 }

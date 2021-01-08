@@ -961,7 +961,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"numberingWalls\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"numberingWalls\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\ntry:\r\n\tlastBackslash = filePath.rindex(\"\\\\\")+1\r\nexcept:\r\n\tlastBackslash = filePath.rindex(\"/\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
       "VariableInputPorts": true,
       "Id": "10bd0b6035cf4f169dfacda8f1ee8a24",
       "Inputs": [
@@ -1540,8 +1540,8 @@
         ],
         "Left": 172.752089095558,
         "Top": -148.6451869804269,
-        "Width": 272.0,
-        "Height": 518.01784909961,
+        "Width": 213.09040540454185,
+        "Height": 452.01784909960992,
         "FontSize": 36.0,
         "InitialTop": -95.6451869804269,
         "InitialHeight": 425.01784909960992,
@@ -1549,8 +1549,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": -0.0014522280501125806,
-    "Y": 84.679418562075341,
+    "X": 87.998547771949887,
+    "Y": 143.67941856207534,
     "Zoom": 0.86880133114520408
   }
 }

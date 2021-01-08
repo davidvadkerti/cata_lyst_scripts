@@ -429,7 +429,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Converts a Dynamo mesh to a polysurface. Uses multithreading - optimized for 4 cores."
+      "Description": "Converts a Dynamo mesh to a polysurface. By default the node is single threaded, but if you specify a higher number of threads in the `NUMTHREAD` input, the node will run multi-threaded to speed up the conversion.\r\n\r\n*WARNING* Using multi-threaded code with Dynamo's geometry kernel may crash Revit in some cases."
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
@@ -726,7 +726,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Get the actual sketch lines of a sketch based element (floor, ceiling, modified wall, etc.) . You can optionally fetch the matching model curves, however this might prove comptationally heavy on larger data sets."
+      "Description": "Get the actual sketch lines of a sketch based element (floor, ceiling, modified wall, etc.) . You can optionally fetch the matching model curves, however this might prove comptationally heavy on larger data sets. Does not work with elements from linked files."
     },
     {
       "ConcreteType": "CoreNodeModels.CreateList, CoreNodeModels",
@@ -1276,7 +1276,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Get the actual sketch lines of a sketch based element (floor, ceiling, modified wall, etc.) . You can optionally fetch the matching model curves, however this might prove comptationally heavy on larger data sets."
+      "Description": "Get the actual sketch lines of a sketch based element (floor, ceiling, modified wall, etc.) . You can optionally fetch the matching model curves, however this might prove comptationally heavy on larger data sets. Does not work with elements from linked files."
     },
     {
       "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
@@ -1619,7 +1619,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"subregion2floorOnTopo\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"subregion2floorOnTopo\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\ntry:\r\n\tlastBackslash = filePath.rindex(\"\\\\\")+1\r\nexcept:\r\n\tlastBackslash = filePath.rindex(\"/\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
       "VariableInputPorts": true,
       "Id": "fcfd9c267bba4ef9b250b13fa5ccae92",
       "Inputs": [
@@ -2475,7 +2475,7 @@
         "Height": 295.568181184095,
         "FontSize": 30.0,
         "InitialTop": -547.060586789195,
-        "InitialHeight": 279.568181184095,
+        "InitialHeight": 326.568181184095,
         "TextblockHeight": 36.0,
         "Background": "#FFFF7BAC"
       },
@@ -2493,7 +2493,7 @@
         "Height": 147.15644470200328,
         "FontSize": 30.0,
         "InitialTop": 34.5469461617762,
-        "InitialHeight": 128.719625387754,
+        "InitialHeight": 153.15644470200328,
         "TextblockHeight": 36.0,
         "Background": "#FFFFAA45"
       },
@@ -2514,7 +2514,7 @@
         "Height": 441.027336786696,
         "FontSize": 30.0,
         "InitialTop": -559.483202909495,
-        "InitialHeight": 425.027336786696,
+        "InitialHeight": 437.027336786696,
         "TextblockHeight": 36.0,
         "Background": "#FFC1D676"
       },
@@ -2534,7 +2534,7 @@
         "Height": 393.43227201659903,
         "FontSize": 30.0,
         "InitialTop": 267.717230315642,
-        "InitialHeight": 377.432272016599,
+        "InitialHeight": 389.43227201659903,
         "TextblockHeight": 36.0,
         "Background": "#FFE8F7AD"
       },
@@ -2556,7 +2556,7 @@
         "Height": 329.67047270371995,
         "FontSize": 30.0,
         "InitialTop": 334.118737555562,
-        "InitialHeight": 427.692831416794,
+        "InitialHeight": 326.568181184095,
         "TextblockHeight": 36.0,
         "Background": "#FF48B9FF"
       },
@@ -2576,7 +2576,7 @@
         "Height": 836.781157641147,
         "FontSize": 30.0,
         "InitialTop": 133.9216205829,
-        "InitialHeight": 820.781157641147,
+        "InitialHeight": 842.781157641147,
         "TextblockHeight": 36.0,
         "Background": "#FFC1D676"
       }

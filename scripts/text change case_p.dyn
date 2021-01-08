@@ -494,7 +494,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"text change case\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"text change case\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\ntry:\r\n\tlastBackslash = filePath.rindex(\"\\\\\")+1\r\nexcept:\r\n\tlastBackslash = filePath.rindex(\"/\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
       "VariableInputPorts": true,
       "Id": "1205be495036482aa8cc4dab6e98a2a6",
       "Inputs": [
@@ -782,8 +782,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 69.912470495614571,
-        "Y": 491.85546399690674
+        "X": 69.18426350555,
+        "Y": 492.58367098697119
       }
     ],
     "Annotations": [
@@ -802,7 +802,7 @@
         "Height": 168.827151362738,
         "FontSize": 14.0,
         "InitialTop": 314.505124766348,
-        "InitialHeight": 194.220379088742,
+        "InitialHeight": 164.827151362738,
         "TextblockHeight": 20.0,
         "Background": "#FFFFAA45"
       },
@@ -820,7 +820,7 @@
         "Height": 222.6107092611727,
         "FontSize": 14.0,
         "InitialTop": -17.9322425127962,
-        "InitialHeight": 247.313643837494,
+        "InitialHeight": 218.6107092611727,
         "TextblockHeight": 20.0,
         "Background": "#FFFFAA45"
       },
@@ -838,7 +838,7 @@
         "Height": 275.730774423124,
         "FontSize": 14.0,
         "InitialTop": 230.627715675921,
-        "InitialHeight": 273.308496412755,
+        "InitialHeight": 322.730774423124,
         "TextblockHeight": 20.0,
         "Background": "#FFC1D676"
       }

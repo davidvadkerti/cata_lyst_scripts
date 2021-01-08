@@ -40,8 +40,33 @@
       "Id": "2347386f97f24457ac7b087f66ae5307",
       "Name": "Kód profesie",
       "Type": "string",
-      "Value": "VZ",
+      "Value": "GS",
       "Description": "Creates a string."
+    },
+    {
+      "Id": "ba67a42256894410b05ab79c9f6796e1",
+      "Name": "Parameter pre kód profesie",
+      "Type": "string",
+      "Value": "Poznámka",
+      "Description": "Creates a string."
+    },
+    {
+      "Id": "3ee47110e9b44ef68e52b278a90a130c",
+      "Name": "Označenie poschodia",
+      "Type": "string",
+      "Value": "01",
+      "Description": "Creates a string."
+    },
+    {
+      "Id": "5f09a83e6e15442ca48cfc656f902ed4",
+      "Name": "Rozsah Dole",
+      "Type": "number",
+      "Value": "3000",
+      "MaximumValue": 8000.0,
+      "MinimumValue": 0.0,
+      "StepValue": 100.0,
+      "NumberType": "Double",
+      "Description": "A slider that produces numeric values."
     }
   ],
   "Outputs": [],
@@ -1046,26 +1071,6 @@
     {
       "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
       "NodeType": "StringInputNode",
-      "InputValue": "Profesia",
-      "Id": "e72a480134e64e0bbd96c5d52d439400",
-      "Inputs": [],
-      "Outputs": [
-        {
-          "Id": "60a113f3ae4b4edaa0c6f6788ece4d29",
-          "Name": "",
-          "Description": "String",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "Creates a string."
-    },
-    {
-      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
-      "NodeType": "StringInputNode",
       "InputValue": "Vo vybranej stene vytvorí automaticky prierazy pre vybrané VZT potrubia obdĺžnikového prierezu - Duct alebo káblové žľaby - Cable Trays. V projekte musí byť naloadovaná family s názvom \"Prieraz_RECT_stena\" a pridaný Shared Parameter \"Profesia\".\r\n\r\nTrasy profesií je potrebné dočasne nakopírovať priamo do projektu. Nestačí mať naloadovaný link.\r\n\r\nJe potrebné mať nainštalované packages Clockwork a Springs",
       "Id": "4f6b9c7df7a9408fb55fc30928de2ac2",
       "Inputs": [],
@@ -1108,7 +1113,7 @@
       "ConcreteType": "Dynamo.Nodes.DSModelElementsSelection, DSRevitNodesUI",
       "NodeType": "ExtensionNode",
       "InstanceId": [
-        "93ab6b57-da83-471a-8635-e4781de92b9d-01a8eed4"
+        "93ab6b57-da83-471a-8635-e4781de92b9d-01a8f222"
       ],
       "Id": "895eb3c524e94777ad9dac1b77cf763b",
       "Inputs": [],
@@ -1176,7 +1181,7 @@
     {
       "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
       "NodeType": "StringInputNode",
-      "InputValue": "VZ",
+      "InputValue": "GS",
       "Id": "2347386f97f24457ac7b087f66ae5307",
       "Inputs": [],
       "Outputs": [
@@ -1196,7 +1201,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"prierazyRectDucts&cableTrays\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\ntry:\r\n\tlastBackslash = filePath.rindex(\"\\\\\")+1\r\nexcept:\r\n\tlastBackslash = filePath.rindex(\"/\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"prierazyRectDucts&cableTraysE2\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
       "VariableInputPorts": true,
       "Id": "4b1651b0513b44deaa3e946b72498fd8",
       "Inputs": [
@@ -1674,6 +1679,403 @@
       ],
       "Replication": "Disabled",
       "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Poznámka",
+      "Id": "ba67a42256894410b05ab79c9f6796e1",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7cf293d82821493986ccce8566d8eb95",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "01",
+      "Id": "3ee47110e9b44ef68e52b278a90a130c",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "e8552e7e40aa4d5e91ef442a962e768a",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.GetParameterValueByName@string",
+      "Id": "dea16efa3c5249709f9bf5ce0d73c9c1",
+      "Inputs": [
+        {
+          "Id": "d12ac3108cb344cc820ce236dac67f19",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a02023213c5849a7822ccf72403ad3ef",
+          "Name": "parameterName",
+          "Description": "The name of the parameter whose value you want to obtain.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1f8232ea30524642970a36a9f6199826",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the value of one of the element's parameters.\n\nElement.GetParameterValueByName (parameterName: string): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.SetParameterByName@string,var",
+      "Id": "09ac5f28801a4001aef4f20a182ab3e5",
+      "Inputs": [
+        {
+          "Id": "9180bf24574b444a876fe8678b2494d1",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6a563de91a3146189400f9c561c4c469",
+          "Name": "parameterName",
+          "Description": "The name of the parameter to set.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "cd6e2952d4f54ed89bcea79cc0f4585e",
+          "Name": "value",
+          "Description": "The value.\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f796e8a9638d4489aca39ab144cae462",
+          "Name": "Element",
+          "Description": "Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Set one of the element's parameters.\n\nElement.SetParameterByName (parameterName: string, value: var): Element"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Stavba KOD",
+      "Id": "69b143f9d861416dab3a9be2006b6a9e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "fe3bb66e9ebe497f9422c9b20e4f7449",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Poschodie",
+      "Id": "51460efdb62b4f70bb0f78971f3f5360",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "5e38cc1946c1426fba98cf6eb3b96aa5",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.SetParameterByName@string,var",
+      "Id": "6223345eb24a4773b86bf99b5a24da2b",
+      "Inputs": [
+        {
+          "Id": "cd0ef024f8374f67990aa877b4d0150e",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4ea95e7df9c84c6ab34005356cb59204",
+          "Name": "parameterName",
+          "Description": "The name of the parameter to set.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c9f1a4089a634ee8b5df60977daff9eb",
+          "Name": "value",
+          "Description": "The value.\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ad13733fa372418ea261bcb1158c2879",
+          "Name": "Element",
+          "Description": "Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Set one of the element's parameters.\n\nElement.SetParameterByName (parameterName: string, value: var): Element"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.SetParameterByName@string,var",
+      "Id": "56652888a3e143798099d5dda155ed6b",
+      "Inputs": [
+        {
+          "Id": "00d91c74489c49d7bd6c72a72c873479",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d518ddd26c704c588440adcb151fad66",
+          "Name": "parameterName",
+          "Description": "The name of the parameter to set.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c1035c3f78774b2aadedea0ab3fa4c9e",
+          "Name": "value",
+          "Description": "The value.\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "857704ce8bc44735a808fc4a9bfbfdb8",
+          "Name": "Element",
+          "Description": "Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Set one of the element's parameters.\n\nElement.SetParameterByName (parameterName: string, value: var): Element"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Rozsah Dole",
+      "Id": "1f1410bc90f4492bbcece80c6a71cb91",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1924dbaff587409489e892785430b26e",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DoubleSlider, CoreNodeModels",
+      "NodeType": "NumberInputNode",
+      "NumberType": "Double",
+      "MaximumValue": 8000.0,
+      "MinimumValue": 0.0,
+      "StepValue": 100.0,
+      "InputValue": 3000.0,
+      "Id": "5f09a83e6e15442ca48cfc656f902ed4",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "18aeb74989c04a1abcaec04c09f09c50",
+          "Name": "",
+          "Description": "Double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A slider that produces numeric values."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nid_list = IN[0]\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\n\r\nrecord = \"\"\r\nfor id_int in id_list:\r\n    line = datestamp + separator + str(id_int) + separator + user_name + \"\\n\"\r\n\r\n    # try:\r\n    # f = open(\"U:\\\\1603_Eurovea 2\\\\04_RP\\\\01 PROJEKT\\\\LOG\\\\prierazy\" + file_name +\".log\", \"a\")\r\n    # f.write(line)\r\n    # f.close()\r\n    record += line\r\n    # status = \"log has been written\"\r\n    # except:\r\n    #     pass\r\n        # status = \"something went wrong\"\r\nf = open(\"T:\\\\1603_Eurovea 2\\\\04_RP\\\\_Global\\\\01_PROJEKT\\\\10_LOG\\\\prierazy\\\\\" + file_name +\".log\", \"a\")\r\nf.write(record)\r\nf.close()\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = record",
+      "VariableInputPorts": true,
+      "Id": "2beaa90cb17045a191f827b0ab1bbc4a",
+      "Inputs": [
+        {
+          "Id": "6d01bcd956cf4eddbe6256463bfcc1b8",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7ee675340d1d432d9c0d3386027668c6",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "2851d9c536184cda856c47e0f6b7734b",
+      "Inputs": [
+        {
+          "Id": "cddf1f216a0f4ef485870318b2a3c7b2",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d5136cdd34db4533a6574b00e0dae377",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.Id",
+      "Id": "a129a688aae34fb4948b9df093a5eb40",
+      "Inputs": [
+        {
+          "Id": "8aa3b671b5044f17ba5dc16d14cebd39",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3b84f6bb1bca4ed0bcf2cb63abee00f0",
+          "Name": "int",
+          "Description": "int",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the Element Id for this element\n\nElement.Id: int"
     }
   ],
   "Connectors": [
@@ -1758,6 +2160,26 @@
       "Id": "930d0ccf7e1244d7aaf4055a3f29331f"
     },
     {
+      "Start": "fb5d3513fb594f6a92788aa74972186b",
+      "End": "9180bf24574b444a876fe8678b2494d1",
+      "Id": "823c443d803f40e3aa1ffa3b866542e3"
+    },
+    {
+      "Start": "fb5d3513fb594f6a92788aa74972186b",
+      "End": "cd0ef024f8374f67990aa877b4d0150e",
+      "Id": "ead11558a66a4b739398b46ce8a6cbf7"
+    },
+    {
+      "Start": "fb5d3513fb594f6a92788aa74972186b",
+      "End": "00d91c74489c49d7bd6c72a72c873479",
+      "Id": "2b0bcbcf13c940d78dcbb25c83e1c5d5"
+    },
+    {
+      "Start": "fb5d3513fb594f6a92788aa74972186b",
+      "End": "8aa3b671b5044f17ba5dc16d14cebd39",
+      "Id": "db0683dbeeef49d792d720982ed2e946"
+    },
+    {
       "Start": "e467e8fb3b0b4bb0926932f12dbd462f",
       "End": "e146804137b34a90b29737602d383c2f",
       "Id": "57e93631813e4449aaf3c20c6451d780"
@@ -1833,11 +2255,6 @@
       "Id": "635e0989e9bc4d4f9ad743875481ee01"
     },
     {
-      "Start": "60a113f3ae4b4edaa0c6f6788ece4d29",
-      "End": "00d9014772f84476bccb7279cadf1a23",
-      "Id": "e40a317e61c141e7ba0863fe86e98a47"
-    },
-    {
       "Start": "c8774afbfbfc4f00b4468dbbb668afe4",
       "End": "82a381fe307d434aad4cb51f2a078d08",
       "Id": "4513a0165f8e4b0a8b970083978ce0ec"
@@ -1851,6 +2268,11 @@
       "Start": "c8774afbfbfc4f00b4468dbbb668afe4",
       "End": "50457dd14502499bbcb6befc5b49ff32",
       "Id": "17da333af59143be8ec72e6aa7503d96"
+    },
+    {
+      "Start": "c8774afbfbfc4f00b4468dbbb668afe4",
+      "End": "d12ac3108cb344cc820ce236dac67f19",
+      "Id": "9fb4423589724bb3aded0a0a8643f5e1"
     },
     {
       "Start": "7d665119dde64836b60f7e625714dcdd",
@@ -1961,6 +2383,56 @@
       "Start": "de455457ab624f9189de7d3dde54bbcd",
       "End": "bc12ae0ea27c465daa07fcedb4cc836e",
       "Id": "49a5098b99fc44598c741dacdce83622"
+    },
+    {
+      "Start": "7cf293d82821493986ccce8566d8eb95",
+      "End": "00d9014772f84476bccb7279cadf1a23",
+      "Id": "835071a5717e4546992999cdb9e0f277"
+    },
+    {
+      "Start": "e8552e7e40aa4d5e91ef442a962e768a",
+      "End": "c9f1a4089a634ee8b5df60977daff9eb",
+      "Id": "e1c69ebdaadf4bda825017d460595b8b"
+    },
+    {
+      "Start": "1f8232ea30524642970a36a9f6199826",
+      "End": "cd6e2952d4f54ed89bcea79cc0f4585e",
+      "Id": "a4be97b186394ca5ad3cf700b9107f10"
+    },
+    {
+      "Start": "fe3bb66e9ebe497f9422c9b20e4f7449",
+      "End": "a02023213c5849a7822ccf72403ad3ef",
+      "Id": "db86b317d72d48fea6d7ad68797a56aa"
+    },
+    {
+      "Start": "fe3bb66e9ebe497f9422c9b20e4f7449",
+      "End": "6a563de91a3146189400f9c561c4c469",
+      "Id": "5759e470310a44b09085cf41fbf14247"
+    },
+    {
+      "Start": "5e38cc1946c1426fba98cf6eb3b96aa5",
+      "End": "4ea95e7df9c84c6ab34005356cb59204",
+      "Id": "351dc5bbaeee44ada3374c9557af4f5f"
+    },
+    {
+      "Start": "1924dbaff587409489e892785430b26e",
+      "End": "d518ddd26c704c588440adcb151fad66",
+      "Id": "185ccd9ecefd4f50b3e99757f9270251"
+    },
+    {
+      "Start": "18aeb74989c04a1abcaec04c09f09c50",
+      "End": "c1035c3f78774b2aadedea0ab3fa4c9e",
+      "Id": "8fb30a6e1dc546c9b281871a57d7de16"
+    },
+    {
+      "Start": "7ee675340d1d432d9c0d3386027668c6",
+      "End": "cddf1f216a0f4ef485870318b2a3c7b2",
+      "Id": "c209497d316c4479980e698040a96805"
+    },
+    {
+      "Start": "3b84f6bb1bca4ed0bcf2cb63abee00f0",
+      "End": "6d01bcd956cf4eddbe6256463bfcc1b8",
+      "Id": "8d97d7a1e7b447019368cc6f5c968887"
     }
   ],
   "Dependencies": [
@@ -2273,16 +2745,6 @@
       },
       {
         "ShowGeometry": true,
-        "Name": "Parameter Name",
-        "Id": "e72a480134e64e0bbd96c5d52d439400",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 2613.5292586602609,
-        "Y": 749.9854473257077
-      },
-      {
-        "ShowGeometry": true,
         "Name": "Návod",
         "Id": "4f6b9c7df7a9408fb55fc30928de2ac2",
         "IsSetAsInput": true,
@@ -2298,8 +2760,8 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -1430.2954016070998,
-        "Y": -534.92908890594708
+        "X": -1429.2492214090485,
+        "Y": -532.83672850984487
       },
       {
         "ShowGeometry": true,
@@ -2308,8 +2770,8 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -1496.7770306714074,
-        "Y": -380.76507496913325
+        "X": -1495.730850473356,
+        "Y": -378.67271457303104
       },
       {
         "ShowGeometry": true,
@@ -2318,8 +2780,8 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -1524.9239116723109,
-        "Y": -167.99218183179346
+        "X": -1523.8777314742595,
+        "Y": -165.89982143569125
       },
       {
         "ShowGeometry": true,
@@ -2328,8 +2790,8 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -1521.5895947999156,
-        "Y": -97.676045194298979
+        "X": -1520.5434146018642,
+        "Y": -95.583684798196771
       },
       {
         "ShowGeometry": true,
@@ -2338,8 +2800,8 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -1460.3479704607951,
-        "Y": -21.402350998036013
+        "X": -1459.3017902627437,
+        "Y": -19.309990601933805
       },
       {
         "ShowGeometry": true,
@@ -2348,8 +2810,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -1448.9948093814185,
-        "Y": 142.53755109359781
+        "X": -1460.1438008289961,
+        "Y": 373.8580090932295
       },
       {
         "ShowGeometry": true,
@@ -2490,6 +2952,136 @@
         "Excluded": false,
         "X": 2785.0309834504733,
         "Y": 1065.4623355359854
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Parameter pre kód profesie",
+        "Id": "ba67a42256894410b05ab79c9f6796e1",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -1503.5919548434827,
+        "Y": 61.264778061395987
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Označenie poschodia",
+        "Id": "3ee47110e9b44ef68e52b278a90a130c",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -1466.8143417460428,
+        "Y": 174.55699019080782
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.GetParameterValueByName",
+        "Id": "dea16efa3c5249709f9bf5ce0d73c9c1",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2548.55027193738,
+        "Y": 1680.5471260722582
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.SetParameterByName",
+        "Id": "09ac5f28801a4001aef4f20a182ab3e5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2971.2209850313193,
+        "Y": 1574.3088660279775
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Parameter Name",
+        "Id": "69b143f9d861416dab3a9be2006b6a9e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2292.59344983998,
+        "Y": 1573.7201611462581
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Parameter Name",
+        "Id": "51460efdb62b4f70bb0f78971f3f5360",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2579.9767733131193,
+        "Y": 1925.6410506043178
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.SetParameterByName",
+        "Id": "6223345eb24a4773b86bf99b5a24da2b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2952.44985101975,
+        "Y": 1933.5508719812381
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.SetParameterByName",
+        "Id": "56652888a3e143798099d5dda155ed6b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3012.12801438294,
+        "Y": 2172.259058393719
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Parameter Name",
+        "Id": "1f1410bc90f4492bbcece80c6a71cb91",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2639.65493667631,
+        "Y": 2164.3492370167987
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Rozsah Dole",
+        "Id": "5f09a83e6e15442ca48cfc656f902ed4",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -1510.0624128764473,
+        "Y": 275.40905795553311
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY log - ID elementu",
+        "Id": "2beaa90cb17045a191f827b0ab1bbc4a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3324.0497387983455,
+        "Y": -706.5781242796121
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "2851d9c536184cda856c47e0f6b7734b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3530.2512263775357,
+        "Y": -706.47712120536812
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.Id",
+        "Id": "a129a688aae34fb4948b9df093a5eb40",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3028.7465966269856,
+        "Y": -700.16152841120208
       }
     ],
     "Annotations": [
@@ -2520,15 +3112,18 @@
           "895eb3c524e94777ad9dac1b77cf763b",
           "73b2bb0a5795453d931ec6c84af7ec24",
           "2aea4d21a018450291fea9e72a73324d",
-          "2347386f97f24457ac7b087f66ae5307"
+          "2347386f97f24457ac7b087f66ae5307",
+          "ba67a42256894410b05ab79c9f6796e1",
+          "3ee47110e9b44ef68e52b278a90a130c",
+          "5f09a83e6e15442ca48cfc656f902ed4"
         ],
-        "Left": -1534.9239116723109,
-        "Top": -587.92908890594708,
+        "Left": -1533.8777314742595,
+        "Top": -585.83672850984487,
         "Width": 359.14688100090348,
-        "Height": 634.52673790791107,
+        "Height": 929.24578646537793,
         "FontSize": 36.0,
-        "InitialTop": -534.92908890594708,
-        "InitialHeight": 658.52673790791107,
+        "InitialTop": -532.83672850984487,
+        "InitialHeight": 953.24578646537793,
         "TextblockHeight": 43.0,
         "Background": "#FFC1D676"
       },
@@ -2677,24 +3272,74 @@
         "Background": "#FFC1D676"
       },
       {
-        "Id": "dcd3b6aba4934d2890235794803dc876",
-        "Title": "PROFESIA",
+        "Id": "39d2df50b63b4edfa2a82af264dd5b8d",
+        "Title": "setter - stavba kod",
         "Nodes": [
-          "e72a480134e64e0bbd96c5d52d439400"
+          "09ac5f28801a4001aef4f20a182ab3e5"
         ],
-        "Left": 2603.5292586602609,
-        "Top": 696.9854473257077,
-        "Width": 166.19666666666669,
-        "Height": 121.0,
+        "Left": 2961.2209850313193,
+        "Top": 1478.3088660279775,
+        "Width": 290.0,
+        "Height": 241.0,
         "FontSize": 36.0,
-        "InitialTop": 749.9854473257077,
+        "InitialTop": 1574.3088660279775,
         "InitialHeight": 145.0,
+        "TextblockHeight": 86.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "0218e500e143452e88f06f226f03bc88",
+        "Title": "setter - poschodie",
+        "Nodes": [
+          "6223345eb24a4773b86bf99b5a24da2b"
+        ],
+        "Left": 2942.44985101975,
+        "Top": 1880.5508719812381,
+        "Width": 290.0,
+        "Height": 198.0,
+        "FontSize": 36.0,
+        "InitialTop": 1933.5508719812381,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "64620dc811b3460e951df9cd345b978a",
+        "Title": "setter - Rozsah Dole",
+        "Nodes": [
+          "56652888a3e143798099d5dda155ed6b"
+        ],
+        "Left": 3002.12801438294,
+        "Top": 2076.259058393719,
+        "Width": 290.0,
+        "Height": 241.0,
+        "FontSize": 36.0,
+        "InitialTop": 2172.259058393719,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 86.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "cfb0d9f8a3094f179b52c7ab0572070a",
+        "Title": "logging IDs to log file",
+        "Nodes": [
+          "2beaa90cb17045a191f827b0ab1bbc4a",
+          "2851d9c536184cda856c47e0f6b7734b",
+          "a129a688aae34fb4948b9df093a5eb40"
+        ],
+        "Left": 3018.7465966269856,
+        "Top": -759.5781242796121,
+        "Width": 599.50462975055007,
+        "Height": 152.41659586841,
+        "FontSize": 36.0,
+        "InitialTop": -706.5781242796121,
+        "InitialHeight": 151.41659586841,
         "TextblockHeight": 43.0,
         "Background": "#FF48B9FF"
       }
     ],
-    "X": 2213.109839114707,
-    "Y": 401.25806238596658,
-    "Zoom": 1.2702537886260816
+    "X": 2354.1775684770632,
+    "Y": 14.065036150503431,
+    "Zoom": 1.4795922638508365
   }
 }
