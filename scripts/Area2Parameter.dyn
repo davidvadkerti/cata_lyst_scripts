@@ -1,0 +1,531 @@
+{
+  "Uuid": "97bee55e-96c7-42ff-8443-27637193ff92",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "Area2Parameter",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "2c25c0eb193a46129278d6fe629c99d2",
+      "Name": "Parameter to write",
+      "Type": "string",
+      "Value": "Comments",
+      "Description": "Creates a string."
+    },
+    {
+      "Id": "68c64d7830454e738cfc85187746bd39",
+      "Name": "zaohkrúlenie (počet desatinných miest)",
+      "Type": "number",
+      "Value": "2",
+      "MaximumValue": 4.0,
+      "MinimumValue": -3.0,
+      "StepValue": 1.0,
+      "NumberType": "Integer",
+      "Description": "A slider that produces integer values."
+    },
+    {
+      "Id": "0f7232ed5cdb4c689d9e51e93d44f3c3",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Zapíše zaokrúhlenú hodnotu plochy do zvoleného parametru. Vhodné napríklad na vyjazovanie plôch Filled Regionov cez Detail Tagy",
+      "Description": "Creates a string."
+    },
+    {
+      "Id": "ccbd4a7e98c24b77881f2761f31e80e7",
+      "Name": "Add Units?",
+      "Type": "boolean",
+      "Value": "false",
+      "Description": "Selection between a true and false."
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "125ca506-99fb-4a79-8799-a9f02d7195e4-00d0caf2"
+      ],
+      "Id": "13c629430be94ac99b9280b91a5e415d",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4ab08340e21743119a5c33c4fc6c6936",
+          "Name": "Element",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.GetParameterValueByName@string",
+      "Id": "6df1fb74c2324e24aa3be632bffeff3c",
+      "Inputs": [
+        {
+          "Id": "b43eacbb1016495493b6aef959c2fd00",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "74e1c962d292438cb7aa6a04770c870c",
+          "Name": "parameterName",
+          "Description": "The name of the parameter whose value you want to obtain.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1b274e36a6d54457a3de98d5a580d11c",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the value of one of the element's parameters.\n\nElement.GetParameterValueByName (parameterName: string): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Area\";",
+      "Id": "400efbcdcdcd41d4b684ef6ee5581021",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d50b37c80b684ac78b460b4d4b089d2b",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.SetParameterByName@string,var",
+      "Id": "4c17c41c3211468d8ca7ad3bfea39d06",
+      "Inputs": [
+        {
+          "Id": "a75a77df2fcb4469ba979b3e925c85b1",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "462cb3cdfa624a4daad3f313f57aee38",
+          "Name": "parameterName",
+          "Description": "The name of the parameter to set.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6190b39dd2a44cf39adf4ed8cb8d780f",
+          "Name": "value",
+          "Description": "The value.\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8d5044964fc94996b62ab6720c53ab89",
+          "Name": "Element",
+          "Description": "Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Set one of the element's parameters.\n\nElement.SetParameterByName (parameterName: string, value: var): Element"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Comments",
+      "Id": "2c25c0eb193a46129278d6fe629c99d2",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "928c7144b81244f3ada908795182f35a",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.IntegerSlider, CoreNodeModels",
+      "NodeType": "NumberInputNode",
+      "NumberType": "Integer",
+      "InputValue": 2,
+      "MaximumValue": 4,
+      "MinimumValue": -3,
+      "StepValue": 1,
+      "Id": "68c64d7830454e738cfc85187746bd39",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "e2564de66887449ca435630823211073",
+          "Name": "",
+          "Description": "Int32",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A slider that produces integer values."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n#decimal places\r\nn = IN[0]\r\n#number to round\r\nnum = IN[1]\r\nadd_units = IN[2]\r\n\r\nmultiplier = 10**n\r\nrounded_num = round(num*multiplier)/multiplier\r\nrounded_str = str(rounded_num)\r\n#removing ending 0.0 if not float\r\nif n<0:\r\n\trounded_str = rounded_str.split(\".\")[0]\r\nunits = \" m²\"\r\n\r\nif add_units:\r\n\tresult = rounded_str + units\r\nelse:\r\n\tresult = rounded_str\r\n\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = result",
+      "VariableInputPorts": true,
+      "Id": "4405177420e84f9dbed3c5f138ca8fa8",
+      "Inputs": [
+        {
+          "Id": "00bbac4b928c4df983da113aa9374182",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "510798ecf6a041eead7b9e2b3d8dc71c",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a907367e99d74b27b6d34146417dc14b",
+          "Name": "IN[2]",
+          "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9a69a9b1a34e421987a4861ae10c115b",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Zapíše zaokrúhlenú hodnotu plochy do zvoleného parametru. Vhodné napríklad na vyjazovanie plôch Filled Regionov cez Detail Tagy",
+      "Id": "0f7232ed5cdb4c689d9e51e93d44f3c3",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "a69282f0d54d45f496b64e83e6ac30fd",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": false,
+      "Id": "ccbd4a7e98c24b77881f2761f31e80e7",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "f1400da6cfc34fc2961c5dfc2d79671c",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"Area2Parameter\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "VariableInputPorts": true,
+      "Id": "09803b530da04e279c8f1deda365ea83",
+      "Inputs": [
+        {
+          "Id": "184bf012d7c042d5a4ce15d648f7d897",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1d4fe9aed75b45c68bfed9b50dd8537e",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "4ab08340e21743119a5c33c4fc6c6936",
+      "End": "b43eacbb1016495493b6aef959c2fd00",
+      "Id": "78f8debd27ff43328cd7fff0363e43bb"
+    },
+    {
+      "Start": "4ab08340e21743119a5c33c4fc6c6936",
+      "End": "a75a77df2fcb4469ba979b3e925c85b1",
+      "Id": "9171a66b86c54279a0d685b17f5ffa95"
+    },
+    {
+      "Start": "1b274e36a6d54457a3de98d5a580d11c",
+      "End": "510798ecf6a041eead7b9e2b3d8dc71c",
+      "Id": "0e00594010ca49769f1efb78d015f710"
+    },
+    {
+      "Start": "d50b37c80b684ac78b460b4d4b089d2b",
+      "End": "74e1c962d292438cb7aa6a04770c870c",
+      "Id": "0b6cfaf8cb6141278eacef9c53109752"
+    },
+    {
+      "Start": "928c7144b81244f3ada908795182f35a",
+      "End": "462cb3cdfa624a4daad3f313f57aee38",
+      "Id": "3131c249b4df4255a69110304323aa1f"
+    },
+    {
+      "Start": "e2564de66887449ca435630823211073",
+      "End": "00bbac4b928c4df983da113aa9374182",
+      "Id": "70e466b79ab944aa82a4b29e5ae7f037"
+    },
+    {
+      "Start": "9a69a9b1a34e421987a4861ae10c115b",
+      "End": "6190b39dd2a44cf39adf4ed8cb8d780f",
+      "Id": "9644e00de6a54bf7bf590ef5766f0f9e"
+    },
+    {
+      "Start": "f1400da6cfc34fc2961c5dfc2d79671c",
+      "End": "a907367e99d74b27b6d34146417dc14b",
+      "Id": "1acd294b2d304e9e845840044e67d2a0"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Vyber Element",
+        "Id": "13c629430be94ac99b9280b91a5e415d",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -33.945291047205956,
+        "Y": 71.5366233485646
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.GetParameterValueByName",
+        "Id": "6df1fb74c2324e24aa3be632bffeff3c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 431.5,
+        "Y": 227.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "400efbcdcdcd41d4b684ef6ee5581021",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 274.64154038203151,
+        "Y": 289.68372970020351
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.SetParameterByName",
+        "Id": "4c17c41c3211468d8ca7ad3bfea39d06",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1266.909305118666,
+        "Y": 127.81042127266244
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Parameter to write",
+        "Id": "2c25c0eb193a46129278d6fe629c99d2",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -26.686983505249145,
+        "Y": 212.59920963066764
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "zaohkrúlenie (počet desatinných miest)",
+        "Id": "68c64d7830454e738cfc85187746bd39",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -123.54745573184204,
+        "Y": 320.511126160825
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY round2string",
+        "Id": "4405177420e84f9dbed3c5f138ca8fa8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 900.77380448758572,
+        "Y": 322.02313442827227
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "0f7232ed5cdb4c689d9e51e93d44f3c3",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -55.0671167257787,
+        "Y": 492.61873367420162
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Add Units?",
+        "Id": "ccbd4a7e98c24b77881f2761f31e80e7",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -36.516066057279772,
+        "Y": 404.64678904664561
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY log",
+        "Id": "09803b530da04e279c8f1deda365ea83",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -56.512329352146708,
+        "Y": 704.9644573967671
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "672718939948413dad023cae49a72ca8",
+        "Title": "INPUT",
+        "Nodes": [
+          "13c629430be94ac99b9280b91a5e415d",
+          "2c25c0eb193a46129278d6fe629c99d2",
+          "68c64d7830454e738cfc85187746bd39",
+          "ccbd4a7e98c24b77881f2761f31e80e7"
+        ],
+        "Left": -133.54745573184204,
+        "Top": 18.536623348564603,
+        "Width": 319.0,
+        "Height": 454.110165698081,
+        "FontSize": 36.0,
+        "InitialTop": 71.5366233485646,
+        "InitialHeight": 478.110165698081,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 521.95811148493453,
+    "Y": -492.10105162437276,
+    "Zoom": 1.2071011375140888
+  }
+}
