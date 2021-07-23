@@ -1,0 +1,399 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "template",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "52341b4af96b4130b6234cc2c5da7082",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Návod, ktorý uvidí používateľ v Dynamo Playeri.\r\n\r\nJe potrebné mať nainštalované packages...",
+      "Description": "Creates a string."
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "c0bc9ae235e5483eb910802c217945a6",
+      "Name": "OUTPUT",
+      "Type": "unknown",
+      "InitialValue": "",
+      "Description": "Visualize the output of node."
+    }
+  ],
+  "Nodes": [
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Návod, ktorý uvidí používateľ v Dynamo Playeri.\r\n\r\nJe potrebné mať nainštalované packages...",
+      "Id": "52341b4af96b4130b6234cc2c5da7082",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1e8b96ab499b41be8f6e5dfdde4631af",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "c0bc9ae235e5483eb910802c217945a6",
+      "Inputs": [
+        {
+          "Id": "46699720e3364d85b26933aebde246c3",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "17ccc7cf2700449f96f08171b41dcdb6",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\nclr.AddReference(\"RevitServices\")\r\nclr.AddReference(\"RevitAPI\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom Autodesk.Revit import DB\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = uiapp.Application\r\n\r\nrooms = DB.FilteredElementCollector(doc).OfCategory(DB.BuiltInCategory.OST_Rooms).WhereElementIsNotElementType().ToElements()\r\nareas = []\r\nfor room in rooms:\r\n\tarea = room.LookupParameter(\"Area\").AsDouble()\r\n\tareas.append(area*0.3048*0.3048)\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = areas",
+      "VariableInputPorts": true,
+      "Id": "7f35899e5d154ebab93abec3ec818ec0",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "9f8b6eff2e9b4e6da3b1c3c3c2822935",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"novy nazov skriptu\";",
+      "Id": "73cd7974471643e498a789e2fd5e6f4e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "42a0a6ce60d64ec5b9b0ceaeb412359e",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "a1767834-0500-427d-95ae-021e5ab548e3",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "1752eaeeffac4c0b976f9bdac0dee9a2",
+      "Inputs": [
+        {
+          "Id": "3f415a7ba52f4cbbbe72ba002158c854",
+          "Name": "scriptName",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4d3289f268bd4b54bcdeca1de5306395",
+          "Name": "OUT",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "node logs every run of the script in which is used to the hardcoded server location"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "42a0a6ce60d64ec5b9b0ceaeb412359e",
+      "End": "3f415a7ba52f4cbbbe72ba002158c854",
+      "Id": "64e08775c4cf4c5395ed5b97d1eceac3"
+    }
+  ],
+  "Dependencies": [
+    "a1767834-0500-427d-95ae-021e5ab548e3"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "cata_lyst",
+      "Version": "0.0.1",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "1752eaeeffac4c0b976f9bdac0dee9a2"
+      ]
+    }
+  ],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -16.965513229370117,
+      "EyeY": 24.341577529907227,
+      "EyeZ": 50.649433135986328,
+      "LookX": 12.444104194641113,
+      "LookY": -13.011065483093262,
+      "LookZ": -58.544906616210938,
+      "UpX": -0.081237569451332092,
+      "UpY": 0.9205048680305481,
+      "UpZ": 0.3821927011013031
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "52341b4af96b4130b6234cc2c5da7082",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 4439.4985205202629,
+        "Y": 1513.0155994841055
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "OUTPUT",
+        "Id": "c0bc9ae235e5483eb910802c217945a6",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": true,
+        "Excluded": false,
+        "X": 5160.2706905259038,
+        "Y": 1783.6027773638655
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY FilterElementCollector",
+        "Id": "7f35899e5d154ebab93abec3ec818ec0",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 4676.5929373557983,
+        "Y": 1547.6139983724811
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "73cd7974471643e498a789e2fd5e6f4e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 4440.566207933668,
+        "Y": 1902.2299536168548
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "usageLog",
+        "Id": "1752eaeeffac4c0b976f9bdac0dee9a2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 4697.1734499946651,
+        "Y": 1900.6966973799674
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "585143ce8bf141259ccd8a7e6b8b2c14",
+        "Title": "INPUT",
+        "Nodes": [
+          "45f9052287544deab13260cf7d3564c7"
+        ],
+        "Left": 4435.1899676549292,
+        "Top": 1691.3094783514864,
+        "Width": 205.0,
+        "Height": 97.0,
+        "FontSize": 36.0,
+        "InitialTop": 1744.3094783514864,
+        "InitialHeight": 140.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "7ba934459f92445c81e22e629ed251d5",
+        "Title": "Filter",
+        "Nodes": [
+          "5f6f05b6e9724bb993e7db24e7b98145"
+        ],
+        "Left": 4665.8679237561737,
+        "Top": 1691.4545042881766,
+        "Width": 132.0,
+        "Height": 97.0,
+        "FontSize": 36.0,
+        "InitialTop": 1744.4545042881766,
+        "InitialHeight": 140.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FF48B9FF"
+      },
+      {
+        "Id": "80eb9287f18847999e0e7d6301b97704",
+        "Title": "OUTPUT",
+        "Nodes": [
+          "c0bc9ae235e5483eb910802c217945a6",
+          "d6a83ac2773e43b48f2689fa6c8797d2"
+        ],
+        "Left": 5147.3833756386875,
+        "Top": 1684.1092511369363,
+        "Width": 251.60268511278377,
+        "Height": 193.49352622692913,
+        "FontSize": 36.0,
+        "InitialTop": 1737.1092511369363,
+        "InitialHeight": 191.49352622692913,
+        "TextblockHeight": 43.0,
+        "Background": "#FFFFAA45"
+      },
+      {
+        "Id": "75458a1d5e1c43cd9ab96335befe82f0",
+        "Title": "Error handling",
+        "Nodes": [
+          "fbac99d55a8243498d52be11c8ef91ed"
+        ],
+        "Left": 4815.8634717590921,
+        "Top": 1687.0721248483126,
+        "Width": 307.0,
+        "Height": 112.0,
+        "FontSize": 36.0,
+        "InitialTop": 1740.0721248483126,
+        "InitialHeight": 140.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FFFF7BAC"
+      },
+      {
+        "Id": "45f9052287544deab13260cf7d3564c7",
+        "Title": "Place inputs for Dynamo Player",
+        "Nodes": [],
+        "Left": 4445.1899676549292,
+        "Top": 1744.3094783514864,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "5f6f05b6e9724bb993e7db24e7b98145",
+        "Title": "filtering elements",
+        "Nodes": [],
+        "Left": 4675.8679237561737,
+        "Top": 1744.4545042881766,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "d6a83ac2773e43b48f2689fa6c8797d2",
+        "Title": "Place output for Dynamo Player",
+        "Nodes": [],
+        "Left": 5157.3833756386875,
+        "Top": 1737.1092511369363,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "efebbb60727c4c1a8c061dc646a670ef",
+        "Title": "python FilterElementCollector",
+        "Nodes": [],
+        "Left": 4674.6425212343311,
+        "Top": 1497.5907103957732,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "fbac99d55a8243498d52be11c8ef91ed",
+        "Title": "Treating errors as hints to user what to do to avoid the error",
+        "Nodes": [],
+        "Left": 4825.8634717590921,
+        "Top": 1740.0721248483126,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "47c8aad0941842a4a3473fa7066b3944",
+        "Title": "Logovanie pre analytiku\r\nuprav nazov skriptu",
+        "Nodes": [],
+        "Left": 4439.4902340837289,
+        "Top": 1829.6146969048762,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": -3200.2124641249875,
+    "Y": -993.27724386125738,
+    "Zoom": 0.77134588332573117
+  }
+}
