@@ -1,0 +1,165 @@
+{
+  "Uuid": "5f732687-f860-477d-a5fe-e2d6c581024f",
+  "IsCustomNode": true,
+  "Category": "catalyst.dataManipulation",
+  "Description": "remove nulls from list",
+  "Name": "RemoveNullsV2",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "obj",
+        "TypeName": "var",
+        "TypeRank": -1,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "a23b2b5cf4e2496799b3b437a7512e68",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "49d4e678e60942689b378cc8ed2168ca",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndata = IN[0]\r\n\r\n# Place your code below this line\r\nresult = []\r\nfor d in data:\r\n\tif d is not None:\r\n\t\tresult.append(d)\r\n# Assign your output to the OUT variable.\r\nOUT = result",
+      "VariableInputPorts": true,
+      "Id": "6f762d0ab764491e8d624975d8e789a7",
+      "Inputs": [
+        {
+          "Id": "3173ce763ba143aaa8423a0fea8d3bb3",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ffaf64c78de64ae5862ecf9cb2d94e6d",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "items",
+      "Id": "32c00a2c5b99448592f00b25ec6df235",
+      "Inputs": [
+        {
+          "Id": "219a4e63ba124f32996fc0df94a635a4",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "49d4e678e60942689b378cc8ed2168ca",
+      "End": "3173ce763ba143aaa8423a0fea8d3bb3",
+      "Id": "892bda06f76a430cbf8c0398107f13c4"
+    },
+    {
+      "Start": "ffaf64c78de64ae5862ecf9cb2d94e6d",
+      "End": "219a4e63ba124f32996fc0df94a635a4",
+      "Id": "0fa24cbf9223478c87240f1470faed00"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -11986.827371184794,
+      "EyeY": 29894.120918646695,
+      "EyeZ": 21800.935929626088,
+      "LookX": -2099.5927342000414,
+      "LookY": -39539.655215343075,
+      "LookZ": -13545.919145587584,
+      "UpX": -0.130598205382158,
+      "UpY": 0.52249856471595124,
+      "UpZ": -0.8425789925109316
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Input",
+        "Id": "a23b2b5cf4e2496799b3b437a7512e68",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 81.949770459552383,
+        "Y": 149.98219584569742
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "6f762d0ab764491e8d624975d8e789a7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 337.56698114204437,
+        "Y": 154.67062314540061
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "32c00a2c5b99448592f00b25ec6df235",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 508.38915516242741,
+        "Y": 148.79525222551931
+      }
+    ],
+    "Annotations": [],
+    "X": 206.0,
+    "Y": 100.0,
+    "Zoom": 1.0
+  }
+}

@@ -5,8 +5,14 @@
 * [download](https://bitbucket.org/davidvadkerti/dynamoscripts/downloads/?tab=tags) - stiahnuť aktuálnu verziu Dynamo skriptov
 * [youtube channel](https://www.youtube.com/playlist?list=PL7jLBbBNDaKlnBmdsM1JXzFDyDtHQexBp) - videonávody k niektorým skriptom
 
+### Repozitár obsahuje 
+* viac ako 100 Dynamo skriptov, vačšinou pripravených pre Dynamo Player
+* Power BI template pre analytiku
+* package cata_lyst
+* template pre vytváranie Dynamo skriptov
 
-Kompatibilita: Dynamo 2.3 - je súčasťou Revitu 2020.2
+
+Kompatibilita: Dynamo 2.3 - je súčasťou Revitu 2020.4
 
 ![alt text](https://static.miraheze.org/gfiwiki/a/a8/DynamoToposurface1.PNG "ukážka skriptu TopographyMeter-LoadLegend.dyn")
 
@@ -20,3 +26,7 @@ Kompatibilita: Dynamo 2.3 - je súčasťou Revitu 2020.2
 [![Click to watch video on Youtube](https://img.youtube.com/vi/2LBi9p3gPiY/0.jpg)](https://youtu.be/2LBi9p3gPiY)
 
 [![Click to watch video on Youtube](https://img.youtube.com/vi/iTW9NoQGErE/0.jpg)](https://youtu.be/iTW9NoQGErE)
+
+[![Click to watch video on Youtube](https://img.youtube.com/vi/OIPYgD29jGo/0.jpg)](https://youtu.be/OIPYgD29jGo)
+
+[![Click to watch video on Youtube](https://img.youtube.com/vi/2e41kLyN-MU/0.jpg)](https://youtu.be/2e41kLyN-MU)

@@ -1,0 +1,318 @@
+{
+  "Uuid": "ac993e4f-584a-440b-a89e-eb6fe3e46898",
+  "IsCustomNode": true,
+  "Category": "catalyst.dataExtraction",
+  "Description": "export to excel without too much setting needed\r\nsheet name = Sheet 1\r\nstart = A0\r\noverwrite = false",
+  "Name": "simpleExcelExport",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Sheet 1\";\n0;\ntrue;",
+      "Id": "072eb3c5edaa40bca24e684d17f3474d",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7bef0bea23564c39af8d6ec7c2f356b5",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "53105ebd86454394a3be6a5066f8f382",
+          "Name": "",
+          "Description": "Value of expression at line 2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8d828d9a58ae4689ad55c218b60dd1e4",
+          "Name": "",
+          "Description": "Value of expression at line 3",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSOffice.Data.ExportExcel@string,string,int,int,var[][],bool",
+      "Id": "3771a148435a4d4fa7b452911d52db52",
+      "Inputs": [
+        {
+          "Id": "05b93ee292824688899feaa3483b17ec",
+          "Name": "filePath",
+          "Description": "File path to the Microsoft Excel spreadsheet.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "abc9d3d0226144269962ba9b1ef000f3",
+          "Name": "sheetName",
+          "Description": "Name of the workseet to write data to.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "607765698f154f9fb26744954d4cd577",
+          "Name": "startRow",
+          "Description": "Start row for writing data. Enter 0 for Row 1, 1 for Row 2, etc.\n\nint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6316b1c3261b4924977296794b77164c",
+          "Name": "startCol",
+          "Description": "Start column for writing data. Enter 0 for Column A, 1 for Column B, etc.\n\nint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "601112f9f3ee447c85e73be690fae3c1",
+          "Name": "data",
+          "Description": "Data to write to the spreadsheet.\n\nvar[][]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c0c68eae3a1f46d992d6bf22178d6bf8",
+          "Name": "overWrite",
+          "Description": "bool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0f87d39b30a54cea9570261ead9ea959",
+          "Name": "data",
+          "Description": "Data written to the spreadsheet.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Write data to a Microsoft Excel spreadsheet. Data is written by row with sublists to be written in successive rows. Rows and columns are zero-indexed; for example, the value in the data list at [0,0] will be written to cell A1. Null values and empty lists are written to Excel as empty cells. This node requires Microsoft Excel to be installed.\n\nData.ExportExcel (filePath: string, sheetName: string, startRow: int, startCol: int, data: var[][], overWrite: bool = false): var[][]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "data",
+      "Id": "48991dd616c74f67a0007cd301e05f1b",
+      "Inputs": [
+        {
+          "Id": "97006fd180c94f6a88acaabe23940f1b",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "data",
+        "TypeName": "var",
+        "TypeRank": -1,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "bead1cfd0a8e4913a5ccadc5ce147ec0",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "baf061969ece425984b46196bb587455",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "filePath",
+        "TypeName": "string",
+        "TypeRank": 0,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "da5e2b464bf44dedb55843b8fbeb1672",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "3057ed7f605f4441a867580d661d69a2",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "7bef0bea23564c39af8d6ec7c2f356b5",
+      "End": "abc9d3d0226144269962ba9b1ef000f3",
+      "Id": "66ec8f5457994bbaa91cb596c4d874fb"
+    },
+    {
+      "Start": "53105ebd86454394a3be6a5066f8f382",
+      "End": "607765698f154f9fb26744954d4cd577",
+      "Id": "e7e71e6e291a48c8a87874039b66ba26"
+    },
+    {
+      "Start": "53105ebd86454394a3be6a5066f8f382",
+      "End": "6316b1c3261b4924977296794b77164c",
+      "Id": "bfedaa93a74447fead8eaacfa335cc41"
+    },
+    {
+      "Start": "8d828d9a58ae4689ad55c218b60dd1e4",
+      "End": "c0c68eae3a1f46d992d6bf22178d6bf8",
+      "Id": "6539019b9cd6443bbd47aac76a68af29"
+    },
+    {
+      "Start": "0f87d39b30a54cea9570261ead9ea959",
+      "End": "97006fd180c94f6a88acaabe23940f1b",
+      "Id": "2f27b93f1e1c4451ab21b0c4e2203c1c"
+    },
+    {
+      "Start": "baf061969ece425984b46196bb587455",
+      "End": "601112f9f3ee447c85e73be690fae3c1",
+      "Id": "66d421207e83429ca3247d789f06183a"
+    },
+    {
+      "Start": "3057ed7f605f4441a867580d661d69a2",
+      "End": "05b93ee292824688899feaa3483b17ec",
+      "Id": "dce4ccad39fc4676bc17294b10cb604a"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "072eb3c5edaa40bca24e684d17f3474d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 336.00445103857567,
+        "Y": 96.065281899109777
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Data.ExportExcel",
+        "Id": "3771a148435a4d4fa7b452911d52db52",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 662.0,
+        "Y": 61.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "48991dd616c74f67a0007cd301e05f1b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 953.0,
+        "Y": 0.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Input",
+        "Id": "bead1cfd0a8e4913a5ccadc5ce147ec0",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 344.5,
+        "Y": 231.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Input",
+        "Id": "da5e2b464bf44dedb55843b8fbeb1672",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 321.97181008902078,
+        "Y": 2.2462908011870013
+      }
+    ],
+    "Annotations": [],
+    "X": 187.5625,
+    "Y": 271.02,
+    "Zoom": 0.8425
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "Uuid": "60e722c7-eba2-4799-aca9-a79eddc249d1",
+  "IsCustomNode": true,
+  "Category": "catalyst.revit.application",
+  "Description": "gets revit user name",
+  "Name": "revitUserName",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport clr\r\n\r\nclr.AddReference('RevitServices')\r\nfrom RevitServices.Persistence import DocumentManager\r\napp = DocumentManager.Instance.CurrentUIApplication.Application\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = app.Username",
+      "VariableInputPorts": true,
+      "Id": "df2ce7c360754afca0d354989fcd95c2",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d0f80a88b45b4d3ea0eec5256d4f46e9",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "OUT",
+      "Id": "c40385846e8745c39ddd4dcb62631fab",
+      "Inputs": [
+        {
+          "Id": "197c0feab48b40f4bbbd75f0789d611b",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "d0f80a88b45b4d3ea0eec5256d4f46e9",
+      "End": "197c0feab48b40f4bbbd75f0789d611b",
+      "Id": "3de0c47b21d3455a8c2759d9fb09aefb"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "Id": "df2ce7c360754afca0d354989fcd95c2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "revit username",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 250.0,
+        "Y": 0.0
+      },
+      {
+        "Id": "c40385846e8745c39ddd4dcb62631fab",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Output",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 431.0,
+        "Y": 0.0
+      }
+    ],
+    "Annotations": [],
+    "X": 0.0,
+    "Y": 0.0,
+    "Zoom": 1.0
+  }
+}

@@ -46,55 +46,6 @@
       "Description": "Creates a string."
     },
     {
-      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
-      "NodeType": "PythonScriptNode",
-      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\nboolean = IN[0]\r\ntrue = IN[1]\r\nfalse = IN[2]\r\n\r\n# Place your code below this line\r\nif boolean == 1:\r\n\tresult = true\r\nelif boolean == 0:\r\n\tresult = false\r\nelse:\r\n\tresult = null\r\n# Assign your output to the OUT variable.\r\nOUT = result",
-      "VariableInputPorts": true,
-      "Id": "cf61a687e42a4342b36637db5407e295",
-      "Inputs": [
-        {
-          "Id": "144fc6fb165244e199b36eb7e621564a",
-          "Name": "IN[0]",
-          "Description": "Input #0",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "629ee69454854491a6cad5be86abf120",
-          "Name": "IN[1]",
-          "Description": "Input #1",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "021958c5a96941e4a6a9c041b95b8b4d",
-          "Name": "IN[2]",
-          "Description": "Input #2",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "5d3b2a65fe444fb28e468e148232267b",
-          "Name": "OUT",
-          "Description": "Result of the python script",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "Runs an embedded IronPython script."
-    },
-    {
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
       "NodeType": "ExtensionNode",
       "Id": "c0bc9ae235e5483eb910802c217945a6",
@@ -145,16 +96,36 @@
       "Description": "Runs an embedded IronPython script."
     },
     {
-      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
-      "NodeType": "PythonScriptNode",
-      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"Nazov scriptu\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
-      "VariableInputPorts": true,
-      "Id": "11f9d168d43146e88885c0769f599cf1",
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"novy nazov skriptu\";",
+      "Id": "73cd7974471643e498a789e2fd5e6f4e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "42a0a6ce60d64ec5b9b0ceaeb412359e",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "a1767834-0500-427d-95ae-021e5ab548e3",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "1752eaeeffac4c0b976f9bdac0dee9a2",
       "Inputs": [
         {
-          "Id": "7ccb1f0e64c64035bb76ecde91efa8b8",
-          "Name": "IN[0]",
-          "Description": "Input #0",
+          "Id": "3f415a7ba52f4cbbbe72ba002158c854",
+          "Name": "scriptName",
+          "Description": "string",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -163,29 +134,46 @@
       ],
       "Outputs": [
         {
-          "Id": "e8c82a24a8d4476eb334e0268d870705",
+          "Id": "4d3289f268bd4b54bcdeca1de5306395",
           "Name": "OUT",
-          "Description": "Result of the python script",
+          "Description": "return value",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
           "KeepListStructure": false
         }
       ],
-      "Replication": "Disabled",
-      "Description": "Runs an embedded IronPython script."
+      "Replication": "Auto",
+      "Description": "node logs every run of the script in which is used to the hardcoded server location"
     }
   ],
-  "Connectors": [],
-  "Dependencies": [],
-  "NodeLibraryDependencies": [],
+  "Connectors": [
+    {
+      "Start": "42a0a6ce60d64ec5b9b0ceaeb412359e",
+      "End": "3f415a7ba52f4cbbbe72ba002158c854",
+      "Id": "64e08775c4cf4c5395ed5b97d1eceac3"
+    }
+  ],
+  "Dependencies": [
+    "a1767834-0500-427d-95ae-021e5ab548e3"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "cata_lyst",
+      "Version": "0.0.1",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "1752eaeeffac4c0b976f9bdac0dee9a2"
+      ]
+    }
+  ],
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.3.0.5885",
+      "Version": "2.3.1.11775",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -209,18 +197,8 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 4439.4985205202629,
+        "X": 4436.9056500023353,
         "Y": 1513.0155994841055
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "pyIF",
-        "Id": "cf61a687e42a4342b36637db5407e295",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 4681.1682309857833,
-        "Y": 1508.560170996145
       },
       {
         "ShowGeometry": true,
@@ -239,18 +217,28 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5030.5197630528965,
-        "Y": 1533.35321052388
+        "X": 4676.5929373557983,
+        "Y": 1547.6139983724811
       },
       {
         "ShowGeometry": true,
-        "Name": "PY log",
-        "Id": "11f9d168d43146e88885c0769f599cf1",
+        "Name": "Code Block",
+        "Id": "73cd7974471643e498a789e2fd5e6f4e",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 4437.5862229702234,
-        "Y": 1878.2717202124852
+        "X": 4440.566207933668,
+        "Y": 1902.2299536168548
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "usageLog",
+        "Id": "1752eaeeffac4c0b976f9bdac0dee9a2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 4697.1734499946651,
+        "Y": 1900.6966973799674
       }
     ],
     "Annotations": [
@@ -299,7 +287,7 @@
         "Height": 193.49352622692913,
         "FontSize": 36.0,
         "InitialTop": 1737.1092511369363,
-        "InitialHeight": 170.49352622692913,
+        "InitialHeight": 191.49352622692913,
         "TextblockHeight": 43.0,
         "Background": "#FFFFAA45"
       },
@@ -310,28 +298,14 @@
           "fbac99d55a8243498d52be11c8ef91ed"
         ],
         "Left": 4815.8634717590921,
-        "Top": 1684.4792543303849,
+        "Top": 1687.0721248483126,
         "Width": 307.0,
         "Height": 112.0,
         "FontSize": 36.0,
-        "InitialTop": 1737.4792543303849,
+        "InitialTop": 1740.0721248483126,
         "InitialHeight": 140.0,
         "TextblockHeight": 43.0,
         "Background": "#FFFF7BAC"
-      },
-      {
-        "Id": "85da8c12b57440fbb83c177d86b4a57f",
-        "Title": "python IF statement, pretoze IF node v dyname casto nefunguje ako ma",
-        "Nodes": [],
-        "Left": 4682.22629335286,
-        "Top": 1459.287757062255,
-        "Width": 0.0,
-        "Height": 0.0,
-        "FontSize": 36.0,
-        "InitialTop": 0.0,
-        "InitialHeight": 0.0,
-        "TextblockHeight": 0.0,
-        "Background": "#FFC1D676"
       },
       {
         "Id": "45f9052287544deab13260cf7d3564c7",
@@ -379,8 +353,8 @@
         "Id": "efebbb60727c4c1a8c061dc646a670ef",
         "Title": "python FilterElementCollector",
         "Nodes": [],
-        "Left": 5016.9014296007554,
-        "Top": 1472.9584404754623,
+        "Left": 4674.6425212343311,
+        "Top": 1497.5907103957732,
         "Width": 0.0,
         "Height": 0.0,
         "FontSize": 36.0,
@@ -394,7 +368,7 @@
         "Title": "Treating errors as hints to user what to do to avoid the error",
         "Nodes": [],
         "Left": 4825.8634717590921,
-        "Top": 1737.4792543303849,
+        "Top": 1740.0721248483126,
         "Width": 0.0,
         "Height": 0.0,
         "FontSize": 36.0,
@@ -407,8 +381,8 @@
         "Id": "47c8aad0941842a4a3473fa7066b3944",
         "Title": "Logovanie pre analytiku\r\nuprav nazov skriptu",
         "Nodes": [],
-        "Left": 4439.4902340837289,
-        "Top": 1829.6146969048762,
+        "Left": 4445.9724103785475,
+        "Top": 1834.8004379407312,
         "Width": 0.0,
         "Height": 0.0,
         "FontSize": 36.0,
@@ -418,8 +392,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": -1596.7871814013279,
-    "Y": -340.37490764307768,
-    "Zoom": 0.41618062824273011
+    "X": -3200.2124641249875,
+    "Y": -993.27724386125738,
+    "Zoom": 0.77134588332573117
   }
 }

@@ -1,0 +1,165 @@
+{
+  "Uuid": "a1767834-0500-427d-95ae-021e5ab548e3",
+  "IsCustomNode": true,
+  "Category": "catalyst.telemetry",
+  "Description": "node logs every run of the script in which is used to the hardcoded server location",
+  "Name": "usageLog",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "OUT",
+      "Id": "1d075dd82b2c45fb8157332e22cbfdb1",
+      "Inputs": [
+        {
+          "Id": "a6fb3aab60fe41c9917f15c76bedb279",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "scriptName",
+        "TypeName": "string",
+        "TypeRank": 0,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "0043523f6f2b49409543f6003d345bc2",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "fe6b2fd56c944be88ba0288ebec0f719",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\n\r\n#import custom library\r\nimport sys\r\nsys.path.append(r\"U:\\REVIT\\Dynamo\\Lib\")\r\nimport ctypes\r\nfrom catalyst import dyn_log_path, dyn_logger\r\n\r\n# name of the script for log\r\nscript_name = IN[0]\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\napp = DocumentManager.Instance.CurrentUIApplication.Application\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = app.Username\r\n#user_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\n\r\nstatus = dyn_logger(filePath,user_name,script_name)\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "VariableInputPorts": true,
+      "Id": "af4156d490c34c16b0a5e919eb9c9b1f",
+      "Inputs": [
+        {
+          "Id": "51bf677afd6246329844a6a5d1d6f6b9",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3ec949fb17844a78aceaa364db12d573",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "fe6b2fd56c944be88ba0288ebec0f719",
+      "End": "51bf677afd6246329844a6a5d1d6f6b9",
+      "Id": "83b3eafa95f542398f45542def6d2a7f"
+    },
+    {
+      "Start": "3ec949fb17844a78aceaa364db12d573",
+      "End": "a6fb3aab60fe41c9917f15c76bedb279",
+      "Id": "c69d45daf9e04fab8c7e8b24da5c841c"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "Id": "1d075dd82b2c45fb8157332e22cbfdb1",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Output",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 448.51939492084864,
+        "Y": -8.6508914247238238
+      },
+      {
+        "Id": "0043523f6f2b49409543f6003d345bc2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Input",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 19.729649273455948,
+        "Y": -7.6685771637992275
+      },
+      {
+        "Id": "af4156d490c34c16b0a5e919eb9c9b1f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "PY log",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 252.924284408272,
+        "Y": -16.650590838946982
+      }
+    ],
+    "Annotations": [],
+    "X": 197.12716186813725,
+    "Y": 477.388548566324,
+    "Zoom": 1.6284534137505133
+  }
+}
