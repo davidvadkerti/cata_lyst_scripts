@@ -1,0 +1,116 @@
+{
+  "Uuid": "7ad971f1-cdfb-4162-b51f-052adc1829a2",
+  "IsCustomNode": true,
+  "Category": "catalyst.revit",
+  "Description": "get the name of the current document with an extension",
+  "Name": "getDocNameExt",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\n\r\n#import custom library\r\nimport sys\r\nsys.path.append(r\"U:\\REVIT\\Dynamo\\Lib\")\r\n\r\n# name of the script for log\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\napp = DocumentManager.Instance.CurrentUIApplication.Application\r\nfilePath = doc.PathName\r\n\r\n\r\ndef doc_name(filePath):\r\n\t# get the name of the curent document\r\n\ttry:\r\n\t\tlastBackslash = filePath.rindex(\"\\\\\")+1\r\n\texcept:\r\n\t\tlastBackslash = filePath.rindex(\"/\")+1\r\n\tfile_name = filePath[lastBackslash:]\r\n\treturn file_name\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = doc_name(filePath)",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "a33f2bd9765941c3b175a6c62f2e94a2",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "bdad5626444745a3b61ab6b1643e9aee",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "OUT",
+      "Id": "b5cb3b86020342c487589368dd3cd63c",
+      "Inputs": [
+        {
+          "Id": "1025f5536b034da48b7183a2529e088c",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "bdad5626444745a3b61ab6b1643e9aee",
+      "End": "1025f5536b034da48b7183a2529e088c",
+      "Id": "fbd74a047a804dbe937726a201f5498f"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Author": "None provided",
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.0.5650",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "PY get doc name no extension",
+        "Id": "a33f2bd9765941c3b175a6c62f2e94a2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 250.0,
+        "Y": 0.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "b5cb3b86020342c487589368dd3cd63c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 570.0,
+        "Y": 0.0
+      }
+    ],
+    "Annotations": [],
+    "X": 0.0,
+    "Y": 0.0,
+    "Zoom": 1.0
+  }
+}

@@ -60,7 +60,8 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\n\r\n#import custom library\r\nimport sys\r\nsys.path.append(r\"U:\\REVIT\\Dynamo\\Lib\")\r\nimport ctypes\r\nfrom catalyst import dyn_log_path, dyn_logger\r\n\r\n# name of the script for log\r\nscript_name = IN[0]\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\napp = DocumentManager.Instance.CurrentUIApplication.Application\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = app.Username\r\n#user_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\n\r\nstatus = dyn_logger(filePath,user_name,script_name)\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\n\r\n#import custom library\r\nimport sys\r\nsys.path.append(r\"U:\\REVIT\\Dynamo\\Lib\")\r\nimport ctypes\r\nfrom catalyst import dyn_log_path, dyn_logger\r\n\r\n# name of the script for log\r\nscript_name = IN[0]\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\napp = DocumentManager.Instance.CurrentUIApplication.Application\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = app.Username\r\n#user_name = getpass.getuser()\r\n\r\nstatus = dyn_logger(filePath,user_name,script_name)\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "Engine": "IronPython2",
       "VariableInputPorts": true,
       "Id": "af4156d490c34c16b0a5e919eb9c9b1f",
       "Inputs": [
@@ -86,7 +87,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Runs an embedded IronPython script."
+      "Description": "Runs an embedded Python script."
     }
   ],
   "Connectors": [
@@ -103,13 +104,14 @@
   ],
   "Dependencies": [],
   "NodeLibraryDependencies": [],
+  "Author": "None provided",
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": false,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.3.0.5885",
+      "Version": "2.12.0.5650",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -127,31 +129,31 @@
     },
     "NodeViews": [
       {
+        "ShowGeometry": true,
+        "Name": "Output",
         "Id": "1d075dd82b2c45fb8157332e22cbfdb1",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Output",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 448.51939492084864,
         "Y": -8.6508914247238238
       },
       {
+        "ShowGeometry": true,
+        "Name": "Input",
         "Id": "0043523f6f2b49409543f6003d345bc2",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Input",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 19.729649273455948,
         "Y": -7.6685771637992275
       },
       {
+        "ShowGeometry": true,
+        "Name": "PY log",
         "Id": "af4156d490c34c16b0a5e919eb9c9b1f",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "PY log",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 252.924284408272,
         "Y": -16.650590838946982

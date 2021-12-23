@@ -1,0 +1,877 @@
+{
+  "Uuid": "64914e6a-3f89-43c4-8e67-32144ac3e169",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "speckleSendLineBasedElems",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "012a001fd7d541978acc023d4bebe96e",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Pošle do Speckle streamu všetky Line Based elementy (napr. Pipes, Walls, Grids) v danom Worksete ako čiary - pre použitie v AutoCADe",
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "b38c170a01c844b698b81aae0fc175eb",
+      "Name": "Workset Name",
+      "Type": "string",
+      "Value": "",
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "326b7b68db2c4558aa9a175faf269a9a",
+      "Name": "Category",
+      "Type": "dropdownSelection",
+      "Value": "OST_Grids",
+      "Description": "All built-in categories.",
+      "SelectedIndex": 269
+    },
+    {
+      "Id": "77e1d83c8ba64fd39282544e213c3dd5",
+      "Name": "Speckle stream",
+      "Type": "string",
+      "Value": "https://speckle.xyz/streams/...",
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "096d352a1ad144389a084e2867da844b",
+      "Name": "message (optional)",
+      "Type": "string",
+      "Value": "",
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Speckle.ConnectorDynamo.SendNode.Send, SpeckleConnectorDynamo",
+      "AutoUpdate": true,
+      "ExpiredCount": "",
+      "NodeType": "ExtensionNode",
+      "Id": "f99fb932596d4845a1a9d2d7cda6554d",
+      "Inputs": [
+        {
+          "Id": "1a59462233ed45d48a37b4cf9c86fdce",
+          "Name": "data",
+          "Description": "The data to send",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "feeb20db57134422a6651b2b95a95800",
+          "Name": "stream",
+          "Description": "The stream or streams to send to",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ea4e71d1f5f541ad890156e97a803a32",
+          "Name": "message",
+          "Description": "Commit message. If left blank, one will be generated for you.",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0cf6155e717349d08029044e0e39c9f9",
+          "Name": "stream",
+          "Description": "Stream or streams pointing to the created commit",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Send data to a Speckle server"
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "ff597b418c134d7880614d693f0430c9",
+      "Inputs": [
+        {
+          "Id": "b10ee4d8afcc4ba18937862ac8e2c960",
+          "Name": "Category",
+          "Description": "The Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c1a51cd51bec4a0ea98ee857e0b77b07",
+          "Name": "Elements",
+          "Description": "An element type.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Get all elements of the specified category from the model."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "0b59c4d8-afe4-4063-bf7e-2195fa33e8a9",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "236a17a6bf3f47c78a853672280d1304",
+      "Inputs": [
+        {
+          "Id": "706b1502e98e450988c45f52343bd54a",
+          "Name": "element",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "589e1ac08e0c4d53a149a862dc24d445",
+          "Name": "points",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "30c29002882f4aabadaac23618cbc411",
+          "Name": "curveEndpoints",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ad09ddf8b36b49c3980ffcebf928004f",
+          "Name": "curves",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "cd2e80318d1e4c48bb58a418eb008cb9",
+          "Name": "isPoint",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "790cb347e6fb434fa819d29b24a1da4d",
+          "Name": "isCurve",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4abba1595e9e4450a6ae8e19081c73b1",
+          "Name": "hasLocation",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "1039a73a68394496ae58156b8018c2be",
+          "Name": "angle",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "03b5717fc9864e54a660444f2fe380e4",
+          "Name": "hasRotation",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e9fbd48ed6ee4e3da676329da84a97c0",
+          "Name": "hasMulipleCurves",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "01af8f01bb5f4196a5d0d4712aefb118",
+          "Name": "mulipleCurves",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the location of an element as point, curve or curve loop, along with some booleans to help filtering the results. Unlike the OOTB Element.GetLocation node, it also retunrs sketch lines of sketch-based elements like floor slabs as well as the element's rotation property."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "b8c0487c47ea41a88d410999d8f7fe59",
+      "Inputs": [
+        {
+          "Id": "2e168a4a73cc45bba67f4c94ba2a244a",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fed73cdfd38a422cb903f82d1df80b2d",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Pošle do Speckle streamu všetky Line Based elementy (napr. Pipes, Walls, Grids) v danom Worksete ako čiary - pre použitie v AutoCADe",
+      "Id": "012a001fd7d541978acc023d4bebe96e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "362b9fedf67040a68454ddf6cd4d6be3",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"speckleSendLineBasedElems\";",
+      "Id": "eac27344ca9c4b16aef26a7a6590c356",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "05c00f54e0e54c8f95f7a84e3b323fa6",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "a1767834-0500-427d-95ae-021e5ab548e3",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "d554161b2ef24306b693b7f1ffdc75dc",
+      "Inputs": [
+        {
+          "Id": "f2103f7d537c46be99df3cb13377eeb3",
+          "Name": "scriptName",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fc8beeef17ce4b1aab4e890dcdf30ae2",
+          "Name": "OUT",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "node logs every run of the script in which is used to the hardcoded server location"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "58ec14f9-ee6f-41cd-b7ec-25bdcc690926",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "9ad62ad10bd44d51b4488c1d25976081",
+      "Inputs": [
+        {
+          "Id": "770df1e2ed3e4f259e8d52bf38c27b11",
+          "Name": "element",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fee2be96e93b4c95ac0464371ac9b473",
+          "Name": "Workset",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "23cacb839551472eabc23ec5f265c4e4",
+          "Name": "Workset Name",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the workset of the given element."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "==@var[]..[],var[]..[]",
+      "Id": "3aa213fbfdd14a63b103bf72d94f9cf3",
+      "Inputs": [
+        {
+          "Id": "1a3fbfc4df0241c78598ba9b851e17f3",
+          "Name": "x",
+          "Description": "Basic type object to compare (e.g. bool, int, double, string, etc.)\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4ab8655eca4d4276b37fa45bd8daab19",
+          "Name": "y",
+          "Description": "Basic type object to compare (e.g. bool, int, double, string, etc.)\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b3349af05b1241beb1fb4437b3fa9232",
+          "Name": "bool",
+          "Description": "Result of equality check",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Compares if x and y are equal\n\n== (x: var[]..[], y: var[]..[]): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "",
+      "Id": "b38c170a01c844b698b81aae0fc175eb",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "342cfb6002084f98a8549fbcf30348eb",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.FilterByBoolMask@var[]..[],var[]..[]",
+      "Id": "77e5b475a20d45d59ef4089742c77e14",
+      "Inputs": [
+        {
+          "Id": "c2fdabd001dd4b0daa5cd1a916be5a88",
+          "Name": "list",
+          "Description": "List to filter.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a716d8d5fd254ecda7b0fbe0ba8b3e67",
+          "Name": "mask",
+          "Description": "List of booleans representing a mask.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "38a035cdac264423b21dc908fcec9ed1",
+          "Name": "in",
+          "Description": "Items whose mask index is true.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d18cea76b6404ea5a795367dc7a7cb03",
+          "Name": "out",
+          "Description": "Items whose mask index is false.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Filters a sequence by looking up corresponding indices in a separate list of booleans.\n\nList.FilterByBoolMask (list: var[]..[], mask: var[]..[]): var[]..[]"
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
+      "SelectedIndex": 269,
+      "SelectedString": "OST_Grids",
+      "NodeType": "ExtensionNode",
+      "Id": "326b7b68db2c4558aa9a175faf269a9a",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1b5bc470957c41ff8a5c61969f9e2979",
+          "Name": "Category",
+          "Description": "The selected Category.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "All built-in categories."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "https://speckle.xyz/streams/...",
+      "Id": "77e1d83c8ba64fd39282544e213c3dd5",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "57360fdb3d504139b8a34e88ba9e6b56",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "",
+      "Id": "096d352a1ad144389a084e2867da844b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "567c2ccb809d460fa52da60af2f1508b",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "c1a51cd51bec4a0ea98ee857e0b77b07",
+      "End": "770df1e2ed3e4f259e8d52bf38c27b11",
+      "Id": "e781d19dae5b491aafc90c0091e85131"
+    },
+    {
+      "Start": "c1a51cd51bec4a0ea98ee857e0b77b07",
+      "End": "c2fdabd001dd4b0daa5cd1a916be5a88",
+      "Id": "550d15edadc642b0873ef08aa99b63c4"
+    },
+    {
+      "Start": "ad09ddf8b36b49c3980ffcebf928004f",
+      "End": "2e168a4a73cc45bba67f4c94ba2a244a",
+      "Id": "d08919015acd465da76ac736495d1b04"
+    },
+    {
+      "Start": "fed73cdfd38a422cb903f82d1df80b2d",
+      "End": "1a59462233ed45d48a37b4cf9c86fdce",
+      "Id": "43af9a29f28141c8a185c1133e653c04"
+    },
+    {
+      "Start": "05c00f54e0e54c8f95f7a84e3b323fa6",
+      "End": "f2103f7d537c46be99df3cb13377eeb3",
+      "Id": "bbbe3ee3611343c3a0b12192449f0402"
+    },
+    {
+      "Start": "23cacb839551472eabc23ec5f265c4e4",
+      "End": "1a3fbfc4df0241c78598ba9b851e17f3",
+      "Id": "a0cfd1f3dc9044c9bae2413e65b5b42b"
+    },
+    {
+      "Start": "b3349af05b1241beb1fb4437b3fa9232",
+      "End": "a716d8d5fd254ecda7b0fbe0ba8b3e67",
+      "Id": "e85896f9b0c940e99b8cd442521b9951"
+    },
+    {
+      "Start": "342cfb6002084f98a8549fbcf30348eb",
+      "End": "4ab8655eca4d4276b37fa45bd8daab19",
+      "Id": "fd7d307ff17047a7ac12aa46c875efa3"
+    },
+    {
+      "Start": "38a035cdac264423b21dc908fcec9ed1",
+      "End": "706b1502e98e450988c45f52343bd54a",
+      "Id": "f375cbe6c0ec43c68e1332abd778e9f2"
+    },
+    {
+      "Start": "1b5bc470957c41ff8a5c61969f9e2979",
+      "End": "b10ee4d8afcc4ba18937862ac8e2c960",
+      "Id": "95c93124602d415e83ebd3a23b8e0de6"
+    },
+    {
+      "Start": "57360fdb3d504139b8a34e88ba9e6b56",
+      "End": "feeb20db57134422a6651b2b95a95800",
+      "Id": "9c307db7566343f2b2d5f9dae01dd149"
+    },
+    {
+      "Start": "567c2ccb809d460fa52da60af2f1508b",
+      "End": "ea4e71d1f5f541ad890156e97a803a32",
+      "Id": "40b00454734149a49a0896ad9c185b7d"
+    }
+  ],
+  "Dependencies": [
+    "0b59c4d8-afe4-4063-bf7e-2195fa33e8a9",
+    "a1767834-0500-427d-95ae-021e5ab548e3",
+    "58ec14f9-ee6f-41cd-b7ec-25bdcc690926"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "SpeckleDynamo2",
+      "Version": "2.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "f99fb932596d4845a1a9d2d7cda6554d"
+      ]
+    },
+    {
+      "Name": "Clockwork for Dynamo 2.x",
+      "Version": "2.3.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "236a17a6bf3f47c78a853672280d1304"
+      ]
+    },
+    {
+      "Name": "cata_lyst",
+      "Version": "0.0.1",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "d554161b2ef24306b693b7f1ffdc75dc"
+      ]
+    },
+    {
+      "Name": "Genius Loci",
+      "Version": "2021.11.10",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "9ad62ad10bd44d51b4488c1d25976081"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.0.5650",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Send",
+        "Id": "f99fb932596d4845a1a9d2d7cda6554d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2064.7145393659293,
+        "Y": 306.11858572347467
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "All Elements of Category",
+        "Id": "ff597b418c134d7880614d693f0430c9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 121.69092095356422,
+        "Y": -187.91487466825515
+      },
+      {
+        "ShowGeometry": false,
+        "Name": "Element.Location+",
+        "Id": "236a17a6bf3f47c78a853672280d1304",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1368.6373972639831,
+        "Y": -220.30205242791862
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "b8c0487c47ea41a88d410999d8f7fe59",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1717.1852665145393,
+        "Y": 88.500173574371729
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "012a001fd7d541978acc023d4bebe96e",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -307.23647415964103,
+        "Y": -383.80885650463739
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "eac27344ca9c4b16aef26a7a6590c356",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -283.50025378569342,
+        "Y": 575.15597843632384
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "usageLog",
+        "Id": "d554161b2ef24306b693b7f1ffdc75dc",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 96.643729039117943,
+        "Y": 580.73275044484285
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element Workset",
+        "Id": "9ad62ad10bd44d51b4488c1d25976081",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 428.523075153047,
+        "Y": -32.05101066425766
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "==",
+        "Id": "3aa213fbfdd14a63b103bf72d94f9cf3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 760.88478080592608,
+        "Y": 57.681038347509343
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Workset Name",
+        "Id": "b38c170a01c844b698b81aae0fc175eb",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -284.90837941602172,
+        "Y": 8.3824612513632246
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.FilterByBoolMask",
+        "Id": "77e5b475a20d45d59ef4089742c77e14",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1017.903230125617,
+        "Y": -28.618540328249765
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Category",
+        "Id": "326b7b68db2c4558aa9a175faf269a9a",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -288.7007830855232,
+        "Y": -108.21010934921094
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Speckle stream",
+        "Id": "77e1d83c8ba64fd39282544e213c3dd5",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -296.47988511413666,
+        "Y": 173.96597289624583
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "message (optional)",
+        "Id": "096d352a1ad144389a084e2867da844b",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -283.83126733582492,
+        "Y": 293.85680560299716
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "1ae6b8c5bacf4e029dc64fc8fc36fcdf",
+        "Title": "INPUT",
+        "Nodes": [
+          "326b7b68db2c4558aa9a175faf269a9a",
+          "b38c170a01c844b698b81aae0fc175eb",
+          "77e1d83c8ba64fd39282544e213c3dd5",
+          "096d352a1ad144389a084e2867da844b"
+        ],
+        "Left": -306.47988511413666,
+        "Top": -161.41010934921093,
+        "Width": 218.4,
+        "Height": 523.06691495220809,
+        "FontSize": 36.0,
+        "InitialTop": -108.21010934921094,
+        "InitialHeight": 547.06691495220809,
+        "TextblockHeight": 43.2,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "6ee2266439cd415eb1338ce71bb40ccc",
+        "Title": "Filter by Workset",
+        "Nodes": [
+          "9ad62ad10bd44d51b4488c1d25976081",
+          "3aa213fbfdd14a63b103bf72d94f9cf3",
+          "77e5b475a20d45d59ef4089742c77e14"
+        ],
+        "Left": 418.523075153047,
+        "Top": -85.251010664257663,
+        "Width": 780.58015497257009,
+        "Height": 261.132049011767,
+        "FontSize": 36.0,
+        "InitialTop": -32.05101066425766,
+        "InitialHeight": 234.732049011767,
+        "TextblockHeight": 43.2,
+        "Background": "#FF48B9FF"
+      }
+    ],
+    "X": 165.68232169386263,
+    "Y": 275.782133270263,
+    "Zoom": 0.44162179007223495
+  }
+}

@@ -1,0 +1,892 @@
+{
+  "Uuid": "c9f9bf40-5c44-423d-ad90-f95d227db6fd",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "speckleBlocks",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "1aa7628abd444b0a9a6f52f27a399996",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Umiestni a otočí family instances v Revite podľa Blokov v DWG súbore\r\n\r\nV AutoCADe je nutné do Speckle streamu najprv poslať všetky bloky a až potom spustiť tento skript",
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "c89011a706134e9699a69402d6700d3a",
+      "Name": "Speckle Stream URL",
+      "Type": "string",
+      "Value": "https://speckle.xyz/streams/defc24f058",
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "85204b64deaf4740b84e91545a4dfbe5",
+      "Name": "OUTPUT",
+      "Type": "unknown",
+      "InitialValue": "",
+      "Description": "Visualize the node's output"
+    }
+  ],
+  "Nodes": [
+    {
+      "ConcreteType": "Speckle.ConnectorDynamo.ReceiveNode.Receive, SpeckleConnectorDynamo",
+      "Stream": {
+        "OriginalInput": "https://speckle.xyz/streams/defc24f058",
+        "UserId": null,
+        "ServerUrl": "https://speckle.xyz",
+        "StreamId": "defc24f058",
+        "CommitId": null,
+        "BranchName": null,
+        "ObjectId": null,
+        "IsValid": true,
+        "Type": 1
+      },
+      "LastCommitId": "a9c70f765a",
+      "ReceiveEnabled": true,
+      "ExpiredCount": "",
+      "AutoUpdate": true,
+      "AutoUpdateEnabled": true,
+      "NodeType": "ExtensionNode",
+      "Id": "187dd33d4a0e4186b05c7314feb2ee0c",
+      "Inputs": [
+        {
+          "Id": "57c77d6d66084071a5b37555cff1309d",
+          "Name": "stream",
+          "Description": "The stream to receive from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "dc5bc127d8c444ce937dfb164873c0c0",
+          "Name": "data",
+          "Description": "Data received",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d8d1a9ff8bcb4db0a4982f2ed6b38ae5",
+          "Name": "info",
+          "Description": "Commit information",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Receive data from a Speckle server"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\nspeckle_data = IN[0]\r\n\r\n# Place your code below this line\r\ninsert_points = []\r\nfor dict in speckle_data:\r\n\tip = dict[\"insertionPoint\"]\r\n\tinsert_points.append(ip)\r\n\t\r\n# Assign your output to the OUT variable.\r\nOUT = insert_points",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "2f5d8cc215d84e4894ae5fb482dc29f4",
+      "Inputs": [
+        {
+          "Id": "9ee71eb62d0f461599e36bd52008d645",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "52f4859a557040d193a7de489d7f7bdc",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.FamilyInstance.ByPointAndLevel@Revit.Elements.FamilyType,Autodesk.DesignScript.Geometry.Point,Revit.Elements.Level",
+      "Id": "e19db34d22224641bfe354d5b9d0f96c",
+      "Inputs": [
+        {
+          "Id": "92976932da84497c92febda5cc35d8a6",
+          "Name": "familyType",
+          "Description": "Family Type. Also called Family Symbol.\n\nFamilyType",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b708be7706ba4fa3885d0b4d0b47b409",
+          "Name": "point",
+          "Description": "Point in meters.\n\nPoint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "597d134b25dc4164984487cbf1238c09",
+          "Name": "level",
+          "Description": "Level to host Family Instance.\n\nLevel",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c0201b10d6e7471a8292299ba5e317d2",
+          "Name": "FamilyInstance",
+          "Description": "FamilyInstance",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Place a Revit FamilyInstance given the FamilyType (also known as the FamilySymbol in the Revit API), it's coordinates in world space, and the Level\n\nFamilyInstance.ByPointAndLevel (familyType: FamilyType, point: Point, level: Level): FamilyInstance"
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.Levels, DSRevitNodesUI",
+      "SelectedIndex": 1,
+      "SelectedString": "Level 1",
+      "NodeType": "ExtensionNode",
+      "Id": "a5da2ef10de549148e493ba13270813f",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1e1e42663d38400eb158f30fac9597f7",
+          "Name": "Levels",
+          "Description": "The selected Levels",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select a level in the active document"
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.FamilyTypes, DSRevitNodesUI",
+      "SelectedIndex": 154,
+      "SelectedString": "vylevka plech:vylevka plech",
+      "NodeType": "ExtensionNode",
+      "Id": "5744222bd0a84e5e9e0c99291365703b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "53cdc262844e458abd73f0d53acbcae7",
+          "Name": "Family Type",
+          "Description": "The selected Family Type",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "All family types available in the document."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\nspeckle_data = IN[0]\r\n\r\n# Place your code below this line\r\ntransforms = []\r\nfor dict in speckle_data:\r\n\tt = dict[\"transform\"]\r\n\ttransforms.append(t)\r\n\t\r\n# Assign your output to the OUT variable.\r\nOUT = transforms",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "93495b31dd194ec2bcec823dbfb57b45",
+      "Inputs": [
+        {
+          "Id": "e83dfe2895e940ddb227a6acbd969a07",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6367dab1b3664c9faa14749911aa8536",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import sys\r\nimport clr\r\nimport math\r\nclr.AddReference('System.Numerics')\r\nfrom System.Numerics import *\r\n\r\ndef euler_from_quaternion(x, y, z, w):\r\n    t0 = +2.0 * (w * x + y * z)\r\n    t1 = +1.0 - 2.0 * (x * x + y * y)\r\n    roll_x = math.atan2(t0, t1)\r\n \r\n    t2 = +2.0 * (w * y - z * x)\r\n    t2 = +1.0 if t2 > +1.0 else t2\r\n    t2 = -1.0 if t2 < -1.0 else t2\r\n    pitch_y = math.asin(t2)\r\n \r\n    t3 = +2.0 * (w * z + x * y)\r\n    t4 = +1.0 - 2.0 * (y * y + z * z)\r\n    yaw_z = math.atan2(t3, t4)\r\n    \r\n    return roll_x, pitch_y, yaw_z # in radians\r\n\r\n\r\n#iterate list of transforms\r\ntransforms = IN[0]\r\nangles = []\r\n\r\nfor v in transforms:\r\n\r\n\tmatrix = Matrix4x4(v[0],v[1],v[2],v[3],v[4],v[5],v[6],v[7],v[8],v[9],v[10],v[11],v[12],v[13],v[14],v[15])\r\n\t\r\n\tdecomposed = Matrix4x4.Decompose(matrix)\r\n\trotation = decomposed[2]\r\n\teuler = euler_from_quaternion(rotation.X, rotation.Y, rotation.Z, rotation.W)\r\n\tangles.append(math.degrees(euler[2]))\r\n\r\nOUT = angles",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "af2d6516629d44f4b703b1d8802e4984",
+      "Inputs": [
+        {
+          "Id": "5112f5e628a64b14a5ac45c036980ae8",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "836f99029a834989a6ef123126d12b18",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.FamilyInstance.SetRotation@double",
+      "Id": "2fa7e9ae1d1844278da487d687e56651",
+      "Inputs": [
+        {
+          "Id": "a0d1071494444e96a32c61a9c17c261b",
+          "Name": "familyInstance",
+          "Description": "Revit.Elements.FamilyInstance",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a42c186a5d4740bea3312c37b10b4682",
+          "Name": "degree",
+          "Description": "The Euler angle around Z-axis.\n\ndouble",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7d60286bd595400eb201b281cedebb87",
+          "Name": "FamilyInstance",
+          "Description": "The result family instance.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Set the Euler angle of the family instance around its local Z-axis.\n\nFamilyInstance.SetRotation (degree: double): FamilyInstance"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.Math.Round@double",
+      "Id": "20a66a91501c48f0b4fd86d94e136551",
+      "Inputs": [
+        {
+          "Id": "9fbfc675cab14f4caaf1402f06b6b0d0",
+          "Name": "number",
+          "Description": "Number to round.\n\ndouble",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "30f5ff042c7e46f39c2e520c9ba0eec8",
+          "Name": "number",
+          "Description": "Integral value closes to the number.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Rounds a number to the closest integral value. Note that this method returns a double-precision floating-point number instead of an integral type.\n\nMath.Round (number: double): double"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "6412cd5901354cb78fc4a24f0170c4bc",
+      "Inputs": [
+        {
+          "Id": "017187805c4a4739ae14930ffd2d48c8",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "64ebada1c6594c19955b9934af65aade",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Umiestni a otočí family instances v Revite podľa Blokov v DWG súbore\r\n\r\nV AutoCADe je nutné do Speckle streamu najprv poslať všetky bloky a až potom spustiť tento skript",
+      "Id": "1aa7628abd444b0a9a6f52f27a399996",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "e1dd7281714d4ca389b3331d2c35483c",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Speckle Blocks\";",
+      "Id": "ab33e0428fae41e9939353eed265ba19",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "bc35e53cdb6649c780df8d93cf0396c6",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "a1767834-0500-427d-95ae-021e5ab548e3",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "ffee10d1a4324b49a8656b0af4b486ec",
+      "Inputs": [
+        {
+          "Id": "73fe155cd7f049b2a087ab39ac3ce533",
+          "Name": "scriptName",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "857a6397516e426fb1a1dfbab11b76eb",
+          "Name": "OUT",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "node logs every run of the script in which is used to the hardcoded server location"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "85204b64deaf4740b84e91545a4dfbe5",
+      "Inputs": [
+        {
+          "Id": "6e78d9e3af8b4c1f9524766198e74b7a",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "bbab64f96b89481eb2806ccc27f73da8",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "https://speckle.xyz/streams/defc24f058",
+      "Id": "c89011a706134e9699a69402d6700d3a",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "8d3c41765e04485ea379b99884afc65e",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "dc5bc127d8c444ce937dfb164873c0c0",
+      "End": "9ee71eb62d0f461599e36bd52008d645",
+      "Id": "cd18b89ba07e4952841fa9d3bcee0a2c"
+    },
+    {
+      "Start": "dc5bc127d8c444ce937dfb164873c0c0",
+      "End": "e83dfe2895e940ddb227a6acbd969a07",
+      "Id": "f968e840a3a34e2e992df3af6e4227fc"
+    },
+    {
+      "Start": "d8d1a9ff8bcb4db0a4982f2ed6b38ae5",
+      "End": "017187805c4a4739ae14930ffd2d48c8",
+      "Id": "3184d935866b4a2fbca5d74ceda570e8"
+    },
+    {
+      "Start": "52f4859a557040d193a7de489d7f7bdc",
+      "End": "b708be7706ba4fa3885d0b4d0b47b409",
+      "Id": "a8c41680cb944fa0a7610d102f198d08"
+    },
+    {
+      "Start": "c0201b10d6e7471a8292299ba5e317d2",
+      "End": "a0d1071494444e96a32c61a9c17c261b",
+      "Id": "cc1c0c74e05c469e92bfbb41b7f3526f"
+    },
+    {
+      "Start": "1e1e42663d38400eb158f30fac9597f7",
+      "End": "597d134b25dc4164984487cbf1238c09",
+      "Id": "fbafbf17c80c494181da5b0f0c6ebc68"
+    },
+    {
+      "Start": "53cdc262844e458abd73f0d53acbcae7",
+      "End": "92976932da84497c92febda5cc35d8a6",
+      "Id": "0caec0ef60b04e29bc8a0b530a236d8c"
+    },
+    {
+      "Start": "6367dab1b3664c9faa14749911aa8536",
+      "End": "5112f5e628a64b14a5ac45c036980ae8",
+      "Id": "c4901566355b471eadd9192ef770a1c2"
+    },
+    {
+      "Start": "836f99029a834989a6ef123126d12b18",
+      "End": "9fbfc675cab14f4caaf1402f06b6b0d0",
+      "Id": "ac0407ede09040e9afd34ab5695d103c"
+    },
+    {
+      "Start": "30f5ff042c7e46f39c2e520c9ba0eec8",
+      "End": "a42c186a5d4740bea3312c37b10b4682",
+      "Id": "09b1feff99b04a3e8250d03ccb805404"
+    },
+    {
+      "Start": "bc35e53cdb6649c780df8d93cf0396c6",
+      "End": "73fe155cd7f049b2a087ab39ac3ce533",
+      "Id": "a2637ff950344246b8f1a123619997c9"
+    },
+    {
+      "Start": "8d3c41765e04485ea379b99884afc65e",
+      "End": "57c77d6d66084071a5b37555cff1309d",
+      "Id": "da30c42f9b2b48bfbe4fcddac5c533cb"
+    }
+  ],
+  "Dependencies": [
+    "a1767834-0500-427d-95ae-021e5ab548e3"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "SpeckleDynamo2",
+      "Version": "2.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "187dd33d4a0e4186b05c7314feb2ee0c"
+      ]
+    },
+    {
+      "Name": "cata_lyst",
+      "Version": "0.0.1",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "ffee10d1a4324b49a8656b0af4b486ec"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [
+    {
+      "NodeId": "e19db34d-2222-4641-bfe3-54d5b9d0f96c",
+      "Binding": {
+        "ByPointAndLevel_InClassDecl-1_InFunctionScope-1_Instance0_e19db34d-2222-4641-bfe3-54d5b9d0f96c": "PFNPQVAtRU5WOkVudmVsb3BlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOlNPQVAtRU5DPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy9zb2FwL2VuY29kaW5nLyIgeG1sbnM6U09BUC1FTlY9Imh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3NvYXAvZW52ZWxvcGUvIiB4bWxuczpjbHI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vc29hcC9lbmNvZGluZy9jbHIvMS4wIiBTT0FQLUVOVjplbmNvZGluZ1N0eWxlPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy9zb2FwL2VuY29kaW5nLyI+DQo8U09BUC1FTlY6Qm9keT4NCjxhMTpDYWxsU2l0ZV94MDAyQl9UcmFjZVNlcmlhbGlzZXJIZWxwZXIgaWQ9InJlZi0xIiB4bWxuczphMT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9jbHIvbnNhc3NlbS9Qcm90b0NvcmUvUHJvdG9Db3JlJTJDJTIwVmVyc2lvbiUzRDIuMTIuMC41NjUwJTJDJTIwQ3VsdHVyZSUzRG5ldXRyYWwlMkMlMjBQdWJsaWNLZXlUb2tlbiUzRG51bGwiPg0KPE51bWJlck9mRWxlbWVudHM+MTwvTnVtYmVyT2ZFbGVtZW50cz4NCjxCYXNlLTBfSGFzRGF0YT5mYWxzZTwvQmFzZS0wX0hhc0RhdGE+DQo8QmFzZS0wX0hhc05lc3RlZERhdGE+dHJ1ZTwvQmFzZS0wX0hhc05lc3RlZERhdGE+DQo8QmFzZS0wX05lc3RlZERhdGFDb3VudD40PC9CYXNlLTBfTmVzdGVkRGF0YUNvdW50Pg0KPEJhc2UtMC0wX0hhc0RhdGE+dHJ1ZTwvQmFzZS0wLTBfSGFzRGF0YT4NCjxCYXNlLTAtMF9EYXRhIGlkPSJyZWYtMyI+UEZOUFFWQXRSVTVXT2tWdWRtVnNiM0JsSUhodGJHNXpPbmh6YVQwaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNUzlZVFV4VFkyaGxiV0V0YVc1emRHRnVZMlVpSUhodGJHNXpPbmh6WkQwaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNUzlZVFV4VFkyaGxiV0VpSUhodGJHNXpPbE5QUVZBdFJVNURQU0pvZEhSd09pOHZjMk5vWlcxaGN5NTRiV3h6YjJGd0xtOXlaeTl6YjJGd0wyVnVZMjlrYVc1bkx5SWdlRzFzYm5NNlUwOUJVQzFGVGxZOUltaDBkSEE2THk5elkyaGxiV0Z6TG5odGJITnZZWEF1YjNKbkwzTnZZWEF2Wlc1MlpXeHZjR1V2SWlCNGJXeHVjenBqYkhJOUltaDBkSEE2THk5elkyaGxiV0Z6TG0xcFkzSnZjMjltZEM1amIyMHZjMjloY0M5bGJtTnZaR2x1Wnk5amJISXZNUzR3SWlCVFQwRlFMVVZPVmpwbGJtTnZaR2x1WjFOMGVXeGxQU0pvZEhSd09pOHZjMk5vWlcxaGN5NTRiV3h6YjJGd0xtOXlaeTl6YjJGd0wyVnVZMjlrYVc1bkx5SStEUW84VTA5QlVDMUZUbFk2UW05a2VUNE5DanhoTVRwVFpYSnBZV3hwZW1GaWJHVkpaQ0JwWkQwaWNtVm1MVEVpSUhodGJHNXpPbUV4UFNKb2RIUndPaTh2YzJOb1pXMWhjeTV0YVdOeWIzTnZablF1WTI5dEwyTnNjaTl1YzJGemMyVnRMMUpsZG1sMFUyVnlkbWxqWlhNdVVHVnljMmx6ZEdWdVkyVXZVbVYyYVhSVFpYSjJhV05sY3lVeVF5VXlNRlpsY25OcGIyNGxNMFF5TGpFeUxqQXVOVGMwTUNVeVF5VXlNRU4xYkhSMWNtVWxNMFJ1WlhWMGNtRnNKVEpESlRJd1VIVmliR2xqUzJWNVZHOXJaVzRsTTBSdWRXeHNJajROQ2p4emRISnBibWRKUkNCcFpEMGljbVZtTFRNaVBqQTROV1pqWXpVM0xUazBNbU10TkdVek9TMDRNRE0zTFRKbE5EUTFPVFUwWXprNFpDMHdNREEwT1dZd1pEd3ZjM1J5YVc1blNVUStEUW84YVc1MFNVUStNekF5T0RZeFBDOXBiblJKUkQ0TkNqd3ZZVEU2VTJWeWFXRnNhWHBoWW14bFNXUStEUW84TDFOUFFWQXRSVTVXT2tKdlpIaytEUW84TDFOUFFWQXRSVTVXT2tWdWRtVnNiM0JsUGcwSzwvQmFzZS0wLTBfRGF0YT4NCjxCYXNlLTAtMF9IYXNOZXN0ZWREYXRhPmZhbHNlPC9CYXNlLTAtMF9IYXNOZXN0ZWREYXRhPg0KPEJhc2UtMC0xX0hhc0RhdGE+dHJ1ZTwvQmFzZS0wLTFfSGFzRGF0YT4NCjxCYXNlLTAtMV9EYXRhIGlkPSJyZWYtNCI+UEZOUFFWQXRSVTVXT2tWdWRtVnNiM0JsSUhodGJHNXpPbmh6YVQwaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNUzlZVFV4VFkyaGxiV0V0YVc1emRHRnVZMlVpSUhodGJHNXpPbmh6WkQwaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNUzlZVFV4VFkyaGxiV0VpSUhodGJHNXpPbE5QUVZBdFJVNURQU0pvZEhSd09pOHZjMk5vWlcxaGN5NTRiV3h6YjJGd0xtOXlaeTl6YjJGd0wyVnVZMjlrYVc1bkx5SWdlRzFzYm5NNlUwOUJVQzFGVGxZOUltaDBkSEE2THk5elkyaGxiV0Z6TG5odGJITnZZWEF1YjNKbkwzTnZZWEF2Wlc1MlpXeHZjR1V2SWlCNGJXeHVjenBqYkhJOUltaDBkSEE2THk5elkyaGxiV0Z6TG0xcFkzSnZjMjltZEM1amIyMHZjMjloY0M5bGJtTnZaR2x1Wnk5amJISXZNUzR3SWlCVFQwRlFMVVZPVmpwbGJtTnZaR2x1WjFOMGVXeGxQU0pvZEhSd09pOHZjMk5vWlcxaGN5NTRiV3h6YjJGd0xtOXlaeTl6YjJGd0wyVnVZMjlrYVc1bkx5SStEUW84VTA5QlVDMUZUbFk2UW05a2VUNE5DanhoTVRwVFpYSnBZV3hwZW1GaWJHVkpaQ0JwWkQwaWNtVm1MVEVpSUhodGJHNXpPbUV4UFNKb2RIUndPaTh2YzJOb1pXMWhjeTV0YVdOeWIzTnZablF1WTI5dEwyTnNjaTl1YzJGemMyVnRMMUpsZG1sMFUyVnlkbWxqWlhNdVVHVnljMmx6ZEdWdVkyVXZVbVYyYVhSVFpYSjJhV05sY3lVeVF5VXlNRlpsY25OcGIyNGxNMFF5TGpFeUxqQXVOVGMwTUNVeVF5VXlNRU4xYkhSMWNtVWxNMFJ1WlhWMGNtRnNKVEpESlRJd1VIVmliR2xqUzJWNVZHOXJaVzRsTTBSdWRXeHNJajROQ2p4emRISnBibWRKUkNCcFpEMGljbVZtTFRNaVBqQTROV1pqWXpVM0xUazBNbU10TkdVek9TMDRNRE0zTFRKbE5EUTFPVFUwWXprNFpDMHdNREEwT1dZd1pUd3ZjM1J5YVc1blNVUStEUW84YVc1MFNVUStNekF5T0RZeVBDOXBiblJKUkQ0TkNqd3ZZVEU2VTJWeWFXRnNhWHBoWW14bFNXUStEUW84TDFOUFFWQXRSVTVXT2tKdlpIaytEUW84TDFOUFFWQXRSVTVXT2tWdWRtVnNiM0JsUGcwSzwvQmFzZS0wLTFfRGF0YT4NCjxCYXNlLTAtMV9IYXNOZXN0ZWREYXRhPmZhbHNlPC9CYXNlLTAtMV9IYXNOZXN0ZWREYXRhPg0KPEJhc2UtMC0yX0hhc0RhdGE+dHJ1ZTwvQmFzZS0wLTJfSGFzRGF0YT4NCjxCYXNlLTAtMl9EYXRhIGlkPSJyZWYtNSI+UEZOUFFWQXRSVTVXT2tWdWRtVnNiM0JsSUhodGJHNXpPbmh6YVQwaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNUzlZVFV4VFkyaGxiV0V0YVc1emRHRnVZMlVpSUhodGJHNXpPbmh6WkQwaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNUzlZVFV4VFkyaGxiV0VpSUhodGJHNXpPbE5QUVZBdFJVNURQU0pvZEhSd09pOHZjMk5vWlcxaGN5NTRiV3h6YjJGd0xtOXlaeTl6YjJGd0wyVnVZMjlrYVc1bkx5SWdlRzFzYm5NNlUwOUJVQzFGVGxZOUltaDBkSEE2THk5elkyaGxiV0Z6TG5odGJITnZZWEF1YjNKbkwzTnZZWEF2Wlc1MlpXeHZjR1V2SWlCNGJXeHVjenBqYkhJOUltaDBkSEE2THk5elkyaGxiV0Z6TG0xcFkzSnZjMjltZEM1amIyMHZjMjloY0M5bGJtTnZaR2x1Wnk5amJISXZNUzR3SWlCVFQwRlFMVVZPVmpwbGJtTnZaR2x1WjFOMGVXeGxQU0pvZEhSd09pOHZjMk5vWlcxaGN5NTRiV3h6YjJGd0xtOXlaeTl6YjJGd0wyVnVZMjlrYVc1bkx5SStEUW84VTA5QlVDMUZUbFk2UW05a2VUNE5DanhoTVRwVFpYSnBZV3hwZW1GaWJHVkpaQ0JwWkQwaWNtVm1MVEVpSUhodGJHNXpPbUV4UFNKb2RIUndPaTh2YzJOb1pXMWhjeTV0YVdOeWIzTnZablF1WTI5dEwyTnNjaTl1YzJGemMyVnRMMUpsZG1sMFUyVnlkbWxqWlhNdVVHVnljMmx6ZEdWdVkyVXZVbVYyYVhSVFpYSjJhV05sY3lVeVF5VXlNRlpsY25OcGIyNGxNMFF5TGpFeUxqQXVOVGMwTUNVeVF5VXlNRU4xYkhSMWNtVWxNMFJ1WlhWMGNtRnNKVEpESlRJd1VIVmliR2xqUzJWNVZHOXJaVzRsTTBSdWRXeHNJajROQ2p4emRISnBibWRKUkNCcFpEMGljbVZtTFRNaVBqQTROV1pqWXpVM0xUazBNbU10TkdVek9TMDRNRE0zTFRKbE5EUTFPVFUwWXprNFpDMHdNREEwT1dZd1pqd3ZjM1J5YVc1blNVUStEUW84YVc1MFNVUStNekF5T0RZelBDOXBiblJKUkQ0TkNqd3ZZVEU2VTJWeWFXRnNhWHBoWW14bFNXUStEUW84TDFOUFFWQXRSVTVXT2tKdlpIaytEUW84TDFOUFFWQXRSVTVXT2tWdWRtVnNiM0JsUGcwSzwvQmFzZS0wLTJfRGF0YT4NCjxCYXNlLTAtMl9IYXNOZXN0ZWREYXRhPmZhbHNlPC9CYXNlLTAtMl9IYXNOZXN0ZWREYXRhPg0KPEJhc2UtMC0zX0hhc0RhdGE+dHJ1ZTwvQmFzZS0wLTNfSGFzRGF0YT4NCjxCYXNlLTAtM19EYXRhIGlkPSJyZWYtNiI+UEZOUFFWQXRSVTVXT2tWdWRtVnNiM0JsSUhodGJHNXpPbmh6YVQwaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNUzlZVFV4VFkyaGxiV0V0YVc1emRHRnVZMlVpSUhodGJHNXpPbmh6WkQwaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNUzlZVFV4VFkyaGxiV0VpSUhodGJHNXpPbE5QUVZBdFJVNURQU0pvZEhSd09pOHZjMk5vWlcxaGN5NTRiV3h6YjJGd0xtOXlaeTl6YjJGd0wyVnVZMjlrYVc1bkx5SWdlRzFzYm5NNlUwOUJVQzFGVGxZOUltaDBkSEE2THk5elkyaGxiV0Z6TG5odGJITnZZWEF1YjNKbkwzTnZZWEF2Wlc1MlpXeHZjR1V2SWlCNGJXeHVjenBqYkhJOUltaDBkSEE2THk5elkyaGxiV0Z6TG0xcFkzSnZjMjltZEM1amIyMHZjMjloY0M5bGJtTnZaR2x1Wnk5amJISXZNUzR3SWlCVFQwRlFMVVZPVmpwbGJtTnZaR2x1WjFOMGVXeGxQU0pvZEhSd09pOHZjMk5vWlcxaGN5NTRiV3h6YjJGd0xtOXlaeTl6YjJGd0wyVnVZMjlrYVc1bkx5SStEUW84VTA5QlVDMUZUbFk2UW05a2VUNE5DanhoTVRwVFpYSnBZV3hwZW1GaWJHVkpaQ0JwWkQwaWNtVm1MVEVpSUhodGJHNXpPbUV4UFNKb2RIUndPaTh2YzJOb1pXMWhjeTV0YVdOeWIzTnZablF1WTI5dEwyTnNjaTl1YzJGemMyVnRMMUpsZG1sMFUyVnlkbWxqWlhNdVVHVnljMmx6ZEdWdVkyVXZVbVYyYVhSVFpYSjJhV05sY3lVeVF5VXlNRlpsY25OcGIyNGxNMFF5TGpFeUxqQXVOVGMwTUNVeVF5VXlNRU4xYkhSMWNtVWxNMFJ1WlhWMGNtRnNKVEpESlRJd1VIVmliR2xqUzJWNVZHOXJaVzRsTTBSdWRXeHNJajROQ2p4emRISnBibWRKUkNCcFpEMGljbVZtTFRNaVBqQTROV1pqWXpVM0xUazBNbU10TkdVek9TMDRNRE0zTFRKbE5EUTFPVFUwWXprNFpDMHdNREEwT1dZeE1Ed3ZjM1J5YVc1blNVUStEUW84YVc1MFNVUStNekF5T0RZMFBDOXBiblJKUkQ0TkNqd3ZZVEU2VTJWeWFXRnNhWHBoWW14bFNXUStEUW84TDFOUFFWQXRSVTVXT2tKdlpIaytEUW84TDFOUFFWQXRSVTVXT2tWdWRtVnNiM0JsUGcwSzwvQmFzZS0wLTNfRGF0YT4NCjxCYXNlLTAtM19IYXNOZXN0ZWREYXRhPmZhbHNlPC9CYXNlLTAtM19IYXNOZXN0ZWREYXRhPg0KPC9hMTpDYWxsU2l0ZV94MDAyQl9UcmFjZVNlcmlhbGlzZXJIZWxwZXI+DQo8L1NPQVAtRU5WOkJvZHk+DQo8L1NPQVAtRU5WOkVudmVsb3BlPg0K"
+      }
+    }
+  ],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.0.5650",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": 211.50379943847656,
+      "EyeY": 7902.35107421875,
+      "EyeZ": -2720.60107421875,
+      "LookX": -173.04457092285156,
+      "LookY": -7201.22607421875,
+      "LookZ": 2109.56298828125,
+      "UpX": 0.081554487347602844,
+      "UpY": -0.069756977260112762,
+      "UpZ": -0.99422472715377808
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Receive",
+        "Id": "187dd33d4a0e4186b05c7314feb2ee0c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -233.09462075748291,
+        "Y": 111.5761795467985
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY speckle block insertion points",
+        "Id": "2f5d8cc215d84e4894ae5fb482dc29f4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 144.65721508997831,
+        "Y": 121.2477860962953
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "FamilyInstance.ByPointAndLevel",
+        "Id": "e19db34d22224641bfe354d5b9d0f96c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 759.27062498450459,
+        "Y": 101.80427024558938
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Levels",
+        "Id": "a5da2ef10de549148e493ba13270813f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -525.20974166660392,
+        "Y": 288.6881353131871
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Family Types",
+        "Id": "5744222bd0a84e5e9e0c99291365703b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -532.1027674218584,
+        "Y": -47.508107832445617
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY speckle block transforms",
+        "Id": "93495b31dd194ec2bcec823dbfb57b45",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 252.66915204312511,
+        "Y": 313.66790620768757
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY block rotations",
+        "Id": "af2d6516629d44f4b703b1d8802e4984",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 564.5662353427889,
+        "Y": 315.491371415205
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "FamilyInstance.SetRotation",
+        "Id": "2fa7e9ae1d1844278da487d687e56651",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1248.6590260194603,
+        "Y": 183.89510497389506
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Math.Round",
+        "Id": "20a66a91501c48f0b4fd86d94e136551",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 815.25671046523621,
+        "Y": 316.71317897896455
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "6412cd5901354cb78fc4a24f0170c4bc",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 246.3364763392558,
+        "Y": 493.96423235467421
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "1aa7628abd444b0a9a6f52f27a399996",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -518.94062451128752,
+        "Y": -477.42953272210673
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "ab33e0428fae41e9939353eed265ba19",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -524.85670317132258,
+        "Y": 444.6243013586967
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "usageLog",
+        "Id": "ffee10d1a4324b49a8656b0af4b486ec",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -268.24946111032273,
+        "Y": 443.09104512181659
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "OUTPUT",
+        "Id": "85204b64deaf4740b84e91545a4dfbe5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": true,
+        "Excluded": false,
+        "X": 239.70484501666056,
+        "Y": -374.70765540181969
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Speckle Stream URL",
+        "Id": "c89011a706134e9699a69402d6700d3a",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -532.10827355845208,
+        "Y": 114.0367099620417
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "58127eeb4cb646d18ba3156bd9592b4b",
+        "Title": "INPUT",
+        "Nodes": [
+          "c89011a706134e9699a69402d6700d3a",
+          "5744222bd0a84e5e9e0c99291365703b",
+          "a5da2ef10de549148e493ba13270813f"
+        ],
+        "Left": -542.10827355845208,
+        "Top": -100.50810783244562,
+        "Width": 283.00550613659368,
+        "Height": 482.19624314563271,
+        "FontSize": 36.0,
+        "InitialTop": -47.508107832445617,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "716350fe083e41b0a7a406f442e40f7d",
+        "Title": "Filter",
+        "Nodes": [
+          "98d96394e858449ba9c4c8d7893e396d"
+        ],
+        "Left": -273.17596275217193,
+        "Top": -471.21510497217923,
+        "Width": 132.0,
+        "Height": 102.0,
+        "FontSize": 36.0,
+        "InitialTop": -418.21510497217923,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FF48B9FF"
+      },
+      {
+        "Id": "fcce6624cc514ee88078dc843d87165c",
+        "Title": "Error handling",
+        "Nodes": [
+          "fb4b42f85ccd45c9964099a42e736f71"
+        ],
+        "Left": -123.18041474925349,
+        "Top": -475.59748441204329,
+        "Width": 307.0,
+        "Height": 117.0,
+        "FontSize": 36.0,
+        "InitialTop": -422.59748441204329,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FFFF7BAC"
+      },
+      {
+        "Id": "4fd5562d465e4ac9b0b8bb4809e17c0b",
+        "Title": "OUTPUT",
+        "Nodes": [
+          "85204b64deaf4740b84e91545a4dfbe5",
+          "5abe17391a024df68fd911ba2fd8c537"
+        ],
+        "Left": 226.81753012944796,
+        "Top": -474.20118162875337,
+        "Width": 232.8873148872126,
+        "Height": 377.49352622693368,
+        "FontSize": 36.0,
+        "InitialTop": -421.20118162875337,
+        "InitialHeight": 191.49352622693368,
+        "TextblockHeight": 43.0,
+        "Background": "#FFFFAA45"
+      },
+      {
+        "Id": "98d96394e858449ba9c4c8d7893e396d",
+        "Title": "filtering elements",
+        "Nodes": [],
+        "Left": -263.17596275217193,
+        "Top": -418.21510497217923,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "fb4b42f85ccd45c9964099a42e736f71",
+        "Title": "Treating errors as hints to user what to do to avoid the error",
+        "Nodes": [],
+        "Left": -113.18041474925349,
+        "Top": -422.59748441204329,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "5abe17391a024df68fd911ba2fd8c537",
+        "Title": "Place output for Dynamo Player",
+        "Nodes": [],
+        "Left": 236.81753012944796,
+        "Top": -421.20118162875337,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 811.35960683259111,
+    "Y": 342.14040466232228,
+    "Zoom": 0.37881904298070679
+  }
+}
