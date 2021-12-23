@@ -1,9 +1,9 @@
 # DynamoScripts
 ## Dynamo BIM skripty pre Revit
+* [zoznam skriptov](https://airtable.com/shrBtODlBgiQb5SDQ/tblpbwzuzVPqy2vEz) - zoznam skriptov na Airtable
 * [help](http://dynamohelp.atwebpages.com) - verejná help web stránka
-* [wiki](https://gfi.miraheze.org/wiki/Zoznam_Dynamo_skriptov) - privátny firemný wiki portál
 * [download](https://bitbucket.org/davidvadkerti/dynamoscripts/downloads/?tab=tags) - stiahnuť aktuálnu verziu Dynamo skriptov
-* [youtube channel](https://www.youtube.com/playlist?list=PL7jLBbBNDaKlnBmdsM1JXzFDyDtHQexBp) - videonávody k niektorým skriptom
+* [youtube channel](https://www.youtube.com/playlist?list=PL7jLBbBNDaKlnBmdsM1JXzFDyDtHQexBp) - videonávody k niektorým skriptom dostupné aj z Airtable
 
 ### Repozitár obsahuje 
 * viac ako 100 Dynamo skriptov, vačšinou pripravených pre Dynamo Player
