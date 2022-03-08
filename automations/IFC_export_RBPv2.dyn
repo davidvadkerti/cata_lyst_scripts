@@ -1,0 +1,586 @@
+{
+  "Uuid": "cd24453b-d015-4f27-8783-b1c866c55ac7",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "IFC_export_RBPv2",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "c3b2c930cfe24d23a6b5c37c8f49f302",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "vyexportuje IFC súbor z aktívneho dokumentu\r\n\r\nJe potrebné mať nainštalovaný Package Genius Loci",
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "56f137df1c93425ab3614dd987d98f07",
+      "Name": "OUTPUT",
+      "Type": "unknown",
+      "InitialValue": "",
+      "Description": "Visualize the node's output"
+    }
+  ],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "b6f62bca-c938-4d9d-91fd-71b0352fff3b",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "e012c42749e746c790b34e1003bfd176",
+      "Inputs": [
+        {
+          "Id": "925f306b787846b28d2bf5955adeb181",
+          "Name": "DirectoryPath",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "fff991e6fda64e86962ba2971ac70de4",
+          "Name": "view",
+          "Description": "var[]..[]\nDefault value : Revit.Application.Document.Current.ActiveView",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b57ecdb0167c4041b5eab9e386b277ef",
+          "Name": "Filename",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "dc5f5052689f4d9397bc5243d58f07ad",
+          "Name": "IFCversion",
+          "Description": "IFC Version\n\nstring\nDefault value : \"IFC2x3\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b34ef36cc7e440209dca12cbbb6c25e9",
+          "Name": "ProjectOrigin",
+          "Description": "SharedCoordinates =\"0\", SiteSurveyPoint =\"1\",\nProjectBasePoint=\"2\", InternalCoordinates=\"3\"\n\nstring\nDefault value : \"3\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e9a490203ff8422fab24564c28b3db78",
+          "Name": "Phase",
+          "Description": "If no phase is connected, export Default phase\n\nvar[]..[]\nDefault value : null",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ab5645dbceef4441882b6d9d038fffcb",
+          "Name": "UserDefinedPSet",
+          "Description": "FilePath\n\nvar[]..[]\nDefault value : \"\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3591fce7d11a4ec4900fd6b500707507",
+          "Name": "RevitInternalPset",
+          "Description": "bool\nDefault value : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8b13afc7d51845dc98b1a51ef4a6ec9e",
+          "Name": "WallAndColumnSplitting",
+          "Description": "bool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e15f6439c5994eea903a7dcd8afb8354",
+          "Name": "ExportBaseQuantities",
+          "Description": "bool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3c82f67b9f524f5ca59121199e35e0b9",
+          "Name": "Succeed",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Export View to IFC file in the active document.\r\nFor use with the Select Phase node.\r\nSome other IFC options are embedded inside the python script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"0\";",
+      "Id": "e18dcb3532224e5aa46bd443b9544d38",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d9eae014d8c940f68c471b5481c09d7c",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "vyexportuje IFC súbor z aktívneho dokumentu\r\n\r\nJe potrebné mať nainštalovaný Package Genius Loci",
+      "Id": "c3b2c930cfe24d23a6b5c37c8f49f302",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "6358f620379b4b609b735589ce887140",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "56f137df1c93425ab3614dd987d98f07",
+      "Inputs": [
+        {
+          "Id": "78934d5174974fbfb5c05f45c0820a43",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b646573532744ae49b5c8ed5e63d0b64",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the node's output"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"C:\\\\Users\\\\davidv\\\\Desktop\\\\test\\\\ifc\\\\exportKLG\";",
+      "Id": "cfca644589ec4f85a8ab1f830dea19ee",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "a12e4febcaed471c93ea32830ba125dc",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# this script opens all worksets which doesn't have \"link\" in their name\r\n# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\nclr.AddReference(\"RevitServices\")\r\nclr.AddReference(\"RevitAPI\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom Autodesk.Revit import DB\r\nfrom Autodesk.Revit.DB.Document import GetElement\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = uiapp.Application\r\nuidoc = DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument\r\n\r\nrooms = DB.FilteredElementCollector(doc).OfCategory(DB.BuiltInCategory.OST_Rooms).WhereElementIsNotElementType().ToElements()\r\n\r\n\r\n# opening worksets with \"link\" not in the name\r\nif doc.IsWorkshared:\r\n    ws_collector = DB.FilteredWorksetCollector(doc)\\\r\n                     .OfKind(DB.WorksetKind.UserWorkset)\\\r\n                     .ToWorksets()\r\n\r\n    for ws in ws_collector:\r\n        if \"link\" not in ws.Name.lower():\r\n            # get all elements in a workset\r\n            filter = DB.ElementWorksetFilter(ws.Id)\r\n            ws_elems = DB.FilteredElementCollector(doc)\\\r\n                         .WherePasses(filter)\\\r\n                         .WhereElementIsNotElementType()\\\r\n                         .ToElements()\r\n            if ws_elems:\r\n                # get first element in a workset\r\n                first_elem_id = ws_elems[0].Id\r\n                uidoc.ShowElements(doc.GetElement(first_elem_id))\r\n\r\n# filtering out 3D view with the name which contains \"Dalux\"\r\n#collector = DB.FilteredElementCollector(doc).OfClass(DB.View)\r\n#filtered_views = []\r\n#for view in collector:\r\n#    if view.Name.Contains(\"Dalux\"):\r\n#        filtered_views.append(view)\r\n# opening the view\r\n#uidoc.RequestViewChange(filtered_views[0])\r\nOUT = IN[0]",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "02b2a52246aa43fb8e467f140c7d0661",
+      "Inputs": [
+        {
+          "Id": "d5f4956401874e34a757cc9015eb41e6",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d48fe5fa0b374287a33773469e4229b8",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\nclr.AddReference(\"RevitServices\")\r\nclr.AddReference(\"RevitAPI\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\n\r\n# Place your code below this line\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = uiapp.Application\r\nuidoc = DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument\r\n\r\ndef userNamePurge(file_name):\r\n    def centralPathSplitter(new_file_name):\r\n        file_path_split = new_file_name.split(\"/\")\r\n        new_file_name = file_path_split[-1]\r\n        return new_file_name + extension\r\n\r\n    def pathSplitter(new_file_name):\r\n        file_path_split = file_name.split(\"\\\\\")\r\n        new_file_name = file_path_split[-1]\r\n        return new_file_name\r\n\r\n    # userName and detached purge\r\n    revit_user_name = \"davidv\"\r\n    file_path_split_name = file_name.split(\"_\")\r\n\r\n    # extension extraction\r\n    file_path_split_ext = file_name.split(\".\")\r\n    extension = \".\"+file_path_split_ext[-1]\r\n\r\n    if file_path_split_name[-1] == \"detached.rvt\" and file_path_split_name[-2] == revit_user_name:\r\n        file_name_list = file_path_split_name[0:-2]\r\n        new_file_name = \"_\".join(file_name_list)\r\n        centralPath = centralPathSplitter(new_file_name)\r\n    elif file_path_split_name[-1] == \"detached.rvt\":\r\n        file_name_list = file_path_split_name[0:-1]\r\n        new_file_name = \"_\".join(file_name_list)\r\n        centralPath = centralPathSplitter(new_file_name)\r\n    elif file_path_split_name[-1] == revit_user_name + \".rvt\":\r\n        file_name_list = file_path_split_name[0:-1]\r\n        new_file_name = \"_\".join(file_name_list)\r\n        centralPath = centralPathSplitter(new_file_name)\r\n    else:\r\n        file_name_list = file_path_split_name\r\n        new_file_name = \"_\".join(file_name_list)\r\n        centralPath = pathSplitter(new_file_name)\r\n\r\n    return centralPath\r\n\r\nname = doc.PathName\r\nif not name:\r\n    name = \"Not saved file\"\r\n# workshared file\r\nfileName = userNamePurge(name)\r\n# Assign your output to the OUT variable.\r\nOUT = fileName[:-4]",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "1dca6377d5dc4e27bd33760d4f18c9a7",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "15832035220a4b25a0f685fcae2dec09",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# this script opens all worksets which doesn't have \"link\" in their name\r\n# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\nclr.AddReference(\"RevitServices\")\r\nclr.AddReference(\"RevitAPI\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom Autodesk.Revit import DB\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = uiapp.Application\r\nuidoc = DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument\r\n\r\ncollector = DB.FilteredElementCollector(doc).OfClass(DB.View)\r\nfiltered_views = []\r\nfor view in collector:\r\n    if view.Name.Contains(\"IFC\"):\r\n        filtered_views.append(view)\r\n    elif view.Name.Contains(\"Dalux\"):\r\n        filtered_views.append(view)\r\nOUT = filtered_views[0]",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "8b4e5b2117dc4dd49fc191f1cbaa0951",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "78bf9e75aeb2474d8199691ad7e5c445",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "3c82f67b9f524f5ca59121199e35e0b9",
+      "End": "78934d5174974fbfb5c05f45c0820a43",
+      "Id": "7f0dc1102e6644c999282b0f7e238b0c"
+    },
+    {
+      "Start": "d9eae014d8c940f68c471b5481c09d7c",
+      "End": "b34ef36cc7e440209dca12cbbb6c25e9",
+      "Id": "2644352303bd44ff82abcc598cd23d37"
+    },
+    {
+      "Start": "a12e4febcaed471c93ea32830ba125dc",
+      "End": "d5f4956401874e34a757cc9015eb41e6",
+      "Id": "4fd606afb81547688a9c47da49cafcf6"
+    },
+    {
+      "Start": "d48fe5fa0b374287a33773469e4229b8",
+      "End": "925f306b787846b28d2bf5955adeb181",
+      "Id": "3aaebb4d27914355b0140e867e68a2ac"
+    },
+    {
+      "Start": "15832035220a4b25a0f685fcae2dec09",
+      "End": "b57ecdb0167c4041b5eab9e386b277ef",
+      "Id": "c40bbb0baade4e52991c94623ef7228c"
+    },
+    {
+      "Start": "78bf9e75aeb2474d8199691ad7e5c445",
+      "End": "fff991e6fda64e86962ba2971ac70de4",
+      "Id": "4fbcb2b9469247c497ae9102de6dee5f"
+    }
+  ],
+  "Dependencies": [
+    "b6f62bca-c938-4d9d-91fd-71b0352fff3b"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Genius Loci",
+      "Version": "2021.11.10",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "e012c42749e746c790b34e1003bfd176"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.0.5650",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Export IFC",
+        "Id": "e012c42749e746c790b34e1003bfd176",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 766.00631657343,
+        "Y": 101.56736549903405
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "e18dcb3532224e5aa46bd443b9544d38",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 348.70249647526759,
+        "Y": 420.871946620658
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "c3b2c930cfe24d23a6b5c37c8f49f302",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 123.80495297425443,
+        "Y": -171.7959612115863
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "OUTPUT",
+        "Id": "56f137df1c93425ab3614dd987d98f07",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": true,
+        "Excluded": false,
+        "X": 1187.9592989118282,
+        "Y": 161.15274816789224
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "cfca644589ec4f85a8ab1f830dea19ee",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -130.92588218457956,
+        "Y": 9.6881576678879782
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY Workset Opener",
+        "Id": "02b2a52246aa43fb8e467f140c7d0661",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 450.30213058288371,
+        "Y": 11.353811484300195
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY getDocNameV2",
+        "Id": "1dca6377d5dc4e27bd33760d4f18c9a7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 299.15076048952812,
+        "Y": 311.80495251918842
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "PY View finder IFC",
+        "Id": "8b4e5b2117dc4dd49fc191f1cbaa0951",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 304.55900518857908,
+        "Y": 152.37645398345063
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "b7be7c5c6cb54755bb81c8697bb3973a",
+        "Title": "Filter",
+        "Nodes": [
+          "90069763633e4b9da57a6655ce3e85e0"
+        ],
+        "Left": 805.759970009181,
+        "Top": -118.8965509687435,
+        "Width": 132.0,
+        "Height": 102.0,
+        "FontSize": 36.0,
+        "InitialTop": -65.8965509687435,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FF48B9FF"
+      },
+      {
+        "Id": "16c85508707c426493c7f4779a214210",
+        "Title": "Error handling",
+        "Nodes": [
+          "df53592385714000b069bacf0fc8d523"
+        ],
+        "Left": 955.7555180120994,
+        "Top": -123.27893040860755,
+        "Width": 307.0,
+        "Height": 117.0,
+        "FontSize": 36.0,
+        "InitialTop": -70.27893040860755,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FFFF7BAC"
+      },
+      {
+        "Id": "5f54acb3c51349e6807966073df6c12e",
+        "Title": "OUTPUT",
+        "Nodes": [
+          "56f137df1c93425ab3614dd987d98f07",
+          "e3e1ec4ca2a64dde9a85a28aec75189c"
+        ],
+        "Left": 1175.0719840246156,
+        "Top": 61.65922194095856,
+        "Width": 232.8873148872126,
+        "Height": 377.49352622693368,
+        "FontSize": 36.0,
+        "InitialTop": 114.65922194095856,
+        "InitialHeight": 191.49352622693368,
+        "TextblockHeight": 43.0,
+        "Background": "#FFFFAA45"
+      },
+      {
+        "Id": "e556034faf7e47c0b6e4f0478b25db7d",
+        "Title": "opens all worksets without links",
+        "Nodes": [
+          "02b2a52246aa43fb8e467f140c7d0661"
+        ],
+        "Left": 440.30213058288371,
+        "Top": -171.64618851569981,
+        "Width": 199.0,
+        "Height": 287.0,
+        "FontSize": 36.0,
+        "InitialTop": 11.353811484300195,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 173.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "90069763633e4b9da57a6655ce3e85e0",
+        "Title": "filtering elements",
+        "Nodes": [],
+        "Left": 815.759970009181,
+        "Top": -65.8965509687435,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "df53592385714000b069bacf0fc8d523",
+        "Title": "Treating errors as hints to user what to do to avoid the error",
+        "Nodes": [],
+        "Left": 965.7555180120994,
+        "Top": -70.27893040860755,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "e3e1ec4ca2a64dde9a85a28aec75189c",
+        "Title": "Place output for Dynamo Player",
+        "Nodes": [],
+        "Left": 1185.0719840246156,
+        "Top": 114.65922194095856,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 87.077718757692168,
+    "Y": 259.758708610963,
+    "Zoom": 0.715214993038323
+  }
+}
