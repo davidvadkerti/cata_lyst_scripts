@@ -7,6 +7,7 @@
 
 ### Repozitár obsahuje 
 * viac ako 100 Dynamo skriptov, vačšinou pripravených pre Dynamo Player
+* RBP skripty pre automatické spúšťanie na neobmedzenom počte modelov cez [Revit Batch Processor](https://github.com/bvn-architecture/RevitBatchProcessor)
 * Power BI template pre analytiku
 * package cata_lyst
 * template pre vytváranie Dynamo skriptov
