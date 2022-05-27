@@ -2,7 +2,7 @@
   "Uuid": "cd24453b-d015-4f27-8783-b1c866c55ac7",
   "IsCustomNode": false,
   "Description": "",
-  "Name": "IFC_export",
+  "Name": "IFC_export_p",
   "ElementResolver": {
     "ResolutionMap": {}
   },
@@ -12,16 +12,25 @@
       "Name": "Návod",
       "Type": "string",
       "Value": "vyexportuje IFC súbor z aktívneho dokumentu\r\n\r\nJe potrebné mať nainštalovaný Package Genius Loci",
-      "Description": "Creates a string.",
-      "SelectedIndex": 0
+      "Description": "Creates a string."
     },
     {
       "Id": "0b4c6c3654db467eb46eaf8d5b663f18",
       "Name": "Directory Path",
       "Type": "string",
       "Value": "No file selected.",
-      "Description": "Allows you to select a directory on the system to get its path",
-      "SelectedIndex": 0
+      "Description": "Allows you to select a directory on the system to get its path"
+    },
+    {
+      "Id": "c178eaff81e448179ec646853d45b62b",
+      "Name": "Coodinates\r\nSharedCoordinates = 0, SiteSurveyPoint = 1, ProjectBasePoint = 2, InternalCoordinates = 3",
+      "Type": "number",
+      "Value": "3",
+      "MaximumValue": 3.0,
+      "MinimumValue": 0.0,
+      "StepValue": 1.0,
+      "NumberType": "Double",
+      "Description": "A slider that produces numeric values."
     }
   ],
   "Outputs": [
@@ -30,7 +39,7 @@
       "Name": "OUTPUT",
       "Type": "unknown",
       "InitialValue": "",
-      "Description": "Visualize the node's output"
+      "Description": "Visualize the output of node."
     }
   ],
   "Nodes": [
@@ -147,26 +156,6 @@
       "Description": "Export View to IFC file in the active document.\r\nFor use with the Select Phase node.\r\nSome other IFC options are embedded inside the python script."
     },
     {
-      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
-      "NodeType": "CodeBlockNode",
-      "Code": "\"3\";",
-      "Id": "e18dcb3532224e5aa46bd443b9544d38",
-      "Inputs": [],
-      "Outputs": [
-        {
-          "Id": "f307e919e2534027be6a774201300e9a",
-          "Name": "",
-          "Description": "Value of expression at line 1",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "Allows for DesignScript code to be authored directly"
-    },
-    {
       "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
       "NodeType": "StringInputNode",
       "InputValue": "vyexportuje IFC súbor z aktívneho dokumentu\r\n\r\nJe potrebné mať nainštalovaný Package Genius Loci",
@@ -264,7 +253,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Visualize the node's output"
+      "Description": "Visualize the output of node."
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
@@ -387,6 +376,30 @@
       ],
       "Replication": "Disabled",
       "Description": "Allows you to select a directory on the system to get its path"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DoubleSlider, CoreNodeModels",
+      "NodeType": "NumberInputNode",
+      "NumberType": "Double",
+      "MaximumValue": 3.0,
+      "MinimumValue": 0.0,
+      "StepValue": 1.0,
+      "InputValue": 3.0,
+      "Id": "c178eaff81e448179ec646853d45b62b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "5baf860859304a31ac9bfd8da211de71",
+          "Name": "",
+          "Description": "Double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A slider that produces numeric values."
     }
   ],
   "Connectors": [
@@ -394,11 +407,6 @@
       "Start": "3c82f67b9f524f5ca59121199e35e0b9",
       "End": "78934d5174974fbfb5c05f45c0820a43",
       "Id": "80798a86d33247fe94ceabc392cb2f4a"
-    },
-    {
-      "Start": "f307e919e2534027be6a774201300e9a",
-      "End": "b34ef36cc7e440209dca12cbbb6c25e9",
-      "Id": "c8ebb3aae6bf44c98f92dc547aae4950"
     },
     {
       "Start": "3666b2ef1ab74ab499f8e5782553e51a",
@@ -429,6 +437,11 @@
       "Start": "17e84fd161d54b2db77fdd7b8b521012",
       "End": "925f306b787846b28d2bf5955adeb181",
       "Id": "9309f5c78f5f420883731484344d5c34"
+    },
+    {
+      "Start": "5baf860859304a31ac9bfd8da211de71",
+      "End": "b34ef36cc7e440209dca12cbbb6c25e9",
+      "Id": "dc6641e9b27548888df7e59af6d6258a"
     }
   ],
   "Dependencies": [
@@ -455,30 +468,13 @@
       ]
     }
   ],
-  "Thumbnail": "",
-  "GraphDocumentationURL": null,
-  "ExtensionWorkspaceData": [
-    {
-      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
-      "Name": "Properties",
-      "Version": "2.12",
-      "Data": {}
-    }
-  ],
-  "Author": "",
-  "Linting": {
-    "activeLinter": "None",
-    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
-    "warningCount": 0,
-    "errorCount": 0
-  },
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.12.0.5650",
+      "Version": "2.6.1.8786",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -504,16 +500,6 @@
         "Excluded": false,
         "X": 745.5,
         "Y": 178.0
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "Code Block",
-        "Id": "e18dcb3532224e5aa46bd443b9544d38",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 449.14496284262032,
-        "Y": 471.00988839136306
       },
       {
         "ShowGeometry": true,
@@ -562,8 +548,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 213.064418655512,
-        "Y": 303.33708158802585
+        "X": 208.29350813673864,
+        "Y": 372.26257746260092
       },
       {
         "ShowGeometry": true,
@@ -572,8 +558,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 440.34366031845076,
-        "Y": 200.81145452927422
+        "X": 339.57351413673229,
+        "Y": 214.24747402017
       },
       {
         "ShowGeometry": true,
@@ -582,8 +568,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 250.43981658616502,
-        "Y": 195.90618919301585
+        "X": 161.42618745898034,
+        "Y": 205.98320381118765
       },
       {
         "ShowGeometry": true,
@@ -602,8 +588,18 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 244.952679849648,
-        "Y": 49.711465943315829
+        "X": 416.26192835856943,
+        "Y": 19.48042208880031
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Coodinates\r\nSharedCoordinates = 0, SiteSurveyPoint = 1, ProjectBasePoint = 2, InternalCoordinates = 3",
+        "Id": "c178eaff81e448179ec646853d45b62b",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -58.682031844368282,
+        "Y": 102.55533425063288
       }
     ],
     "Annotations": [
@@ -611,16 +607,17 @@
         "Id": "34b97eaf2f9b4533849a4e3cba74252e",
         "Title": "INPUT",
         "Nodes": [
-          "0b4c6c3654db467eb46eaf8d5b663f18"
+          "0b4c6c3654db467eb46eaf8d5b663f18",
+          "c178eaff81e448179ec646853d45b62b"
         ],
-        "Left": 234.952679849648,
-        "Top": -3.4885340566841734,
-        "Width": 132.0,
-        "Height": 146.60000000000002,
+        "Left": -68.682031844368282,
+        "Top": -33.51957791119969,
+        "Width": 636.0,
+        "Height": 204.07491216183257,
         "FontSize": 36.0,
-        "InitialTop": 49.711465943315829,
-        "InitialHeight": 145.0,
-        "TextblockHeight": 43.2,
+        "InitialTop": 19.48042208880031,
+        "InitialHeight": 228.07491216183257,
+        "TextblockHeight": 43.0,
         "Background": "#FFC1D676"
       },
       {
@@ -630,13 +627,13 @@
           "90069763633e4b9da57a6655ce3e85e0"
         ],
         "Left": 640.69302187287508,
-        "Top": -123.12257409401924,
+        "Top": -122.92257409401924,
         "Width": 132.0,
-        "Height": 102.6,
+        "Height": 97.0,
         "FontSize": 36.0,
         "InitialTop": -69.92257409401924,
-        "InitialHeight": 145.0,
-        "TextblockHeight": 43.2,
+        "InitialHeight": 140.0,
+        "TextblockHeight": 43.0,
         "Background": "#FF48B9FF"
       },
       {
@@ -646,13 +643,13 @@
           "df53592385714000b069bacf0fc8d523"
         ],
         "Left": 790.68856987579352,
-        "Top": -127.5049535338833,
-        "Width": 307.20000000000005,
-        "Height": 117.0,
+        "Top": -127.30495353388329,
+        "Width": 307.0,
+        "Height": 112.0,
         "FontSize": 36.0,
         "InitialTop": -74.304953533883292,
-        "InitialHeight": 145.0,
-        "TextblockHeight": 43.2,
+        "InitialHeight": 140.0,
+        "TextblockHeight": 43.0,
         "Background": "#FFFF7BAC"
       },
       {
@@ -663,13 +660,13 @@
           "e3e1ec4ca2a64dde9a85a28aec75189c"
         ],
         "Left": 1175.0719840246156,
-        "Top": 61.459221940958557,
-        "Width": 232.48731488721251,
-        "Height": 377.09352622693365,
+        "Top": 61.65922194095856,
+        "Width": 220.60268511278741,
+        "Height": 193.49352622693368,
         "FontSize": 36.0,
         "InitialTop": 114.65922194095856,
         "InitialHeight": 191.49352622693368,
-        "TextblockHeight": 43.2,
+        "TextblockHeight": 43.0,
         "Background": "#FFFFAA45"
       },
       {
@@ -715,8 +712,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": 311.14851509667437,
-    "Y": 169.53761072813418,
-    "Zoom": 0.6063734867386027
+    "X": 102.27895273345393,
+    "Y": 290.55344581216968,
+    "Zoom": 0.47325700602368703
   }
 }

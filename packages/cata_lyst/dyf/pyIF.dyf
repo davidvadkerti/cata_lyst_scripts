@@ -40,7 +40,7 @@
       "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
       "NodeType": "InputNode",
       "Parameter": {
-        "Name": "ifFalse",
+        "Name": "ifTrue",
         "TypeName": "var",
         "TypeRank": -1,
         "DefaultValue": null,
@@ -66,6 +66,7 @@
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
       "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\nboolean = IN[0]\r\ntrue = IN[1]\r\nfalse = IN[2]\r\n\r\n# Place your code below this line\r\nif boolean == 1:\r\n\tresult = true\r\nelif boolean == 0:\r\n\tresult = false\r\nelse:\r\n\tresult = null\r\n# Assign your output to the OUT variable.\r\nOUT = result",
+      "Engine": "IronPython2",
       "VariableInputPorts": true,
       "Id": "6e7d1779e9954f73a93473bdeace30b2",
       "Inputs": [
@@ -109,7 +110,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Runs an embedded IronPython script."
+      "Description": "Runs an embedded Python script."
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
@@ -136,7 +137,7 @@
       "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
       "NodeType": "InputNode",
       "Parameter": {
-        "Name": "ifTrue",
+        "Name": "ifFalse",
         "TypeName": "var",
         "TypeRank": -1,
         "DefaultValue": null,
@@ -183,13 +184,14 @@
   ],
   "Dependencies": [],
   "NodeLibraryDependencies": [],
+  "Author": "None provided",
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": false,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.3.0.5885",
+      "Version": "2.12.0.5650",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
