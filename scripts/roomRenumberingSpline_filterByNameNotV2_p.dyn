@@ -11,15 +11,25 @@
       "Id": "3e1ba0fd5da149c89feaa5f3b162e7b4",
       "Name": "Návod",
       "Type": "string",
-      "Value": "Pre kobky, výťahy a šachty\r\nFormat precislovania = pl.mmm\r\np=prefix, l=level, m=cislo miestnosti\r\nnapr. = P-2.056\r\n\r\nPrecisluje miestnosti podla nakreslenej ciary.\r\n\tNajprv je potrebne nakreslit ciaru (najlepsie spline), ktora pretina miestnosti ktore chceme precislovat. Ciary je dobre robit v samostatnej Subcategory napr. \"Renumbering rooms\" aby sa dali lahko vsetky naraz vypnut/zapnut pre nasledne opatovne precislovanie. Ciara musi byt kreslena ako Model Line alebo konvertovana z Detail Line.\r\n\tModel Line musi byt nakreslena vo Workplane, ktora pretina precislovane miestnosti, cize typicky v rovine podlahy. Pri velmi dlhej ciare sa moze vyskytnut chyba, vtedy rozdelte ciaru na viacere elementy.\r\n\tPrikaz moze pracovat dlhsie, nepustajte ho v automatickom mode, ale len v manualnom.",
-      "Description": "Creates a string."
+      "Value": "Pre bežné miestnosti\r\nFormat precislovania = pl.mmm\r\np=prefix, l=level, m=cislo miestnosti\r\nnapr. = P-2.056\r\n\r\nPrecisluje miestnosti podla nakreslenej ciary.\r\n\tNajprv je potrebne nakreslit ciaru (najlepsie spline), ktora pretina miestnosti ktore chceme precislovat. Ciary je dobre robit v samostatnej Subcategory napr. \"Renumbering rooms\" aby sa dali lahko vsetky naraz vypnut/zapnut pre nasledne opatovne precislovanie. Ciara musi byt kreslena ako Model Line alebo konvertovana z Detail Line.\r\n\tModel Line musi byt nakreslena vo Workplane, ktora pretina precislovane miestnosti, cize typicky v rovine podlahy. Pri velmi dlhej ciare sa moze vyskytnut chyba, vtedy rozdelte ciaru na viacere elementy.\r\n\tPrikaz moze pracovat dlhsie, nepustajte ho v automatickom mode, ale len v manualnom.",
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "12fc419357164f2f82147f4d69c02c9d",
+      "Name": "Select Spline",
+      "Type": "hostSelection",
+      "Value": "",
+      "Description": "Select a model element from the document.",
+      "SelectedIndex": 0
     },
     {
       "Id": "3e90d630f86b42ad860bca93fb076498",
       "Name": "Prefix",
       "Type": "string",
       "Value": "P",
-      "Description": "Creates a string."
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
     },
     {
       "Id": "947971828e60439e81d78303b8d9bf87",
@@ -27,7 +37,8 @@
       "Type": "number",
       "Value": "5",
       "NumberType": "Double",
-      "Description": "Creates a number."
+      "Description": "Creates a number.",
+      "SelectedIndex": 0
     },
     {
       "Id": "e14a3361ee0148f39b9b1db1a6d07615",
@@ -35,21 +46,24 @@
       "Type": "number",
       "Value": "1",
       "NumberType": "Double",
-      "Description": "Creates a number."
+      "Description": "Creates a number.",
+      "SelectedIndex": 0
     },
     {
       "Id": "25e26344181c4a90a6d7e7a5fbce9717",
       "Name": "Name filter NOT - 1\r\nmiestnosti s týmto parametrom sa neprečíslujú",
       "Type": "string",
       "Value": "Kobka",
-      "Description": "Creates a string."
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
     },
     {
       "Id": "30e332bb68814fc883fa266b41723917",
       "Name": "Name filter NOT - 2\r\nmiestnosti s týmto parametrom sa neprečíslujú",
       "Type": "string",
       "Value": "Sklad garáže",
-      "Description": "Creates a string."
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
     }
   ],
   "Outputs": [],
@@ -132,7 +146,7 @@
       "Outputs": [
         {
           "Id": "8525fae263f1455983e1c0d438d7368d",
-          "Name": "count",
+          "Name": "int",
           "Description": "List length.",
           "UsingDefaultValue": false,
           "Level": 2,
@@ -459,7 +473,7 @@
         {
           "Id": "0467d3db9b2f4751831f5b02994c9b1a",
           "Name": "x",
-          "Description": "x value.\n\nvar[]..[]",
+          "Description": "Integer or double value\n\nvar[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -468,7 +482,7 @@
         {
           "Id": "be7fa3d1afd947fe8078e2c2c51a4deb",
           "Name": "y",
-          "Description": "y value.\n\nvar[]..[]",
+          "Description": "Integer or double value\n\nvar[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -478,8 +492,8 @@
       "Outputs": [
         {
           "Id": "d260c03631f248c3b6caeebc23ad00d3",
-          "Name": "var[]..[]",
-          "Description": "var[]..[]",
+          "Name": "bool",
+          "Description": "Result of check",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -487,7 +501,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "x less y?\n\n< (x: var[]..[], y: var[]..[]): var[]..[]"
+      "Description": "Compares if x is lower to y\n\n< (x: var[]..[], y: var[]..[]): var[]..[]"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
@@ -546,7 +560,7 @@
       "Outputs": [
         {
           "Id": "380795907d3e4176b293e5dbd1cf32c6",
-          "Name": "count",
+          "Name": "int",
           "Description": "List length.",
           "UsingDefaultValue": false,
           "Level": 2,
@@ -584,7 +598,7 @@
         {
           "Id": "a3a06dea4fd4461cb059764b56398823",
           "Name": "chordLength",
-          "Description": "double\nDefault value : 1",
+          "Description": "Chord length\n\ndouble\nDefault value : 1",
           "UsingDefaultValue": true,
           "Level": 2,
           "UseLevels": false,
@@ -701,12 +715,12 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Visualize the output of node."
+      "Description": "Visualize the node's output"
     },
     {
       "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
       "NodeType": "StringInputNode",
-      "InputValue": "Pre kobky, výťahy a šachty\r\nFormat precislovania = pl.mmm\r\np=prefix, l=level, m=cislo miestnosti\r\nnapr. = P-2.056\r\n\r\nPrecisluje miestnosti podla nakreslenej ciary.\r\n\tNajprv je potrebne nakreslit ciaru (najlepsie spline), ktora pretina miestnosti ktore chceme precislovat. Ciary je dobre robit v samostatnej Subcategory napr. \"Renumbering rooms\" aby sa dali lahko vsetky naraz vypnut/zapnut pre nasledne opatovne precislovanie. Ciara musi byt kreslena ako Model Line alebo konvertovana z Detail Line.\r\n\tModel Line musi byt nakreslena vo Workplane, ktora pretina precislovane miestnosti, cize typicky v rovine podlahy. Pri velmi dlhej ciare sa moze vyskytnut chyba, vtedy rozdelte ciaru na viacere elementy.\r\n\tPrikaz moze pracovat dlhsie, nepustajte ho v automatickom mode, ale len v manualnom.",
+      "InputValue": "Pre bežné miestnosti\r\nFormat precislovania = pl.mmm\r\np=prefix, l=level, m=cislo miestnosti\r\nnapr. = P-2.056\r\n\r\nPrecisluje miestnosti podla nakreslenej ciary.\r\n\tNajprv je potrebne nakreslit ciaru (najlepsie spline), ktora pretina miestnosti ktore chceme precislovat. Ciary je dobre robit v samostatnej Subcategory napr. \"Renumbering rooms\" aby sa dali lahko vsetky naraz vypnut/zapnut pre nasledne opatovne precislovanie. Ciara musi byt kreslena ako Model Line alebo konvertovana z Detail Line.\r\n\tModel Line musi byt nakreslena vo Workplane, ktora pretina precislovane miestnosti, cize typicky v rovine podlahy. Pri velmi dlhej ciare sa moze vyskytnut chyba, vtedy rozdelte ciaru na viacere elementy.\r\n\tPrikaz moze pracovat dlhsie, nepustajte ho v automatickom mode, ale len v manualnom.",
       "Id": "3e1ba0fd5da149c89feaa5f3b162e7b4",
       "Inputs": [],
       "Outputs": [
@@ -794,37 +808,6 @@
       "Description": "Allows for DesignScript code to be authored directly"
     },
     {
-      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
-      "NodeType": "PythonScriptNode",
-      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"RoomRenumberingSpline_filterByNameNotV2\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\ntry:\r\n\tlastBackslash = filePath.rindex(\"\\\\\")+1\r\nexcept:\r\n\tlastBackslash = filePath.rindex(\"/\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
-      "VariableInputPorts": true,
-      "Id": "a96b70534c55405f8e076a9667e5fd47",
-      "Inputs": [
-        {
-          "Id": "99b3ed81e6024ee1a18596d14c5db0d0",
-          "Name": "IN[0]",
-          "Description": "Input #0",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "3f18064fb8c94be58f6f7d7731fdc6d0",
-          "Name": "OUT",
-          "Description": "Result of the python script",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "Runs an embedded IronPython script."
-    },
-    {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
       "FunctionSignature": "Revit.Elements.Room.IsInsideRoom@Autodesk.DesignScript.Geometry.Point",
@@ -882,7 +865,7 @@
       "Outputs": [
         {
           "Id": "8ff415966f5f43a69df0985122042f2b",
-          "Name": "count",
+          "Name": "int",
           "Description": "List length.",
           "UsingDefaultValue": false,
           "Level": 2,
@@ -941,7 +924,7 @@
         {
           "Id": "72b1019cbd51406aa5d6808b06ee4765",
           "Name": "keys",
-          "Description": "list of keys\n\nvar[]..[]",
+          "Description": "list of keys, keys have to be sortable (e.g. numbers,strings)\n\nvar[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -951,8 +934,8 @@
       "Outputs": [
         {
           "Id": "7236ebd0b5174e9c953001800dc7e7aa",
-          "Name": "sorted list",
-          "Description": "sorted list",
+          "Name": "sortedList",
+          "Description": "type: var[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -960,8 +943,8 @@
         },
         {
           "Id": "648ce6258fc84f40a001b1ed54fef8de",
-          "Name": "sorted keys",
-          "Description": "sorted keys",
+          "Name": "sortedKeys",
+          "Description": "type: var[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1066,8 +1049,8 @@
         },
         {
           "Id": "26a468a165004b4791349e230fa8aaa1",
-          "Name": "amt",
-          "Description": "Layers of nesting to remove.\n\nint\nDefault value : -1",
+          "Name": "amount",
+          "Description": "Layers of list nesting to remove (-1 will remove all list nestings)\n\nint\nDefault value : -1",
           "UsingDefaultValue": true,
           "Level": 2,
           "UseLevels": false,
@@ -1077,8 +1060,8 @@
       "Outputs": [
         {
           "Id": "ed9cd44b286a41e1a9addad050da5984",
-          "Name": "var[]..[]",
-          "Description": "var[]..[]",
+          "Name": "list",
+          "Description": "Flattened list by amount",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1086,7 +1069,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Flattens a nested list of lists by a certain amount.\n\nList.Flatten (list: var[]..[], amt: int = -1): var[]..[]"
+      "Description": "Flattens a nested list of lists by a certain amount.\n\nList.Flatten (list: var[]..[], amount: int = -1): var[]..[]"
     },
     {
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
@@ -1115,7 +1098,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Visualize the output of node."
+      "Description": "Visualize the node's output"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -1126,7 +1109,7 @@
         {
           "Id": "a94e7cd8c72c47a192cf70203cf81850",
           "Name": "lists",
-          "Description": "A list of lists to be transposed.\n\nvar[]..[]",
+          "Description": "List of lists to be transposed\n\nvar[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1137,7 +1120,7 @@
         {
           "Id": "dac80e07b87345f1af817d206cd43959",
           "Name": "lists",
-          "Description": "A list of transposed lists.",
+          "Description": "List of transposed lists",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1215,7 +1198,7 @@
         {
           "Id": "9f5a15ec7e9449ec958200b74e686479",
           "Name": "x",
-          "Description": "x value.\n\nvar[]..[]",
+          "Description": "Basic type object to compare (e.g. bool, int, double, string, etc.)\n\nvar[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1224,7 +1207,7 @@
         {
           "Id": "fda6346a671443fcb936bf7b299d330c",
           "Name": "y",
-          "Description": "y value.\n\nvar[]..[]",
+          "Description": "Basic type object to compare (e.g. bool, int, double, string, etc.)\n\nvar[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1234,8 +1217,8 @@
       "Outputs": [
         {
           "Id": "31c57b9f663e48e18c190016f5372245",
-          "Name": "var[]..[]",
-          "Description": "var[]..[]",
+          "Name": "bool",
+          "Description": "Result of equality check",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1243,7 +1226,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Equal x to y?\n\n== (x: var[]..[], y: var[]..[]): var[]..[]"
+      "Description": "Compares if x and y are equal\n\n== (x: var[]..[], y: var[]..[]): var[]..[]"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -1254,7 +1237,7 @@
         {
           "Id": "5254a53cf1af48118ca20525401ec063",
           "Name": "x",
-          "Description": "x value.\n\nvar[]..[]",
+          "Description": "Basic type object to compare (e.g. bool, int, double, string, etc.)\n\nvar[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1263,7 +1246,7 @@
         {
           "Id": "1e050be802454bf78b75a2b3c03f6f1d",
           "Name": "y",
-          "Description": "y value.\n\nvar[]..[]",
+          "Description": "Basic type object to compare (e.g. bool, int, double, string, etc.)\n\nvar[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1273,8 +1256,8 @@
       "Outputs": [
         {
           "Id": "426f2b76cdbf48b5944e81bed6ca76da",
-          "Name": "var[]..[]",
-          "Description": "var[]..[]",
+          "Name": "bool",
+          "Description": "Result of equality check",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1282,7 +1265,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Equal x to y?\n\n== (x: var[]..[], y: var[]..[]): var[]..[]"
+      "Description": "Compares if x and y are equal\n\n== (x: var[]..[], y: var[]..[]): var[]..[]"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -1292,8 +1275,8 @@
       "Inputs": [
         {
           "Id": "c612876942814ebf9d6f1681f1419419",
-          "Name": "a",
-          "Description": "A boolean.\n\nbool",
+          "Name": "bool",
+          "Description": "A boolean\n\nbool",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1301,8 +1284,8 @@
         },
         {
           "Id": "71a2dc1d8f4d49bbba1fae7acf780f9a",
-          "Name": "b",
-          "Description": "A boolean.\n\nbool",
+          "Name": "otherBool",
+          "Description": "Other boolean\n\nbool",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1313,7 +1296,7 @@
         {
           "Id": "b4ad9aa003e84d8f8b9c3db154be1966",
           "Name": "bool",
-          "Description": "Boolean result.",
+          "Description": "Boolean result",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1321,7 +1304,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Boolean XOR: Returns true if and only if exactly one of the inputs is true.\n\nMath.Xor (a: bool, b: bool): bool"
+      "Description": "Boolean XOR: Returns true if and only if exactly one of the inputs is true.\n\nMath.Xor (bool: bool, otherBool: bool): bool"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -1427,7 +1410,7 @@
         {
           "Id": "67f92cdd77544cc0b6434e54d57ca8f2",
           "Name": "x",
-          "Description": "x value.\n\nvar[]..[]",
+          "Description": "Integer or double value\n\nvar[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1436,7 +1419,7 @@
         {
           "Id": "ad829a6084b4442e966e9e4e40e02c1a",
           "Name": "y",
-          "Description": "y value.\n\nvar[]..[]",
+          "Description": "Integer or double value\n\nvar[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1446,8 +1429,8 @@
       "Outputs": [
         {
           "Id": "d5d955485c624f2c817a35aea265d0b1",
-          "Name": "var[]..[]",
-          "Description": "var[]..[]",
+          "Name": "bool",
+          "Description": "Result of check",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1455,7 +1438,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "x less y?\n\n< (x: var[]..[], y: var[]..[]): var[]..[]"
+      "Description": "Compares if x is lower to y\n\n< (x: var[]..[], y: var[]..[]): var[]..[]"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
@@ -1615,6 +1598,57 @@
       ],
       "Replication": "Disabled",
       "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "a1767834-0500-427d-95ae-021e5ab548e3",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "489ab044dc064a1993bf1c83598e2aff",
+      "Inputs": [
+        {
+          "Id": "1405cc39576d404ea6a3fc97b779a3bf",
+          "Name": "scriptName",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4909308738b64dbc9bff230ae038ce57",
+          "Name": "OUT",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "node logs every run of the script in which is used to the hardcoded server location"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"RoomRenumberingSpline_filterByNameNotV2\";",
+      "Id": "f66a35a6ed464fc3b0f64f35c3acdb7d",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "81afe6382b054b6998bdc78fe1b1dabc",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
     }
   ],
   "Connectors": [
@@ -1897,17 +1931,56 @@
       "Start": "db45bc2fae92438881a2ad8a95140b33",
       "End": "1e050be802454bf78b75a2b3c03f6f1d",
       "Id": "785b03d89e9f4944a509816ce7c3c306"
+    },
+    {
+      "Start": "81afe6382b054b6998bdc78fe1b1dabc",
+      "End": "1405cc39576d404ea6a3fc97b779a3bf",
+      "Id": "fd985696344c40cc85aa3ad1d47c5806"
     }
   ],
-  "Dependencies": [],
-  "NodeLibraryDependencies": [],
+  "Dependencies": [
+    "a1767834-0500-427d-95ae-021e5ab548e3"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "cata_lyst",
+      "Version": "0.0.1",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "489ab044dc064a1993bf1c83598e2aff"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "None provided",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.3.0.5885",
+      "Version": "2.12.1.8246",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -2143,16 +2216,6 @@
         "Excluded": false,
         "X": -325.09531227303671,
         "Y": 353.25892079248877
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "PY log",
-        "Id": "a96b70534c55405f8e076a9667e5fd47",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": -185.09278739229842,
-        "Y": 592.25794674168014
       },
       {
         "ShowGeometry": true,
@@ -2393,6 +2456,26 @@
         "Excluded": false,
         "X": -213.96540843922793,
         "Y": 224.24939087230771
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "usageLog",
+        "Id": "489ab044dc064a1993bf1c83598e2aff",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 105.19880140808914,
+        "Y": 697.95262153207966
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "f66a35a6ed464fc3b0f64f35c3acdb7d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -342.69566144118346,
+        "Y": 710.608677117633
       }
     ],
     "Annotations": [
@@ -2428,11 +2511,11 @@
         ],
         "Left": -244.48698985458168,
         "Top": -302.94646678272073,
-        "Width": 353.64632135509692,
+        "Width": 400.64632135509692,
         "Height": 595.19585765502848,
         "FontSize": 14.0,
         "InitialTop": -272.94646678272073,
-        "InitialHeight": 482.892514880877,
+        "InitialHeight": 642.19585765502848,
         "TextblockHeight": 20.0,
         "Background": "#FFC1D676"
       },
@@ -2503,8 +2586,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": 504.5903012259904,
-    "Y": 330.38056279633145,
-    "Zoom": 0.55103132610938121
+    "X": 816.516531142285,
+    "Y": 458.0326587971017,
+    "Zoom": 1.322054709501187
   }
 }

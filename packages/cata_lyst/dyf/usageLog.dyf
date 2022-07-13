@@ -60,7 +60,8 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\n\r\n#import custom library\r\nimport sys\r\nsys.path.append(r\"\\\\pantograph\\Google_Drive_Home_Office\\#Firma\\Revit\\_DYNAMO\\Lib\")\r\nimport ctypes\r\nfrom catalyst import dyn_log_path, dyn_logger\r\n\r\n# name of the script for log\r\nscript_name = IN[0]\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\napp = DocumentManager.Instance.CurrentUIApplication.Application\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = app.Username\r\n#user_name = getpass.getuser()\r\n\r\nstatus = dyn_logger(filePath,user_name,script_name)\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\n\r\n#import custom library\r\nimport sys\r\nsys.path.append(r\"\\\\pantograph\\Google_Drive\\Public\\Firma\\Revit\\Dynamo\\Lib\")\r\nimport ctypes\r\nfrom catalyst import dyn_log_path, dyn_logger\r\n\r\n# name of the script for log\r\nscript_name = IN[0]\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\napp = DocumentManager.Instance.CurrentUIApplication.Application\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = app.Username\r\n#user_name = getpass.getuser()\r\n\r\nstatus = dyn_logger(filePath,user_name,script_name)\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "Engine": "IronPython2",
       "VariableInputPorts": true,
       "Id": "af4156d490c34c16b0a5e919eb9c9b1f",
       "Inputs": [
@@ -86,7 +87,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Runs an embedded IronPython script."
+      "Description": "Runs an embedded Python script."
     }
   ],
   "Connectors": [
@@ -103,27 +104,28 @@
   ],
   "Dependencies": [],
   "NodeLibraryDependencies": [],
+  "Author": "None provided",
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": false,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.6.1.8786",
+      "Version": "2.12.1.8246",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
     "Camera": {
       "Name": "Background Preview",
-      "EyeX": 473924.1875,
-      "EyeY": 23446.794921875,
-      "EyeZ": -4701.3447265625,
-      "LookX": -345.853759765625,
-      "LookY": -21576.8828125,
-      "LookZ": 827.22113037109375,
-      "UpX": 0.37987467646598816,
-      "UpY": 0.1736481785774231,
-      "UpZ": -0.90859317779541016
+      "EyeX": -379.47064945023521,
+      "EyeY": 11218.730566127491,
+      "EyeZ": 37224.68993264492,
+      "LookX": 7537.74325128027,
+      "LookY": -8165.8885222202953,
+      "LookZ": -36432.42571452132,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
     },
     "NodeViews": [
       {
@@ -158,8 +160,8 @@
       }
     ],
     "Annotations": [],
-    "X": -516.84048360777615,
-    "Y": 223.06649209624572,
-    "Zoom": 2.8254330653474815
+    "X": 179.88868112983221,
+    "Y": 372.22071491799568,
+    "Zoom": 1.7247319086662447
   }
 }

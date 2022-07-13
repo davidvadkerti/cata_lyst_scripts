@@ -1,0 +1,167 @@
+{
+  "Uuid": "ce20bc28-a46b-4c7a-938f-b5e8c76c9604",
+  "IsCustomNode": true,
+  "Category": "catalyst.dataManipulation",
+  "Description": "strip accents from the strings",
+  "Name": "stripAccents",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndata = IN[0]\r\n\r\n# Place your code below this line\r\ndef strip_accents(s):\r\n    # removing accents from strings\r\n    import unicodedata\r\n    return ''.join(c for c in unicodedata.normalize('NFD', s)\r\n                  if unicodedata.category(c) != 'Mn')\r\nno_acc_strings = []\r\nfor i in data:\r\n\tno_acc_str = strip_accents(i)\r\n\tno_acc_strings.append(no_acc_str)\r\n\t\r\n# Assign your output to the OUT variable.\r\nOUT = strip_accents(data)",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "58b3674e82de4d3fb0e944ad243875fd",
+      "Inputs": [
+        {
+          "Id": "cb602ea33fba4d33ba59735ee4303c44",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c0fe4ee0df5b49358a792f1e4aba1ecd",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "OUT",
+      "Id": "dfa278e9ef994e6cac08ca213e7d5e2a",
+      "Inputs": [
+        {
+          "Id": "c2e78ed8af29420e939d3aa6cb263102",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "input",
+        "TypeName": "string",
+        "TypeRank": 0,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "3164b6d8c18e4eefaed3eebadb055cd6",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "89da8d56ebf247a6896148181a2834a5",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "c0fe4ee0df5b49358a792f1e4aba1ecd",
+      "End": "c2e78ed8af29420e939d3aa6cb263102",
+      "Id": "646fdd0f66274390aced765cdf39edb8"
+    },
+    {
+      "Start": "89da8d56ebf247a6896148181a2834a5",
+      "End": "cb602ea33fba4d33ba59735ee4303c44",
+      "Id": "eea76688273742c6af0466f6b0bc5197"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Author": "None provided",
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.1.8246",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "PY strip accents",
+        "Id": "58b3674e82de4d3fb0e944ad243875fd",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 248.813056379822,
+        "Y": 0.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "dfa278e9ef994e6cac08ca213e7d5e2a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 481.0,
+        "Y": 0.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Input",
+        "Id": "3164b6d8c18e4eefaed3eebadb055cd6",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 24.925853299695632,
+        "Y": 12.156634247552958
+      }
+    ],
+    "Annotations": [],
+    "X": 268.0,
+    "Y": 220.0,
+    "Zoom": 0.8425
+  }
+}
