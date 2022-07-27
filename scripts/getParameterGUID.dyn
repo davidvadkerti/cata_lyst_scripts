@@ -1,0 +1,523 @@
+{
+  "Uuid": "33fe4d0e-b54b-49c9-847e-3e1b7fe51db5",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "getParameterGUID",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "ca7974e5191e4cf39e7dd34f02bde630",
+      "Name": "Shared Parameter Name",
+      "Type": "string",
+      "Value": "sirka",
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "08ff6b0db5384f7caddfdca6a38e70f5",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Získa GUID Shared parametru s danym menom.\r\nVhodné na pridanie identického parametru do nových súborov alebo pridanie parametru novým elementom, ktoré ich nemajú v RFA súbore.",
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "6372257a6d18436b96e2194f051e956b",
+      "Name": "Output",
+      "Type": "unknown",
+      "InitialValue": "",
+      "Description": "Visualize the node's output"
+    }
+  ],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import FilteredElementCollector, SharedParameterElement\r\n\r\nclr.AddReference('RevitServices')\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nspe = FilteredElementCollector(doc).OfClass(SharedParameterElement)\r\n\r\nguid = []\r\npName = []\r\n\r\nfor s in spe:\r\n\tguid.append(s.GuidValue)\r\n\tpName.append(s.Name)\r\n\r\nOUT = pName, guid",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "d8f1ca29a6b14c5898940011ae6238cb",
+      "Inputs": [
+        {
+          "Id": "d8fc878c3b7d44e185329dfc96c350c0",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "2509d08460fa44e5a458092b78956c36",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.GetItemAtIndex@var[]..[],int",
+      "Id": "7fc586f7498d45c5a0b2f689e162ff1c",
+      "Inputs": [
+        {
+          "Id": "07a79421fbd54656a02f2d668ab12e90",
+          "Name": "list",
+          "Description": "List to fetch an item from.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": true,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4b611f5dcc2a41e88890797d977e3065",
+          "Name": "index",
+          "Description": "Index of the item to be fetched.\n\nint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f49c4e1a391f469c8a750224ea7da497",
+          "Name": "item",
+          "Description": "Item in the list at the given index.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns an item from the given list that's located at the specified index.\n\nList.GetItemAtIndex (list: var[]..[], index: int): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.IndexOf@var[]..[],var",
+      "Id": "018e6a2889a14e55a2b3bd5ecb5db1b8",
+      "Inputs": [
+        {
+          "Id": "bb0469b63b1449e89eaf7b8c529fa0ce",
+          "Name": "list",
+          "Description": "The list to find the element in.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": true,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3ab1a5cda718411db7cbf3569a33c0a3",
+          "Name": "element",
+          "Description": "The element whose index is to be returned.\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "cee05a7073c44c4989d8cbb9de654d42",
+          "Name": "int",
+          "Description": "The index of the element in the list. Invalid index -1 will be returned if strict match not found.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the index of the element in the given list. Match between given list and target element must be a strict match (i.e. int to int, double to double, string to string, object to object etc.)\n\nList.IndexOf (list: var[]..[], element: var): int"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.FirstItem@var[]..[]",
+      "Id": "42af7b94be964b03b3f85d4147002da3",
+      "Inputs": [
+        {
+          "Id": "a1c742f230494c1ca1336ee0b0eaa571",
+          "Name": "list",
+          "Description": "List to get the first item from.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1f79ab1d5bdc495280411ccf58ab6f94",
+          "Name": "item",
+          "Description": "First item in the list.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the first item in a list.\n\nList.FirstItem (list: var[]..[]): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "6372257a6d18436b96e2194f051e956b",
+      "Inputs": [
+        {
+          "Id": "afb5d395799a4f75bb76200c11d2bd5e",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "99d03ccb9acc40ec9b124be3fca65657",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "sirka",
+      "Id": "ca7974e5191e4cf39e7dd34f02bde630",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7dbdfe8d972349ec9cf4a773df021d48",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Získa GUID Shared parametru s danym menom.\r\nVhodné na pridanie identického parametru do nových súborov alebo pridanie parametru novým elementom, ktoré ich nemajú v RFA súbore.",
+      "Id": "08ff6b0db5384f7caddfdca6a38e70f5",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "dbc4d29e00444cc1a619fee7eb41bef9",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"getParameterGUID\";",
+      "Id": "699c38c7c9b44d0c8e6773fdbd987f31",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "8aec3bb26ca148afb36fafd4ba60ebd8",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "a1767834-0500-427d-95ae-021e5ab548e3",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "1284b992df004cb896fd4ba9a6ab2f47",
+      "Inputs": [
+        {
+          "Id": "7242f6d0f6ff4a1c8b8d4536a448ca77",
+          "Name": "scriptName",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "836b240d3dbc48e384371b7c3f2bd95f",
+          "Name": "OUT",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "node logs every run of the script in which is used to the hardcoded server location"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "2509d08460fa44e5a458092b78956c36",
+      "End": "bb0469b63b1449e89eaf7b8c529fa0ce",
+      "Id": "6aa8915af5b84be0bac5794cc6261f1b"
+    },
+    {
+      "Start": "2509d08460fa44e5a458092b78956c36",
+      "End": "07a79421fbd54656a02f2d668ab12e90",
+      "Id": "a3c63f24bb6d403eb0c02455331429fd"
+    },
+    {
+      "Start": "f49c4e1a391f469c8a750224ea7da497",
+      "End": "afb5d395799a4f75bb76200c11d2bd5e",
+      "Id": "7dd4a398bb644532b97ec7fa7c51ed36"
+    },
+    {
+      "Start": "cee05a7073c44c4989d8cbb9de654d42",
+      "End": "a1c742f230494c1ca1336ee0b0eaa571",
+      "Id": "359207ec34384e38b5fe72d22fc7589c"
+    },
+    {
+      "Start": "1f79ab1d5bdc495280411ccf58ab6f94",
+      "End": "4b611f5dcc2a41e88890797d977e3065",
+      "Id": "94c8c11c40304e4595c40ef4ed358eba"
+    },
+    {
+      "Start": "7dbdfe8d972349ec9cf4a773df021d48",
+      "End": "3ab1a5cda718411db7cbf3569a33c0a3",
+      "Id": "85cddacc34c34bf2a11e584bf42bc758"
+    },
+    {
+      "Start": "8aec3bb26ca148afb36fafd4ba60ebd8",
+      "End": "7242f6d0f6ff4a1c8b8d4536a448ca77",
+      "Id": "73d182d450f147018bbc185a07723cfe"
+    }
+  ],
+  "Dependencies": [
+    "a1767834-0500-427d-95ae-021e5ab548e3"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "cata_lyst",
+      "Version": "0.0.1",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "1284b992df004cb896fd4ba9a6ab2f47"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.1.8246",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "d8f1ca29a6b14c5898940011ae6238cb",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1085.0650074313771,
+        "Y": 673.87107719342032
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.GetItemAtIndex",
+        "Id": "7fc586f7498d45c5a0b2f689e162ff1c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2009.9467154502556,
+        "Y": 756.78302307023012
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.IndexOf",
+        "Id": "018e6a2889a14e55a2b3bd5ecb5db1b8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1445.842741484418,
+        "Y": 591.501841549879
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.FirstItem",
+        "Id": "42af7b94be964b03b3f85d4147002da3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1724.3913357149465,
+        "Y": 670.43163255339812
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "6372257a6d18436b96e2194f051e956b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": true,
+        "Excluded": false,
+        "X": 2293.6671371128177,
+        "Y": 750.57032615150843
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Shared Parameter Name",
+        "Id": "ca7974e5191e4cf39e7dd34f02bde630",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1092.4545155494127,
+        "Y": 564.5060766602503
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Návod",
+        "Id": "08ff6b0db5384f7caddfdca6a38e70f5",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1082.9687262491811,
+        "Y": 333.22122243497233
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "699c38c7c9b44d0c8e6773fdbd987f31",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1105.4433511682216,
+        "Y": 854.49278368898149
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "usageLog",
+        "Id": "1284b992df004cb896fd4ba9a6ab2f47",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1362.0505932292215,
+        "Y": 852.95952745210138
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "8e0af2479b3b4b95bea0fbbefd7652cd",
+        "Title": "INPUT",
+        "Nodes": [
+          "ca7974e5191e4cf39e7dd34f02bde630"
+        ],
+        "Left": 1082.4545155494127,
+        "Top": 511.5060766602503,
+        "Width": 232.0,
+        "Height": 121.0,
+        "FontSize": 36.0,
+        "InitialTop": 564.5060766602503,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "1389c4325f3d4618ba46edea3d5cd651",
+        "Title": "OUTPUT",
+        "Nodes": [
+          "6372257a6d18436b96e2194f051e956b"
+        ],
+        "Left": 2283.6671371128177,
+        "Top": 697.57032615150843,
+        "Width": 230.0,
+        "Height": 331.0,
+        "FontSize": 36.0,
+        "InitialTop": 750.57032615150843,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FFFFAA45"
+      }
+    ],
+    "X": -775.33589696210038,
+    "Y": -203.34355847449069,
+    "Zoom": 0.86395320366140238
+  }
+}
