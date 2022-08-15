@@ -1,0 +1,905 @@
+{
+  "Uuid": "cc1f2ba2-1522-4571-9e3f-bb078fbf6d0c",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "unhideInViews",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "4132dfdb11154142b790afa20baf5ff2",
+      "Name": "Návod",
+      "Type": "string",
+      "Value": "Zruší Hide Elements in View pre celú kategóriu. Zmena sa spravi vo Views, ktoré majú hodnotu parametra podľa filtra",
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "f7a109ce4a0a429f9aaf8a6e288709c0",
+      "Name": "Parameter Name",
+      "Type": "string",
+      "Value": "Delenie I",
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "4c8521d91c7c4c219cebff66cc427a26",
+      "Name": "Parameter Value",
+      "Type": "string",
+      "Value": "02_PSP",
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "0e0b6a5a7553486588b9db36a94bcdb0",
+      "Name": "Categories",
+      "Type": "dropdownSelection",
+      "Value": "OST_Views",
+      "Description": "All built-in categories.",
+      "SelectedIndex": 684
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "archilab.Revit.Views.Views.UnHideElements@Revit.Elements.Views.View,Revit.Elements.Element[]",
+      "Id": "876f2b53280b47e68e28bb4ef8cd1bce",
+      "Inputs": [
+        {
+          "Id": "c9e3d63ceaff40ea857eeacd6d7166a7",
+          "Name": "view",
+          "Description": "View",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e5608a87b7a3460f90a6f7ae60a2c060",
+          "Name": "elements",
+          "Description": "Element[]",
+          "UsingDefaultValue": false,
+          "Level": 1,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "de68a7b05b0747dd893c4ea9d42e92bb",
+          "Name": "bool[]",
+          "Description": "bool[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Views.UnHideElements (view: View, elements: Element[]): bool[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "a4dd8f6e-689f-4998-b8ef-4a04146d12c2",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "9f983a2a701847199863352ac25b6b63",
+      "Inputs": [
+        {
+          "Id": "1f96fcffc0814b0cbc433b3b9a234445",
+          "Name": "IdOrUniqueId",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 1,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bf29d6c2966e4306b299f4b80bb761d6",
+          "Name": "docOrRevitLinkInstance",
+          "Description": " Use only if you want to query a linked model\n\nvar\nDefault value : null",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "499d6b410fe6424098a32ce416d3b9a0",
+          "Name": "element",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the Revit element(s) for a list of IDs (or a single ID). Optionally retrieves elements from linked documents as well."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.Id",
+      "Id": "53ec5730cdfe40c5ab0ffcc22dc61cea",
+      "Inputs": [
+        {
+          "Id": "8e64445cd03f4389a0b0c84bc16dbcd2",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b6ded4ba9b1f4ad0ba25821cdc6572b9",
+          "Name": "int",
+          "Description": "int",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the Element Id for this element\n\nElement.Id: int"
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "30ad71a9144b4c9cb57824db3631a979",
+      "Inputs": [
+        {
+          "Id": "128be25591b64c5c85e0a1406a373fb8",
+          "Name": "Category",
+          "Description": "The Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3d6f3de9be9e4f9380eeb025708acff1",
+          "Name": "Elements",
+          "Description": "An element type.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Get all elements of the specified category from the model."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Category.ByName@string",
+      "Id": "92fa62b49bc94bd1ae8d7c2cd6f4481f",
+      "Inputs": [
+        {
+          "Id": "21292e5692b6417fbd0594966a7c7d54",
+          "Name": "name",
+          "Description": "The built in category name.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7f519c99d6f245f4a14a4d5038e67b7d",
+          "Name": "Category",
+          "Description": "Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets a Revit category by the built-in category name.\n\nCategory.ByName (name: string): Category"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Views\";",
+      "Id": "b913b2c52bca4b8a81326574683ae5ee",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "f74899fb3e754d20b2147689a0182cfb",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "3c525e92d8de422fbe3c61fc65377b17",
+      "Inputs": [
+        {
+          "Id": "3269f586c71142a6a4d4bd112bc564f3",
+          "Name": "Category",
+          "Description": "The Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fa479d1d9e3646c6b9c80e3a32b171cb",
+          "Name": "Elements",
+          "Description": "An element type.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Get all elements of the specified category from the model."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.GetParameterValueByName@string",
+      "Id": "50e5c7baf5644781beeffcf29a574244",
+      "Inputs": [
+        {
+          "Id": "bf58650316c04015b6cdded89aabc563",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "2da675a48e3a4be1a162f2829461b4a8",
+          "Name": "parameterName",
+          "Description": "The name of the parameter whose value you want to obtain.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "2b9d762f12564b8d99353e6fb58d6b2d",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the value of one of the element's parameters.\n\nElement.GetParameterValueByName (parameterName: string): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "==@var[]..[],var[]..[]",
+      "Id": "3500b828d38c4040b6bb67aa97f2f3f0",
+      "Inputs": [
+        {
+          "Id": "5573cc8771a14817a4bdaafd399719e5",
+          "Name": "x",
+          "Description": "Basic type object to compare (e.g. bool, int, double, string, etc.)\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "aba246c6e1aa4eaeab47bb9ee7e64892",
+          "Name": "y",
+          "Description": "Basic type object to compare (e.g. bool, int, double, string, etc.)\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f71b508a15bd409fa73c30d20e5fd0f1",
+          "Name": "bool",
+          "Description": "Result of equality check",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Compares if x and y are equal\n\n== (x: var[]..[], y: var[]..[]): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.FilterByBoolMask@var[]..[],var[]..[]",
+      "Id": "bc7e9ca601c448fc8813c3ba26c94e98",
+      "Inputs": [
+        {
+          "Id": "cd288ad8208648f5af04c36237c0de2c",
+          "Name": "list",
+          "Description": "List to filter.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "cdc87e9770894e40a642cca98b56c255",
+          "Name": "mask",
+          "Description": "List of booleans representing a mask.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d370822acf4c49ac8135406aa8e4fda9",
+          "Name": "in",
+          "Description": "Items whose mask index is true.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b64e7b388f114ec083ac27856be10783",
+          "Name": "out",
+          "Description": "Items whose mask index is false.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Filters a sequence by looking up corresponding indices in a separate list of booleans.\n\nList.FilterByBoolMask (list: var[]..[], mask: var[]..[]): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Logic.RefactoredIf, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "304a1cf1b347483883877bc2d77f83c4",
+      "Inputs": [
+        {
+          "Id": "75a47710f29045809c70fcfb2a30ea9b",
+          "Name": "test",
+          "Description": "Boolean test",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a69ece1568f648c4bc660528de0a1aeb",
+          "Name": "true",
+          "Description": "Returned if test is true",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "310a2a0c90024f53ba49fae76dde348e",
+          "Name": "false",
+          "Description": "Returned if test is false",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "bc0535d5863444ed920dd0601426b724",
+          "Name": "result",
+          "Description": "Result block produced",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the result of either the True or False input depending on what boolean value is toggled in the test input."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Zruší Hide Elements in View pre celú kategóriu. Zmena sa spravi vo Views, ktoré majú hodnotu parametra podľa filtra",
+      "Id": "4132dfdb11154142b790afa20baf5ff2",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "2a7b4535bfc04b2984951eee61c33029",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Delenie I",
+      "Id": "f7a109ce4a0a429f9aaf8a6e288709c0",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "0143dc063421479e8088ed52c608653c",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "02_PSP",
+      "Id": "4c8521d91c7c4c219cebff66cc427a26",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1942fe87f5b54564a5bb32c76540a406",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": false,
+      "Id": "ffd1ed62a006450ebdb0048e387106c1",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "aea93db4a47b460fae438323420799b7",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementsSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "40ebba82-d568-41bd-830a-aa7d9643fbb4-00a6c788",
+        "40ebba82-d568-41bd-830a-aa7d9643fbb4-00a6c8a1"
+      ],
+      "Id": "781cee0df20646aea70013ae234332ed",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4de79e0b05a34a789384fe654d91d658",
+          "Name": "Elements",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
+      "SelectedIndex": 684,
+      "SelectedString": "OST_Views",
+      "NodeType": "ExtensionNode",
+      "Id": "0e0b6a5a7553486588b9db36a94bcdb0",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "6915869453684e318a41e6425f8625ca",
+          "Name": "Category",
+          "Description": "The selected Category.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "All built-in categories."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "499d6b410fe6424098a32ce416d3b9a0",
+      "End": "310a2a0c90024f53ba49fae76dde348e",
+      "Id": "6ce7fcba20f74a94b1daa971db658a78"
+    },
+    {
+      "Start": "b6ded4ba9b1f4ad0ba25821cdc6572b9",
+      "End": "1f96fcffc0814b0cbc433b3b9a234445",
+      "Id": "af4098b807274d9cad4f7caf5bb3005c"
+    },
+    {
+      "Start": "3d6f3de9be9e4f9380eeb025708acff1",
+      "End": "bf58650316c04015b6cdded89aabc563",
+      "Id": "e7347cc5e6f24ba3a4389974f74b89ce"
+    },
+    {
+      "Start": "3d6f3de9be9e4f9380eeb025708acff1",
+      "End": "cd288ad8208648f5af04c36237c0de2c",
+      "Id": "10e102191ac54d0c837377b399421ca5"
+    },
+    {
+      "Start": "7f519c99d6f245f4a14a4d5038e67b7d",
+      "End": "128be25591b64c5c85e0a1406a373fb8",
+      "Id": "d6b2696929ed4eafb632e16a8405ffd5"
+    },
+    {
+      "Start": "f74899fb3e754d20b2147689a0182cfb",
+      "End": "21292e5692b6417fbd0594966a7c7d54",
+      "Id": "4f6718007e714b4aa09bf3bbee5d613a"
+    },
+    {
+      "Start": "fa479d1d9e3646c6b9c80e3a32b171cb",
+      "End": "a69ece1568f648c4bc660528de0a1aeb",
+      "Id": "edd383a39afd4a0d8a597e3a069e245d"
+    },
+    {
+      "Start": "2b9d762f12564b8d99353e6fb58d6b2d",
+      "End": "5573cc8771a14817a4bdaafd399719e5",
+      "Id": "0267eab9f37841feb6964528a17b76bc"
+    },
+    {
+      "Start": "f71b508a15bd409fa73c30d20e5fd0f1",
+      "End": "cdc87e9770894e40a642cca98b56c255",
+      "Id": "9a555da485f2493eafdaf9554d390eeb"
+    },
+    {
+      "Start": "d370822acf4c49ac8135406aa8e4fda9",
+      "End": "c9e3d63ceaff40ea857eeacd6d7166a7",
+      "Id": "077e7a3f971a4fbdbb5f201a7ed31c59"
+    },
+    {
+      "Start": "bc0535d5863444ed920dd0601426b724",
+      "End": "e5608a87b7a3460f90a6f7ae60a2c060",
+      "Id": "943264d564b24e92aec25638591bf6eb"
+    },
+    {
+      "Start": "0143dc063421479e8088ed52c608653c",
+      "End": "2da675a48e3a4be1a162f2829461b4a8",
+      "Id": "25f607aa0b4e4aeeb0cfa80d2a9546e7"
+    },
+    {
+      "Start": "1942fe87f5b54564a5bb32c76540a406",
+      "End": "aba246c6e1aa4eaeab47bb9ee7e64892",
+      "Id": "9b2b6420fc4a4808984becb89a6c95c7"
+    },
+    {
+      "Start": "aea93db4a47b460fae438323420799b7",
+      "End": "75a47710f29045809c70fcfb2a30ea9b",
+      "Id": "dd1fafaf011041e689663a86e5fece2d"
+    },
+    {
+      "Start": "4de79e0b05a34a789384fe654d91d658",
+      "End": "8e64445cd03f4389a0b0c84bc16dbcd2",
+      "Id": "dbcc3507dd7e4b68a7274e4019ee547b"
+    },
+    {
+      "Start": "6915869453684e318a41e6425f8625ca",
+      "End": "3269f586c71142a6a4d4bd112bc564f3",
+      "Id": "1a926bfabedd4acc94a46a1027c3d057"
+    }
+  ],
+  "Dependencies": [
+    "a4dd8f6e-689f-4998-b8ef-4a04146d12c2"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "archi-lab.net",
+      "Version": "2023.213.1523",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "876f2b53280b47e68e28bb4ef8cd1bce"
+      ]
+    },
+    {
+      "Name": "Clockwork for Dynamo 2.x",
+      "Version": "2.4.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "9f983a2a701847199863352ac25b6b63"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.1.8246",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "Id": "876f2b53280b47e68e28bb4ef8cd1bce",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Views.UnHideElements",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 701.497129399088,
+        "Y": 248.05899776551303
+      },
+      {
+        "Id": "9f983a2a701847199863352ac25b6b63",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Element.ByID",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -168.27838537912771,
+        "Y": 482.34199664778748
+      },
+      {
+        "Id": "53ec5730cdfe40c5ab0ffcc22dc61cea",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Element.Id",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -417.65675822655703,
+        "Y": 509.046600976979
+      },
+      {
+        "Id": "30ad71a9144b4c9cb57824db3631a979",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "All Elements of Category",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -372.39970976910661,
+        "Y": -178.31459205646254
+      },
+      {
+        "Id": "92fa62b49bc94bd1ae8d7c2cd6f4481f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Category.ByName",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -612.4170430692468,
+        "Y": -175.11436094579406
+      },
+      {
+        "Id": "b913b2c52bca4b8a81326574683ae5ee",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -767.43049916282132,
+        "Y": -164.97241213470659
+      },
+      {
+        "Id": "3c525e92d8de422fbe3c61fc65377b17",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "All Elements of Category",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -480.0889589073397,
+        "Y": 363.78744384009872
+      },
+      {
+        "Id": "50e5c7baf5644781beeffcf29a574244",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Element.GetParameterValueByName",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -99.601898489150585,
+        "Y": -51.629350885768019
+      },
+      {
+        "Id": "3500b828d38c4040b6bb67aa97f2f3f0",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "==",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 247.12966980462295,
+        "Y": 5.9121104882507325
+      },
+      {
+        "Id": "bc7e9ca601c448fc8813c3ba26c94e98",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "List.FilterByBoolMask",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 524.72234057688013,
+        "Y": -96.351553069314321
+      },
+      {
+        "Id": "304a1cf1b347483883877bc2d77f83c4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "If",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 178.0129982159367,
+        "Y": 317.88112941622626
+      },
+      {
+        "Id": "4132dfdb11154142b790afa20baf5ff2",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Name": "Návod",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -1019.1904790358535,
+        "Y": -171.09004881237891
+      },
+      {
+        "Id": "f7a109ce4a0a429f9aaf8a6e288709c0",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Name": "Parameter Name",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -960.58364865654846,
+        "Y": 76.12043037787717
+      },
+      {
+        "Id": "4c8521d91c7c4c219cebff66cc427a26",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Name": "Parameter Value",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -963.27118268852644,
+        "Y": 167.32739869282179
+      },
+      {
+        "Id": "ffd1ed62a006450ebdb0048e387106c1",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "by selection?",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -960.02952382028809,
+        "Y": 258.74487750498974
+      },
+      {
+        "Id": "781cee0df20646aea70013ae234332ed",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Select Model Elements",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -957.23107614105731,
+        "Y": 520.72245524442633
+      },
+      {
+        "Id": "0e0b6a5a7553486588b9db36a94bcdb0",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Name": "Categories",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -960.37163871913629,
+        "Y": 384.47843088585495
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "14c372f894e743b5b124a5c8356d0d58",
+        "Title": "INPUT",
+        "Nodes": [
+          "f7a109ce4a0a429f9aaf8a6e288709c0",
+          "4c8521d91c7c4c219cebff66cc427a26",
+          "ffd1ed62a006450ebdb0048e387106c1",
+          "781cee0df20646aea70013ae234332ed",
+          "0e0b6a5a7553486588b9db36a94bcdb0"
+        ],
+        "Left": -973.27118268852644,
+        "Top": 23.12043037787717,
+        "Width": 278.04010654746912,
+        "Height": 616.60202486654919,
+        "FontSize": 36.0,
+        "InitialTop": 76.12043037787717,
+        "InitialHeight": 589.60202486654919,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 1062.0259108861642,
+    "Y": 144.86680874115018,
+    "Zoom": 0.81848241076529837
+  }
+}
