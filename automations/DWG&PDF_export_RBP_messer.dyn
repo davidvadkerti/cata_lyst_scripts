@@ -11,7 +11,7 @@
       "Id": "c3b2c930cfe24d23a6b5c37c8f49f302",
       "Name": "Návod",
       "Type": "string",
-      "Value": "vyexportuje DWG súbory z aktívneho dokumentu - nastavene len pre Messer",
+      "Value": "vyexportuje DWG a PDF súbory z aktívneho dokumentu - nastavene len pre Messer. Pripravené pre Autoexport cez RBP",
       "Description": "Creates a string.",
       "SelectedIndex": 0
     }
@@ -36,7 +36,7 @@
     {
       "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
       "NodeType": "StringInputNode",
-      "InputValue": "vyexportuje DWG súbory z aktívneho dokumentu - nastavene len pre Messer",
+      "InputValue": "vyexportuje DWG a PDF súbory z aktívneho dokumentu - nastavene len pre Messer. Pripravené pre Autoexport cez RBP",
       "Id": "c3b2c930cfe24d23a6b5c37c8f49f302",
       "Inputs": [],
       "Outputs": [
@@ -1432,64 +1432,6 @@
       "Description": "Runs an embedded Python script."
     },
     {
-      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
-      "FunctionSignature": "333aa4f0-160c-4c38-9426-1a8fb803c683",
-      "FunctionType": "Graph",
-      "NodeType": "FunctionNode",
-      "Id": "87d4bb0964024053819ba29b62e32fa0",
-      "Inputs": [
-        {
-          "Id": "d03addf18e1d4e168a29e190c808c4d6",
-          "Name": "DirectoryPath",
-          "Description": "var[]..[]",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "bb9b3cc4b63c4fd3b59c29ba4db4c034",
-          "Name": "view",
-          "Description": "var[]..[]",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "52f865a3875343c1a1c998d9d673d4b2",
-          "Name": "Filename",
-          "Description": "string[]..[]",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "9586ca84bb5041128bf0365559de6cbc",
-          "Name": "Combine",
-          "Description": "Combine into a single file ?\n\nbool\nDefault value : false",
-          "UsingDefaultValue": true,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "192ddf9a1da943578fafd7421e7f487b",
-          "Name": "Succeed",
-          "Description": "return value",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Auto",
-      "Description": "Works only in Revit 2022 and later.\r\nExports a selection of views in PDF format."
-    },
-    {
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
       "NodeType": "ExtensionNode",
       "Id": "c4baad8d9df94af88b6d6467c1d48730",
@@ -1555,7 +1497,7 @@
       "Id": "648ef7da85eb400f9106686536fa273e",
       "Inputs": [
         {
-          "Id": "6735948182474055adfda46235f43229",
+          "Id": "95e9c2bb5b8e4e749648e8b7465d48ae",
           "Name": "folder",
           "Description": "folder",
           "UsingDefaultValue": false,
@@ -1566,7 +1508,144 @@
       ],
       "Outputs": [
         {
-          "Id": "a2d7d293ac9e4537b05244dcd46bd943",
+          "Id": "5865c0a682c24f7093afccbd3ef48bdc",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "#Inspired by Sean Page, 2022 https://forum.dynamobim.com/t/export-pdf-in-revit-2022-quick-example/62697\r\nimport clr\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\n\r\nclr.AddReference('System')\r\nfrom System.Collections.Generic import List\r\n\r\nclr.AddReference('RevitServices')\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\n\r\nFolder = IN[0]\r\nsheets = UnwrapElement(IN[1]) if isinstance(IN[1],list) else [UnwrapElement(IN[1])]\r\nnames = IN[2] if isinstance(IN[2],list) else [IN[2]]\r\nresult = []\r\n\r\nopts = PDFExportOptions()\r\nopts.ExportQuality = PDFExportQualityType.DPI600\r\n#This will use the TitleBlock size to create the sheet size\r\nopts.PaperFormat = ExportPaperFormat.Default\r\n#This will use a specific size for every view exported\r\n#opts.PaperFormat = ExportPaperFormat.ARCH_E1\r\nopts.ZoomType = ZoomType.Zoom\r\nopts.ZoomPercentage = 100\r\nopts.HideCropBoundaries = True\r\nopts.HideReferencePlane = True\r\nopts.HideScopeBoxes = True\r\nopts.HideUnreferencedViewTags = False\r\nopts.MaskCoincidentLines = True\r\nopts.ViewLinksInBlue = False\r\nopts.ColorDepth = ColorDepthType.Color\r\n#Don't think of this as a \"continue\" but rather as a silent mode\r\nopts.StopOnError = False\r\n#Make sure to not use these settings as they don't work if 'Default' size is used above\r\n#opts.PaperPlacement = PaperPlacementType.LowerLeft\r\n\r\nif IN[3] == True:\r\n\topts.Combine = True\r\n\topts.FileName = names[0]\r\n\tsheetId = List[ElementId](x.Id for x in sheets)\r\n\tresult=doc.Export(Folder,sheetId,opts)\r\nelse:\r\n\tfor sheet,name in zip(sheets,names):\r\n\t\topts.FileName = name\r\n\t\tsheetId = List[ElementId]()\r\n\t\tsheetId.Add(sheet.Id)\r\n\t\tresult.append(doc.Export(Folder,sheetId,opts))\r\n\t\r\nOUT = result",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "4753292d81f544b89616436dfdc77388",
+      "Inputs": [
+        {
+          "Id": "5b1fdbaec10d4ee8b1517531412ddec8",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "562225bff6f54f85a3ad6ee9bd4add52",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "5e2d172a03d74b13b38328b50fc2caac",
+          "Name": "IN[2]",
+          "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "42129141f71f4638be946785aa48b355",
+          "Name": "IN[3]",
+          "Description": "Input #3",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "085175b0a9ba4b798aa9468b3c42d324",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "333aa4f0-160c-4c38-9426-1a8fb803c683",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "87d4bb0964024053819ba29b62e32fa0",
+      "Inputs": [
+        {
+          "Id": "f60eaacfd9e5470f890daa1014985e6d",
+          "Name": "DirectoryPath",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "7f2d86cc4af944b9848e7b9567ab39c9",
+          "Name": "view",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "5d7f067558f94779b5f13189646faecc",
+          "Name": "Filename",
+          "Description": "string[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ffcd342bc423403ea5c51c7e14f43576",
+          "Name": "Combine",
+          "Description": "Combine into a single file ?\n\nbool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "938e926320b74da896c35da3eb326303",
+          "Name": "Succeed",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Works only in Revit 2022 and later.\r\nExports a selection of views in PDF format."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"\\\\\\\\pantograph\\\\Google_Drive_Home_Office\\\\A13 MESSER\\\\AutoExport\\\\corr\";",
+      "Id": "13ee4a96560a4bfea458f14f4311f5fe",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d1078b2b658945818723c2a12ef7e3a8",
           "Name": "",
           "Description": "Value of expression at line 1",
           "UsingDefaultValue": false,
@@ -1583,12 +1662,12 @@
     {
       "Start": "16e80cd5f3e84c9e82c3d5dfa2f9e281",
       "End": "92503a464342436eb8df6147ba04e8b9",
-      "Id": "6a542638aa9944e098743c7dbf757c60"
+      "Id": "340ac0561cec4f0986a218b7d3c5a448"
     },
     {
       "Start": "16e80cd5f3e84c9e82c3d5dfa2f9e281",
-      "End": "6735948182474055adfda46235f43229",
-      "Id": "607289d4b4b74aa0991261bdb929abc1"
+      "End": "95e9c2bb5b8e4e749648e8b7465d48ae",
+      "Id": "dc221e4b619a4f1b9de83563675ba817"
     },
     {
       "Start": "71973b1afcc044e89e03ec109c208368",
@@ -1752,8 +1831,8 @@
     },
     {
       "Start": "60e112e86bdd44298b4d5242b8ce5f83",
-      "End": "bb9b3cc4b63c4fd3b59c29ba4db4c034",
-      "Id": "373782e048f24546aacbcd7a508ea2e8"
+      "End": "562225bff6f54f85a3ad6ee9bd4add52",
+      "Id": "29a7b302d9944044b40c5db2b49ea2ec"
     },
     {
       "Start": "3498e6e2270544cdba7ed5e1942ad1fb",
@@ -1817,13 +1896,8 @@
     },
     {
       "Start": "463611622c994a01aeea99400131c96e",
-      "End": "52f865a3875343c1a1c998d9d673d4b2",
-      "Id": "da7be398c8f9497d9b3e8776ae59c955"
-    },
-    {
-      "Start": "192ddf9a1da943578fafd7421e7f487b",
-      "End": "da63aa8ed9a5417eb419aea5a20f9a2b",
-      "Id": "a45dc1eddc154e1582c64c032477b1e5"
+      "End": "5e2d172a03d74b13b38328b50fc2caac",
+      "Id": "5405f994c4d347f5b818a27b06ac8f04"
     },
     {
       "Start": "c3eb8b8a77c74ac19f0f0d68cb4377c6",
@@ -1836,9 +1910,14 @@
       "Id": "e225ad5b6cc847faa27a45fc641013fa"
     },
     {
-      "Start": "a2d7d293ac9e4537b05244dcd46bd943",
-      "End": "d03addf18e1d4e168a29e190c808c4d6",
-      "Id": "8d97bc90969445b9830cf07e13610edb"
+      "Start": "5865c0a682c24f7093afccbd3ef48bdc",
+      "End": "5b1fdbaec10d4ee8b1517531412ddec8",
+      "Id": "eafaec0270a04ab7a9ea477d6cd8a219"
+    },
+    {
+      "Start": "085175b0a9ba4b798aa9468b3c42d324",
+      "End": "da63aa8ed9a5417eb419aea5a20f9a2b",
+      "Id": "810e9555168b4e33bcad88aba2266a91"
     }
   ],
   "Dependencies": [
@@ -1934,8 +2013,8 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -2602.6444261507759,
-        "Y": 38.669088716672604
+        "X": -2621.2090513001453,
+        "Y": -16.493911886740477
       },
       {
         "ShowGeometry": true,
@@ -2339,23 +2418,13 @@
       },
       {
         "ShowGeometry": true,
-        "Name": "ExportPDF",
-        "Id": "87d4bb0964024053819ba29b62e32fa0",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 1510.4213307170448,
-        "Y": 2116.9223147917291
-      },
-      {
-        "ShowGeometry": true,
         "Name": "OUTPUT",
         "Id": "c4baad8d9df94af88b6d6467c1d48730",
         "IsSetAsInput": false,
         "IsSetAsOutput": true,
         "Excluded": false,
-        "X": 1851.4290697739239,
-        "Y": 2126.3008941479688
+        "X": 1861.0694189101932,
+        "Y": 2101.5114249404191
       },
       {
         "ShowGeometry": true,
@@ -2374,8 +2443,38 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -1265.2823337540688,
-        "Y": 1978.1495254411088
+        "X": -1265.28233375407,
+        "Y": 1978.14952544111
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Export PDF",
+        "Id": "4753292d81f544b89616436dfdc77388",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1522.4127243775124,
+        "Y": 2101.769800202138
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "ExportPDF",
+        "Id": "87d4bb0964024053819ba29b62e32fa0",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": 1468.5627243626966,
+        "Y": 1883.8262114985498
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "tempTest",
+        "Id": "13ee4a96560a4bfea458f14f4311f5fe",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -2324.1505889248024,
+        "Y": 46.270967794573437
       }
     ],
     "Annotations": [
@@ -2424,7 +2523,7 @@
         "Height": 376.96269819273044,
         "FontSize": 36.0,
         "InitialTop": 331.57317158030895,
-        "InitialHeight": 194.0328852343365,
+        "InitialHeight": 190.9626981927305,
         "TextblockHeight": 43.0,
         "Background": "#FFFFAA45"
       },
@@ -2506,7 +2605,7 @@
         "Height": 189.0,
         "FontSize": 36.0,
         "InitialTop": 2778.0101773250108,
-        "InitialHeight": 123.0,
+        "InitialHeight": 145.0,
         "TextblockHeight": 86.0,
         "Background": "#FFC1D676"
       },
@@ -2522,7 +2621,7 @@
         "Height": 200.0,
         "FontSize": 36.0,
         "InitialTop": 3339.5762124237508,
-        "InitialHeight": 134.0,
+        "InitialHeight": 145.0,
         "TextblockHeight": 86.0,
         "Background": "#FFC1D676"
       },
@@ -2538,7 +2637,7 @@
         "Height": 244.0,
         "FontSize": 36.0,
         "InitialTop": 2389.2986342171735,
-        "InitialHeight": 134.0,
+        "InitialHeight": 145.0,
         "TextblockHeight": 130.0,
         "Background": "#FFC1D676"
       },
@@ -2549,13 +2648,13 @@
           "c4baad8d9df94af88b6d6467c1d48730",
           "a06a256e9f2b45618a3d37477b8f4ddc"
         ],
-        "Left": 1841.4290697739239,
-        "Top": 2026.0839814994411,
+        "Left": 1851.0694189101932,
+        "Top": 2001.2945122918914,
         "Width": 230.0,
         "Height": 378.2169126485278,
         "FontSize": 36.0,
-        "InitialTop": 2079.0839814994411,
-        "InitialHeight": 355.21691264852825,
+        "InitialTop": 2054.2945122918914,
+        "InitialHeight": 192.2169126485278,
         "TextblockHeight": 43.0,
         "Background": "#FFFFAA45"
       },
@@ -2605,8 +2704,8 @@
         "Id": "a06a256e9f2b45618a3d37477b8f4ddc",
         "Title": "Place output for Dynamo Player",
         "Nodes": [],
-        "Left": 1854.0497248987153,
-        "Top": 2079.0839814994411,
+        "Left": 1863.6900740349847,
+        "Top": 2054.2945122918914,
         "Width": 0.0,
         "Height": 0.0,
         "FontSize": 36.0,
@@ -2616,8 +2715,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": 1084.8437787122034,
-    "Y": -183.64435904736422,
-    "Zoom": 0.36549975836402193
+    "X": 717.752838830947,
+    "Y": -91.360309298661718,
+    "Zoom": 0.2199628142003931
   }
 }
