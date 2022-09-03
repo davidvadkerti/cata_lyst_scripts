@@ -14,6 +14,7 @@
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
       "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\nstart = IN[0]\r\nend = IN[1]\r\ndecPlaces = IN[2]\r\n\r\n# Place your code below this line\r\nzeros_list = []\r\nend_digit_count = len(str(end))\r\nfor i in range(start,end):\r\n\tstr_num = str(i)\r\n\tdigit_count = len(str_num)\r\n\tzeros_count = decPlaces-digit_count\r\n\tzeros_string = zeros_count*\"0\" + str_num\r\n\tzeros_list.append(zeros_string)\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = zeros_list",
+      "Engine": "IronPython2",
       "VariableInputPorts": true,
       "Id": "b69c68b88b7149bebb8a50fd7c8551e7",
       "Inputs": [
@@ -57,7 +58,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Runs an embedded IronPython script."
+      "Description": "Runs an embedded Python script."
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
@@ -183,13 +184,14 @@
   ],
   "Dependencies": [],
   "NodeLibraryDependencies": [],
+  "Author": "None provided",
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": false,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.3.0.5885",
+      "Version": "2.12.1.8246",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },

@@ -1,0 +1,257 @@
+{
+  "Uuid": "81412531-cbc1-464f-8ba3-03173c726964",
+  "IsCustomNode": true,
+  "Category": "catalyst.dataManipulation",
+  "Description": "removes null values from list and provides mask for filtering out elements from another lists",
+  "Name": "removeNullsWithMask",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndata = IN[0]\r\n\r\n# Place your code below this line\r\nresult = []\r\nmask = []\r\nfor d in data:\r\n\tif d is not None:\r\n\t\tresult.append(d)\r\n\t\tmask.append(True)\r\n\telse:\r\n\t\tmask.append(False)\r\n# Assign your output to the OUT variable.\r\nOUT = result, mask",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "ca776b5b03404fc685c47718cde39823",
+      "Inputs": [
+        {
+          "Id": "a5522b482a8b4c33b1d02653df2cdaf6",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "20fcde0ec7674d5fbe27e97925a61e5e",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "a[0];\na[1];",
+      "Id": "2671811d6c4945688f96a02077bb823a",
+      "Inputs": [
+        {
+          "Id": "9f007f9792264a6f906ef4788fcb42ed",
+          "Name": "a",
+          "Description": "a",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "00e44c5c1fdb4e8cae40b1ff95da0479",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e26be7d86f2f4dddaa4eb77d41bfd052",
+          "Name": "",
+          "Description": "Value of expression at line 2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "list without nulls",
+      "Id": "031d272371584922b6cec0ebf6803b50",
+      "Inputs": [
+        {
+          "Id": "f9dd2999a6b0414eafb82e90dd27d22b",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "mask",
+      "Id": "e1edf3a8ef784420b3f89c9127625641",
+      "Inputs": [
+        {
+          "Id": "e818b8ff14004bb097d103449f7ace78",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "obj",
+        "TypeName": "var",
+        "TypeRank": -1,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "ffa5d176976a4dc1baf4187ac60ffa87",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "922d7c88626a4b759592a55c1989ada0",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "20fcde0ec7674d5fbe27e97925a61e5e",
+      "End": "9f007f9792264a6f906ef4788fcb42ed",
+      "Id": "76046f1f7f8b40d9bd2e378ac923ed1c"
+    },
+    {
+      "Start": "00e44c5c1fdb4e8cae40b1ff95da0479",
+      "End": "f9dd2999a6b0414eafb82e90dd27d22b",
+      "Id": "77e5b35e661e41afb7301227701b35c2"
+    },
+    {
+      "Start": "e26be7d86f2f4dddaa4eb77d41bfd052",
+      "End": "e818b8ff14004bb097d103449f7ace78",
+      "Id": "b461fe98a742487dbfa653d02175b07f"
+    },
+    {
+      "Start": "922d7c88626a4b759592a55c1989ada0",
+      "End": "a5522b482a8b4c33b1d02653df2cdaf6",
+      "Id": "65b4dcfbbe1d434b9e9955961c7729fd"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Author": "None provided",
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.1.8246",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "Id": "ca776b5b03404fc685c47718cde39823",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "PY remove nulls with mask",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 250.0,
+        "Y": 27.837015944209043
+      },
+      {
+        "Id": "2671811d6c4945688f96a02077bb823a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 541.33763539934534,
+        "Y": 29.008896486571757
+      },
+      {
+        "Id": "031d272371584922b6cec0ebf6803b50",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Output",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 760.74181923236733,
+        "Y": 0.0
+      },
+      {
+        "Id": "e1edf3a8ef784420b3f89c9127625641",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Output",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 768.653336455978,
+        "Y": 98.135609311886839
+      },
+      {
+        "Id": "ffa5d176976a4dc1baf4187ac60ffa87",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Input",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 26.60746290306821,
+        "Y": 30.500124201044656
+      }
+    ],
+    "Annotations": [],
+    "X": 262.17744639296484,
+    "Y": 262.747870390395,
+    "Zoom": 1.1179878830423848
+  }
+}
