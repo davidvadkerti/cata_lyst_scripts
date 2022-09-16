@@ -12,28 +12,31 @@
       "Name": "Návod",
       "Type": "string",
       "Value": "Vyexportuje vsetky tabulky zacinajuce danym retazcom do samostatnych txt suborov do urceneho folderu.",
-      "Description": "Creates a string."
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
     },
     {
       "Id": "61f44598f7104437b3b805e475821505",
       "Name": "View Name starts with",
       "Type": "string",
       "Value": "PBI skladby",
-      "Description": "Creates a string."
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
     },
     {
       "Id": "038ed8fd33294145841e2fad51a7fcd1",
       "Name": "Directory Path",
       "Type": "string",
       "Value": "C:\\",
-      "Description": "Allows you to select a directory on the system to get its path"
+      "Description": "Allows you to select a directory on the system to get its path",
+      "SelectedIndex": 0
     }
   ],
   "Outputs": [],
   "Nodes": [
     {
       "ConcreteType": "DSRevitNodesUI.ElementTypes, DSRevitNodesUI",
-      "SelectedIndex": 342,
+      "SelectedIndex": 352,
       "SelectedString": "ViewSchedule",
       "NodeType": "ExtensionNode",
       "Id": "ac5ca6ba66fc49d4a7d7b480f0d080f2",
@@ -118,7 +121,7 @@
       "Id": "b05d6ce4adf048af942346491dec6a00",
       "Inputs": [
         {
-          "Id": "5bbc1f8b703d4a1592971d777a479f36",
+          "Id": "ce84aa5adf7d4b5aa23baf5e9ed79746",
           "Name": "FileName",
           "Description": "FileName",
           "UsingDefaultValue": false,
@@ -129,7 +132,7 @@
       ],
       "Outputs": [
         {
-          "Id": "425558f386144247a483fdb30f4f14d4",
+          "Id": "674f2e92916543c387aa9cd53593f9df",
           "Name": "",
           "Description": "Value of expression at line 1",
           "UsingDefaultValue": false,
@@ -145,6 +148,7 @@
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
       "Code": "import clr\nclr.AddReference(\"RevitAPI\")\nfrom Autodesk.Revit.DB import *\n\nschedule_list = IN[0]\npath = IN[1]\nfilename_list = IN[2]\nresult_list = []\n\nfor index, sched in enumerate(schedule_list):\n\tschedule = UnwrapElement(sched)\n\tfilename = filename_list[index]\n\ttry:\n\t\texport_options = ViewScheduleExportOptions()\n\t\tschedule.Export(path, filename, export_options)\n\t\tresult_list.append(\"Schedule Exported \")\n\texcept: result_list.append(\"Failure \")\nOUT = result_list",
+      "Engine": "IronPython2",
       "VariableInputPorts": true,
       "Id": "02f52078d9af4db89ca6a092d864d652",
       "Inputs": [
@@ -188,7 +192,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Runs an embedded IronPython script."
+      "Description": "Runs an embedded Python script."
     },
     {
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
@@ -217,7 +221,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Visualize the output of node."
+      "Description": "Visualize the node's output"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -353,7 +357,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Visualize the output of node."
+      "Description": "Visualize the node's output"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -363,8 +367,8 @@
       "Inputs": [
         {
           "Id": "87a0dc807a134e5fb43e4c310312eaf5",
-          "Name": "str",
-          "Description": "String to search the start of.\n\nstring",
+          "Name": "string",
+          "Description": "String to search the start of\n\nstring",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -382,7 +386,7 @@
         {
           "Id": "620cfdf9dff74b58ba4ae7d55697123d",
           "Name": "ignoreCase",
-          "Description": "Whether or not comparison takes case into account.\n\nbool\nDefault value : false",
+          "Description": "True to ignore case in comparison, false to take case into account\n\nbool\nDefault value : false",
           "UsingDefaultValue": true,
           "Level": 2,
           "UseLevels": false,
@@ -393,7 +397,7 @@
         {
           "Id": "aeebdd4062c349a5818578c4cb56e72c",
           "Name": "bool",
-          "Description": "Whether the string starts with the substring.",
+          "Description": "True if string starts with substring, false if it doesn’t",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -401,7 +405,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Determines if the given string starts with the given substring.\n\nString.StartsWith (str: string, searchFor: string, ignoreCase: bool = false): bool"
+      "Description": "Determines if the given string starts with the given substring.\n\nString.StartsWith (string: string, searchFor: string, ignoreCase: bool = false): bool"
     },
     {
       "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
@@ -445,7 +449,7 @@
     },
     {
       "ConcreteType": "CoreNodeModels.Input.Directory, CoreNodeModels",
-      "HintPath": "C:\\Users\\davidv\\Desktop\\legendy\\trial",
+      "HintPath": "C:\\",
       "InputValue": "C:\\",
       "NodeType": "ExtensionNode",
       "Id": "038ed8fd33294145841e2fad51a7fcd1",
@@ -465,16 +469,36 @@
       "Description": "Allows you to select a directory on the system to get its path"
     },
     {
-      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
-      "NodeType": "PythonScriptNode",
-      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"export all schedules by name\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\nlastBackslash = filePath.rindex(\"\\\\\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
-      "VariableInputPorts": true,
-      "Id": "6299f0a36aa74bb9a10791dd18514388",
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"export all schedules by name\";",
+      "Id": "e0e286ae543f45b9997948174653edad",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "535a8829420c47629b687a53cb675286",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "a1767834-0500-427d-95ae-021e5ab548e3",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "2419f7395534442fa7a548e277ef20aa",
       "Inputs": [
         {
-          "Id": "61a6b8a50ae741e5a73be2541fa78de0",
-          "Name": "IN[0]",
-          "Description": "Input #0",
+          "Id": "933a906006dc478fa7befc36a2c9b326",
+          "Name": "scriptName",
+          "Description": "string",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -483,17 +507,17 @@
       ],
       "Outputs": [
         {
-          "Id": "94aa1f432be64c0797ba40b3b1c7869c",
+          "Id": "db6ce5b1f73e4a01a11e47fab978a180",
           "Name": "OUT",
-          "Description": "Result of the python script",
+          "Description": "return value",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
           "KeepListStructure": false
         }
       ],
-      "Replication": "Disabled",
-      "Description": "Runs an embedded IronPython script."
+      "Replication": "Auto",
+      "Description": "node logs every run of the script in which is used to the hardcoded server location"
     }
   ],
   "Connectors": [
@@ -514,18 +538,18 @@
     },
     {
       "Start": "1f3bd2bc8eb242ae86824152c2b9c6c7",
-      "End": "5bbc1f8b703d4a1592971d777a479f36",
-      "Id": "983b3f29ec8840a68150a5af196f863b"
-    },
-    {
-      "Start": "1f3bd2bc8eb242ae86824152c2b9c6c7",
       "End": "1cfbd056f4a346dfbb23c88f8f921250",
       "Id": "cd38bd3910374abb9acdd6a95f7cf279"
     },
     {
-      "Start": "425558f386144247a483fdb30f4f14d4",
+      "Start": "1f3bd2bc8eb242ae86824152c2b9c6c7",
+      "End": "ce84aa5adf7d4b5aa23baf5e9ed79746",
+      "Id": "dcda71c6c3cf4cd0a2d6eeb716be6972"
+    },
+    {
+      "Start": "674f2e92916543c387aa9cd53593f9df",
       "End": "596ce2d0a8524f8ebdc7a208a54ee1e4",
-      "Id": "de05c417bda548e6917b188fe5238446"
+      "Id": "3f8b249232ad47ca9db4677bac5feadd"
     },
     {
       "Start": "f9ffb5c976684ca1b9f0f12219398dbb",
@@ -560,23 +584,62 @@
     {
       "Start": "5e8fdef378794431a0a614dd99bb44cd",
       "End": "6249ed8b599645dcb1f6e14bf2265aec",
-      "Id": "c5642ac492594530849b720458824c39"
+      "Id": "d18fd596a29d44a28bec28e69751b899"
     },
     {
       "Start": "a332c1b90be04042bef585a054a32bf4",
       "End": "68cec5e146004737bb4876508b22336f",
-      "Id": "652a6c58ab584cd5a521f0a2f12b4cc2"
+      "Id": "cdebe20922854ddc9542e8244abdcfc5"
+    },
+    {
+      "Start": "535a8829420c47629b687a53cb675286",
+      "End": "933a906006dc478fa7befc36a2c9b326",
+      "Id": "2e25f096e4674b30bb4f76572dd7f5bd"
     }
   ],
-  "Dependencies": [],
-  "NodeLibraryDependencies": [],
+  "Dependencies": [
+    "a1767834-0500-427d-95ae-021e5ab548e3"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "cata_lyst",
+      "Version": "0.0.1",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "2419f7395534442fa7a548e277ef20aa"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "None provided",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
-      "HasRunWithoutCrash": false,
+      "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.3.0.5885",
+      "Version": "2.12.1.8246",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -641,7 +704,7 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "X": 1977.78866421166,
-        "Y": 19.9217267073206
+        "Y": 17.886073397732275
       },
       {
         "ShowGeometry": true,
@@ -735,13 +798,23 @@
       },
       {
         "ShowGeometry": true,
-        "Name": "PY log",
-        "Id": "6299f0a36aa74bb9a10791dd18514388",
+        "Name": "Code Block",
+        "Id": "e0e286ae543f45b9997948174653edad",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 237.32673210317375,
-        "Y": 391.41044649311607
+        "X": 215.97062582218888,
+        "Y": 451.25309602938046
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "usageLog",
+        "Id": "2419f7395534442fa7a548e277ef20aa",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 559.93019976305379,
+        "Y": 450.71247992749886
       }
     ],
     "Annotations": [
@@ -773,7 +846,7 @@
         ],
         "Left": 215.43596354367568,
         "Top": 84.231209323627,
-        "Width": 171.04930150770431,
+        "Width": 218.04930150770431,
         "Height": 282.41803915517852,
         "FontSize": 14.0,
         "InitialTop": 114.231209323627,
@@ -782,8 +855,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": 201.674401175017,
-    "Y": 160.75075602162923,
-    "Zoom": 0.82810339461987648
+    "X": 88.788168518508655,
+    "Y": 221.97396549183941,
+    "Zoom": 0.71361973642164589
   }
 }
