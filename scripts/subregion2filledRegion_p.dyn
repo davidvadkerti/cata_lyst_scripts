@@ -12,7 +12,24 @@
       "Name": "Návod",
       "Type": "string",
       "Value": "Skopíruje Sketchlines zo sketch based elementov ako Floor, Subregion, Roof atd a nakresli podla nich Filled region v aktivnom View",
-      "Description": "Creates a string."
+      "Description": "Creates a string.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "bb1343cb2dc54230ac9b66385d78c86a",
+      "Name": "Select Subregion",
+      "Type": "hostSelection",
+      "Value": "b6c808ae-e91f-4c27-b2fc-15d5afc2717c-00a7534f",
+      "Description": "Select a model element from the document.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "b13614220fba4045807251510fa0f230",
+      "Name": "Select Filled Region Type",
+      "Type": "dropdownSelection",
+      "Value": "",
+      "Description": "Select an existing Filled Region Type from the active document.",
+      "SelectedIndex": -1
     }
   ],
   "Outputs": [],
@@ -142,8 +159,8 @@
         },
         {
           "Id": "e24f770cb24f431fb8d49b295395c1e5",
-          "Name": "amt",
-          "Description": "Layers of nesting to remove.\n\nint\nDefault value : -1",
+          "Name": "amount",
+          "Description": "Layers of list nesting to remove (-1 will remove all list nestings)\n\nint\nDefault value : -1",
           "UsingDefaultValue": true,
           "Level": 2,
           "UseLevels": false,
@@ -153,8 +170,8 @@
       "Outputs": [
         {
           "Id": "29c180bcd90f47969a0d27c106415178",
-          "Name": "var[]..[]",
-          "Description": "var[]..[]",
+          "Name": "list",
+          "Description": "Flattened list by amount",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -162,7 +179,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Flattens a nested list of lists by a certain amount.\n\nList.Flatten (list: var[]..[], amt: int = -1): var[]..[]"
+      "Description": "Flattens a nested list of lists by a certain amount.\n\nList.Flatten (list: var[]..[], amount: int = -1): var[]..[]"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -285,7 +302,9 @@
     {
       "ConcreteType": "Dynamo.Nodes.DSModelElementSelection, DSRevitNodesUI",
       "NodeType": "ExtensionNode",
-      "InstanceId": [],
+      "InstanceId": [
+        "b6c808ae-e91f-4c27-b2fc-15d5afc2717c-00a7534f"
+      ],
       "Id": "bb1343cb2dc54230ac9b66385d78c86a",
       "Inputs": [],
       "Outputs": [
@@ -303,8 +322,8 @@
     },
     {
       "ConcreteType": "DSRevitNodesUI.FilledRegionTypes, DSRevitNodesUI",
-      "SelectedIndex": 0,
-      "SelectedString": "Betón",
+      "SelectedIndex": -1,
+      "SelectedString": "",
       "NodeType": "ExtensionNode",
       "Id": "b13614220fba4045807251510fa0f230",
       "Inputs": [],
@@ -326,6 +345,7 @@
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
       "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom datetime import datetime\r\nimport getpass\r\n\r\n# name of the script for log\r\nlog_string = \"subregion2filledRegion\"\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nfilePath = doc.PathName\r\n\r\n# getting file name from path\r\ntry:\r\n\tlastBackslash = filePath.rindex(\"\\\\\")+1\r\nexcept:\r\n\tlastBackslash = filePath.rindex(\"/\")+1\r\nfile_name = filePath[lastBackslash:]\r\nuser_name = getpass.getuser()\r\ndatestamp = str(datetime.now())\r\n# tabulator between data to easy import to excel schedule\r\nseparator = \"\\t\"\r\nline = datestamp + separator + log_string + separator + user_name + \"\\n\"\r\n\r\ntry:\r\n\tf = open(\"L:\\\\customToolslogs\\\\dynLogs\\\\\" + file_name +\".log\", \"a\")\r\n\tf.write(line)\r\n\tf.close()\r\n\tstatus = \"log has been written\"\r\nexcept:\r\n\tstatus = \"something went wrong\"\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = status",
+      "Engine": "IronPython2",
       "VariableInputPorts": true,
       "Id": "9479b9a76764440aba85709f70ae283d",
       "Inputs": [
@@ -351,14 +371,53 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Runs an embedded IronPython script."
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.Flatten@var[]..[],int",
+      "Id": "c5bf6144ab3f4ed282b5fc2f71720566",
+      "Inputs": [
+        {
+          "Id": "105aec952e2c4fa4862ce05ebb9809eb",
+          "Name": "list",
+          "Description": "List to flatten.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d18246d27af94126a49da11de496f6d6",
+          "Name": "amount",
+          "Description": "Layers of list nesting to remove (-1 will remove all list nestings)\n\nint\nDefault value : -1",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9250c7ebd17b491f8137d653878c9686",
+          "Name": "list",
+          "Description": "Flattened list by amount",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Flattens a nested list of lists by a certain amount.\n\nList.Flatten (list: var[]..[], amount: int = -1): var[]..[]"
     }
   ],
   "Connectors": [
     {
       "Start": "6bd9a361170447d2b7962e25b2cadd6a",
-      "End": "3f450f091658480797d23fc106099ee6",
-      "Id": "edb01a382a5a4fc4800565142c93fa10"
+      "End": "105aec952e2c4fa4862ce05ebb9809eb",
+      "Id": "104bf0545e6d471fac30a8383b018945"
     },
     {
       "Start": "c3975e323af3440a930cdee82cbd1aa0",
@@ -394,6 +453,11 @@
       "Start": "49a1b419ac3d451089135c5c9ae2667a",
       "End": "bb884d3477634c069d2dde8b682d78ad",
       "Id": "f2ecd172a3f94ce7b7f828079397181f"
+    },
+    {
+      "Start": "9250c7ebd17b491f8137d653878c9686",
+      "End": "3f450f091658480797d23fc106099ee6",
+      "Id": "66fefde4dfa6414ea42b3189b293314a"
     }
   ],
   "Dependencies": [
@@ -409,13 +473,36 @@
       ]
     }
   ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "None provided",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 10000.0,
-      "HasRunWithoutCrash": false,
+      "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.3.0.5885",
+      "Version": "2.12.1.8246",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -433,114 +520,124 @@
     },
     "NodeViews": [
       {
+        "ShowGeometry": true,
+        "Name": "CurveElement.Curve",
         "Id": "102d7f00b6cd4051bafd1861344d8735",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "CurveElement.Curve",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1476.8189995916,
         "Y": -528.128638706908
       },
       {
+        "ShowGeometry": true,
+        "Name": "Springs.Collector.ElementSketch",
         "Id": "3ff514e8e13545318c424501113ff62b",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Springs.Collector.ElementSketch",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 980.44126966773,
         "Y": -547.060586789195
       },
       {
+        "ShowGeometry": true,
+        "Name": "Boolean",
         "Id": "58c22c3299c14bbe8cb482c514d7f262",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Boolean",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 797.008589294067,
         "Y": -394.84726083404
       },
       {
+        "ShowGeometry": true,
+        "Name": "List.Flatten",
         "Id": "0f602e5b2f4e48fd835dd850aff9b1a4",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "List.Flatten",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1399.00158087134,
         "Y": -378.334772537118
       },
       {
+        "ShowGeometry": true,
+        "Name": "FilledRegion.ByCurves",
         "Id": "0003b7911e7b43a58668f5b9dad03fc5",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "FilledRegion.ByCurves",
-        "ShowGeometry": true,
         "Excluded": false,
-        "X": 1848.45175073091,
-        "Y": -682.065313369511
+        "X": 2349.0211835859277,
+        "Y": -732.26105187575888
       },
       {
+        "ShowGeometry": true,
+        "Name": "Document.Current",
         "Id": "a33bbc53ae744847bfb0f9eee6317b9f",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Document.Current",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1295.27807791374,
         "Y": -806.506759691936
       },
       {
+        "ShowGeometry": true,
+        "Name": "Document.ActiveView",
         "Id": "42cb94ee78a44a189fe7a647dc4b7d80",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Document.ActiveView",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 1470.15437820193,
         "Y": -799.670384986847
       },
       {
+        "ShowGeometry": true,
+        "Name": "Návod",
         "Id": "95a7ae16a497486d90691d85cb1a3bcd",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "Návod",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 519.469193436599,
         "Y": -966.740484085611
       },
       {
+        "ShowGeometry": true,
+        "Name": "Select Subregion",
         "Id": "bb1343cb2dc54230ac9b66385d78c86a",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "Select Subregion",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 534.693821337794,
         "Y": -620.953337099638
       },
       {
+        "ShowGeometry": true,
+        "Name": "Select Filled Region Type",
         "Id": "b13614220fba4045807251510fa0f230",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
-        "Name": "Select Filled Region Type",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 518.501538207713,
         "Y": -737.401466858152
       },
       {
+        "ShowGeometry": true,
+        "Name": "PY log",
         "Id": "9479b9a76764440aba85709f70ae283d",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "PY log",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 546.48286879935779,
         "Y": -411.60130925170137
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.Flatten",
+        "Id": "c5bf6144ab3f4ed282b5fc2f71720566",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1856.9947775080691,
+        "Y": -555.57005511933028
       }
     ],
     "Annotations": [
@@ -553,7 +650,7 @@
         ],
         "Left": 508.501538207713,
         "Top": -783.401466858152,
-        "Width": 240.0,
+        "Width": 234.0,
         "Height": 281.448129758514,
         "FontSize": 30.0,
         "InitialTop": -737.401466858152,
@@ -562,8 +659,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": -199.83846258477149,
-    "Y": 756.59943961638373,
-    "Zoom": 0.79997660972141427
+    "X": -24.571288820239943,
+    "Y": 718.07601810740448,
+    "Zoom": 0.59865899643431608
   }
 }
