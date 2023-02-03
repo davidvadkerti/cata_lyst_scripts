@@ -2,7 +2,7 @@
 # Python library for Dynamo nodes
 
 # for easy batch setting of custom log path
-dyn_log_path = "L:\\customToolslogs\\dynLogs\\"
+dyn_log_path = "X:\\CustomTools\\customToolslogs\\dynLogs\\"
 
 # logging Dynamo script usage
 def dyn_logger(filePath,user_name,script_name):
@@ -20,7 +20,7 @@ def dyn_logger(filePath,user_name,script_name):
 	line = datestamp + separator + script_name + separator + user_name + "\n"
 
 	try:
-		f = open("L:\\customToolslogs\\dynLogs\\" + file_name +".log", "a")
+		f = open("X:\\CustomTools\\customToolslogs\\dynLogs\\" + file_name +".log", "a")
 		f.write(line)
 		f.close()
 		return "log has been written"

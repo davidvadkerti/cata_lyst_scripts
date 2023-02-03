@@ -1,0 +1,167 @@
+{
+  "Uuid": "a959c951-d1fa-4346-8998-51d237e67345",
+  "IsCustomNode": true,
+  "Category": "catalyst.dataManipulation",
+  "Description": "Converts number to string with no decimal numbers",
+  "Name": "Number2integerString",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndata = IN[0]\r\noutput = []\r\n# Place your code below this line\r\nfor i in data:\r\n\t# convert to string\r\n\tstring_i = str(i)\r\n\t# if english locale with comma as decimal point\r\n\tif string_i.find(\".\") > -1:\r\n\t\tsplit_string = string_i.Split(\".\")\r\n\t# if another locale\t\r\n\telse:\r\n\t\tsplit_string = string_i.Split(\",\")\r\n\t\r\n\toutput.append(split_string[0])\r\n\t\t\r\n# Assign your output to the OUT variable.\r\nOUT = output",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "839ebd93c7cd4043b002ed4841216398",
+      "Inputs": [
+        {
+          "Id": "e97fd2eadf33419b92ea2485b104619d",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a1b19d75ca2e46d9bed68d8382f4b0f9",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "OUT",
+      "Id": "27f09cf152de436aba45925575c025e3",
+      "Inputs": [
+        {
+          "Id": "9a3407d61f694810808f5264159c71d8",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "num",
+        "TypeName": "var",
+        "TypeRank": 1,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "d70e02a8bd4b4530a2fc0d5c7524165d",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "fea4a4b268f24c918201b57533d28abb",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "a1b19d75ca2e46d9bed68d8382f4b0f9",
+      "End": "9a3407d61f694810808f5264159c71d8",
+      "Id": "3ec64c074f6a4cb987f71894619a88eb"
+    },
+    {
+      "Start": "fea4a4b268f24c918201b57533d28abb",
+      "End": "e97fd2eadf33419b92ea2485b104619d",
+      "Id": "83e99e0bbc864afda2aaa2319beeb725"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Author": "None provided",
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.1.8246",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": 101650.2795383565,
+      "EyeY": 171894.13149783661,
+      "EyeZ": 187125.88526671607,
+      "LookX": -186222.7170383565,
+      "LookY": -162355.16958377411,
+      "LookZ": -278063.34620421607,
+      "UpX": -0.12990032136440277,
+      "UpY": 0.97237002849578857,
+      "UpZ": -0.1939656138420105
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "839ebd93c7cd4043b002ed4841216398",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 195.450384602811,
+        "Y": -8.9670600652914061
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "27f09cf152de436aba45925575c025e3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 449.0,
+        "Y": 0.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Input",
+        "Id": "d70e02a8bd4b4530a2fc0d5c7524165d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -26.235722079808681,
+        "Y": 2.9911217317786907
+      }
+    ],
+    "Annotations": [],
+    "X": 158.1031828573276,
+    "Y": 300.46040202306631,
+    "Zoom": 1.130842140625
+  }
+}

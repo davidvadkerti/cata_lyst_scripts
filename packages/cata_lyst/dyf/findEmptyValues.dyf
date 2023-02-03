@@ -1,0 +1,172 @@
+{
+  "Uuid": "581ebe2e-0354-4d1a-bd6a-de3a01c62014",
+  "IsCustomNode": true,
+  "Category": "catalyst.dataManipulation",
+  "Description": "finds empty values for textual and numeric parameters",
+  "Name": "findEmptyValues",
+  "ElementResolver": {
+    "ResolutionMap": {
+      "List": {
+        "Key": "List",
+        "Value": "BuiltIn.ds"
+      }
+    }
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndata = IN[0]\r\nmask = []\r\n# Place your code below this line\r\n\r\nfor i in data:\r\n\tif i == None:\r\n\t\tmask.append(True)\r\n\telif i == \"\":\r\n\t\tmask.append(True)\r\n\telif i == \" \":\r\n\t\tmask.append(True)\r\n\t# just trying to find more empty values\r\n\telif i == \"\\n\":\r\n\t\tmask.append(True)\r\n\t# some numerical numbers are empty in GUI but 0 in API\r\n\telif i == 0:\r\n\t\tmask.append(True)\r\n\telse:\r\n\t\tmask.append(False)\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = mask",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "99cc95de56a74636b277bc40c7dbdd95",
+      "Inputs": [
+        {
+          "Id": "70758f46d1364244a2cac37bf287979c",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9bf2864f8ad34596909c0a7c802fd1af",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "mask: OUT",
+      "Id": "e4d9fd190cc4490e9d58a65eb381e33a",
+      "Inputs": [
+        {
+          "Id": "aec2227a16f64a598a30d942fd20a7a5",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "parameterValues",
+        "TypeName": "var",
+        "TypeRank": -1,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "8c1ea87ce2684a09b93bb78bfc473786",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "cfa3d7b8b17c4b7cb7696573f899e2a2",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "9bf2864f8ad34596909c0a7c802fd1af",
+      "End": "aec2227a16f64a598a30d942fd20a7a5",
+      "Id": "82bface951e24b23aac673cbc7e4d79d"
+    },
+    {
+      "Start": "cfa3d7b8b17c4b7cb7696573f899e2a2",
+      "End": "70758f46d1364244a2cac37bf287979c",
+      "Id": "f9298db9be724ed6a817ff41698911ee"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Author": "None provided",
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.1.8246",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "99cc95de56a74636b277bc40c7dbdd95",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 250.0,
+        "Y": 0.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "e4d9fd190cc4490e9d58a65eb381e33a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 461.0,
+        "Y": 11.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Input",
+        "Id": "8c1ea87ce2684a09b93bb78bfc473786",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -95.050229540447617,
+        "Y": -17.017804154302581
+      }
+    ],
+    "Annotations": [],
+    "X": 178.0,
+    "Y": 33.0,
+    "Zoom": 1.0
+  }
+}
